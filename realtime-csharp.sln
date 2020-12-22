@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.808.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realtime", "Realtime\Realtime.csproj", "{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtimeTests", "RealtimeTests\RealtimeTests.csproj", "{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CFFD342-4DBD-4D79-BD1C-2183939DBFD4}
+	EndGlobalSection
+EndGlobal
