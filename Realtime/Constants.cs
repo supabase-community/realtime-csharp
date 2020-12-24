@@ -20,14 +20,8 @@ namespace Supabase.Realtime
             Delete
         }
 
-        public static int DEFAULT_TIMEOUT = 10000;
-        public static int WS_CLOSE_NORMAL = 1000;
-
-        public static string CHANNEL_STATE_CLOSED = "closed";
-        public static string CHANNEL_STATE_ERRORED = "errored";
-        public static string CHANNEL_STATE_JOINED = "joined";
-        public static string CHANNEL_STATE_JOINING = "joining";
-        public static string CHANNEL_STATE_LEAVING = "leaving";
+        public const int DEFAULT_TIMEOUT = 10000;
+        public const int WS_CLOSE_NORMAL = 1000;
 
         public static string CHANNEL_EVENT_CLOSE = "phx_close";
         public static string CHANNEL_EVENT_ERROR = "phx_error";
@@ -35,6 +29,6 @@ namespace Supabase.Realtime
         public static string CHANNEL_EVENT_REPLY = "phx_reply";
         public static string CHANNEL_EVENT_LEAVE = "phx_leave";
 
-        public static string TANSPORT_WEBSOCKET = "websocket";
+        public static string TRANSPORT_WEBSOCKET = "websocket";
     }
 }

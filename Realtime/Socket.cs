@@ -7,23 +7,25 @@ using System.Web;
 using Newtonsoft.Json;
 using Postgrest.Models;
 using WebSocketSharp;
-using static Supabase.Realtime.StateChangedEventArgs;
+using static Supabase.Realtime.SocketStateChangedEventArgs;
 
 namespace Supabase.Realtime
 {
-    public class Socket<T> where T : BaseModel, new()
+    public class Socket
     {
-        public EventHandler<StateChangedEventArgs> StateChanged;
+        public bool IsConnected => connection.IsAlive;
+        public EventHandler<SocketStateChangedEventArgs> StateChanged;
+        public EventHandler<SocketMessageEventArgs> OnMessage;
 
         private string endpoint;
-        private SocketOptions<T> options;
+        private ClientOptions options;
         private WebSocket connection;
 
         private Task heartbeatTask;
-        private CancellationTokenSource hearbeatTokenSource;
+        private CancellationTokenSource heartbeatTokenSource;
 
         private bool hasPendingHeartbeat = false;
-        private int pendingHeartbeatRef = 0;
+        private string pendingHeartbeatRef = "0";
 
         private Task reconnectTask;
         private CancellationTokenSource reconnectTokenSource;
@@ -43,13 +45,13 @@ namespace Supabase.Realtime
             }
         }
 
-        public Socket(string endpoint, SocketOptions<T> options = null)
+        public Socket(string endpoint, ClientOptions options = null)
         {
-            this.endpoint = $"{endpoint}/{Constants.TANSPORT_WEBSOCKET}";
+            this.endpoint = $"{endpoint}/{Constants.TRANSPORT_WEBSOCKET}";
 
             if (options == null)
             {
-                options = new SocketOptions<T>();
+                options = new ClientOptions();
             }
 
             this.options = options;
@@ -78,11 +80,11 @@ namespace Supabase.Realtime
             }
         }
 
-        public void Push(SocketMessage<T> data)
+        public void Push(SocketMessage data)
         {
-            var task = new Task(() => options.Encode(data, data => connection.Send(data)));
-
             options.Logger("push", $"{data.Topic} {data.Event} ({data.Ref})", data.Payload);
+
+            var task = new Task(() => options.Encode(data, data => connection.Send(data)));
 
             if (connection.IsAlive)
             {
@@ -104,9 +106,9 @@ namespace Supabase.Realtime
                 connection.Close(CloseStatusCode.Normal, "heartbeat timeout");
                 return;
             }
-            pendingHeartbeatRef = MakeRef();
+            pendingHeartbeatRef = MakeMsgRef();
 
-            Push(new SocketMessage<T> { Topic = "pheonix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
+            Push(new SocketMessage { Topic = "pheonix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
         }
 
         private void OnConnectionOpened(object sender, EventArgs args)
@@ -118,21 +120,21 @@ namespace Supabase.Realtime
             if (reconnectTokenSource != null)
                 reconnectTokenSource.Cancel();
 
-            if (hearbeatTokenSource != null)
-                hearbeatTokenSource.Cancel();
+            if (heartbeatTokenSource != null)
+                heartbeatTokenSource.Cancel();
 
-            hearbeatTokenSource = new CancellationTokenSource();
+            heartbeatTokenSource = new CancellationTokenSource();
             heartbeatTask = Task.Run(async () =>
             {
-                while (!hearbeatTokenSource.IsCancellationRequested)
+                while (!heartbeatTokenSource.IsCancellationRequested)
                 {
                     SendHeartbeat();
-                    await Task.Delay(options.HeartbeatInterval, hearbeatTokenSource.Token);
+                    await Task.Delay(options.HeartbeatInterval, heartbeatTokenSource.Token);
                 }
-            }, hearbeatTokenSource.Token);
+            }, heartbeatTokenSource.Token);
 
 
-            StateChanged?.Invoke(sender, new StateChangedEventArgs(ConnectionState.Open, args));
+            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Open, args));
         }
 
         private void OnConnectionMessage(object sender, MessageEventArgs args)
@@ -140,14 +142,15 @@ namespace Supabase.Realtime
             options.Decode(args.Data, decoded =>
             {
                 this.options.Logger("receive", $"{decoded.Payload} {decoded.Topic} {decoded.Event} ({decoded.Ref})", decoded.Payload);
+                OnMessage?.Invoke(sender, new SocketMessageEventArgs(decoded));
             });
 
-            StateChanged?.Invoke(sender, new StateChangedEventArgs(ConnectionState.Message, args));
+            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Message, args));
         }
 
         private void OnConnectionError(object sender, ErrorEventArgs args)
         {
-            StateChanged?.Invoke(sender, new StateChangedEventArgs(ConnectionState.Error, args));
+            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Error, args));
         }
 
         private void OnConnectionClosed(object sender, CloseEventArgs args)
@@ -169,10 +172,11 @@ namespace Supabase.Realtime
                 }
             }, reconnectTokenSource.Token);
 
-            StateChanged?.Invoke(sender, new StateChangedEventArgs(ConnectionState.Close, args));
+            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Close, args));
         }
 
-        private int MakeRef() => reference + 1 == reference ? 0 : reference + 1;
+        internal string MakeMsgRef() => reference + 1 == reference ? 0.ToString() : (reference + 1).ToString();
+        internal string ReplyEventName(string msgRef) => $"chan_reply_{msgRef}";
 
         private void FlushBuffer()
         {
@@ -182,42 +186,6 @@ namespace Supabase.Realtime
             }
             buffer.Clear();
         }
-
-    }
-
-    public class SocketOptions<T> where T : BaseModel, new()
-    {
-        // The function to encode outgoing messages. Defaults to JSON:
-        public Action<object, Action<string>> Encode { get; set; } = (payload, callback) => callback(JsonConvert.SerializeObject(payload));
-
-        // The function to decode incoming messages.
-        public Action<string, Action<SocketMessage<T>>> Decode { get; set; } = (payload, callback) => callback(JsonConvert.DeserializeObject<SocketMessage<T>>(payload));
-
-        public Action<string, string, object> Logger { get; set; } = (kind, msg, data) => Debug.WriteLine($"{kind}: {msg}, {0}", JsonConvert.SerializeObject(data, Formatting.Indented));
-
-        // The Websocket Transport, for example WebSocket.
-        public string Transport { get; set; } = Constants.TANSPORT_WEBSOCKET;
-
-        // The default timeout in milliseconds to trigger push timeouts.
-        public TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(Constants.DEFAULT_TIMEOUT);
-
-        // The interval to send a heartbeat message
-        public TimeSpan HeartbeatInterval { get; set; } = TimeSpan.FromSeconds(30);
-
-        // The interval to reconnect
-        public Func<int, TimeSpan> ReconnectAfterInterval { get; set; } = (tries) =>
-        {
-            var intervals = new int[] { 1, 2, 5, 10 };
-            return TimeSpan.FromSeconds(tries < intervals.Length ? tries - 1 : 10);
-        };
-
-        // The maximum timeout of a long poll AJAX request.
-        public TimeSpan LongPollerTimeout = TimeSpan.FromSeconds(20);
-
-        public Dictionary<string, object> Headers = new Dictionary<string, object>();
-
-        // The optional params to pass when connecting
-        public SocketOptionsParameters Parameters = new SocketOptionsParameters();
     }
 
     public class SocketOptionsParameters
@@ -226,7 +194,7 @@ namespace Supabase.Realtime
         public string ApiKey { get; set; }
     }
 
-    public class SocketMessage<T> where T : BaseModel, new()
+    public class SocketMessage
     {
         [JsonProperty("topic")]
         public string Topic { get; set; }
@@ -235,13 +203,13 @@ namespace Supabase.Realtime
         public string Event { get; set; }
 
         [JsonProperty("payload")]
-        public T Payload { get; set; }
+        public object Payload { get; set; }
 
         [JsonProperty("ref")]
         public string Ref { get; set; }
     }
 
-    public class StateChangedEventArgs : EventArgs
+    public class SocketStateChangedEventArgs : EventArgs
     {
         public enum ConnectionState
         {
@@ -254,10 +222,20 @@ namespace Supabase.Realtime
         public ConnectionState State { get; set; }
         public EventArgs Args { get; set; }
 
-        public StateChangedEventArgs(ConnectionState state, EventArgs args)
+        public SocketStateChangedEventArgs(ConnectionState state, EventArgs args)
         {
             State = state;
             Args = args;
+        }
+    }
+
+    public class SocketMessageEventArgs : EventArgs
+    {
+        public SocketMessage Message { get; private set; }
+
+        public SocketMessageEventArgs(SocketMessage message)
+        {
+            Message = message;
         }
     }
 }
