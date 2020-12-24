@@ -8,7 +8,7 @@ The bulk of this library is a translation and c-sharp-ification of the [supabase
 
 ## Status
 
-- [ ] Client Connects to Websocket
+- [x] Client Connects to Websocket
 - [ ] Socket Event Handlers
   - [ ] Open
   - [ ] Close - when channel is explicitly closed by server or by calling `Channel.Unsubscribe()`
