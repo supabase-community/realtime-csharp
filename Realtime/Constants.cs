@@ -51,6 +51,9 @@ namespace Supabase.Realtime
         /// </summary>
         public static string CHANNEL_EVENT_LEAVE = "phx_leave";
 
+        public static string PHEONIX_STATUS_OK = "ok";
+        public static string PHEONIX_STATUS_ERROR = "error";
+
         public static string TRANSPORT_WEBSOCKET = "websocket";
     }
 }

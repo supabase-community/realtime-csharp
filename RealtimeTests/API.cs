@@ -19,7 +19,10 @@ namespace RealtimeTests
             Task.Run(() =>
             {
                 var client = Client.Instance.Initialize(endpoint);
-                client.OnOpen += (sender, args) => tsc.SetResult(true);
+                client.OnOpen += (sender, args) =>
+                {
+                    tsc.SetResult(true);
+                };
                 client.Connect();
             });
 
@@ -35,11 +38,13 @@ namespace RealtimeTests
             {
                 var client = Client.Instance.Initialize(endpoint);
 
-                client.OnOpen += (sender, args) =>
+                var channel = client.Channel("realtime", "*");
+                channel.StateChanged += (s, args) =>
                 {
-                    var channel = client.Channel("realtime", "*");
-                    channel.Subscribe();
+                    tsc.SetResult(args.State == Channel.ChannelState.Joined);
                 };
+
+                channel.Subscribe();
 
                 client.Connect();
             });

@@ -119,7 +119,7 @@ namespace Supabase.Realtime
         /// <param name="args"></param>
         private void HandleSocketMessage(object sender, SocketMessageEventArgs args)
         {
-            if (args.Message.Ref == msgRef && args.Message.Event == EventName)
+            if (args.Message.Ref == msgRef)
             {
                 CancelTimeout();
                 Response = args.Message;

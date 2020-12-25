@@ -4,6 +4,7 @@ using System.Timers;
 using Newtonsoft.Json;
 using Supabase.Realtime.Attributes;
 using WebSocketSharp;
+using static Supabase.Realtime.Channel;
 
 namespace Supabase.Realtime
 {
@@ -52,12 +53,7 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when this channel listener is closed
         /// </summary>
-        public EventHandler OnClosed;
-
-        /// <summary>
-        /// Invoked when this channel is in an error state.
-        /// </summary>
-        public EventHandler OnError;
+        public EventHandler<ChannelStateChangedEventArgs> StateChanged;
 
         public bool IsClosed => State == ChannelState.Closed;
         public bool IsErrored => State == ChannelState.Errored;
@@ -135,8 +131,7 @@ namespace Supabase.Realtime
         /// </summary>
         public void Unsubscribe()
         {
-            State = ChannelState.Leaving;
-
+            SetState(ChannelState.Leaving);
             var leavePush = new Push(this, Constants.CHANNEL_EVENT_LEAVE, null);
             leavePush.Send();
         }
@@ -179,13 +174,54 @@ namespace Supabase.Realtime
 
         private void SendJoin(int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
-            State = ChannelState.Joining;
+            SetState(ChannelState.Joining);
+            // Remove handler if exists
+            joinPush.OnMessage -= HandleJoinResponse;
+
+            joinPush.OnMessage += HandleJoinResponse;
             joinPush.Resend(timeoutMs);
+        }
+
+        private void HandleJoinResponse(object sender, SocketMessageEventArgs args)
+        {
+            if (args.Message.Event == Constants.CHANNEL_EVENT_REPLY)
+            {
+                var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Message.Payload));
+                if (obj.Status == Constants.PHEONIX_STATUS_OK)
+                {
+                    SetState(ChannelState.Joined);
+                }
+            }
+        }
+
+        private void SetState(ChannelState state)
+        {
+            State = state;
+            StateChanged?.Invoke(this, new ChannelStateChangedEventArgs(state));
         }
 
         public class ItemInsertedEventArgs : EventArgs { }
         public class ItemUpdatedEventArgs : EventArgs { }
         public class ItemDeletedEventArgs : EventArgs { }
+    }
+
+    public class ChannelStateChangedEventArgs : EventArgs
+    {
+        public ChannelState State { get; private set; }
+
+        public ChannelStateChangedEventArgs(ChannelState state)
+        {
+            State = state;
+        }
+    }
+
+    public class PheonixResponse
+    {
+        [JsonProperty("response")]
+        public object Response;
+
+        [JsonProperty("status")]
+        public string Status;
     }
 
     public class ChannelResponse
