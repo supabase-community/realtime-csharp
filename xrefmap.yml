@@ -145,24 +145,12 @@ references:
   commentId: T:Supabase.Realtime.Channel.ItemUpdatedEventArgs
   fullName: Supabase.Realtime.Channel.ItemUpdatedEventArgs
   nameWithType: Channel.ItemUpdatedEventArgs
-- uid: Supabase.Realtime.Channel.OnClosed
-  name: OnClosed
-  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnClosed
-  commentId: F:Supabase.Realtime.Channel.OnClosed
-  fullName: Supabase.Realtime.Channel.OnClosed
-  nameWithType: Channel.OnClosed
 - uid: Supabase.Realtime.Channel.OnDelete
   name: OnDelete
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnDelete
   commentId: F:Supabase.Realtime.Channel.OnDelete
   fullName: Supabase.Realtime.Channel.OnDelete
   nameWithType: Channel.OnDelete
-- uid: Supabase.Realtime.Channel.OnError
-  name: OnError
-  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnError
-  commentId: F:Supabase.Realtime.Channel.OnError
-  fullName: Supabase.Realtime.Channel.OnError
-  nameWithType: Channel.OnError
 - uid: Supabase.Realtime.Channel.OnInsert
   name: OnInsert
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnInsert
@@ -233,6 +221,12 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.State
   nameWithType: Channel.State
+- uid: Supabase.Realtime.Channel.StateChanged
+  name: StateChanged
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_StateChanged
+  commentId: F:Supabase.Realtime.Channel.StateChanged
+  fullName: Supabase.Realtime.Channel.StateChanged
+  nameWithType: Channel.StateChanged
 - uid: Supabase.Realtime.Channel.Subscribe(System.Int32)
   name: Subscribe(Int32)
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Subscribe_System_Int32_
@@ -427,6 +421,38 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.ChannelResponse.Type
   nameWithType: ChannelResponse.Type
+- uid: Supabase.Realtime.ChannelStateChangedEventArgs
+  name: ChannelStateChangedEventArgs
+  href: api/Supabase.Realtime.ChannelStateChangedEventArgs.html
+  commentId: T:Supabase.Realtime.ChannelStateChangedEventArgs
+  fullName: Supabase.Realtime.ChannelStateChangedEventArgs
+  nameWithType: ChannelStateChangedEventArgs
+- uid: Supabase.Realtime.ChannelStateChangedEventArgs.#ctor(Supabase.Realtime.Channel.ChannelState)
+  name: ChannelStateChangedEventArgs(Channel.ChannelState)
+  href: api/Supabase.Realtime.ChannelStateChangedEventArgs.html#Supabase_Realtime_ChannelStateChangedEventArgs__ctor_Supabase_Realtime_Channel_ChannelState_
+  commentId: M:Supabase.Realtime.ChannelStateChangedEventArgs.#ctor(Supabase.Realtime.Channel.ChannelState)
+  fullName: Supabase.Realtime.ChannelStateChangedEventArgs.ChannelStateChangedEventArgs(Supabase.Realtime.Channel.ChannelState)
+  nameWithType: ChannelStateChangedEventArgs.ChannelStateChangedEventArgs(Channel.ChannelState)
+- uid: Supabase.Realtime.ChannelStateChangedEventArgs.#ctor*
+  name: ChannelStateChangedEventArgs
+  href: api/Supabase.Realtime.ChannelStateChangedEventArgs.html#Supabase_Realtime_ChannelStateChangedEventArgs__ctor_
+  commentId: Overload:Supabase.Realtime.ChannelStateChangedEventArgs.#ctor
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelStateChangedEventArgs.ChannelStateChangedEventArgs
+  nameWithType: ChannelStateChangedEventArgs.ChannelStateChangedEventArgs
+- uid: Supabase.Realtime.ChannelStateChangedEventArgs.State
+  name: State
+  href: api/Supabase.Realtime.ChannelStateChangedEventArgs.html#Supabase_Realtime_ChannelStateChangedEventArgs_State
+  commentId: P:Supabase.Realtime.ChannelStateChangedEventArgs.State
+  fullName: Supabase.Realtime.ChannelStateChangedEventArgs.State
+  nameWithType: ChannelStateChangedEventArgs.State
+- uid: Supabase.Realtime.ChannelStateChangedEventArgs.State*
+  name: State
+  href: api/Supabase.Realtime.ChannelStateChangedEventArgs.html#Supabase_Realtime_ChannelStateChangedEventArgs_State_
+  commentId: Overload:Supabase.Realtime.ChannelStateChangedEventArgs.State
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelStateChangedEventArgs.State
+  nameWithType: ChannelStateChangedEventArgs.State
 - uid: Supabase.Realtime.Client
   name: Client
   href: api/Supabase.Realtime.Client.html
@@ -874,6 +900,18 @@ references:
   commentId: F:Supabase.Realtime.Constants.EventType.Update
   fullName: Supabase.Realtime.Constants.EventType.Update
   nameWithType: Constants.EventType.Update
+- uid: Supabase.Realtime.Constants.PHEONIX_STATUS_ERROR
+  name: PHEONIX_STATUS_ERROR
+  href: api/Supabase.Realtime.Constants.html#Supabase_Realtime_Constants_PHEONIX_STATUS_ERROR
+  commentId: F:Supabase.Realtime.Constants.PHEONIX_STATUS_ERROR
+  fullName: Supabase.Realtime.Constants.PHEONIX_STATUS_ERROR
+  nameWithType: Constants.PHEONIX_STATUS_ERROR
+- uid: Supabase.Realtime.Constants.PHEONIX_STATUS_OK
+  name: PHEONIX_STATUS_OK
+  href: api/Supabase.Realtime.Constants.html#Supabase_Realtime_Constants_PHEONIX_STATUS_OK
+  commentId: F:Supabase.Realtime.Constants.PHEONIX_STATUS_OK
+  fullName: Supabase.Realtime.Constants.PHEONIX_STATUS_OK
+  nameWithType: Constants.PHEONIX_STATUS_OK
 - uid: Supabase.Realtime.Constants.SocketStates
   name: Constants.SocketStates
   href: api/Supabase.Realtime.Constants.SocketStates.html
@@ -922,6 +960,24 @@ references:
   commentId: F:Supabase.Realtime.Constants.WS_CLOSE_NORMAL
   fullName: Supabase.Realtime.Constants.WS_CLOSE_NORMAL
   nameWithType: Constants.WS_CLOSE_NORMAL
+- uid: Supabase.Realtime.PheonixResponse
+  name: PheonixResponse
+  href: api/Supabase.Realtime.PheonixResponse.html
+  commentId: T:Supabase.Realtime.PheonixResponse
+  fullName: Supabase.Realtime.PheonixResponse
+  nameWithType: PheonixResponse
+- uid: Supabase.Realtime.PheonixResponse.Response
+  name: Response
+  href: api/Supabase.Realtime.PheonixResponse.html#Supabase_Realtime_PheonixResponse_Response
+  commentId: F:Supabase.Realtime.PheonixResponse.Response
+  fullName: Supabase.Realtime.PheonixResponse.Response
+  nameWithType: PheonixResponse.Response
+- uid: Supabase.Realtime.PheonixResponse.Status
+  name: Status
+  href: api/Supabase.Realtime.PheonixResponse.html#Supabase_Realtime_PheonixResponse_Status
+  commentId: F:Supabase.Realtime.PheonixResponse.Status
+  fullName: Supabase.Realtime.PheonixResponse.Status
+  nameWithType: PheonixResponse.Status
 - uid: Supabase.Realtime.Push
   name: Push
   href: api/Supabase.Realtime.Push.html
