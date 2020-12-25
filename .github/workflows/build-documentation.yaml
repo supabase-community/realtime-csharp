@@ -15,9 +15,9 @@ jobs:
             persist-credentials: false
 
       - uses: nikeee/docfx-action@v1.0.0
-          name: Build Documentation
-          with:
-            args: ./documentation/docfx.json
+        name: Build Documentation
+        with:
+          args: ./documentation/docfx.json
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
