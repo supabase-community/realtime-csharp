@@ -1,0 +1,368 @@
+{
+  "homepages": [],
+  "source_base_path": "/github/workspace/.documentation",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.ChannelState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.ChannelState.html",
+          "hash": "QOJROJQG2UyEjQ+UDlDAag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.ItemDeletedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.ItemDeletedEventArgs.html",
+          "hash": "bAMKfTRyez0uD6kQHb6z2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.ItemInsertedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.ItemInsertedEventArgs.html",
+          "hash": "Pq0lJbs3EMm37hocAIqOfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.ItemUpdatedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.ItemUpdatedEventArgs.html",
+          "hash": "BgEUJt9mbock+O6j7uAuZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.html",
+          "hash": "JankeZ3Jp4KmNr+qRT8atQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.ChannelColumnResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.ChannelColumnResponse.html",
+          "hash": "UKKOc833SZY+xbtLKB8tjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.ChannelResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.ChannelResponse.html",
+          "hash": "EwU3VvUlcxAnAVZtgcYm6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Client.html",
+          "hash": "b0T0r7lILqGvV967+I9pcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.ClientAuthorization.AuthorizationType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.ClientAuthorization.AuthorizationType.html",
+          "hash": "2KJSH/Mb8BeF2xPSM7Ekzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.ClientAuthorization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.ClientAuthorization.html",
+          "hash": "OpFxFIyvdnpo0Pge+C+1ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.ClientOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.ClientOptions.html",
+          "hash": "JCBoSJ7eE0BttsVoLa1vvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Constants.EventType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Constants.EventType.html",
+          "hash": "2ExZdRvHzkwNhE5pXtGlGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Constants.SocketStates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Constants.SocketStates.html",
+          "hash": "/rOGsmq+GJd1rD51lxmVSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Constants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Constants.html",
+          "hash": "pxJ54rZgViOkKx4wfTWmGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Push.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Push.html",
+          "hash": "5ijx/GV2HqHQD2lRDAF+zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.html",
+          "hash": "BOS+Zv21/VdRIs6hvG4zgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketMessage.html",
+          "hash": "rDIewGe1Lh40vqfiHsXVDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketMessageEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketMessageEventArgs.html",
+          "hash": "MRscU6KzmqsjZ6RpQW//rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketOptionsParameters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketOptionsParameters.html",
+          "hash": "v54spwRquD6WglACkejUtw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.html",
+          "hash": "kSJesEndkcMvxNhS6LhNgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.html",
+          "hash": "AvrtdTb9TkbCpJljFQkUwg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.html",
+          "hash": "fDmKkzdXB9ZohaTGih+/jQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "OwH6ssogVbx02QRDxapRFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "17i9KesCi9K8l5gmacTiOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "qUX2q3i2GNa1JVU9+Rs59w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "zY1V+pupLZozODrXqPhyFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 22,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 2,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
