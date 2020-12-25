@@ -1,0 +1,46 @@
+### YamlMime:TableOfContent
+- uid: Supabase.Realtime
+  name: Supabase.Realtime
+  items:
+  - uid: Supabase.Realtime.Channel
+    name: Channel
+  - uid: Supabase.Realtime.Channel.ChannelState
+    name: Channel.ChannelState
+  - uid: Supabase.Realtime.Channel.ItemDeletedEventArgs
+    name: Channel.ItemDeletedEventArgs
+  - uid: Supabase.Realtime.Channel.ItemInsertedEventArgs
+    name: Channel.ItemInsertedEventArgs
+  - uid: Supabase.Realtime.Channel.ItemUpdatedEventArgs
+    name: Channel.ItemUpdatedEventArgs
+  - uid: Supabase.Realtime.ChannelColumnResponse
+    name: ChannelColumnResponse
+  - uid: Supabase.Realtime.ChannelResponse
+    name: ChannelResponse
+  - uid: Supabase.Realtime.Client
+    name: Client
+  - uid: Supabase.Realtime.ClientAuthorization
+    name: ClientAuthorization
+  - uid: Supabase.Realtime.ClientAuthorization.AuthorizationType
+    name: ClientAuthorization.AuthorizationType
+  - uid: Supabase.Realtime.ClientOptions
+    name: ClientOptions
+  - uid: Supabase.Realtime.Constants
+    name: Constants
+  - uid: Supabase.Realtime.Constants.EventType
+    name: Constants.EventType
+  - uid: Supabase.Realtime.Constants.SocketStates
+    name: Constants.SocketStates
+  - uid: Supabase.Realtime.Push
+    name: Push
+  - uid: Supabase.Realtime.Socket
+    name: Socket
+  - uid: Supabase.Realtime.SocketMessage
+    name: SocketMessage
+  - uid: Supabase.Realtime.SocketMessageEventArgs
+    name: SocketMessageEventArgs
+  - uid: Supabase.Realtime.SocketOptionsParameters
+    name: SocketOptionsParameters
+  - uid: Supabase.Realtime.SocketStateChangedEventArgs
+    name: SocketStateChangedEventArgs
+  - uid: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+    name: SocketStateChangedEventArgs.ConnectionState

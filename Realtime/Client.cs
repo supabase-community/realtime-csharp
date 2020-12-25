@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using Postgrest.Attributes;
-using Postgrest.Models;
-using static Supabase.Realtime.Constants;
+using WebSocketSharp;
 
 namespace Supabase.Realtime
 {
@@ -33,12 +30,15 @@ namespace Supabase.Realtime
         /// </summary>
         public Socket Socket { get; private set; }
 
+        /// <summary>
+        /// Client Options - most of which are regarding Socket connection options
+        /// </summary>
         public ClientOptions Options { get; private set; }
 
-        private string realtimeUrl;
-        private ClientAuthorization authorization;
-
         private static Client instance;
+        /// <summary>
+        /// The Client Instance (singleton)
+        /// </summary>
         public static Client Instance
         {
             get
@@ -50,18 +50,36 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// Invoked when the socket raises the `open` event.
+        /// </summary>
         public EventHandler<SocketStateChangedEventArgs> OnOpen;
-        public EventHandler<SocketStateChangedEventArgs> OnClose;
-        public EventHandler<SocketStateChangedEventArgs> OnError;
-        public EventHandler<SocketStateChangedEventArgs> OnMessage;
 
         /// <summary>
-        /// 
+        /// Invoked when the socket raises the `close` event.
+        /// </summary>
+        public EventHandler<SocketStateChangedEventArgs> OnClose;
+
+        /// <summary>
+        /// Invoked when the socket raises the `error` event.
+        /// </summary>
+        public EventHandler<SocketStateChangedEventArgs> OnError;
+
+        /// <summary>
+        /// Invoked when the socket raises the `message` event.
+        /// </summary>
+        public EventHandler<SocketStateChangedEventArgs> OnMessage;
+
+        private string realtimeUrl;
+        private ClientAuthorization authorization;
+
+        /// <summary>
+        /// Initializes a Client instance, this method should be called prior to any other method.
         /// </summary>
         /// <param name="realtimeUrl">The connection url (ex: "ws://localhost:4000/socket" - no trailing slash required)</param>
         /// <param name="authorization"></param>
         /// <param name="options"></param>
-        /// <returns></returns>
+        /// <returns>Client</returns>
         public Client Initialize(string realtimeUrl, ClientAuthorization authorization = null, ClientOptions options = null)
         {
             this.realtimeUrl = realtimeUrl;
@@ -76,12 +94,17 @@ namespace Supabase.Realtime
             {
                 options = new ClientOptions();
             }
-            this.Options = options;
-            this.subscriptions = new Dictionary<string, Channel>();
+
+            Options = options;
+            subscriptions = new Dictionary<string, Channel>();
 
             return this;
         }
 
+        /// <summary>
+        /// Attempts to connect to the socket given the params specified in `Initialize`
+        /// </summary>
+        /// <returns></returns>
         public Client Connect()
         {
             if (Socket != null)
@@ -97,7 +120,13 @@ namespace Supabase.Realtime
             return this;
         }
 
-        public Client Disconnect(WebSocketSharp.CloseStatusCode code = WebSocketSharp.CloseStatusCode.Normal, string reason = "Programmatic Disconnect")
+        /// <summary>
+        /// Disconnects from the socket server (if connected).
+        /// </summary>
+        /// <param name="code">Status Code</param>
+        /// <param name="reason">Reason for disconnect</param>
+        /// <returns></returns>
+        public Client Disconnect(CloseStatusCode code = WebSocketSharp.CloseStatusCode.Normal, string reason = "Programmatic Disconnect")
         {
             try
             {
@@ -113,6 +142,42 @@ namespace Supabase.Realtime
             {
                 Debug.WriteLine($"Failed to disconnect socket.");
                 throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Adds a Channel subscription - if a subscription exists with the same signature, the existing subscription will be returned.
+        /// </summary>
+        /// <param name="database">Database to connect to, with Supabase this will likely be `realtime`.</param>
+        /// <param name="schema">Postgres schema, for example, `public`</param>
+        /// <param name="table">Postgres table name</param>
+        /// <param name="column">Postgres column name</param>
+        /// <param name="value">Value the specified column should have</param>
+        /// <returns></returns>
+        public Channel Channel(string database = "realtime", string schema = null, string table = null, string column = null, string value = null)
+        {
+            var key = Utils.GenerateChannelTopic(database, schema, table, column, value);
+
+            if (subscriptions.ContainsKey(key))
+            {
+                return subscriptions[key] as Channel;
+            }
+
+            var subscription = new Channel(database, schema, table, column, value);
+            subscriptions.Add(key, subscription);
+
+            return subscription;
+        }
+
+        /// <summary>
+        /// Removes a channel subscription.
+        /// </summary>
+        /// <param name="channel"></param>
+        public void Remove(Channel channel)
+        {
+            if (subscriptions.ContainsKey(channel.Topic))
+            {
+                subscriptions.Remove(channel.Topic);
             }
         }
 
@@ -133,29 +198,6 @@ namespace Supabase.Realtime
                 case SocketStateChangedEventArgs.ConnectionState.Message:
                     OnMessage?.Invoke(this, args);
                     break;
-            }
-        }
-
-        public Channel Channel(string database = "realtime", string schema = null, string table = null, string col = null, string value = null)
-        {
-            var key = Utils.GenerateChannelTopic(database, schema, table, col, value);
-
-            if (subscriptions.ContainsKey(key))
-            {
-                return subscriptions[key] as Channel;
-            }
-
-            var subscription = new Channel(database, schema, table, col, value);
-            subscriptions.Add(key, subscription);
-
-            return subscription;
-        }
-
-        public void Remove(Channel channel)
-        {
-            if (subscriptions.ContainsKey(channel.Topic))
-            {
-                subscriptions.Remove(channel.Topic);
             }
         }
     }

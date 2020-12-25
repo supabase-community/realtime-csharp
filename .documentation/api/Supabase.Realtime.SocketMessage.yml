@@ -1,0 +1,515 @@
+### YamlMime:ManagedReference
+items:
+- uid: Supabase.Realtime.SocketMessage
+  commentId: T:Supabase.Realtime.SocketMessage
+  id: SocketMessage
+  parent: Supabase.Realtime
+  children:
+  - Supabase.Realtime.SocketMessage.Event
+  - Supabase.Realtime.SocketMessage.Payload
+  - Supabase.Realtime.SocketMessage.Ref
+  - Supabase.Realtime.SocketMessage.Topic
+  langs:
+  - csharp
+  - vb
+  name: SocketMessage
+  nameWithType: SocketMessage
+  fullName: Supabase.Realtime.SocketMessage
+  type: Class
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: SocketMessage
+    path: ../Realtime/Socket.cs
+    startLine: 258
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  summary: "\nRepresentation of a Socket Request.\n"
+  example: []
+  syntax:
+    content: public class SocketMessage
+    content.vb: Public Class SocketMessage
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Supabase.Realtime.SocketMessage.Topic
+  commentId: P:Supabase.Realtime.SocketMessage.Topic
+  id: Topic
+  parent: Supabase.Realtime.SocketMessage
+  langs:
+  - csharp
+  - vb
+  name: Topic
+  nameWithType: SocketMessage.Topic
+  fullName: Supabase.Realtime.SocketMessage.Topic
+  type: Property
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Topic
+    path: ../Realtime/Socket.cs
+    startLine: 260
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: public string Topic { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Topic As String
+  overload: Supabase.Realtime.SocketMessage.Topic*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Supabase.Realtime.SocketMessage.Event
+  commentId: P:Supabase.Realtime.SocketMessage.Event
+  id: Event
+  parent: Supabase.Realtime.SocketMessage
+  langs:
+  - csharp
+  - vb
+  name: Event
+  nameWithType: SocketMessage.Event
+  fullName: Supabase.Realtime.SocketMessage.Event
+  type: Property
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Event
+    path: ../Realtime/Socket.cs
+    startLine: 263
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: public string Event { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Event As String
+  overload: Supabase.Realtime.SocketMessage.Event*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Supabase.Realtime.SocketMessage.Payload
+  commentId: P:Supabase.Realtime.SocketMessage.Payload
+  id: Payload
+  parent: Supabase.Realtime.SocketMessage
+  langs:
+  - csharp
+  - vb
+  name: Payload
+  nameWithType: SocketMessage.Payload
+  fullName: Supabase.Realtime.SocketMessage.Payload
+  type: Property
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Payload
+    path: ../Realtime/Socket.cs
+    startLine: 266
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: public object Payload { get; set; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Public Property Payload As Object
+  overload: Supabase.Realtime.SocketMessage.Payload*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Supabase.Realtime.SocketMessage.Ref
+  commentId: P:Supabase.Realtime.SocketMessage.Ref
+  id: Ref
+  parent: Supabase.Realtime.SocketMessage
+  langs:
+  - csharp
+  - vb
+  name: Ref
+  nameWithType: SocketMessage.Ref
+  fullName: Supabase.Realtime.SocketMessage.Ref
+  type: Property
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Ref
+    path: ../Realtime/Socket.cs
+    startLine: 269
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: public string Ref { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Ref As String
+  overload: Supabase.Realtime.SocketMessage.Ref*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Supabase.Realtime
+  commentId: N:Supabase.Realtime
+  name: Supabase.Realtime
+  nameWithType: Supabase.Realtime
+  fullName: Supabase.Realtime
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Supabase.Realtime.SocketMessage.Topic*
+  commentId: Overload:Supabase.Realtime.SocketMessage.Topic
+  name: Topic
+  nameWithType: SocketMessage.Topic
+  fullName: Supabase.Realtime.SocketMessage.Topic
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Supabase.Realtime.SocketMessage.Event*
+  commentId: Overload:Supabase.Realtime.SocketMessage.Event
+  name: Event
+  nameWithType: SocketMessage.Event
+  fullName: Supabase.Realtime.SocketMessage.Event
+- uid: Supabase.Realtime.SocketMessage.Payload*
+  commentId: Overload:Supabase.Realtime.SocketMessage.Payload
+  name: Payload
+  nameWithType: SocketMessage.Payload
+  fullName: Supabase.Realtime.SocketMessage.Payload
+- uid: Supabase.Realtime.SocketMessage.Ref*
+  commentId: Overload:Supabase.Realtime.SocketMessage.Ref
+  name: Ref
+  nameWithType: SocketMessage.Ref
+  fullName: Supabase.Realtime.SocketMessage.Ref

@@ -38,7 +38,6 @@ namespace RealtimeTests
                 client.OnOpen += (sender, args) =>
                 {
                     var channel = client.Channel("realtime", "*");
-
                     channel.Subscribe();
                 };
 

@@ -7,36 +7,58 @@ namespace Supabase.Realtime
 {
     public class ClientOptions
     {
-        // The function to encode outgoing messages. Defaults to JSON:
+        /// <summary>
+        /// The function to encode outgoing messages. Defaults to JSON
+        /// </summary>
         public Action<object, Action<string>> Encode { get; set; } = (payload, callback) => callback(JsonConvert.SerializeObject(payload));
 
-        // The function to decode incoming messages.
+        /// <summary>
+        /// The function to decode incoming messages.
+        /// </summary>
         public Action<string, Action<SocketMessage>> Decode { get; set; } = (payload, callback) => callback(JsonConvert.DeserializeObject<SocketMessage>(payload));
 
+        /// <summary>
+        /// Logging function
+        /// </summary>
         public Action<string, string, object> Logger { get; set; } = (kind, msg, data) => Debug.WriteLine($"{kind}: {msg}, {0}", JsonConvert.SerializeObject(data, Formatting.Indented));
 
-        // The Websocket Transport, for example WebSocket.
+        /// <summary>
+        /// The Websocket Transport, for example WebSocket.
+        /// </summary>
         public string Transport { get; set; } = Constants.TRANSPORT_WEBSOCKET;
 
-        // The default timeout in milliseconds to trigger push timeouts.
+        /// <summary>
+        /// The default timeout in milliseconds to trigger push timeouts.
+        /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(Constants.DEFAULT_TIMEOUT);
 
-        // The interval to send a heartbeat message
+        /// <summary>
+        /// The interval to send a heartbeat message
+        /// </summary>
         public TimeSpan HeartbeatInterval { get; set; } = TimeSpan.FromSeconds(30);
 
-        // The interval to reconnect
+        /// <summary>
+        /// The interval to reconnect
+        /// </summary>
         public Func<int, TimeSpan> ReconnectAfterInterval { get; set; } = (tries) =>
         {
             var intervals = new int[] { 1, 2, 5, 10 };
             return TimeSpan.FromSeconds(tries < intervals.Length ? tries - 1 : 10);
         };
 
-        // The maximum timeout of a long poll AJAX request.
+        /// <summary>
+        /// The maximum timeout of a long poll AJAX request.
+        /// </summary>
         public TimeSpan LongPollerTimeout = TimeSpan.FromSeconds(20);
 
+        /// <summary>
+        /// Request headers to be appended to the connection string.
+        /// </summary>
         public Dictionary<string, object> Headers = new Dictionary<string, object>();
 
-        // The optional params to pass when connecting
+        /// <summary>
+        /// The optional params to pass when connecting
+        /// </summary>
         public SocketOptionsParameters Parameters = new SocketOptionsParameters();
     }
 }

@@ -1,0 +1,145 @@
+### YamlMime:ManagedReference
+items:
+- uid: Supabase.Realtime.Constants.EventType
+  commentId: T:Supabase.Realtime.Constants.EventType
+  id: Constants.EventType
+  parent: Supabase.Realtime
+  children:
+  - Supabase.Realtime.Constants.EventType.Delete
+  - Supabase.Realtime.Constants.EventType.Insert
+  - Supabase.Realtime.Constants.EventType.Update
+  langs:
+  - csharp
+  - vb
+  name: Constants.EventType
+  nameWithType: Constants.EventType
+  fullName: Supabase.Realtime.Constants.EventType
+  type: Enum
+  source:
+    remote:
+      path: Realtime/Constants.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: EventType
+    path: ../Realtime/Constants.cs
+    startLine: 15
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: public enum EventType
+    content.vb: Public Enum EventType
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Supabase.Realtime.Constants.EventType.Insert
+  commentId: F:Supabase.Realtime.Constants.EventType.Insert
+  id: Insert
+  parent: Supabase.Realtime.Constants.EventType
+  langs:
+  - csharp
+  - vb
+  name: Insert
+  nameWithType: Constants.EventType.Insert
+  fullName: Supabase.Realtime.Constants.EventType.Insert
+  type: Field
+  source:
+    remote:
+      path: Realtime/Constants.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Insert
+    path: ../Realtime/Constants.cs
+    startLine: 17
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Insert = 0
+    return:
+      type: Supabase.Realtime.Constants.EventType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.Constants.EventType.Update
+  commentId: F:Supabase.Realtime.Constants.EventType.Update
+  id: Update
+  parent: Supabase.Realtime.Constants.EventType
+  langs:
+  - csharp
+  - vb
+  name: Update
+  nameWithType: Constants.EventType.Update
+  fullName: Supabase.Realtime.Constants.EventType.Update
+  type: Field
+  source:
+    remote:
+      path: Realtime/Constants.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Update
+    path: ../Realtime/Constants.cs
+    startLine: 18
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Update = 1
+    return:
+      type: Supabase.Realtime.Constants.EventType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.Constants.EventType.Delete
+  commentId: F:Supabase.Realtime.Constants.EventType.Delete
+  id: Delete
+  parent: Supabase.Realtime.Constants.EventType
+  langs:
+  - csharp
+  - vb
+  name: Delete
+  nameWithType: Constants.EventType.Delete
+  fullName: Supabase.Realtime.Constants.EventType.Delete
+  type: Field
+  source:
+    remote:
+      path: Realtime/Constants.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Delete
+    path: ../Realtime/Constants.cs
+    startLine: 19
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Delete = 2
+    return:
+      type: Supabase.Realtime.Constants.EventType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Supabase.Realtime
+  commentId: N:Supabase.Realtime
+  name: Supabase.Realtime
+  nameWithType: Supabase.Realtime
+  fullName: Supabase.Realtime
+- uid: Supabase.Realtime.Constants.EventType
+  commentId: T:Supabase.Realtime.Constants.EventType
+  parent: Supabase.Realtime
+  name: Constants.EventType
+  nameWithType: Constants.EventType
+  fullName: Supabase.Realtime.Constants.EventType

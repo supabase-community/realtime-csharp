@@ -5,6 +5,8 @@ services:
     image: supabase/realtime
     ports:
       - "4000:4000"
+    depends_on:
+      - db
     environment:
       DB_HOST: db
       DB_NAME: postgres
@@ -14,6 +16,18 @@ services:
       PORT: 4000
       HOSTNAME: localhost
       SECRET_KEY_BASE: SOMETHING_SUPER_SECRET
+
+  rest:
+    image: postgrest/postgrest:v7.0.1
+    ports:
+      - "3000:3000"
+    environment:
+      PGRST_DB_URI: postgres://postgres:postgres@db:5432/postgres
+      PGRST_DB_SCHEMA: public, personal
+      PGRST_DB_ANON_ROLE: postgres
+    depends_on:
+      - db
+
   db:
     image: supabase/postgres
     ports:

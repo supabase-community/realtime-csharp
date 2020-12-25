@@ -7,8 +7,14 @@ using WebSocketSharp;
 
 namespace Supabase.Realtime
 {
+    /// <summary>
+    /// Class representation of a channel subscription
+    /// </summary>
     public class Channel
     {
+        /// <summary>
+        /// Channel state with associated string representations.
+        /// </summary>
         public enum ChannelState
         {
             [MapTo("closed")]
@@ -23,12 +29,34 @@ namespace Supabase.Realtime
             Leaving
         }
 
+        /// <summary>
+        /// Invoked when the `INSERT` event is raised.
+        /// </summary>
         public EventHandler<ItemInsertedEventArgs> OnInsert;
+
+        /// <summary>
+        /// Invoked when the `UPDATE` event is raised.
+        /// </summary>
         public EventHandler<ItemUpdatedEventArgs> OnUpdated;
+
+        /// <summary>
+        /// Invoked when the `DELETE` event is raised.
+        /// </summary>
         public EventHandler<ItemDeletedEventArgs> OnDelete;
+
+        /// <summary>
+        /// Invoked anytime a message is decoded within this topic.
+        /// </summary>
         public EventHandler<MessageEventArgs> OnMessage;
 
+        /// <summary>
+        /// Invoked when this channel listener is closed
+        /// </summary>
         public EventHandler OnClosed;
+
+        /// <summary>
+        /// Invoked when this channel is in an error state.
+        /// </summary>
         public EventHandler OnError;
 
         public bool IsClosed => State == ChannelState.Closed;
@@ -37,8 +65,19 @@ namespace Supabase.Realtime
         public bool IsJoining => State == ChannelState.Joining;
         public bool IsLeaving => State == ChannelState.Leaving;
 
+        /// <summary>
+        /// Shorthand accessor for the Client's socket connection.
+        /// </summary>
         public Socket Socket { get => Client.Instance.Socket; }
+
+        /// <summary>
+        /// The Channel's current state.
+        /// </summary>
         public ChannelState State { get; private set; } = ChannelState.Closed;
+
+        /// <summary>
+        /// The Channel's (unique) topic indentifier.
+        /// </summary>
         public string Topic { get => Utils.GenerateChannelTopic(database, schema, table, col, value); }
 
         private string database;
@@ -53,6 +92,14 @@ namespace Supabase.Realtime
         private List<Push> buffer = new List<Push>();
         private Timer rejoinTimer;
 
+        /// <summary>
+        /// Initializes a Channel - must call `Subscribe()` to receive events.
+        /// </summary>
+        /// <param name="database"></param>
+        /// <param name="schema"></param>
+        /// <param name="table"></param>
+        /// <param name="col"></param>
+        /// <param name="value"></param>
         public Channel(string database, string schema, string table, string col, string value)
         {
             this.database = database;
@@ -66,6 +113,10 @@ namespace Supabase.Realtime
             rejoinTimer = new Timer(Client.Instance.Options.Timeout.TotalMilliseconds);
         }
 
+        /// <summary>
+        /// Subscribes to the channel given supplied options/params.
+        /// </summary>
+        /// <param name="timeoutMs"></param>
         public void Subscribe(int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
             if (hasJoinedOnce)
@@ -79,6 +130,9 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// Unsubscribes from the channel.
+        /// </summary>
         public void Unsubscribe()
         {
             State = ChannelState.Leaving;
@@ -87,6 +141,14 @@ namespace Supabase.Realtime
             leavePush.Send();
         }
 
+        /// <summary>
+        /// Sends a `Push` request under this channel.
+        ///
+        /// Maintains a buffer in the event push is called prior to the channel being joined.
+        /// </summary>
+        /// <param name="eventName"></param>
+        /// <param name="payload"></param>
+        /// <param name="timeoutMs"></param>
         public void Push(string eventName, object payload, int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
             if (!hasJoinedOnce)
@@ -105,6 +167,10 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// Rejoins the channel.
+        /// </summary>
+        /// <param name="timeoutMs"></param>
         public void Rejoin(int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
             if (IsLeaving) return;

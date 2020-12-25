@@ -11,10 +11,24 @@ using static Supabase.Realtime.SocketStateChangedEventArgs;
 
 namespace Supabase.Realtime
 {
+    /// <summary>
+    /// Socket connection handler.
+    /// </summary>
     public class Socket
     {
+        /// <summary>
+        /// Returns whether or not the connection is alive.
+        /// </summary>
         public bool IsConnected => connection.IsAlive;
+
+        /// <summary>
+        /// Invoked when the socket state changes.
+        /// </summary>
         public EventHandler<SocketStateChangedEventArgs> StateChanged;
+
+        /// <summary>
+        /// Invoked when a message has been recieved and decoded.
+        /// </summary>
         public EventHandler<SocketMessageEventArgs> OnMessage;
 
         private string endpoint;
@@ -45,6 +59,11 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// Initializes this Socket instance.
+        /// </summary>
+        /// <param name="endpoint"></param>
+        /// <param name="options"></param>
         public Socket(string endpoint, ClientOptions options = null)
         {
             this.endpoint = $"{endpoint}/{Constants.TRANSPORT_WEBSOCKET}";
@@ -57,6 +76,9 @@ namespace Supabase.Realtime
             this.options = options;
         }
 
+        /// <summary>
+        /// Connects to a socket server and registers event listeners.
+        /// </summary>
         public void Connect()
         {
             if (connection != null) return;
@@ -70,6 +92,11 @@ namespace Supabase.Realtime
             connection.Connect();
         }
 
+        /// <summary>
+        /// Disconnects from the socket server.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="reason"></param>
         public void Disconnect(CloseStatusCode code = CloseStatusCode.Normal, string reason = "")
         {
             if (connection != null)
@@ -80,6 +107,12 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// Pushes formatted data to the socket server.
+        ///
+        /// If the connection is not alive, the data will be placed into a buffer to be sent when reconnected.
+        /// </summary>
+        /// <param name="data"></param>
         public void Push(SocketMessage data)
         {
             options.Logger("push", $"{data.Topic} {data.Event} ({data.Ref})", data.Payload);
@@ -96,6 +129,9 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// Maintains a heartbeat connection with the socket server to prevent disconnection.
+        /// </summary>
         private void SendHeartbeat()
         {
             if (!connection.IsAlive) return;
@@ -111,6 +147,11 @@ namespace Supabase.Realtime
             Push(new SocketMessage { Topic = "pheonix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
         }
 
+        /// <summary>
+        /// Called when the socket opens, registers the heartbeat thread and cancels the reconnection timer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void OnConnectionOpened(object sender, EventArgs args)
         {
             options.Logger("transport", $"connected to ${endpointUrl}", null);
@@ -137,11 +178,16 @@ namespace Supabase.Realtime
             StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Open, args));
         }
 
+        /// <summary>
+        /// Parses a recieved socket message into a non-generic type.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void OnConnectionMessage(object sender, MessageEventArgs args)
         {
             options.Decode(args.Data, decoded =>
             {
-                this.options.Logger("receive", $"{decoded.Payload} {decoded.Topic} {decoded.Event} ({decoded.Ref})", decoded.Payload);
+                options.Logger("receive", $"{decoded.Payload} {decoded.Topic} {decoded.Event} ({decoded.Ref})", decoded.Payload);
                 OnMessage?.Invoke(sender, new SocketMessageEventArgs(decoded));
             });
 
@@ -153,6 +199,11 @@ namespace Supabase.Realtime
             StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Error, args));
         }
 
+        /// <summary>
+        /// Begins the reconnection thread with a progressively increasing interval.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void OnConnectionClosed(object sender, CloseEventArgs args)
         {
             options.Logger("transport", "close", args);
@@ -166,8 +217,8 @@ namespace Supabase.Realtime
                 var tries = 1;
                 while (!reconnectTokenSource.IsCancellationRequested)
                 {
-                    this.Disconnect();
-                    this.Connect();
+                    Disconnect();
+                    Connect();
                     await Task.Delay(options.ReconnectAfterInterval(tries++), reconnectTokenSource.Token);
                 }
             }, reconnectTokenSource.Token);
@@ -175,9 +226,17 @@ namespace Supabase.Realtime
             StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Close, args));
         }
 
+        /// <summary>
+        /// Generates an incrementing identifier for message references - this reference is used
+        /// to coordinate requests with their responses.
+        /// </summary>
+        /// <returns></returns>
         internal string MakeMsgRef() => reference + 1 == reference ? 0.ToString() : (reference + 1).ToString();
         internal string ReplyEventName(string msgRef) => $"chan_reply_{msgRef}";
 
+        /// <summary>
+        /// Flushes `Push` requests added while a socket was disconnected.
+        /// </summary>
         private void FlushBuffer()
         {
             foreach (var item in buffer)
@@ -194,6 +253,9 @@ namespace Supabase.Realtime
         public string ApiKey { get; set; }
     }
 
+    /// <summary>
+    /// Representation of a Socket Request.
+    /// </summary>
     public class SocketMessage
     {
         [JsonProperty("topic")]

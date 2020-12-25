@@ -1,0 +1,178 @@
+### YamlMime:ManagedReference
+items:
+- uid: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  commentId: T:Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  id: SocketStateChangedEventArgs.ConnectionState
+  parent: Supabase.Realtime
+  children:
+  - Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Close
+  - Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Error
+  - Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Message
+  - Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Open
+  langs:
+  - csharp
+  - vb
+  name: SocketStateChangedEventArgs.ConnectionState
+  nameWithType: SocketStateChangedEventArgs.ConnectionState
+  fullName: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  type: Enum
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: ConnectionState
+    path: ../Realtime/Socket.cs
+    startLine: 275
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: public enum ConnectionState
+    content.vb: Public Enum ConnectionState
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Open
+  commentId: F:Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Open
+  id: Open
+  parent: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  langs:
+  - csharp
+  - vb
+  name: Open
+  nameWithType: SocketStateChangedEventArgs.ConnectionState.Open
+  fullName: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Open
+  type: Field
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Open
+    path: ../Realtime/Socket.cs
+    startLine: 277
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Open = 0
+    return:
+      type: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Close
+  commentId: F:Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Close
+  id: Close
+  parent: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  langs:
+  - csharp
+  - vb
+  name: Close
+  nameWithType: SocketStateChangedEventArgs.ConnectionState.Close
+  fullName: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Close
+  type: Field
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Close
+    path: ../Realtime/Socket.cs
+    startLine: 278
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Close = 1
+    return:
+      type: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Error
+  commentId: F:Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Error
+  id: Error
+  parent: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  langs:
+  - csharp
+  - vb
+  name: Error
+  nameWithType: SocketStateChangedEventArgs.ConnectionState.Error
+  fullName: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Error
+  type: Field
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Error
+    path: ../Realtime/Socket.cs
+    startLine: 279
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Error = 2
+    return:
+      type: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Message
+  commentId: F:Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Message
+  id: Message
+  parent: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  langs:
+  - csharp
+  - vb
+  name: Message
+  nameWithType: SocketStateChangedEventArgs.ConnectionState.Message
+  fullName: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.Message
+  type: Field
+  source:
+    remote:
+      path: Realtime/Socket.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Message
+    path: ../Realtime/Socket.cs
+    startLine: 280
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Message = 3
+    return:
+      type: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Supabase.Realtime
+  commentId: N:Supabase.Realtime
+  name: Supabase.Realtime
+  nameWithType: Supabase.Realtime
+  fullName: Supabase.Realtime
+- uid: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  commentId: T:Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState
+  parent: Supabase.Realtime
+  name: SocketStateChangedEventArgs.ConnectionState
+  nameWithType: SocketStateChangedEventArgs.ConnectionState
+  fullName: Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState

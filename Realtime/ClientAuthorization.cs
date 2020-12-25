@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Supabase
+namespace Supabase.Realtime
 {
     public class ClientAuthorization
     {

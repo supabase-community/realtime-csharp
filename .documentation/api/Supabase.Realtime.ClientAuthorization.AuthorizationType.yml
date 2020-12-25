@@ -1,0 +1,178 @@
+### YamlMime:ManagedReference
+items:
+- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  commentId: T:Supabase.Realtime.ClientAuthorization.AuthorizationType
+  id: ClientAuthorization.AuthorizationType
+  parent: Supabase.Realtime
+  children:
+  - Supabase.Realtime.ClientAuthorization.AuthorizationType.ApiKey
+  - Supabase.Realtime.ClientAuthorization.AuthorizationType.Basic
+  - Supabase.Realtime.ClientAuthorization.AuthorizationType.Open
+  - Supabase.Realtime.ClientAuthorization.AuthorizationType.Token
+  langs:
+  - csharp
+  - vb
+  name: ClientAuthorization.AuthorizationType
+  nameWithType: ClientAuthorization.AuthorizationType
+  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  type: Enum
+  source:
+    remote:
+      path: Realtime/ClientAuthorization.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: AuthorizationType
+    path: ../Realtime/ClientAuthorization.cs
+    startLine: 11
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: public enum AuthorizationType
+    content.vb: Public Enum AuthorizationType
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.Open
+  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.Open
+  id: Open
+  parent: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  langs:
+  - csharp
+  - vb
+  name: Open
+  nameWithType: ClientAuthorization.AuthorizationType.Open
+  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.Open
+  type: Field
+  source:
+    remote:
+      path: Realtime/ClientAuthorization.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Open
+    path: ../Realtime/ClientAuthorization.cs
+    startLine: 13
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Open = 0
+    return:
+      type: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.ApiKey
+  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.ApiKey
+  id: ApiKey
+  parent: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  langs:
+  - csharp
+  - vb
+  name: ApiKey
+  nameWithType: ClientAuthorization.AuthorizationType.ApiKey
+  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.ApiKey
+  type: Field
+  source:
+    remote:
+      path: Realtime/ClientAuthorization.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: ApiKey
+    path: ../Realtime/ClientAuthorization.cs
+    startLine: 14
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: ApiKey = 1
+    return:
+      type: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.Token
+  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.Token
+  id: Token
+  parent: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  langs:
+  - csharp
+  - vb
+  name: Token
+  nameWithType: ClientAuthorization.AuthorizationType.Token
+  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.Token
+  type: Field
+  source:
+    remote:
+      path: Realtime/ClientAuthorization.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Token
+    path: ../Realtime/ClientAuthorization.cs
+    startLine: 15
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Token = 2
+    return:
+      type: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.Basic
+  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.Basic
+  id: Basic
+  parent: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  langs:
+  - csharp
+  - vb
+  name: Basic
+  nameWithType: ClientAuthorization.AuthorizationType.Basic
+  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.Basic
+  type: Field
+  source:
+    remote:
+      path: Realtime/ClientAuthorization.cs
+      branch: master
+      repo: https://github.com/supabase/realtime-csharp.git
+    id: Basic
+    path: ../Realtime/ClientAuthorization.cs
+    startLine: 16
+  assemblies:
+  - Realtime
+  namespace: Supabase.Realtime
+  syntax:
+    content: Basic = 3
+    return:
+      type: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Supabase.Realtime
+  commentId: N:Supabase.Realtime
+  name: Supabase.Realtime
+  nameWithType: Supabase.Realtime
+  fullName: Supabase.Realtime
+- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType
+  commentId: T:Supabase.Realtime.ClientAuthorization.AuthorizationType
+  parent: Supabase.Realtime
+  name: ClientAuthorization.AuthorizationType
+  nameWithType: ClientAuthorization.AuthorizationType
+  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType
