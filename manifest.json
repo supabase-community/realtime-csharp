@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.ChannelState.html",
-          "hash": "gM2YN5o7t8OR1U2upoTERw=="
+          "hash": "XehlkPipmkJuqKdyVB/VsQ=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.ItemDeletedEventArgs.html",
-          "hash": "Wqc6WvwhuQGobyPX4mu2pg=="
+          "hash": "/8qoRLDGgiZzvvMBELTOIQ=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.ItemInsertedEventArgs.html",
-          "hash": "SJPhQKfRJhr/6W4bvqO/Xw=="
+          "hash": "Y0lEDCbYJ6oYjJuc6tbvhA=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.ItemUpdatedEventArgs.html",
-          "hash": "CSP0pgdDv6a1SmyVslwZow=="
+          "hash": "4kUM4RcF783CB2RIZtSuhw=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.html",
-          "hash": "5Qr3VJFLCnkpk9bXkNJkyw=="
+          "hash": "HwtIiSzl3RRljpQcFibhUg=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ChannelColumnResponse.html",
-          "hash": "vNHcOYWMjESNR0olLlvZag=="
+          "hash": "HEUIbaEBB4aMsgG/QjOoaQ=="
         }
       },
       "is_incremental": false,
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ChannelResponse.html",
-          "hash": "OoP+k9OIg4Me4cRiheIScw=="
+          "hash": "nGZE2cW2XK7eRB/RedLrqw=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ChannelStateChangedEventArgs.html",
-          "hash": "SDM8IA7BL4j8d6MAMV3l7A=="
+          "hash": "ZkT85CS9INs/USmxwjpQ5A=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Client.html",
-          "hash": "b0T0r7lILqGvV967+I9pcQ=="
+          "hash": "dYM3RTW5htaCPtDR2Kde3A=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ClientAuthorization.AuthorizationType.html",
-          "hash": "2KJSH/Mb8BeF2xPSM7Ekzg=="
+          "hash": "xlPB8GIntJxYErsTPeFeoA=="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ClientAuthorization.html",
-          "hash": "OpFxFIyvdnpo0Pge+C+1ww=="
+          "hash": "U9mPqzca26gRfvG1Rtv3Gw=="
         }
       },
       "is_incremental": false,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ClientOptions.html",
-          "hash": "JCBoSJ7eE0BttsVoLa1vvw=="
+          "hash": "yjPinL0wz+huowE4t78dmw=="
         }
       },
       "is_incremental": false,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.EventType.html",
-          "hash": "2ExZdRvHzkwNhE5pXtGlGA=="
+          "hash": "8+qJiC/uEwdhWGSIxc81PQ=="
         }
       },
       "is_incremental": false,
@@ -165,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.SocketStates.html",
-          "hash": "/rOGsmq+GJd1rD51lxmVSg=="
+          "hash": "/xryL7huguHWIdP7QyEJwA=="
         }
       },
       "is_incremental": false,
@@ -177,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.html",
-          "hash": "w2B4ED43wNWkSrdIB8WNlQ=="
+          "hash": "4mcVy+Zs7Eco0a34J7Rq7A=="
         }
       },
       "is_incremental": false,
@@ -189,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.PheonixResponse.html",
-          "hash": "rUOumNiGlQCikL+yO00/xA=="
+          "hash": "lHyTVztaR1t7navTj8+IdA=="
         }
       },
       "is_incremental": false,
@@ -201,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Push.html",
-          "hash": "5ijx/GV2HqHQD2lRDAF+zw=="
+          "hash": "SC0Ay08oLLqrrRTbV8Z8Mg=="
         }
       },
       "is_incremental": false,
@@ -213,31 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Socket.html",
-          "hash": "BOS+Zv21/VdRIs6hvG4zgA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketMessage.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketMessage.html",
-          "hash": "rDIewGe1Lh40vqfiHsXVDw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketMessageEventArgs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketMessageEventArgs.html",
-          "hash": "MRscU6KzmqsjZ6RpQW//rw=="
+          "hash": "vV4XWVmQH1B8vMjfZVsVKA=="
         }
       },
       "is_incremental": false,
@@ -249,7 +225,55 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketOptionsParameters.html",
-          "hash": "v54spwRquD6WglACkejUtw=="
+          "hash": "6lVe9/Iq6Iv6YFGrkLftTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketRequest.html",
+          "hash": "6vU+j3BVSx6fvDMI2MSDOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketResponse.html",
+          "hash": "fTKBqXyaSDDCESN+03acog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketResponseEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketResponseEventArgs.html",
+          "hash": "PNIhKqPUQh2ptCZguOpQ/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.SocketResponsePayload.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.SocketResponsePayload.html",
+          "hash": "ET5bpzTMIcD4rr7Fr+O5kg=="
         }
       },
       "is_incremental": false,
@@ -261,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.html",
-          "hash": "kSJesEndkcMvxNhS6LhNgQ=="
+          "hash": "SBF2w3tChpikT7KHWatt7g=="
         }
       },
       "is_incremental": false,
@@ -273,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.html",
-          "hash": "AvrtdTb9TkbCpJljFQkUwg=="
+          "hash": "NJBFbbX4vuAScLJqWk7/gg=="
         }
       },
       "is_incremental": false,
@@ -285,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.html",
-          "hash": "AyBMPb6kentg+pUVEpn27w=="
+          "hash": "1K3UC0FuGcxY8tbkaHSsEA=="
         }
       },
       "is_incremental": false,
@@ -297,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "OwH6ssogVbx02QRDxapRFQ=="
+          "hash": "yLXF9MR5bNBeWl5WfSdiFg=="
         }
       },
       "is_incremental": false,
@@ -309,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "IAzGagi4saiAucE1vru1uA=="
+          "hash": "LRzjZftG4jm+IzbPBnSUWg=="
         }
       },
       "is_incremental": false,
@@ -321,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "qUX2q3i2GNa1JVU9+Rs59w=="
+          "hash": "UvLRfFWASwlVg+VC/8iHMw=="
         }
       },
       "is_incremental": false,
@@ -333,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "zY1V+pupLZozODrXqPhyFw=="
+          "hash": "wDgNr2bQ8qpIdquWeq5zSA=="
         }
       },
       "is_incremental": false,
@@ -351,23 +375,23 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 2,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 24,
+          "total_file_count": 26,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 2,
+          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }
