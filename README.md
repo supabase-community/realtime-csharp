@@ -1,4 +1,12 @@
+<p align="center">
+<img width="300" src=".github/logo.png"/>
+</p>
+
+---
+
 # realtime-csharp (WIP)
+
+![Build And Test](https://github.com/supabase/realtime-csharp/workflows/Build%20And%20Test/badge.svg)
 
 ---
 
