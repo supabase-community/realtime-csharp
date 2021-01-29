@@ -204,7 +204,7 @@ namespace Supabase.Realtime
         {
             if (args.Message.Ref == joinPush.Ref) return;
 
-            switch(args.Message.Payload.Type)
+            switch(args.Message.Event)
             {
                 case "INSERT":
                     OnInsert?.Invoke(this, new ItemInsertedEventArgs { });

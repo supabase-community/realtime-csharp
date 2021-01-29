@@ -7,8 +7,8 @@ namespace RealtimeTests.Models
     [Table("todos")]
     public class Todo : BaseModel
     {
-        [PrimaryKey]
-        public string Id { get; }
+        [PrimaryKey("id", false)]
+        public int Id { get; set; }
 
         [Column("details")]
         public string Details { get; set; }

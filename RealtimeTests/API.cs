@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RealtimeTests.Models;
 using Supabase.Realtime;
+using static Supabase.Realtime.Channel;
 
 namespace RealtimeTests
 {
@@ -120,7 +122,13 @@ namespace RealtimeTests
 
             var channel = SocketClient.Channel("realtime", "public", "todos");
 
-            channel.OnInsert += (s, args) => tsc.SetResult(true);
+            EventHandler<ItemInsertedEventArgs> callback = null;
+            callback = (s, args) =>
+            {
+                channel.OnInsert -= callback;
+                tsc.SetResult(true);
+            };
+            channel.OnInsert += callback;
 
             channel.StateChanged += async (os, args) =>
             {
@@ -142,8 +150,13 @@ namespace RealtimeTests
 
             var channel = SocketClient.Channel("realtime", "public", "todos");
 
-            channel.OnUpdate += (s, args) => tsc.SetResult(true);
-
+            EventHandler<ItemUpdatedEventArgs> callback = null;
+            callback = (s, args) =>
+            {
+                channel.OnUpdate -= callback;
+                tsc.SetResult(true);
+            };
+            channel.OnUpdate += callback;
             channel.StateChanged += async (os, args) =>
             {
                 if (args.State == Channel.ChannelState.Joined)
@@ -167,7 +180,13 @@ namespace RealtimeTests
 
             var channel = SocketClient.Channel("realtime", "public", "todos");
 
-            channel.OnDelete += (s, args) => tsc.SetResult(true);
+            EventHandler<ItemDeletedEventArgs> callback = null;
+            callback = (s, args) =>
+            {
+                channel.OnDelete -= callback;
+                tsc.SetResult(true);
+            };
+            channel.OnDelete += callback;
 
             channel.StateChanged += async (os, args) =>
             {
@@ -182,6 +201,52 @@ namespace RealtimeTests
             channel.Subscribe();
 
             return tsc.Task;
+        }
+
+        [TestMethod("Channel: Receives '*' Callback")]
+        public Task ChannelReceivesWildcardCallback()
+        {
+            var insertTsc = new TaskCompletionSource<bool>();
+            var updateTsc = new TaskCompletionSource<bool>();
+            var deleteTsc = new TaskCompletionSource<bool>();
+            List<Task> tasks = new List<Task> { insertTsc.Task, updateTsc.Task, deleteTsc.Task };
+
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+
+            channel.OnMessage += (object sender, SocketResponseEventArgs e) =>
+            {
+                if (e.Message.Event == "*")
+                {
+                    switch (e.Message.Payload.Type)
+                    {
+                        case "INSERT":
+                            insertTsc.SetResult(true);
+                            break;
+                        case "UPDATE":
+                            updateTsc.SetResult(true);
+                            break;
+                        case "DELETE":
+                            deleteTsc.SetResult(true);
+                            break;
+                    }
+                }
+            };
+
+            channel.StateChanged += async (os, args) =>
+            {
+                if (args.State == Channel.ChannelState.Joined)
+                {
+                    var modeledResponse = await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+                    var newModel = modeledResponse.Models.First();
+                    newModel.Details = "And edits.";
+                    await newModel.Update<Todo>();
+                    await newModel.Delete<Todo>();
+                }
+            };
+
+            channel.Subscribe();
+
+            return Task.WhenAll(tasks);
         }
     }
 }

@@ -15,10 +15,10 @@ The bulk of this library is a translation and c-sharp-ification of the [supabase
   - [x] Open
   - [x] Close - when channel is explicitly closed by server or by calling `Channel.Unsubscribe()`
   - [x] Error
-- [ ] Realtime Event Handlers
+- [x] Realtime Event Handlers
   - [x] `INSERT`
-  - [ ] `UPDATE`
-  - [ ] `DELETE`
+  - [x] `UPDATE`
+  - [x] `DELETE`
   - [x] `*`
 - [x] Join channels of format:
   - [x] `{database}`
