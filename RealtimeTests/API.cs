@@ -37,7 +37,7 @@ namespace RealtimeTests
         }
 
 
-        [TestMethod("Join channels of format: {database}")]
+        [TestMethod("Client: Join channels of format: {database}")]
         public async Task ClientJoinsChannel_DB()
         {
             var channel = SocketClient.Channel("realtime", "*");
@@ -46,7 +46,7 @@ namespace RealtimeTests
             Assert.AreEqual("realtime:*", channel.Topic);
         }
 
-        [TestMethod("Join channels of format: {database}:{schema}")]
+        [TestMethod("Client: Join channels of format: {database}:{schema}")]
         public async Task ClientJoinsChannel_DB_Schema()
         {
             var channel = SocketClient.Channel("realtime", "public");
@@ -55,7 +55,7 @@ namespace RealtimeTests
             Assert.AreEqual("realtime:public", channel.Topic);
         }
 
-        [TestMethod("Join channels of format: {database}:{schema}:{table}")]
+        [TestMethod("Client: Join channels of format: {database}:{schema}:{table}")]
         public async Task ClientJoinsChannel_DB_Schema_Table()
         {
             var channel = SocketClient.Channel("realtime", "public", "users");
@@ -64,7 +64,7 @@ namespace RealtimeTests
             Assert.AreEqual("realtime:public:users", channel.Topic);
         }
 
-        [TestMethod("Join channels of format: {database}:{schema}:{table}:{col}.eq.{val}")]
+        [TestMethod("Client: Join channels of format: {database}:{schema}:{table}:{col}.eq.{val}")]
         public async Task ClientJoinsChannel_DB_Schema_Table_Query()
         {
             var channel = SocketClient.Channel("realtime", "public", "users", "id", "1");
@@ -183,6 +183,33 @@ namespace RealtimeTests
             });
 
             return Task.WhenAll(tasks);
+        }
+
+        [TestMethod("Client: Returns a single instance of a channel based on topic")]
+        public async Task ClientReturnsSingleChannelInstance()
+        {
+            var channel1 = SocketClient.Channel("realtime", "public", "todos");
+
+            await channel1.Subscribe();
+
+            // Client should return an instance of `realtime:public:todos` that is already joined.
+            var channel2 = SocketClient.Channel("realtime", "public", "todos");
+
+            Assert.AreEqual(true, channel2.IsJoined);
+        }
+
+        [TestMethod("Client: Removes Channel Subscriptions")]
+        public async Task ClientCanRemoveChannelSubscription()
+        {
+            var channel1 = SocketClient.Channel("realtime", "public", "todos");
+            await channel1.Subscribe();
+
+            // Removing channel should remove the stored instance, so a future instance would need
+            // to resubscribe.
+            SocketClient.Remove(channel1);
+
+            var channel2 = SocketClient.Channel("realtime", "public", "todos");
+            Assert.AreEqual(ChannelState.Closed, channel2.State);
         }
     }
 }

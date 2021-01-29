@@ -200,6 +200,9 @@ namespace Supabase.Realtime
         {
             if (subscriptions.ContainsKey(channel.Topic))
             {
+                if (channel.IsJoined)
+                    channel.Unsubscribe();
+
                 subscriptions.Remove(channel.Topic);
             }
         }
