@@ -209,9 +209,9 @@ namespace Supabase.Realtime
 
         private void HandleSocketMessage(object sender, SocketResponseEventArgs args)
         {
-            if (subscriptions.ContainsKey(args.Message.Topic))
+            if (subscriptions.ContainsKey(args.Response.Topic))
             {
-                subscriptions[args.Message.Topic].HandleSocketMessage(args);
+                subscriptions[args.Response.Topic].HandleSocketMessage(args);
             }
         }
 

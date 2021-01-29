@@ -33,7 +33,7 @@ The bulk of this library is a translation and c-sharp-ification of the [supabase
   - [x] `{database}:{schema}`
   - [x] `{database}:{schema}:{table}`
   - [x] `{database}:{schema}:{table}:{col}.eq.{val}`
-- [ ] Responses supply a Generically Typed Model derived from `BaseModel`
+- [x] Responses supply a Generically Typed Model derived from `BaseModel`
 - [x] Ability to remove subscription to Realtime Events
 - [x] Ability to disconnect from socket.
 - [x] Socket reconnects when possible

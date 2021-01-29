@@ -280,6 +280,18 @@ namespace Supabase.Realtime
     /// </summary>
     public class SocketResponse
     {
+        public T Model<T>() where T : BaseModel, new()
+        {
+            if (Payload != null && Payload.Record != null)
+            {
+                return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(Payload.Record));
+            }
+            else
+            {
+                return default;
+            }
+        }
+
         [JsonProperty("topic")]
         public string Topic { get; set; }
 
@@ -342,11 +354,11 @@ namespace Supabase.Realtime
 
     public class SocketResponseEventArgs : EventArgs
     {
-        public SocketResponse Message { get; private set; }
+        public SocketResponse Response { get; private set; }
 
-        public SocketResponseEventArgs(SocketResponse message)
+        public SocketResponseEventArgs(SocketResponse response)
         {
-            Message = message;
+            Response = response;
         }
     }
 }

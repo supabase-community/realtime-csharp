@@ -153,9 +153,9 @@ namespace RealtimeTests
 
                 channel.OnMessage += (object sender, SocketResponseEventArgs e) =>
                 {
-                    if (e.Message.Event == "*")
+                    if (e.Response.Event == "*")
                     {
-                        switch (e.Message.Payload.Type)
+                        switch (e.Response.Payload.Type)
                         {
                             case "INSERT":
                                 insertTsc.SetResult(true);
@@ -210,6 +210,23 @@ namespace RealtimeTests
 
             var channel2 = SocketClient.Channel("realtime", "public", "todos");
             Assert.AreEqual(ChannelState.Closed, channel2.State);
+        }
+
+        [TestMethod("Channel: Payload returns a modeled response (if possible)")]
+        public async Task ChannelPayloadReturnsModel()
+        {
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+
+            channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
+            {
+                var model = e.Response.Model<Todo>();
+                Assert.IsInstanceOfType(model, typeof(Todo));
+            };
+
+            await channel.Subscribe();
+
+            await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+
         }
     }
 }

@@ -34,17 +34,17 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the `INSERT` event is raised.
         /// </summary>
-        public EventHandler<ItemInsertedEventArgs> OnInsert;
+        public EventHandler<SocketResponseEventArgs> OnInsert;
 
         /// <summary>
         /// Invoked when the `UPDATE` event is raised.
         /// </summary>
-        public EventHandler<ItemUpdatedEventArgs> OnUpdate;
+        public EventHandler<SocketResponseEventArgs> OnUpdate;
 
         /// <summary>
         /// Invoked when the `DELETE` event is raised.
         /// </summary>
-        public EventHandler<ItemDeletedEventArgs> OnDelete;
+        public EventHandler<SocketResponseEventArgs> OnDelete;
 
         /// <summary>
         /// Invoked anytime a message is decoded within this topic.
@@ -207,9 +207,9 @@ namespace Supabase.Realtime
 
         private void HandleJoinResponse(object sender, SocketResponseEventArgs args)
         {
-            if (args.Message.Event == Constants.CHANNEL_EVENT_REPLY)
+            if (args.Response.Event == Constants.CHANNEL_EVENT_REPLY)
             {
-                var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Message.Payload));
+                var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Response.Payload));
                 if (obj.Status == Constants.PHEONIX_STATUS_OK)
                 {
                     SetState(ChannelState.Joined);
@@ -225,28 +225,24 @@ namespace Supabase.Realtime
 
         internal void HandleSocketMessage(SocketResponseEventArgs args)
         {
-            if (args.Message.Ref == joinPush.Ref) return;
+            if (args.Response.Ref == joinPush.Ref) return;
 
-            switch (args.Message.Event)
+            switch (args.Response.Event)
             {
                 case "INSERT":
-                    OnInsert?.Invoke(this, new ItemInsertedEventArgs { });
+                    OnInsert?.Invoke(this, args);
                     break;
                 case "UPDATE":
-                    OnUpdate?.Invoke(this, new ItemUpdatedEventArgs { });
+                    OnUpdate?.Invoke(this, args);
                     break;
                 case "DELETE":
-                    OnDelete?.Invoke(this, new ItemDeletedEventArgs { });
+                    OnDelete?.Invoke(this, args);
                     break;
                 case "*":
                     OnMessage?.Invoke(this, args);
                     break;
             }
         }
-
-        public class ItemInsertedEventArgs : EventArgs { }
-        public class ItemUpdatedEventArgs : EventArgs { }
-        public class ItemDeletedEventArgs : EventArgs { }
     }
 
     public class ChannelStateChangedEventArgs : EventArgs

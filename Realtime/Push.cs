@@ -124,10 +124,10 @@ namespace Supabase.Realtime
         /// <param name="args"></param>
         private void HandleSocketMessage(object sender, SocketResponseEventArgs args)
         {
-            if (args.Message.Ref == Ref)
+            if (args.Response.Ref == Ref)
             {
                 CancelTimeout();
-                Response = args.Message;
+                Response = args.Response;
                 OnMessage?.Invoke(this, args);
                 Channel.Socket.OnMessage -= HandleSocketMessage;
             }
