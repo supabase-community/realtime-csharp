@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
 using Supabase.Realtime.Attributes;
@@ -113,17 +114,39 @@ namespace Supabase.Realtime
         /// Subscribes to the channel given supplied options/params.
         /// </summary>
         /// <param name="timeoutMs"></param>
-        public void Subscribe(int timeoutMs = Constants.DEFAULT_TIMEOUT)
+        public Task<Channel> Subscribe(int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
+            var tsc = new TaskCompletionSource<Channel>();
+
+            EventHandler<ChannelStateChangedEventArgs> callback = null;
+            callback = (object sender, ChannelStateChangedEventArgs e) =>
+            {
+                switch (e.State)
+                {
+                    case ChannelState.Joined:
+                        StateChanged -= callback;
+                        tsc.SetResult(this);
+                        break;
+                    case ChannelState.Closed:
+                    case ChannelState.Errored:
+                        StateChanged -= callback;
+                        tsc.SetException(new Exception("Error occurred connecting to channel. Check logs."));
+                        break;
+                }
+            };
+            StateChanged += callback;
+
             if (hasJoinedOnce)
             {
-                throw new Exception("`Subscribe` can only be called a single time per channel instance.");
+                tsc.SetException(new Exception("`Subscribe` can only be called a single time per channel instance."));
             }
             else
             {
                 hasJoinedOnce = true;
                 Rejoin(timeoutMs);
             }
+
+            return tsc.Task;
         }
 
         /// <summary>
@@ -204,7 +227,7 @@ namespace Supabase.Realtime
         {
             if (args.Message.Ref == joinPush.Ref) return;
 
-            switch(args.Message.Event)
+            switch (args.Message.Event)
             {
                 case "INSERT":
                     OnInsert?.Invoke(this, new ItemInsertedEventArgs { });

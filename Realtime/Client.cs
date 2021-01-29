@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using WebSocketSharp;
 
 namespace Supabase.Realtime
@@ -105,20 +106,40 @@ namespace Supabase.Realtime
         /// Attempts to connect to the socket given the params specified in `Initialize`
         /// </summary>
         /// <returns></returns>
-        public Client Connect()
+        public Task<Client> Connect()
         {
+            var tsc = new TaskCompletionSource<Client>();
+
             if (Socket != null)
             {
                 Debug.WriteLine("Socket already exists.");
-                return this;
+                tsc.SetResult(this);
             }
 
             Socket = new Socket(realtimeUrl, Options);
             Socket.StateChanged += HandleSocketStateChanged;
             Socket.OnMessage += HandleSocketMessage;
+
+            EventHandler<SocketStateChangedEventArgs> callback = null;
+            callback = (object sender, SocketStateChangedEventArgs args) =>
+            {
+                switch (args.State)
+                {
+                    case SocketStateChangedEventArgs.ConnectionState.Open:
+                        Socket.StateChanged -= callback;
+                        tsc.SetResult(this);
+                        break;
+                    case SocketStateChangedEventArgs.ConnectionState.Close:
+                    case SocketStateChangedEventArgs.ConnectionState.Error:
+                        Socket.StateChanged -= callback;
+                        tsc.SetException(new Exception("Error occurred connecting to Socket. Check logs."));
+                        break;
+                }
+            };
+            Socket.StateChanged += callback;
             Socket.Connect();
 
-            return this;
+            return tsc.Task;
         }
 
         /// <summary>
