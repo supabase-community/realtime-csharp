@@ -6,6 +6,7 @@
     <Authors>Joseph Schultz &lt;joseph@acupofjose.com&gt;</Authors>
     <Description>Realtime-csharp is written as a client library for supabase/realtime.</Description>
     <RootNamespace>Supabase.Realtime</RootNamespace>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>

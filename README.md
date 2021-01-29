@@ -1,12 +1,8 @@
 <p align="center">
 <img width="300" src=".github/logo.png"/>
+<br/>
+<img src="https://github.com/supabase/realtime-csharp/workflows/Build%20And%20Test/badge.svg"/>
 </p>
-
----
-
-# realtime-csharp (WIP)
-
-![Build And Test](https://github.com/supabase/realtime-csharp/workflows/Build%20And%20Test/badge.svg)
 
 ---
 
@@ -40,6 +36,14 @@ The bulk of this library is a translation and c-sharp-ification of the [supabase
 - [x] Unit Tests
 - [x] Documentation
 - [ ] Nuget Release
+
+## Package made possible through the efforts of:
+
+Join the ranks! See a problem? Help fix it!
+
+| <img src="https://github.com/acupofjose.png" width="150" height="150"> |
+| :--------------------------------------------------------------------: |
+|              [acupofjose](https://github.com/acupofjose)               |
 
 ## Contributing
 
