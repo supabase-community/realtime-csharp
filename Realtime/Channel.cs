@@ -38,7 +38,7 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the `UPDATE` event is raised.
         /// </summary>
-        public EventHandler<ItemUpdatedEventArgs> OnUpdated;
+        public EventHandler<ItemUpdatedEventArgs> OnUpdate;
 
         /// <summary>
         /// Invoked when the `DELETE` event is raised.
@@ -48,7 +48,7 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked anytime a message is decoded within this topic.
         /// </summary>
-        public EventHandler<MessageEventArgs> OnMessage;
+        public EventHandler<SocketResponseEventArgs> OnMessage;
 
         /// <summary>
         /// Invoked when this channel listener is closed
@@ -182,7 +182,7 @@ namespace Supabase.Realtime
             joinPush.Resend(timeoutMs);
         }
 
-        private void HandleJoinResponse(object sender, SocketMessageEventArgs args)
+        private void HandleJoinResponse(object sender, SocketResponseEventArgs args)
         {
             if (args.Message.Event == Constants.CHANNEL_EVENT_REPLY)
             {
@@ -198,6 +198,27 @@ namespace Supabase.Realtime
         {
             State = state;
             StateChanged?.Invoke(this, new ChannelStateChangedEventArgs(state));
+        }
+
+        internal void HandleSocketMessage(SocketResponseEventArgs args)
+        {
+            if (args.Message.Ref == joinPush.Ref) return;
+
+            switch(args.Message.Payload.Type)
+            {
+                case "INSERT":
+                    OnInsert?.Invoke(this, new ItemInsertedEventArgs { });
+                    break;
+                case "UPDATE":
+                    OnUpdate?.Invoke(this, new ItemUpdatedEventArgs { });
+                    break;
+                case "DELETE":
+                    OnDelete?.Invoke(this, new ItemDeletedEventArgs { });
+                    break;
+                case "*":
+                    OnMessage?.Invoke(this, args);
+                    break;
+            }
         }
 
         public class ItemInsertedEventArgs : EventArgs { }

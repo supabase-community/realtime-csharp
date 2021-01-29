@@ -29,7 +29,7 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when a message has been recieved and decoded.
         /// </summary>
-        public EventHandler<SocketMessageEventArgs> OnMessage;
+        public EventHandler<SocketResponseEventArgs> OnMessage;
 
         private string endpoint;
         private ClientOptions options;
@@ -39,20 +39,20 @@ namespace Supabase.Realtime
         private CancellationTokenSource heartbeatTokenSource;
 
         private bool hasPendingHeartbeat = false;
-        private string pendingHeartbeatRef = "0";
+        private string pendingHeartbeatRef = null;
 
         private Task reconnectTask;
         private CancellationTokenSource reconnectTokenSource;
 
         private List<Task> buffer = new List<Task>();
-        private int reference = 0;
+        private int refIndex = 0;
 
         private string endpointUrl
         {
             get
             {
                 var parameters = new Dictionary<string, object> {
-                    { "apikey", options.Parameters.ApiKey }
+                    { "token", options.Parameters.Token }
                 };
 
                 return string.Format($"{endpoint}?{Utils.QueryString(parameters)}");
@@ -113,7 +113,7 @@ namespace Supabase.Realtime
         /// If the connection is not alive, the data will be placed into a buffer to be sent when reconnected.
         /// </summary>
         /// <param name="data"></param>
-        public void Push(SocketMessage data)
+        public void Push(SocketRequest data)
         {
             options.Logger("push", $"{data.Topic} {data.Event} ({data.Ref})", data.Payload);
 
@@ -144,7 +144,7 @@ namespace Supabase.Realtime
             }
             pendingHeartbeatRef = MakeMsgRef();
 
-            Push(new SocketMessage { Topic = "pheonix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
+            Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
         }
 
         /// <summary>
@@ -187,8 +187,12 @@ namespace Supabase.Realtime
         {
             options.Decode(args.Data, decoded =>
             {
-                options.Logger("receive", $"{decoded.Payload} {decoded.Topic} {decoded.Event} ({decoded.Ref})", decoded.Payload);
-                OnMessage?.Invoke(sender, new SocketMessageEventArgs(decoded));
+                options.Logger("receive", $"{decoded.Payload} {decoded.Topic} {decoded.Event} ({decoded.Ref})", null);
+
+                // Ignore sending heartbeat event to `OnMessage` handler 
+                if (decoded.Ref == pendingHeartbeatRef) return;
+
+                OnMessage?.Invoke(sender, new SocketResponseEventArgs(decoded));
             });
 
             StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Message, args));
@@ -231,7 +235,7 @@ namespace Supabase.Realtime
         /// to coordinate requests with their responses.
         /// </summary>
         /// <returns></returns>
-        internal string MakeMsgRef() => reference + 1 == reference ? 0.ToString() : (reference + 1).ToString();
+        internal string MakeMsgRef() => (++refIndex).ToString();
         internal string ReplyEventName(string msgRef) => $"chan_reply_{msgRef}";
 
         /// <summary>
@@ -249,14 +253,14 @@ namespace Supabase.Realtime
 
     public class SocketOptionsParameters
     {
-        [JsonProperty("apikey")]
-        public string ApiKey { get; set; }
+        [JsonProperty("token")]
+        public string Token { get; set; }
     }
 
     /// <summary>
     /// Representation of a Socket Request.
     /// </summary>
-    public class SocketMessage
+    public class SocketRequest
     {
         [JsonProperty("topic")]
         public string Topic { get; set; }
@@ -269,6 +273,51 @@ namespace Supabase.Realtime
 
         [JsonProperty("ref")]
         public string Ref { get; set; }
+    }
+
+    /// <summary>
+    /// Representation of a Socket Response.
+    /// </summary>
+    public class SocketResponse
+    {
+        [JsonProperty("topic")]
+        public string Topic { get; set; }
+
+        [JsonProperty("event")]
+        public string Event { get; set; }
+
+        [JsonProperty("payload")]
+        public SocketResponsePayload Payload { get; set; }
+
+        [JsonProperty("ref")]
+        public string Ref { get; set; }
+    }
+
+    public class SocketResponsePayload
+    {
+        [JsonProperty("columns")]
+        public List<object> Columns { get; set; }
+
+        [JsonProperty("commit_timestamp")]
+        public DateTimeOffset CommitTimestamp { get; set; }
+
+        [JsonProperty("record")]
+        public object Record { get; set; }
+
+        [JsonProperty("schema")]
+        public string Schema { get; set; }
+
+        [JsonProperty("table")]
+        public string Table { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
+
+        [JsonProperty("response")]
+        public object Response { get; set; }
     }
 
     public class SocketStateChangedEventArgs : EventArgs
@@ -291,11 +340,11 @@ namespace Supabase.Realtime
         }
     }
 
-    public class SocketMessageEventArgs : EventArgs
+    public class SocketResponseEventArgs : EventArgs
     {
-        public SocketMessage Message { get; private set; }
+        public SocketResponse Message { get; private set; }
 
-        public SocketMessageEventArgs(SocketMessage message)
+        public SocketResponseEventArgs(SocketResponse message)
         {
             Message = message;
         }

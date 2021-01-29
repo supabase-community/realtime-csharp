@@ -3,7 +3,7 @@ using Postgrest.Attributes;
 
 namespace RealtimeTests.Models
 {
-    [Table("user")]
+    [Table("users")]
     public class User
     {
         [PrimaryKey("id")]

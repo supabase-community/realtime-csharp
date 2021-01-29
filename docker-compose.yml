@@ -1,22 +1,6 @@
 version: "2.3"
 
 services:
-  realtime:
-    image: supabase/realtime
-    ports:
-      - "4000:4000"
-    depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_NAME: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_PORT: 5432
-      PORT: 4000
-      HOSTNAME: localhost
-      SECRET_KEY_BASE: SOMETHING_SUPER_SECRET
-
   rest:
     image: postgrest/postgrest:v7.0.1
     ports:
@@ -28,15 +12,31 @@ services:
     depends_on:
       - db
 
+  realtime:
+    image: supabase/realtime:latest
+    ports:
+      - "4000:4000"
+    environment:
+      DB_HOST: db
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      PORT: 4000
+      HOSTNAME: localhost
+      JWT_SECRET: SOMETHING_SUPER_SECRET
+      SECURE_CHANNELS: "false"
+    depends_on:
+      - db
   db:
     image: supabase/postgres
     ports:
       - "5432:5432"
     volumes:
-    - ./RealtimeTests/db:/docker-entrypoint-initdb.d/
+      - ./RealtimeTests/db:/docker-entrypoint-initdb.d/
     command:
-    - postgres
-    - -c
-    - wal_level=logical
-    environment: 
+      - postgres
+      - -c
+      - wal_level=logical
+    environment:
       POSTGRES_PASSWORD: postgres

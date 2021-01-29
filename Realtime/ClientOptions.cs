@@ -15,12 +15,12 @@ namespace Supabase.Realtime
         /// <summary>
         /// The function to decode incoming messages.
         /// </summary>
-        public Action<string, Action<SocketMessage>> Decode { get; set; } = (payload, callback) => callback(JsonConvert.DeserializeObject<SocketMessage>(payload));
+        public Action<string, Action<SocketResponse>> Decode { get; set; } = (payload, callback) => callback(JsonConvert.DeserializeObject<SocketResponse>(payload));
 
         /// <summary>
         /// Logging function
         /// </summary>
-        public Action<string, string, object> Logger { get; set; } = (kind, msg, data) => Debug.WriteLine($"{kind}: {msg}, {0}", JsonConvert.SerializeObject(data, Formatting.Indented));
+        public Action<string, string, object> Logger { get; set; } = (kind, msg, data) => Debug.WriteLine($"{kind}: {msg}, {JsonConvert.SerializeObject(data, Formatting.Indented)}");
 
         /// <summary>
         /// The Websocket Transport, for example WebSocket.

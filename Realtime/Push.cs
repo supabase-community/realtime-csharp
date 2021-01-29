@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using Newtonsoft.Json;
 using WebSocketSharp;
 
 namespace Supabase.Realtime
@@ -20,13 +21,13 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the server has responded to a request.
         /// </summary>
-        public EventHandler<SocketMessageEventArgs> OnMessage;
+        public EventHandler<SocketResponseEventArgs> OnMessage;
 
         /// <summary>
         /// Invoked when this `Push` has not been responded to within the timeout interval.
         /// </summary>
         public EventHandler OnTimeout;
-        public SocketMessage Response { get; private set; }
+        public SocketResponse Response { get; private set; }
 
         /// <summary>
         /// The associated channel.
@@ -43,10 +44,14 @@ namespace Supabase.Realtime
         /// </summary>
         public object Payload { get; private set; }
 
+        /// <summary>
+        /// Ref Of this Message
+        /// </summary>
+        public string Ref { get; private set; }
 
         private int timeoutMs;
         private Timer timer;
-        private string msgRef;
+        
         private string msgRefEvent;
 
         /// <summary>
@@ -77,7 +82,7 @@ namespace Supabase.Realtime
         public void Resend(int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
             this.timeoutMs = timeoutMs;
-            msgRef = null;
+            Ref = null;
             msgRefEvent = null;
 
             IsSent = false;
@@ -91,12 +96,12 @@ namespace Supabase.Realtime
         {
             StartTimeout();
             IsSent = true;
-            var message = new SocketMessage
+            var message = new SocketRequest
             {
                 Topic = Channel.Topic,
                 Event = EventName,
                 Payload = Payload,
-                Ref = msgRef
+                Ref = Ref
             };
             Channel.Socket.Push(message);
         }
@@ -108,8 +113,8 @@ namespace Supabase.Realtime
         {
             timer.Stop();
             timer.Start();
-            msgRef = Client.Instance.Socket.MakeMsgRef();
-            msgRefEvent = Client.Instance.Socket.ReplyEventName(msgRef);
+            Ref = Client.Instance.Socket.MakeMsgRef();
+            msgRefEvent = Client.Instance.Socket.ReplyEventName(Ref);
         }
 
         /// <summary>
@@ -117,9 +122,9 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void HandleSocketMessage(object sender, SocketMessageEventArgs args)
+        private void HandleSocketMessage(object sender, SocketResponseEventArgs args)
         {
-            if (args.Message.Ref == msgRef)
+            if (args.Message.Ref == Ref)
             {
                 CancelTimeout();
                 Response = args.Message;

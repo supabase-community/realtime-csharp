@@ -11,24 +11,24 @@ The bulk of this library is a translation and c-sharp-ification of the [supabase
 ## Status
 
 - [x] Client Connects to Websocket
-- [ ] Socket Event Handlers
-  - [ ] Open
-  - [ ] Close - when channel is explicitly closed by server or by calling `Channel.Unsubscribe()`
-  - [ ] Error
+- [x] Socket Event Handlers
+  - [x] Open
+  - [x] Close - when channel is explicitly closed by server or by calling `Channel.Unsubscribe()`
+  - [x] Error
 - [ ] Realtime Event Handlers
-  - [ ] `INSERT`
+  - [x] `INSERT`
   - [ ] `UPDATE`
   - [ ] `DELETE`
-  - [ ] `*`
-- [ ] Join channels of format:
-  - [ ] `{database}`
-  - [ ] `{database}:{schema}`
-  - [ ] `{database}:{schema}:{table}`
-  - [ ] `{database}:{schema}:{table}:{col}.eq.{val}`
+  - [x] `*`
+- [x] Join channels of format:
+  - [x] `{database}`
+  - [x] `{database}:{schema}`
+  - [x] `{database}:{schema}:{table}`
+  - [x] `{database}:{schema}:{table}:{col}.eq.{val}`
 - [ ] Responses supply a Generically Typed Model derived from `BaseModel`
 - [ ] Ability to remove subscription to Realtime Events
-- [ ] Ability to disconnect from socket.
-- [ ] Socket reconnects when possible
+- [x] Ability to disconnect from socket.
+- [x] Socket reconnects when possible
 - [ ] Unit Tests
 - [x] Documentation
 - [ ] Nuget Release

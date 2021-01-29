@@ -115,6 +115,7 @@ namespace Supabase.Realtime
 
             Socket = new Socket(realtimeUrl, Options);
             Socket.StateChanged += HandleSocketStateChanged;
+            Socket.OnMessage += HandleSocketMessage;
             Socket.Connect();
 
             return this;
@@ -133,6 +134,7 @@ namespace Supabase.Realtime
                 if (Socket != null)
                 {
                     Socket.StateChanged -= HandleSocketStateChanged;
+                    Socket.OnMessage -= HandleSocketMessage;
                     Socket.Disconnect(code, reason);
                     Socket = null;
                 }
@@ -178,6 +180,14 @@ namespace Supabase.Realtime
             if (subscriptions.ContainsKey(channel.Topic))
             {
                 subscriptions.Remove(channel.Topic);
+            }
+        }
+
+        private void HandleSocketMessage(object sender, SocketResponseEventArgs args)
+        {
+            if (subscriptions.ContainsKey(args.Message.Topic))
+            {
+                subscriptions[args.Message.Topic].HandleSocketMessage(args);
             }
         }
 

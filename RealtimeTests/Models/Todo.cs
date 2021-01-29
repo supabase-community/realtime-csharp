@@ -4,11 +4,11 @@ using Postgrest.Models;
 
 namespace RealtimeTests.Models
 {
-    [Table("Todos")]
+    [Table("todos")]
     public class Todo : BaseModel
     {
-        [PrimaryKey("id")]
-        public int Id { get; set; }
+        [PrimaryKey]
+        public string Id { get; }
 
         [Column("details")]
         public string Details { get; set; }
