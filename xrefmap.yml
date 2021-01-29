@@ -127,24 +127,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.IsLeaving
   nameWithType: Channel.IsLeaving
-- uid: Supabase.Realtime.Channel.ItemDeletedEventArgs
-  name: Channel.ItemDeletedEventArgs
-  href: api/Supabase.Realtime.Channel.ItemDeletedEventArgs.html
-  commentId: T:Supabase.Realtime.Channel.ItemDeletedEventArgs
-  fullName: Supabase.Realtime.Channel.ItemDeletedEventArgs
-  nameWithType: Channel.ItemDeletedEventArgs
-- uid: Supabase.Realtime.Channel.ItemInsertedEventArgs
-  name: Channel.ItemInsertedEventArgs
-  href: api/Supabase.Realtime.Channel.ItemInsertedEventArgs.html
-  commentId: T:Supabase.Realtime.Channel.ItemInsertedEventArgs
-  fullName: Supabase.Realtime.Channel.ItemInsertedEventArgs
-  nameWithType: Channel.ItemInsertedEventArgs
-- uid: Supabase.Realtime.Channel.ItemUpdatedEventArgs
-  name: Channel.ItemUpdatedEventArgs
-  href: api/Supabase.Realtime.Channel.ItemUpdatedEventArgs.html
-  commentId: T:Supabase.Realtime.Channel.ItemUpdatedEventArgs
-  fullName: Supabase.Realtime.Channel.ItemUpdatedEventArgs
-  nameWithType: Channel.ItemUpdatedEventArgs
 - uid: Supabase.Realtime.Channel.OnDelete
   name: OnDelete
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnDelete
@@ -1292,6 +1274,22 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.SocketResponse.Event
   nameWithType: SocketResponse.Event
+- uid: Supabase.Realtime.SocketResponse.Model*
+  name: Model
+  href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Model_
+  commentId: Overload:Supabase.Realtime.SocketResponse.Model
+  isSpec: "True"
+  fullName: Supabase.Realtime.SocketResponse.Model
+  nameWithType: SocketResponse.Model
+- uid: Supabase.Realtime.SocketResponse.Model``1
+  name: Model<T>()
+  href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Model__1
+  commentId: M:Supabase.Realtime.SocketResponse.Model``1
+  name.vb: Model(Of T)()
+  fullName: Supabase.Realtime.SocketResponse.Model<T>()
+  fullName.vb: Supabase.Realtime.SocketResponse.Model(Of T)()
+  nameWithType: SocketResponse.Model<T>()
+  nameWithType.vb: SocketResponse.Model(Of T)()
 - uid: Supabase.Realtime.SocketResponse.Payload
   name: Payload
   href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Payload
@@ -1350,19 +1348,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.SocketResponseEventArgs.SocketResponseEventArgs
   nameWithType: SocketResponseEventArgs.SocketResponseEventArgs
-- uid: Supabase.Realtime.SocketResponseEventArgs.Message
-  name: Message
-  href: api/Supabase.Realtime.SocketResponseEventArgs.html#Supabase_Realtime_SocketResponseEventArgs_Message
-  commentId: P:Supabase.Realtime.SocketResponseEventArgs.Message
-  fullName: Supabase.Realtime.SocketResponseEventArgs.Message
-  nameWithType: SocketResponseEventArgs.Message
-- uid: Supabase.Realtime.SocketResponseEventArgs.Message*
-  name: Message
-  href: api/Supabase.Realtime.SocketResponseEventArgs.html#Supabase_Realtime_SocketResponseEventArgs_Message_
-  commentId: Overload:Supabase.Realtime.SocketResponseEventArgs.Message
+- uid: Supabase.Realtime.SocketResponseEventArgs.Response
+  name: Response
+  href: api/Supabase.Realtime.SocketResponseEventArgs.html#Supabase_Realtime_SocketResponseEventArgs_Response
+  commentId: P:Supabase.Realtime.SocketResponseEventArgs.Response
+  fullName: Supabase.Realtime.SocketResponseEventArgs.Response
+  nameWithType: SocketResponseEventArgs.Response
+- uid: Supabase.Realtime.SocketResponseEventArgs.Response*
+  name: Response
+  href: api/Supabase.Realtime.SocketResponseEventArgs.html#Supabase_Realtime_SocketResponseEventArgs_Response_
+  commentId: Overload:Supabase.Realtime.SocketResponseEventArgs.Response
   isSpec: "True"
-  fullName: Supabase.Realtime.SocketResponseEventArgs.Message
-  nameWithType: SocketResponseEventArgs.Message
+  fullName: Supabase.Realtime.SocketResponseEventArgs.Response
+  nameWithType: SocketResponseEventArgs.Response
 - uid: Supabase.Realtime.SocketResponsePayload
   name: SocketResponsePayload
   href: api/Supabase.Realtime.SocketResponsePayload.html
