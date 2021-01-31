@@ -1,7 +1,11 @@
 <p align="center">
 <img width="300" src=".github/logo.png"/>
-<br/>
-<img src="https://github.com/supabase/realtime-csharp/workflows/Build%20And%20Test/badge.svg"/>
+</p>
+<p align="center">
+  <img src="https://github.com/supabase/realtime-csharp/workflows/Build%20And%20Test/badge.svg"/>
+  <a href="https://www.nuget.org/packages/realtime-csharp/">
+    <img src="https://img.shields.io/badge/dynamic/json?color=green&label=Nuget%20Release&query=data[0].version&url=https%3A%2F%2Fazuresearch-usnc.nuget.org%2Fquery%3Fq%3Dpackageid%3Arealtime-csharp"/>
+  </a>
 </p>
 
 ---
@@ -35,7 +39,7 @@ The bulk of this library is a translation and c-sharp-ification of the [supabase
 - [x] Socket reconnects when possible
 - [x] Unit Tests
 - [x] Documentation
-- [ ] Nuget Release
+- [x] Nuget Release
 
 ## Package made possible through the efforts of:
 
