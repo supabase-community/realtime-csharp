@@ -81,25 +81,26 @@ namespace Supabase.Realtime
         /// <param name="authorization"></param>
         /// <param name="options"></param>
         /// <returns>Client</returns>
-        public Client Initialize(string realtimeUrl, ClientAuthorization authorization = null, ClientOptions options = null)
+        public static Client Initialize(string realtimeUrl, ClientAuthorization authorization = null, ClientOptions options = null)
         {
-            this.realtimeUrl = realtimeUrl;
+            instance = new Client();
+            instance.realtimeUrl = realtimeUrl;
 
             if (authorization == null)
             {
                 authorization = new ClientAuthorization();
             }
-            this.authorization = authorization;
+            instance.authorization = authorization;
 
             if (options == null)
             {
                 options = new ClientOptions();
             }
 
-            Options = options;
-            subscriptions = new Dictionary<string, Channel>();
+            instance.Options = options;
+            instance.subscriptions = new Dictionary<string, Channel>();
 
-            return this;
+            return instance;
         }
 
         /// <summary>
