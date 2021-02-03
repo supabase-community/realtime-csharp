@@ -17,7 +17,8 @@ namespace Supabase.Realtime
         {
             Insert,
             Update,
-            Delete
+            Delete,
+            Unknown
         }
 
         /// <summary>

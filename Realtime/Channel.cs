@@ -207,7 +207,7 @@ namespace Supabase.Realtime
 
         private void HandleJoinResponse(object sender, SocketResponseEventArgs args)
         {
-            if (args.Response.Event == Constants.CHANNEL_EVENT_REPLY)
+            if (args.Response._event == Constants.CHANNEL_EVENT_REPLY)
             {
                 var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Response.Payload));
                 if (obj.Status == Constants.PHEONIX_STATUS_OK)
@@ -227,19 +227,21 @@ namespace Supabase.Realtime
         {
             if (args.Response.Ref == joinPush.Ref) return;
 
+            // If we don't ignore this event we'll end up with double callbacks.
+            if (args.Response._event == "*") return;
+
+            OnMessage?.Invoke(this, args);
+
             switch (args.Response.Event)
             {
-                case "INSERT":
+                case Constants.EventType.Insert:
                     OnInsert?.Invoke(this, args);
                     break;
-                case "UPDATE":
+                case Constants.EventType.Update:
                     OnUpdate?.Invoke(this, args);
                     break;
-                case "DELETE":
+                case Constants.EventType.Delete:
                     OnDelete?.Invoke(this, args);
-                    break;
-                case "*":
-                    OnMessage?.Invoke(this, args);
                     break;
             }
         }
