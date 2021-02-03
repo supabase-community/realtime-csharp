@@ -480,12 +480,12 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Disconnect
   nameWithType: Client.Disconnect
-- uid: Supabase.Realtime.Client.Initialize(System.String,Supabase.Realtime.ClientAuthorization,Supabase.Realtime.ClientOptions)
-  name: Initialize(String, ClientAuthorization, ClientOptions)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Initialize_System_String_Supabase_Realtime_ClientAuthorization_Supabase_Realtime_ClientOptions_
-  commentId: M:Supabase.Realtime.Client.Initialize(System.String,Supabase.Realtime.ClientAuthorization,Supabase.Realtime.ClientOptions)
-  fullName: Supabase.Realtime.Client.Initialize(System.String, Supabase.Realtime.ClientAuthorization, Supabase.Realtime.ClientOptions)
-  nameWithType: Client.Initialize(String, ClientAuthorization, ClientOptions)
+- uid: Supabase.Realtime.Client.Initialize(System.String,Supabase.Realtime.ClientOptions)
+  name: Initialize(String, ClientOptions)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Initialize_System_String_Supabase_Realtime_ClientOptions_
+  commentId: M:Supabase.Realtime.Client.Initialize(System.String,Supabase.Realtime.ClientOptions)
+  fullName: Supabase.Realtime.Client.Initialize(System.String, Supabase.Realtime.ClientOptions)
+  nameWithType: Client.Initialize(String, ClientOptions)
 - uid: Supabase.Realtime.Client.Initialize*
   name: Initialize
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Initialize_
@@ -876,6 +876,12 @@ references:
   commentId: F:Supabase.Realtime.Constants.EventType.Insert
   fullName: Supabase.Realtime.Constants.EventType.Insert
   nameWithType: Constants.EventType.Insert
+- uid: Supabase.Realtime.Constants.EventType.Unknown
+  name: Unknown
+  href: api/Supabase.Realtime.Constants.EventType.html#Supabase_Realtime_Constants_EventType_Unknown
+  commentId: F:Supabase.Realtime.Constants.EventType.Unknown
+  fullName: Supabase.Realtime.Constants.EventType.Unknown
+  nameWithType: Constants.EventType.Unknown
 - uid: Supabase.Realtime.Constants.EventType.Update
   name: Update
   href: api/Supabase.Realtime.Constants.EventType.html#Supabase_Realtime_Constants_EventType_Update
@@ -1184,6 +1190,19 @@ references:
   commentId: T:Supabase.Realtime.SocketOptionsParameters
   fullName: Supabase.Realtime.SocketOptionsParameters
   nameWithType: SocketOptionsParameters
+- uid: Supabase.Realtime.SocketOptionsParameters.ApiKey
+  name: ApiKey
+  href: api/Supabase.Realtime.SocketOptionsParameters.html#Supabase_Realtime_SocketOptionsParameters_ApiKey
+  commentId: P:Supabase.Realtime.SocketOptionsParameters.ApiKey
+  fullName: Supabase.Realtime.SocketOptionsParameters.ApiKey
+  nameWithType: SocketOptionsParameters.ApiKey
+- uid: Supabase.Realtime.SocketOptionsParameters.ApiKey*
+  name: ApiKey
+  href: api/Supabase.Realtime.SocketOptionsParameters.html#Supabase_Realtime_SocketOptionsParameters_ApiKey_
+  commentId: Overload:Supabase.Realtime.SocketOptionsParameters.ApiKey
+  isSpec: "True"
+  fullName: Supabase.Realtime.SocketOptionsParameters.ApiKey
+  nameWithType: SocketOptionsParameters.ApiKey
 - uid: Supabase.Realtime.SocketOptionsParameters.Token
   name: Token
   href: api/Supabase.Realtime.SocketOptionsParameters.html#Supabase_Realtime_SocketOptionsParameters_Token
@@ -1261,6 +1280,19 @@ references:
   commentId: T:Supabase.Realtime.SocketResponse
   fullName: Supabase.Realtime.SocketResponse
   nameWithType: SocketResponse
+- uid: Supabase.Realtime.SocketResponse._event
+  name: _event
+  href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse__event
+  commentId: P:Supabase.Realtime.SocketResponse._event
+  fullName: Supabase.Realtime.SocketResponse._event
+  nameWithType: SocketResponse._event
+- uid: Supabase.Realtime.SocketResponse._event*
+  name: _event
+  href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse__event_
+  commentId: Overload:Supabase.Realtime.SocketResponse._event
+  isSpec: "True"
+  fullName: Supabase.Realtime.SocketResponse._event
+  nameWithType: SocketResponse._event
 - uid: Supabase.Realtime.SocketResponse.Event
   name: Event
   href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Event
