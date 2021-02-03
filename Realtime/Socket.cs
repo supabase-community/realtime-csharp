@@ -89,7 +89,10 @@ namespace Supabase.Realtime
             try
             {
                 connection = new WebSocket(endpointUrl);
-                connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+
+                if (endpointUrl.Contains("wss"))
+                    connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+
                 connection.EnableRedirection = true;
                 connection.WaitTime = options.LongPollerTimeout;
                 connection.OnOpen += OnConnectionOpened;

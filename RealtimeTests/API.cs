@@ -153,20 +153,17 @@ namespace RealtimeTests
 
                 channel.OnMessage += (object sender, SocketResponseEventArgs e) =>
                 {
-                    if (e.Response.Event == "*")
+                    switch (e.Response.Payload.Type)
                     {
-                        switch (e.Response.Payload.Type)
-                        {
-                            case "INSERT":
-                                insertTsc.SetResult(true);
-                                break;
-                            case "UPDATE":
-                                updateTsc.SetResult(true);
-                                break;
-                            case "DELETE":
-                                deleteTsc.SetResult(true);
-                                break;
-                        }
+                        case "INSERT":
+                            insertTsc.SetResult(true);
+                            break;
+                        case "UPDATE":
+                            updateTsc.SetResult(true);
+                            break;
+                        case "DELETE":
+                            deleteTsc.SetResult(true);
+                            break;
                     }
                 };
 
