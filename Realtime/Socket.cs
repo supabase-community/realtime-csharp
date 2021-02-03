@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using Postgrest.Models;
 using WebSocketSharp;
+using static Supabase.Realtime.Constants;
 using static Supabase.Realtime.SocketStateChangedEventArgs;
 
 namespace Supabase.Realtime
@@ -51,8 +53,9 @@ namespace Supabase.Realtime
         {
             get
             {
-                var parameters = new Dictionary<string, object> {
-                    { "token", options.Parameters.Token }
+                var parameters = new Dictionary<string, string> {
+                    { "token", options.Parameters.Token },
+                    { "apikey", options.Parameters.ApiKey }
                 };
 
                 return string.Format($"{endpoint}?{Utils.QueryString(parameters)}");
@@ -255,6 +258,9 @@ namespace Supabase.Realtime
     {
         [JsonProperty("token")]
         public string Token { get; set; }
+
+        [JsonProperty("apikey")]
+        public string ApiKey { get; set; }
     }
 
     /// <summary>
@@ -296,7 +302,28 @@ namespace Supabase.Realtime
         public string Topic { get; set; }
 
         [JsonProperty("event")]
-        public string Event { get; set; }
+        public string _event { get; set; }
+
+        [JsonIgnore]
+        public EventType Event
+        {
+            get
+            {
+                if (Payload == null) return EventType.Unknown;
+
+                switch (Payload.Type)
+                {
+                    case "INSERT":
+                        return EventType.Insert;
+                    case "UPDATE":
+                        return EventType.Update;
+                    case "DELETE":
+                        return EventType.Delete;
+                }
+
+                return EventType.Unknown;
+            }
+        }
 
         [JsonProperty("payload")]
         public SocketResponsePayload Payload { get; set; }

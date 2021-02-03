@@ -72,7 +72,6 @@ namespace Supabase.Realtime
         public EventHandler<SocketStateChangedEventArgs> OnMessage;
 
         private string realtimeUrl;
-        private ClientAuthorization authorization;
 
         /// <summary>
         /// Initializes a Client instance, this method should be called prior to any other method.
@@ -81,16 +80,10 @@ namespace Supabase.Realtime
         /// <param name="authorization"></param>
         /// <param name="options"></param>
         /// <returns>Client</returns>
-        public static Client Initialize(string realtimeUrl, ClientAuthorization authorization = null, ClientOptions options = null)
+        public static Client Initialize(string realtimeUrl, ClientOptions options = null)
         {
             instance = new Client();
             instance.realtimeUrl = realtimeUrl;
-
-            if (authorization == null)
-            {
-                authorization = new ClientAuthorization();
-            }
-            instance.authorization = authorization;
 
             if (options == null)
             {
@@ -111,34 +104,41 @@ namespace Supabase.Realtime
         {
             var tsc = new TaskCompletionSource<Client>();
 
-            if (Socket != null)
+            try
             {
-                Debug.WriteLine("Socket already exists.");
-                tsc.SetResult(this);
-            }
-
-            Socket = new Socket(realtimeUrl, Options);
-            Socket.StateChanged += HandleSocketStateChanged;
-            Socket.OnMessage += HandleSocketMessage;
-
-            EventHandler<SocketStateChangedEventArgs> callback = null;
-            callback = (object sender, SocketStateChangedEventArgs args) =>
-            {
-                switch (args.State)
+                if (Socket != null)
                 {
-                    case SocketStateChangedEventArgs.ConnectionState.Open:
-                        Socket.StateChanged -= callback;
-                        tsc.SetResult(this);
-                        break;
-                    case SocketStateChangedEventArgs.ConnectionState.Close:
-                    case SocketStateChangedEventArgs.ConnectionState.Error:
-                        Socket.StateChanged -= callback;
-                        tsc.SetException(new Exception("Error occurred connecting to Socket. Check logs."));
-                        break;
+                    Debug.WriteLine("Socket already exists.");
+                    tsc.SetResult(this);
                 }
-            };
-            Socket.StateChanged += callback;
-            Socket.Connect();
+
+                Socket = new Socket(realtimeUrl, Options);
+                Socket.StateChanged += HandleSocketStateChanged;
+                Socket.OnMessage += HandleSocketMessage;
+
+                EventHandler<SocketStateChangedEventArgs> callback = null;
+                callback = (object sender, SocketStateChangedEventArgs args) =>
+                {
+                    switch (args.State)
+                    {
+                        case SocketStateChangedEventArgs.ConnectionState.Open:
+                            Socket.StateChanged -= callback;
+                            tsc.SetResult(this);
+                            break;
+                        case SocketStateChangedEventArgs.ConnectionState.Close:
+                        case SocketStateChangedEventArgs.ConnectionState.Error:
+                            Socket.StateChanged -= callback;
+                            tsc.SetException(new Exception("Error occurred connecting to Socket. Check logs."));
+                            break;
+                    }
+                };
+                Socket.StateChanged += callback;
+                Socket.Connect();
+            }
+            catch (Exception ex)
+            {
+                tsc.SetException(ex);
+            }
 
             return tsc.Task;
         }
