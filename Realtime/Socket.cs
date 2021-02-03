@@ -86,13 +86,23 @@ namespace Supabase.Realtime
         {
             if (connection != null) return;
 
-            connection = new WebSocket(endpointUrl);
-            connection.WaitTime = options.LongPollerTimeout;
-            connection.OnOpen += OnConnectionOpened;
-            connection.OnMessage += OnConnectionMessage;
-            connection.OnError += OnConnectionError;
-            connection.OnClose += OnConnectionClosed;
-            connection.Connect();
+            try
+            {
+                connection = new WebSocket(endpointUrl);
+                connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+                connection.EnableRedirection = true;
+                connection.WaitTime = options.LongPollerTimeout;
+                connection.OnOpen += OnConnectionOpened;
+                connection.OnMessage += OnConnectionMessage;
+                connection.OnError += OnConnectionError;
+                connection.OnClose += OnConnectionClosed;
+                connection.Connect();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                throw ex;
+            }
         }
 
         /// <summary>
