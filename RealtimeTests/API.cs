@@ -16,7 +16,7 @@ namespace RealtimeTests
         private string restEndpoint = "http://localhost:3000";
 
         private Client SocketClient;
-        private Postgrest.Client RestClient => Postgrest.Client.Initialize(restEndpoint, new Postgrest.ClientAuthorization());
+        private Postgrest.Client RestClient => Postgrest.Client.Initialize(restEndpoint);
 
         public API()
         {
