@@ -77,7 +77,6 @@ namespace Supabase.Realtime
         /// Initializes a Client instance, this method should be called prior to any other method.
         /// </summary>
         /// <param name="realtimeUrl">The connection url (ex: "ws://localhost:4000/socket" - no trailing slash required)</param>
-        /// <param name="authorization"></param>
         /// <param name="options"></param>
         /// <returns>Client</returns>
         public static Client Initialize(string realtimeUrl, ClientOptions options = null)
