@@ -16,6 +16,44 @@ Documentation can be found [here](https://supabase.github.io/realtime-csharp/api
 
 The bulk of this library is a translation and c-sharp-ification of the [supabase/realtime-js](https://github.com/supabase/realtime-js) library.
 
+**The Websocket-sharp implementation that Realtime-csharp is dependent on does _not_ support TLS1.3**
+
+## Getting Started
+
+Care was had to make this API as _easy<sup>tm</sup>_ to interact with as possible. `Connect()` and `Subscribe()` have `await`-able signatures
+which allow Users to be assured that a connection exists prior to interacting with it.
+
+```c#
+var endpoint = "ws://localhost:3000";
+client = Client.Initialize(endpoint);
+
+await client.Connect();
+
+var channel = client.Channel("realtime", "public", "users");
+
+// Per Event Callbacks
+channel.OnInsert += (sender, args) => Console.WriteLine("New item inserted: " + args.Response.Payload.Record);
+channel.OnUpdate += (sender, args) => Console.WriteLine("Item updated: " + args.Response.Payload.Record);
+channel.OnDelete += (sender, args) => Console.WriteLine("Item deleted");
+
+// Callback for any event, INSERT, UPDATE, or DELETE
+channel.OnMessage += (sender, args) => Debug.WriteLine(args.Message.Event);
+
+await channel.Subscribe();
+```
+
+Leveraging `Postgrest.BaseModel`s, one ought to be able to coerce SocketResponse Records into their associated models by calling:
+```c#
+// ...
+var channel = client.Channel("realtime", "public", "users");
+
+channel.OnInsert += (sender, args) => {
+    var model = args.Response.Model<User>();
+};
+
+await channel.Subscribe();
+```
+
 ## Status
 
 - [x] Client Connects to Websocket
