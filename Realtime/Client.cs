@@ -54,22 +54,22 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the socket raises the `open` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnOpen;
+        public event EventHandler<SocketStateChangedEventArgs> OnOpen;
 
         /// <summary>
         /// Invoked when the socket raises the `close` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnClose;
+        public event EventHandler<SocketStateChangedEventArgs> OnClose;
 
         /// <summary>
         /// Invoked when the socket raises the `error` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnError;
+        public event EventHandler<SocketStateChangedEventArgs> OnError;
 
         /// <summary>
         /// Invoked when the socket raises the `message` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnMessage;
+        public event EventHandler<SocketStateChangedEventArgs> OnMessage;
 
         private string realtimeUrl;
 
@@ -77,7 +77,6 @@ namespace Supabase.Realtime
         /// Initializes a Client instance, this method should be called prior to any other method.
         /// </summary>
         /// <param name="realtimeUrl">The connection url (ex: "ws://localhost:4000/socket" - no trailing slash required)</param>
-        /// <param name="authorization"></param>
         /// <param name="options"></param>
         /// <returns>Client</returns>
         public static Client Initialize(string realtimeUrl, ClientOptions options = null)
