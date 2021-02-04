@@ -130,25 +130,25 @@ references:
 - uid: Supabase.Realtime.Channel.OnDelete
   name: OnDelete
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnDelete
-  commentId: F:Supabase.Realtime.Channel.OnDelete
+  commentId: E:Supabase.Realtime.Channel.OnDelete
   fullName: Supabase.Realtime.Channel.OnDelete
   nameWithType: Channel.OnDelete
 - uid: Supabase.Realtime.Channel.OnInsert
   name: OnInsert
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnInsert
-  commentId: F:Supabase.Realtime.Channel.OnInsert
+  commentId: E:Supabase.Realtime.Channel.OnInsert
   fullName: Supabase.Realtime.Channel.OnInsert
   nameWithType: Channel.OnInsert
 - uid: Supabase.Realtime.Channel.OnMessage
   name: OnMessage
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnMessage
-  commentId: F:Supabase.Realtime.Channel.OnMessage
+  commentId: E:Supabase.Realtime.Channel.OnMessage
   fullName: Supabase.Realtime.Channel.OnMessage
   nameWithType: Channel.OnMessage
 - uid: Supabase.Realtime.Channel.OnUpdate
   name: OnUpdate
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnUpdate
-  commentId: F:Supabase.Realtime.Channel.OnUpdate
+  commentId: E:Supabase.Realtime.Channel.OnUpdate
   fullName: Supabase.Realtime.Channel.OnUpdate
   nameWithType: Channel.OnUpdate
 - uid: Supabase.Realtime.Channel.Push(System.String,System.Object,System.Int32)
@@ -206,7 +206,7 @@ references:
 - uid: Supabase.Realtime.Channel.StateChanged
   name: StateChanged
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_StateChanged
-  commentId: F:Supabase.Realtime.Channel.StateChanged
+  commentId: E:Supabase.Realtime.Channel.StateChanged
   fullName: Supabase.Realtime.Channel.StateChanged
   nameWithType: Channel.StateChanged
 - uid: Supabase.Realtime.Channel.Subscribe(System.Int32)
@@ -509,25 +509,25 @@ references:
 - uid: Supabase.Realtime.Client.OnClose
   name: OnClose
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_OnClose
-  commentId: F:Supabase.Realtime.Client.OnClose
+  commentId: E:Supabase.Realtime.Client.OnClose
   fullName: Supabase.Realtime.Client.OnClose
   nameWithType: Client.OnClose
 - uid: Supabase.Realtime.Client.OnError
   name: OnError
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_OnError
-  commentId: F:Supabase.Realtime.Client.OnError
+  commentId: E:Supabase.Realtime.Client.OnError
   fullName: Supabase.Realtime.Client.OnError
   nameWithType: Client.OnError
 - uid: Supabase.Realtime.Client.OnMessage
   name: OnMessage
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_OnMessage
-  commentId: F:Supabase.Realtime.Client.OnMessage
+  commentId: E:Supabase.Realtime.Client.OnMessage
   fullName: Supabase.Realtime.Client.OnMessage
   nameWithType: Client.OnMessage
 - uid: Supabase.Realtime.Client.OnOpen
   name: OnOpen
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_OnOpen
-  commentId: F:Supabase.Realtime.Client.OnOpen
+  commentId: E:Supabase.Realtime.Client.OnOpen
   fullName: Supabase.Realtime.Client.OnOpen
   nameWithType: Client.OnOpen
 - uid: Supabase.Realtime.Client.Options
@@ -569,138 +569,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Socket
   nameWithType: Client.Socket
-- uid: Supabase.Realtime.ClientAuthorization
-  name: ClientAuthorization
-  href: api/Supabase.Realtime.ClientAuthorization.html
-  commentId: T:Supabase.Realtime.ClientAuthorization
-  fullName: Supabase.Realtime.ClientAuthorization
-  nameWithType: ClientAuthorization
-- uid: Supabase.Realtime.ClientAuthorization.#ctor
-  name: ClientAuthorization()
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization__ctor
-  commentId: M:Supabase.Realtime.ClientAuthorization.#ctor
-  fullName: Supabase.Realtime.ClientAuthorization.ClientAuthorization()
-  nameWithType: ClientAuthorization.ClientAuthorization()
-- uid: Supabase.Realtime.ClientAuthorization.#ctor(Supabase.Realtime.ClientAuthorization.AuthorizationType,System.String,System.String)
-  name: ClientAuthorization(ClientAuthorization.AuthorizationType, String, String)
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization__ctor_Supabase_Realtime_ClientAuthorization_AuthorizationType_System_String_System_String_
-  commentId: M:Supabase.Realtime.ClientAuthorization.#ctor(Supabase.Realtime.ClientAuthorization.AuthorizationType,System.String,System.String)
-  fullName: Supabase.Realtime.ClientAuthorization.ClientAuthorization(Supabase.Realtime.ClientAuthorization.AuthorizationType, System.String, System.String)
-  nameWithType: ClientAuthorization.ClientAuthorization(ClientAuthorization.AuthorizationType, String, String)
-- uid: Supabase.Realtime.ClientAuthorization.#ctor(System.String)
-  name: ClientAuthorization(String)
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization__ctor_System_String_
-  commentId: M:Supabase.Realtime.ClientAuthorization.#ctor(System.String)
-  fullName: Supabase.Realtime.ClientAuthorization.ClientAuthorization(System.String)
-  nameWithType: ClientAuthorization.ClientAuthorization(String)
-- uid: Supabase.Realtime.ClientAuthorization.#ctor(System.String,System.String)
-  name: ClientAuthorization(String, String)
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization__ctor_System_String_System_String_
-  commentId: M:Supabase.Realtime.ClientAuthorization.#ctor(System.String,System.String)
-  fullName: Supabase.Realtime.ClientAuthorization.ClientAuthorization(System.String, System.String)
-  nameWithType: ClientAuthorization.ClientAuthorization(String, String)
-- uid: Supabase.Realtime.ClientAuthorization.#ctor*
-  name: ClientAuthorization
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization__ctor_
-  commentId: Overload:Supabase.Realtime.ClientAuthorization.#ctor
-  isSpec: "True"
-  fullName: Supabase.Realtime.ClientAuthorization.ClientAuthorization
-  nameWithType: ClientAuthorization.ClientAuthorization
-- uid: Supabase.Realtime.ClientAuthorization.ApiKey
-  name: ApiKey
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_ApiKey
-  commentId: P:Supabase.Realtime.ClientAuthorization.ApiKey
-  fullName: Supabase.Realtime.ClientAuthorization.ApiKey
-  nameWithType: ClientAuthorization.ApiKey
-- uid: Supabase.Realtime.ClientAuthorization.ApiKey*
-  name: ApiKey
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_ApiKey_
-  commentId: Overload:Supabase.Realtime.ClientAuthorization.ApiKey
-  isSpec: "True"
-  fullName: Supabase.Realtime.ClientAuthorization.ApiKey
-  nameWithType: ClientAuthorization.ApiKey
-- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType
-  name: ClientAuthorization.AuthorizationType
-  href: api/Supabase.Realtime.ClientAuthorization.AuthorizationType.html
-  commentId: T:Supabase.Realtime.ClientAuthorization.AuthorizationType
-  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType
-  nameWithType: ClientAuthorization.AuthorizationType
-- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.ApiKey
-  name: ApiKey
-  href: api/Supabase.Realtime.ClientAuthorization.AuthorizationType.html#Supabase_Realtime_ClientAuthorization_AuthorizationType_ApiKey
-  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.ApiKey
-  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.ApiKey
-  nameWithType: ClientAuthorization.AuthorizationType.ApiKey
-- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.Basic
-  name: Basic
-  href: api/Supabase.Realtime.ClientAuthorization.AuthorizationType.html#Supabase_Realtime_ClientAuthorization_AuthorizationType_Basic
-  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.Basic
-  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.Basic
-  nameWithType: ClientAuthorization.AuthorizationType.Basic
-- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.Open
-  name: Open
-  href: api/Supabase.Realtime.ClientAuthorization.AuthorizationType.html#Supabase_Realtime_ClientAuthorization_AuthorizationType_Open
-  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.Open
-  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.Open
-  nameWithType: ClientAuthorization.AuthorizationType.Open
-- uid: Supabase.Realtime.ClientAuthorization.AuthorizationType.Token
-  name: Token
-  href: api/Supabase.Realtime.ClientAuthorization.AuthorizationType.html#Supabase_Realtime_ClientAuthorization_AuthorizationType_Token
-  commentId: F:Supabase.Realtime.ClientAuthorization.AuthorizationType.Token
-  fullName: Supabase.Realtime.ClientAuthorization.AuthorizationType.Token
-  nameWithType: ClientAuthorization.AuthorizationType.Token
-- uid: Supabase.Realtime.ClientAuthorization.Password
-  name: Password
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Password
-  commentId: P:Supabase.Realtime.ClientAuthorization.Password
-  fullName: Supabase.Realtime.ClientAuthorization.Password
-  nameWithType: ClientAuthorization.Password
-- uid: Supabase.Realtime.ClientAuthorization.Password*
-  name: Password
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Password_
-  commentId: Overload:Supabase.Realtime.ClientAuthorization.Password
-  isSpec: "True"
-  fullName: Supabase.Realtime.ClientAuthorization.Password
-  nameWithType: ClientAuthorization.Password
-- uid: Supabase.Realtime.ClientAuthorization.Token
-  name: Token
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Token
-  commentId: P:Supabase.Realtime.ClientAuthorization.Token
-  fullName: Supabase.Realtime.ClientAuthorization.Token
-  nameWithType: ClientAuthorization.Token
-- uid: Supabase.Realtime.ClientAuthorization.Token*
-  name: Token
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Token_
-  commentId: Overload:Supabase.Realtime.ClientAuthorization.Token
-  isSpec: "True"
-  fullName: Supabase.Realtime.ClientAuthorization.Token
-  nameWithType: ClientAuthorization.Token
-- uid: Supabase.Realtime.ClientAuthorization.Type
-  name: Type
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Type
-  commentId: P:Supabase.Realtime.ClientAuthorization.Type
-  fullName: Supabase.Realtime.ClientAuthorization.Type
-  nameWithType: ClientAuthorization.Type
-- uid: Supabase.Realtime.ClientAuthorization.Type*
-  name: Type
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Type_
-  commentId: Overload:Supabase.Realtime.ClientAuthorization.Type
-  isSpec: "True"
-  fullName: Supabase.Realtime.ClientAuthorization.Type
-  nameWithType: ClientAuthorization.Type
-- uid: Supabase.Realtime.ClientAuthorization.Username
-  name: Username
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Username
-  commentId: P:Supabase.Realtime.ClientAuthorization.Username
-  fullName: Supabase.Realtime.ClientAuthorization.Username
-  nameWithType: ClientAuthorization.Username
-- uid: Supabase.Realtime.ClientAuthorization.Username*
-  name: Username
-  href: api/Supabase.Realtime.ClientAuthorization.html#Supabase_Realtime_ClientAuthorization_Username_
-  commentId: Overload:Supabase.Realtime.ClientAuthorization.Username
-  isSpec: "True"
-  fullName: Supabase.Realtime.ClientAuthorization.Username
-  nameWithType: ClientAuthorization.Username
 - uid: Supabase.Realtime.ClientOptions
   name: ClientOptions
   href: api/Supabase.Realtime.ClientOptions.html
@@ -1027,13 +895,13 @@ references:
 - uid: Supabase.Realtime.Push.OnMessage
   name: OnMessage
   href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push_OnMessage
-  commentId: F:Supabase.Realtime.Push.OnMessage
+  commentId: E:Supabase.Realtime.Push.OnMessage
   fullName: Supabase.Realtime.Push.OnMessage
   nameWithType: Push.OnMessage
 - uid: Supabase.Realtime.Push.OnTimeout
   name: OnTimeout
   href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push_OnTimeout
-  commentId: F:Supabase.Realtime.Push.OnTimeout
+  commentId: E:Supabase.Realtime.Push.OnTimeout
   fullName: Supabase.Realtime.Push.OnTimeout
   nameWithType: Push.OnTimeout
 - uid: Supabase.Realtime.Push.Payload
@@ -1162,7 +1030,7 @@ references:
 - uid: Supabase.Realtime.Socket.OnMessage
   name: OnMessage
   href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_OnMessage
-  commentId: F:Supabase.Realtime.Socket.OnMessage
+  commentId: E:Supabase.Realtime.Socket.OnMessage
   fullName: Supabase.Realtime.Socket.OnMessage
   nameWithType: Socket.OnMessage
 - uid: Supabase.Realtime.Socket.Push(Supabase.Realtime.SocketRequest)
@@ -1181,7 +1049,7 @@ references:
 - uid: Supabase.Realtime.Socket.StateChanged
   name: StateChanged
   href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_StateChanged
-  commentId: F:Supabase.Realtime.Socket.StateChanged
+  commentId: E:Supabase.Realtime.Socket.StateChanged
   fullName: Supabase.Realtime.Socket.StateChanged
   nameWithType: Socket.StateChanged
 - uid: Supabase.Realtime.SocketOptionsParameters
