@@ -34,27 +34,27 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the `INSERT` event is raised.
         /// </summary>
-        public EventHandler<SocketResponseEventArgs> OnInsert;
+        public event EventHandler<SocketResponseEventArgs> OnInsert;
 
         /// <summary>
         /// Invoked when the `UPDATE` event is raised.
         /// </summary>
-        public EventHandler<SocketResponseEventArgs> OnUpdate;
+        public event EventHandler<SocketResponseEventArgs> OnUpdate;
 
         /// <summary>
         /// Invoked when the `DELETE` event is raised.
         /// </summary>
-        public EventHandler<SocketResponseEventArgs> OnDelete;
+        public event EventHandler<SocketResponseEventArgs> OnDelete;
 
         /// <summary>
         /// Invoked anytime a message is decoded within this topic.
         /// </summary>
-        public EventHandler<SocketResponseEventArgs> OnMessage;
+        public event EventHandler<SocketResponseEventArgs> OnMessage;
 
         /// <summary>
         /// Invoked when this channel listener is closed
         /// </summary>
-        public EventHandler<ChannelStateChangedEventArgs> StateChanged;
+        public event EventHandler<ChannelStateChangedEventArgs> StateChanged;
 
         public bool IsClosed => State == ChannelState.Closed;
         public bool IsErrored => State == ChannelState.Errored;

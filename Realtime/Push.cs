@@ -21,12 +21,12 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the server has responded to a request.
         /// </summary>
-        public EventHandler<SocketResponseEventArgs> OnMessage;
+        public event EventHandler<SocketResponseEventArgs> OnMessage;
 
         /// <summary>
         /// Invoked when this `Push` has not been responded to within the timeout interval.
         /// </summary>
-        public EventHandler OnTimeout;
+        public event EventHandler OnTimeout;
         public SocketResponse Response { get; private set; }
 
         /// <summary>

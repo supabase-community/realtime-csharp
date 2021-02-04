@@ -54,22 +54,22 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the socket raises the `open` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnOpen;
+        public event EventHandler<SocketStateChangedEventArgs> OnOpen;
 
         /// <summary>
         /// Invoked when the socket raises the `close` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnClose;
+        public event EventHandler<SocketStateChangedEventArgs> OnClose;
 
         /// <summary>
         /// Invoked when the socket raises the `error` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnError;
+        public event EventHandler<SocketStateChangedEventArgs> OnError;
 
         /// <summary>
         /// Invoked when the socket raises the `message` event.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> OnMessage;
+        public event EventHandler<SocketStateChangedEventArgs> OnMessage;
 
         private string realtimeUrl;
 

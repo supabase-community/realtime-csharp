@@ -26,12 +26,12 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the socket state changes.
         /// </summary>
-        public EventHandler<SocketStateChangedEventArgs> StateChanged;
+        public event EventHandler<SocketStateChangedEventArgs> StateChanged;
 
         /// <summary>
         /// Invoked when a message has been recieved and decoded.
         /// </summary>
-        public EventHandler<SocketResponseEventArgs> OnMessage;
+        public event EventHandler<SocketResponseEventArgs> OnMessage;
 
         private string endpoint;
         private ClientOptions options;
