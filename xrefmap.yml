@@ -127,12 +127,24 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.IsLeaving
   nameWithType: Channel.IsLeaving
+- uid: Supabase.Realtime.Channel.OnClose
+  name: OnClose
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnClose
+  commentId: E:Supabase.Realtime.Channel.OnClose
+  fullName: Supabase.Realtime.Channel.OnClose
+  nameWithType: Channel.OnClose
 - uid: Supabase.Realtime.Channel.OnDelete
   name: OnDelete
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnDelete
   commentId: E:Supabase.Realtime.Channel.OnDelete
   fullName: Supabase.Realtime.Channel.OnDelete
   nameWithType: Channel.OnDelete
+- uid: Supabase.Realtime.Channel.OnError
+  name: OnError
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnError
+  commentId: E:Supabase.Realtime.Channel.OnError
+  fullName: Supabase.Realtime.Channel.OnError
+  nameWithType: Channel.OnError
 - uid: Supabase.Realtime.Channel.OnInsert
   name: OnInsert
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_OnInsert
