@@ -48,6 +48,7 @@ namespace Supabase.Realtime
 
         private List<Task> buffer = new List<Task>();
         private int refIndex = 0;
+        private bool isReconnecting = false;
 
         private string endpointUrl
         {
@@ -84,21 +85,25 @@ namespace Supabase.Realtime
         /// </summary>
         public void Connect()
         {
-            if (connection != null) return;
+            if (connection != null && connection.IsAlive) return;
 
             try
             {
-                connection = new WebSocket(endpointUrl);
+                if (connection == null)
+                {
+                    connection = new WebSocket(endpointUrl);
 
-                if (endpointUrl.Contains("wss"))
-                    connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+                    if (endpointUrl.Contains("wss"))
+                        connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
 
-                connection.EnableRedirection = true;
-                connection.WaitTime = options.LongPollerTimeout;
-                connection.OnOpen += OnConnectionOpened;
-                connection.OnMessage += OnConnectionMessage;
-                connection.OnError += OnConnectionError;
-                connection.OnClose += OnConnectionClosed;
+                    connection.EnableRedirection = true;
+                    connection.WaitTime = options.LongPollerTimeout;
+                    connection.OnOpen += OnConnectionOpened;
+                    connection.OnMessage += OnConnectionMessage;
+                    connection.OnError += OnConnectionError;
+                    connection.OnClose += OnConnectionClosed;
+                }
+
                 connection.Connect();
             }
             catch (Exception ex)
@@ -136,13 +141,9 @@ namespace Supabase.Realtime
             var task = new Task(() => options.Encode(data, data => connection.Send(data)));
 
             if (connection.IsAlive)
-            {
                 task.Start();
-            }
             else
-            {
                 buffer.Add(task);
-            }
         }
 
         /// <summary>
@@ -151,6 +152,7 @@ namespace Supabase.Realtime
         private void SendHeartbeat()
         {
             if (!connection.IsAlive) return;
+
             if (hasPendingHeartbeat)
             {
                 hasPendingHeartbeat = false;
@@ -158,6 +160,7 @@ namespace Supabase.Realtime
                 connection.Close(CloseStatusCode.Normal, "heartbeat timeout");
                 return;
             }
+
             pendingHeartbeatRef = MakeMsgRef();
 
             Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
@@ -170,9 +173,9 @@ namespace Supabase.Realtime
         /// <param name="args"></param>
         private void OnConnectionOpened(object sender, EventArgs args)
         {
-            options.Logger("transport", $"connected to ${endpointUrl}", null);
+            isReconnecting = false;
 
-            FlushBuffer();
+            options.Logger("transport", $"connected to ${endpointUrl}", null);
 
             if (reconnectTokenSource != null)
                 reconnectTokenSource.Cancel();
@@ -180,6 +183,7 @@ namespace Supabase.Realtime
             if (heartbeatTokenSource != null)
                 heartbeatTokenSource.Cancel();
 
+            hasPendingHeartbeat = false;
             heartbeatTokenSource = new CancellationTokenSource();
             heartbeatTask = Task.Run(async () =>
             {
@@ -190,6 +194,7 @@ namespace Supabase.Realtime
                 }
             }, heartbeatTokenSource.Token);
 
+            FlushBuffer();
 
             StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Open, args));
         }
@@ -226,6 +231,8 @@ namespace Supabase.Realtime
         /// <param name="args"></param>
         private void OnConnectionClosed(object sender, CloseEventArgs args)
         {
+            if (isReconnecting) return;
+
             options.Logger("transport", "close", args);
 
             if (reconnectTokenSource != null)
@@ -234,12 +241,13 @@ namespace Supabase.Realtime
             reconnectTokenSource = new CancellationTokenSource();
             reconnectTask = Task.Run(async () =>
             {
+                isReconnecting = true;
                 var tries = 1;
                 while (!reconnectTokenSource.IsCancellationRequested)
                 {
-                    Disconnect();
-                    Connect();
+                    connection.Close();
                     await Task.Delay(options.ReconnectAfterInterval(tries++), reconnectTokenSource.Token);
+                    Connect();
                 }
             }, reconnectTokenSource.Token);
 
@@ -251,7 +259,7 @@ namespace Supabase.Realtime
         /// to coordinate requests with their responses.
         /// </summary>
         /// <returns></returns>
-        internal string MakeMsgRef() => (++refIndex).ToString();
+        internal string MakeMsgRef() => Guid.NewGuid().ToString();
         internal string ReplyEventName(string msgRef) => $"chan_reply_{msgRef}";
 
         /// <summary>
@@ -259,11 +267,13 @@ namespace Supabase.Realtime
         /// </summary>
         private void FlushBuffer()
         {
-            foreach (var item in buffer)
+            if (connection.IsAlive)
             {
-                item.Start();
+                foreach (var item in buffer)
+                    item.Start();
+
+                buffer.Clear();
             }
-            buffer.Clear();
         }
     }
 

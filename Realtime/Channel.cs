@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
@@ -56,6 +57,16 @@ namespace Supabase.Realtime
         /// </summary>
         public event EventHandler<ChannelStateChangedEventArgs> StateChanged;
 
+        /// <summary>
+        /// Invoked when the socket drops or crashes.
+        /// </summary>
+        public event EventHandler<SocketStateChangedEventArgs> OnError;
+
+        /// <summary>
+        /// Invoked when the channel is explicitly closed by the client.
+        /// </summary>
+        public event EventHandler<SocketStateChangedEventArgs> OnClose;
+
         public bool IsClosed => State == ChannelState.Closed;
         public bool IsErrored => State == ChannelState.Errored;
         public bool IsJoined => State == ChannelState.Joined;
@@ -88,6 +99,7 @@ namespace Supabase.Realtime
         private bool hasJoinedOnce = false;
         private List<Push> buffer = new List<Push>();
         private Timer rejoinTimer;
+        private bool isRejoining = false;
 
         /// <summary>
         /// Initializes a Channel - must call `Subscribe()` to receive events.
@@ -107,7 +119,10 @@ namespace Supabase.Realtime
             this.value = value;
 
             joinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, null);
+
             rejoinTimer = new Timer(Client.Instance.Options.Timeout.TotalMilliseconds);
+            rejoinTimer.Elapsed += HandleRejoinTimerElapsed;
+            rejoinTimer.AutoReset = true;
         }
 
         /// <summary>
@@ -125,6 +140,12 @@ namespace Supabase.Realtime
                 {
                     case ChannelState.Joined:
                         StateChanged -= callback;
+
+                        // Clear buffer
+                        foreach(var item in buffer)
+                            item.Send();
+                        buffer.Clear();
+
                         tsc.SetResult(this);
                         break;
                     case ChannelState.Closed:
@@ -157,6 +178,8 @@ namespace Supabase.Realtime
             SetState(ChannelState.Leaving);
             var leavePush = new Push(this, Constants.CHANNEL_EVENT_LEAVE, null);
             leavePush.Send();
+
+            TriggerChannelClosed(new SocketStateChangedEventArgs(SocketStateChangedEventArgs.ConnectionState.Close, null), false);
         }
 
         /// <summary>
@@ -170,10 +193,10 @@ namespace Supabase.Realtime
         public void Push(string eventName, object payload, int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
             if (!hasJoinedOnce)
-            {
                 throw new Exception($"Tried to push '{eventName}' to '{Topic}' before joining. Use `Channel.Subscribe()` before pushing events");
-            }
+
             var pushEvent = new Push(this, eventName, payload, timeoutMs);
+
             if (canPush)
             {
                 pushEvent.Send();
@@ -195,9 +218,26 @@ namespace Supabase.Realtime
             SendJoin(timeoutMs);
         }
 
+        private void HandleRejoinTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            if (isRejoining) return;
+            isRejoining = true;
+
+            if (State != ChannelState.Closed && State != ChannelState.Errored)
+                return;
+
+            Client.Instance.Options.Logger?.Invoke(Topic, "attempting to rejoin", null);
+
+            // Reset join push instance
+            joinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, null);
+
+            Rejoin();
+        }
+
         private void SendJoin(int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
             SetState(ChannelState.Joining);
+
             // Remove handler if exists
             joinPush.OnMessage -= HandleJoinResponse;
 
@@ -213,6 +253,10 @@ namespace Supabase.Realtime
                 if (obj.Status == Constants.PHEONIX_STATUS_OK)
                 {
                     SetState(ChannelState.Joined);
+
+                    // Disable Rejoin Timeout
+                    rejoinTimer?.Stop();
+                    isRejoining = false;
                 }
             }
         }
@@ -244,6 +288,34 @@ namespace Supabase.Realtime
                     OnDelete?.Invoke(this, args);
                     break;
             }
+        }
+
+        internal void TriggerChannelErrored(SocketStateChangedEventArgs args, bool shouldRejoin = true)
+        {
+            SetState(ChannelState.Errored);
+
+            if (shouldRejoin)
+            {
+                isRejoining = false;
+                rejoinTimer.Start();
+            }
+            else rejoinTimer.Stop();
+
+            OnError?.Invoke(this, args);
+        }
+
+        internal void TriggerChannelClosed(SocketStateChangedEventArgs args, bool shouldRejoin = true)
+        {
+            SetState(ChannelState.Closed);
+
+            if (shouldRejoin)
+            {
+                isRejoining = false;
+                rejoinTimer.Start();
+            }
+            else rejoinTimer.Stop();
+
+            OnClose?.Invoke(this, args);
         }
     }
 
