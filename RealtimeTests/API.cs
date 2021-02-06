@@ -218,7 +218,7 @@ namespace RealtimeTests
             {
                 var channel = SocketClient.Channel("realtime", "public", "todos");
 
-                channel.OnInsert += async (object sender, SocketResponseEventArgs e) =>
+                channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
                 {
                     var model = e.Response.Model<Todo>();
                     tsc.SetResult(model is Todo);

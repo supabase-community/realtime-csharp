@@ -146,12 +146,12 @@ namespace Supabase.Realtime
                             item.Send();
                         buffer.Clear();
 
-                        tsc.SetResult(this);
+                        tsc.TrySetResult(this);
                         break;
                     case ChannelState.Closed:
                     case ChannelState.Errored:
                         StateChanged -= callback;
-                        tsc.SetException(new Exception("Error occurred connecting to channel. Check logs."));
+                        tsc.TrySetException(new Exception("Error occurred connecting to channel. Check logs."));
                         break;
                 }
             };

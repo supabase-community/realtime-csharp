@@ -108,12 +108,11 @@ namespace Supabase.Realtime
                 if (Socket != null)
                 {
                     Debug.WriteLine("Socket already exists.");
-                    tsc.SetResult(this);
-                }
 
-                Socket = new Socket(realtimeUrl, Options);
-                Socket.StateChanged += HandleSocketStateChanged;
-                Socket.OnMessage += HandleSocketMessage;
+                    tsc.TrySetResult(this);
+
+                    return tsc.Task;
+                }
 
                 EventHandler<SocketStateChangedEventArgs> callback = null;
                 callback = (object sender, SocketStateChangedEventArgs args) =>
@@ -122,22 +121,27 @@ namespace Supabase.Realtime
                     {
                         case SocketStateChangedEventArgs.ConnectionState.Open:
                             Socket.StateChanged -= callback;
-                            tsc.SetResult(this);
+                            tsc.TrySetResult(this);
                             break;
                         case SocketStateChangedEventArgs.ConnectionState.Close:
                         case SocketStateChangedEventArgs.ConnectionState.Error:
                             Socket.StateChanged -= callback;
-                            tsc.SetException(new Exception("Error occurred connecting to Socket. Check logs."));
+                            tsc.TrySetException(new Exception("Error occurred connecting to Socket. Check logs."));
                             break;
                     }
                 };
+
+                Socket = new Socket(realtimeUrl, Options);
+
+                Socket.StateChanged += HandleSocketStateChanged;
+                Socket.OnMessage += HandleSocketMessage;
 
                 Socket.StateChanged += callback;
                 Socket.Connect();
             }
             catch (Exception ex)
             {
-                tsc.SetException(ex);
+                tsc.TrySetException(ex);
             }
 
             return tsc.Task;
@@ -218,7 +222,7 @@ namespace Supabase.Realtime
 
         private void HandleSocketStateChanged(object sender, SocketStateChangedEventArgs args)
         {
-            Debug.WriteLine($"STATE CHANGED: {args.State}");
+            Options.Logger("socket", "state changed", args.State);
             switch (args.State)
             {
                 case SocketStateChangedEventArgs.ConnectionState.Open:
