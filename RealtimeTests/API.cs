@@ -74,70 +74,61 @@ namespace RealtimeTests
         }
 
         [TestMethod("Channel: Receives Insert Callback")]
-        public Task ChannelReceivesInsertCallback()
+        public async Task ChannelReceivesInsertCallback()
         {
             var tsc = new TaskCompletionSource<bool>();
 
-            Task.Run(async () =>
-            {
-                var channel = SocketClient.Channel("realtime", "public", "todos");
+            var channel = SocketClient.Channel("realtime", "public", "todos");
 
-                channel.OnInsert += (s, args) => tsc.SetResult(true);
+            channel.OnInsert += (s, args) => tsc.SetResult(true);
 
-                await channel.Subscribe();
-                await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
-            });
+            await channel.Subscribe();
+            await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
 
-            return tsc.Task;
+            Assert.IsTrue(await tsc.Task);
         }
 
         [TestMethod("Channel: Receives Update Callback")]
-        public Task ChannelReceivesUpdateCallback()
+        public async Task ChannelReceivesUpdateCallback()
         {
             var tsc = new TaskCompletionSource<bool>();
 
-            Task.Run(async () =>
-            {
-                var channel = SocketClient.Channel("realtime", "public", "todos");
+            var channel = SocketClient.Channel("realtime", "public", "todos");
 
-                channel.OnUpdate += (s, args) => tsc.SetResult(true);
+            channel.OnUpdate += (s, args) => tsc.SetResult(true);
 
-                await channel.Subscribe();
+            await channel.Subscribe();
 
-                var result = await RestClient.Table<Todo>().Get();
-                var model = result.Models.Last();
-                model.Details = "I'm an updated item ✏️";
+            var result = await RestClient.Table<Todo>().Get();
+            var model = result.Models.Last();
+            model.Details = "I'm an updated item ✏️";
 
-                await model.Update<Todo>();
-            });
+            await model.Update<Todo>();
 
-            return tsc.Task;
+            Assert.IsTrue(await tsc.Task);
         }
 
         [TestMethod("Channel: Receives Delete Callback")]
-        public Task ChannelReceivesDeleteCallback()
+        public async Task ChannelReceivesDeleteCallback()
         {
             var tsc = new TaskCompletionSource<bool>();
 
-            Task.Run(async () =>
-            {
-                var channel = SocketClient.Channel("realtime", "public", "todos");
+            var channel = SocketClient.Channel("realtime", "public", "todos");
 
-                channel.OnDelete += (s, args) => tsc.SetResult(true);
+            channel.OnDelete += (s, args) => tsc.SetResult(true);
 
-                await channel.Subscribe();
+            await channel.Subscribe();
 
-                var result = await RestClient.Table<Todo>().Get();
-                var model = result.Models.Last();
+            var result = await RestClient.Table<Todo>().Get();
+            var model = result.Models.Last();
 
-                await model.Delete<Todo>();
-            });
+            await model.Delete<Todo>();
 
-            return tsc.Task;
+            Assert.IsTrue(await tsc.Task);
         }
 
         [TestMethod("Channel: Receives '*' Callback")]
-        public Task ChannelReceivesWildcardCallback()
+        public async Task ChannelReceivesWildcardCallback()
         {
             var insertTsc = new TaskCompletionSource<bool>();
             var updateTsc = new TaskCompletionSource<bool>();
@@ -147,39 +138,38 @@ namespace RealtimeTests
 
             var channel = SocketClient.Channel("realtime", "public", "todos");
 
-            Task.Run(async () =>
+            channel.OnMessage += (object sender, SocketResponseEventArgs e) =>
             {
-                var channel = SocketClient.Channel("realtime", "public", "todos");
-
-                channel.OnMessage += (object sender, SocketResponseEventArgs e) =>
+                switch (e.Response.Payload.Type)
                 {
-                    switch (e.Response.Payload.Type)
-                    {
-                        case "INSERT":
-                            insertTsc.SetResult(true);
-                            break;
-                        case "UPDATE":
-                            updateTsc.SetResult(true);
-                            break;
-                        case "DELETE":
-                            deleteTsc.SetResult(true);
-                            break;
-                    }
-                };
+                    case "INSERT":
+                        insertTsc.SetResult(true);
+                        break;
+                    case "UPDATE":
+                        updateTsc.SetResult(true);
+                        break;
+                    case "DELETE":
+                        deleteTsc.SetResult(true);
+                        break;
+                }
+            };
 
-                await channel.Subscribe();
+            await channel.Subscribe();
 
-                var modeledResponse = await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
-                var newModel = modeledResponse.Models.First();
+            var modeledResponse = await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+            var newModel = modeledResponse.Models.First();
 
-                newModel.Details = "And edits.";
+            newModel.Details = "And edits.";
 
-                await newModel.Update<Todo>();
+            await newModel.Update<Todo>();
 
-                await newModel.Delete<Todo>();
-            });
+            await newModel.Delete<Todo>();
 
-            return Task.WhenAll(tasks);
+            await Task.WhenAll(tasks);
+
+            Assert.IsTrue(insertTsc.Task.Result);
+            Assert.IsTrue(updateTsc.Task.Result);
+            Assert.IsTrue(deleteTsc.Task.Result);
         }
 
         [TestMethod("Client: Returns a single instance of a channel based on topic")]
@@ -210,45 +200,42 @@ namespace RealtimeTests
         }
 
         [TestMethod("Channel: Payload returns a modeled response (if possible)")]
-        public Task ChannelPayloadReturnsModel()
+        public async Task ChannelPayloadReturnsModel()
         {
             var tsc = new TaskCompletionSource<bool>();
 
-            Task.Run(async () =>
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+
+            channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
             {
-                var channel = SocketClient.Channel("realtime", "public", "todos");
+                var model = e.Response.Model<Todo>();
+                tsc.SetResult(model is Todo);
+            };
 
-                channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
-                {
-                    var model = e.Response.Model<Todo>();
-                    tsc.SetResult(model is Todo);
-                };
+            await channel.Subscribe();
 
-                await channel.Subscribe();
+            await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
 
-                await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
-            });
-
-            return tsc.Task;
+            var result = await tsc.Task;
+            Assert.IsTrue(result);
         }
 
         [TestMethod("Channel: Close Event Handler")]
-        public Task ChannelCloseEventHandler()
+        public async Task ChannelCloseEventHandler()
         {
             var tsc = new TaskCompletionSource<bool>();
 
-            Task.Run(async () =>
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+            channel.OnClose += (object sender, ChannelStateChangedEventArgs args) =>
             {
-                var channel = SocketClient.Channel("realtime", "public", "todos");
-                channel.OnClose += (object sender, ChannelStateChangedEventArgs args) =>
-                {
-                    tsc.SetResult(ChannelState.Closed == args.State);
-                };
-                await channel.Subscribe();
-                channel.Unsubscribe();
-            });
+                tsc.SetResult(ChannelState.Closed == args.State);
+            };
+            await channel.Subscribe();
+            channel.Unsubscribe();
 
-            return tsc.Task;
+            var result = await tsc.Task;
+
+            Assert.IsTrue(result);
         }
     }
 }
