@@ -22,12 +22,24 @@ namespace RealtimeExample
             await realtimeClient.Connect();
 
             // Subscribe to a channel and events
-            var channel = realtimeClient.Channel("realtime", "public", "users");
-            channel.OnInsert += (object s, SocketResponseEventArgs args) => Console.WriteLine("New item inserted: " + args.Response.Payload.Record);
-            channel.OnUpdate += (object s, SocketResponseEventArgs args) => Console.WriteLine("Item updated: " + args.Response.Payload.Record);
-            channel.OnDelete += (object s, SocketResponseEventArgs args) => Console.WriteLine("Item deleted");
+            var channelUsers = realtimeClient.Channel("realtime", "public", "users");
+            channelUsers.OnInsert += (object s, SocketResponseEventArgs args) => Console.WriteLine("New item inserted: " + args.Response.Payload.Record);
+            channelUsers.OnUpdate += (object s, SocketResponseEventArgs args) => Console.WriteLine("Item updated: " + args.Response.Payload.Record);
+            channelUsers.OnDelete += (object s, SocketResponseEventArgs args) => Console.WriteLine("Item deleted");
 
-            await channel.Subscribe();
+            Console.WriteLine("Subscribing to users channel");
+            await channelUsers.Subscribe();
+
+            //Subscribing to another channel
+            var channelTodos = realtimeClient.Channel("realtime", "public", "todos");
+            channelTodos.OnClose += (object sender, ChannelStateChangedEventArgs args) => Console.WriteLine($"Channel todos { args.State}!!");
+            Console.WriteLine("Subscribing to todos channel");
+            await channelTodos.Subscribe();
+
+            //Unsubscribing from channelTodos to trigger the OnClose event
+            channelTodos.Unsubscribe();
+
+            Console.WriteLine($"Users channel state after unsubscribing from todos channel: {channelUsers.State}");
 
             var response = await postgrestClient.Table<User>().Insert(new User { Name = "exampleUser" });
             var user = response.Models.FirstOrDefault();

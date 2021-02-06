@@ -224,30 +224,15 @@ namespace Supabase.Realtime
                     OnOpen?.Invoke(this, args);
                     break;
                 case SocketStateChangedEventArgs.ConnectionState.Close:
-                    HandleSocketClosed(args);
+                    OnClose?.Invoke(this, args);
                     break;
                 case SocketStateChangedEventArgs.ConnectionState.Error:
-                    HandleSocketError(args);
+                    OnError?.Invoke(this, args);
                     break;
                 case SocketStateChangedEventArgs.ConnectionState.Message:
                     OnMessage?.Invoke(this, args);
                     break;
             }
-        }
-
-        private void HandleSocketClosed(SocketStateChangedEventArgs args)
-        {
-            OnClose?.Invoke(this, null);
-
-            foreach (var kvp in subscriptions)
-                kvp.Value.TriggerChannelClosed(args);
-        }
-
-        private void HandleSocketError(SocketStateChangedEventArgs args)
-        {
-            OnError?.Invoke(this, null);
-            foreach (var kvp in subscriptions)
-                kvp.Value.TriggerChannelErrored(args);
         }
     }
 }
