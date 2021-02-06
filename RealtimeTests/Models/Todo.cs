@@ -15,5 +15,8 @@ namespace RealtimeTests.Models
 
         [Column("user_id")]
         public int UserId { get; set; }
+
+        [Column("inserted_at")]
+        public DateTime InsertedAt { get; set; }
     }
 }

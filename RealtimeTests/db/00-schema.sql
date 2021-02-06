@@ -18,7 +18,8 @@ VALUES
 CREATE TABLE public.todos (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   details text,
-  user_id bigint REFERENCES users NOT NULL
+  user_id bigint REFERENCES users NOT NULL,
+  inserted_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
 INSERT INTO 
