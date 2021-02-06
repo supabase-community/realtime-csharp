@@ -210,32 +210,45 @@ namespace RealtimeTests
         }
 
         [TestMethod("Channel: Payload returns a modeled response (if possible)")]
-        public async Task ChannelPayloadReturnsModel()
+        public Task ChannelPayloadReturnsModel()
         {
-            var channel = SocketClient.Channel("realtime", "public", "todos");
+            var tsc = new TaskCompletionSource<bool>();
 
-            channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
+            Task.Run(async () =>
             {
-                var model = e.Response.Model<Todo>();
-                Assert.IsInstanceOfType(model, typeof(Todo));
-            };
+                var channel = SocketClient.Channel("realtime", "public", "todos");
 
-            await channel.Subscribe();
+                channel.OnInsert += async (object sender, SocketResponseEventArgs e) =>
+                {
+                    var model = e.Response.Model<Todo>();
+                    tsc.SetResult(model is Todo);
+                };
 
-            await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+                await channel.Subscribe();
 
+                await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+            });
+
+            return tsc.Task;
         }
 
         [TestMethod("Channel: Close Event Handler")]
-        public async Task ChannelCloseEventHandler()
+        public Task ChannelCloseEventHandler()
         {
-            var channel = SocketClient.Channel("realtime", "public", "todos");
-            channel.OnClose += (object sender, ChannelStateChangedEventArgs args) =>
+            var tsc = new TaskCompletionSource<bool>();
+
+            Task.Run(async () =>
             {
-                Assert.AreEqual(ChannelState.Closed, args.State);
-            };
-            await channel.Subscribe();
-            channel.Unsubscribe();
+                var channel = SocketClient.Channel("realtime", "public", "todos");
+                channel.OnClose += (object sender, ChannelStateChangedEventArgs args) =>
+                {
+                    tsc.SetResult(ChannelState.Closed == args.State);
+                };
+                await channel.Subscribe();
+                channel.Unsubscribe();
+            });
+
+            return tsc.Task;
         }
     }
 }
