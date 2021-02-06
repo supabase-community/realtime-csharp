@@ -176,8 +176,10 @@ namespace Supabase.Realtime
         public void Unsubscribe()
         {
             SetState(ChannelState.Leaving);
+
             var leavePush = new Push(this, Constants.CHANNEL_EVENT_LEAVE, null);
             leavePush.Send();
+
             TriggerChannelStateEvent(new ChannelStateChangedEventArgs(ChannelState.Closed));
         }
 

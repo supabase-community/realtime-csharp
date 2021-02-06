@@ -131,6 +131,7 @@ namespace Supabase.Realtime
                             break;
                     }
                 };
+
                 Socket.StateChanged += callback;
                 Socket.Connect();
             }
