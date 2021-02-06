@@ -47,7 +47,6 @@ namespace Supabase.Realtime
         private CancellationTokenSource reconnectTokenSource;
 
         private List<Task> buffer = new List<Task>();
-        private int refIndex = 0;
         private bool isReconnecting = false;
 
         private string endpointUrl
@@ -173,6 +172,7 @@ namespace Supabase.Realtime
         /// <param name="args"></param>
         private void OnConnectionOpened(object sender, EventArgs args)
         {
+            // Reset flag for reconnections
             isReconnecting = false;
 
             options.Logger("transport", $"connected to ${endpointUrl}", null);
@@ -194,6 +194,7 @@ namespace Supabase.Realtime
                 }
             }, heartbeatTokenSource.Token);
 
+            // Send any pending `Push` messages that were queued while socket was disconnected.
             FlushBuffer();
 
             StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Open, args));
@@ -231,6 +232,8 @@ namespace Supabase.Realtime
         /// <param name="args"></param>
         private void OnConnectionClosed(object sender, CloseEventArgs args)
         {
+            // Make sure that the connection closed handler doesn't get called
+            // multiple times making the reconnectTask redundant.
             if (isReconnecting) return;
 
             options.Logger("transport", "close", args);
@@ -242,11 +245,16 @@ namespace Supabase.Realtime
             reconnectTask = Task.Run(async () =>
             {
                 isReconnecting = true;
+
                 var tries = 1;
                 while (!reconnectTokenSource.IsCancellationRequested)
                 {
                     connection.Close();
+
+                    // Delay reconnection for a set interval, by default it increases the
+                    // time between executions.
                     await Task.Delay(options.ReconnectAfterInterval(tries++), reconnectTokenSource.Token);
+
                     Connect();
                 }
             }, reconnectTokenSource.Token);
