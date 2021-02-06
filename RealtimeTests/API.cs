@@ -225,5 +225,17 @@ namespace RealtimeTests
             await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
 
         }
+
+        [TestMethod("Channel: Close Event Handler")]
+        public async Task ChannelCloseEventHandler()
+        {
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+            channel.OnClose += (object sender, ChannelStateChangedEventArgs args) =>
+            {
+                Assert.AreEqual(ChannelState.Closed, args.State);
+            };
+            await channel.Subscribe();
+            channel.Unsubscribe();
+        }
     }
 }

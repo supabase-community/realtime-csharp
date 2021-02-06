@@ -60,12 +60,12 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the socket drops or crashes.
         /// </summary>
-        public event EventHandler<SocketStateChangedEventArgs> OnError;
+        public event EventHandler<ChannelStateChangedEventArgs> OnError;
 
         /// <summary>
         /// Invoked when the channel is explicitly closed by the client.
         /// </summary>
-        public event EventHandler<SocketStateChangedEventArgs> OnClose;
+        public event EventHandler<ChannelStateChangedEventArgs> OnClose;
 
         public bool IsClosed => State == ChannelState.Closed;
         public bool IsErrored => State == ChannelState.Errored;
@@ -178,8 +178,7 @@ namespace Supabase.Realtime
             SetState(ChannelState.Leaving);
             var leavePush = new Push(this, Constants.CHANNEL_EVENT_LEAVE, null);
             leavePush.Send();
-
-            TriggerChannelClosed(new SocketStateChangedEventArgs(SocketStateChangedEventArgs.ConnectionState.Close, null), false);
+            TriggerChannelStateEvent(new ChannelStateChangedEventArgs(ChannelState.Closed));
         }
 
         /// <summary>
@@ -290,9 +289,9 @@ namespace Supabase.Realtime
             }
         }
 
-        internal void TriggerChannelErrored(SocketStateChangedEventArgs args, bool shouldRejoin = true)
+        private void TriggerChannelStateEvent(ChannelStateChangedEventArgs args, bool shouldRejoin = true)
         {
-            SetState(ChannelState.Errored);
+            SetState(args.State);
 
             if (shouldRejoin)
             {
@@ -301,21 +300,17 @@ namespace Supabase.Realtime
             }
             else rejoinTimer.Stop();
 
-            OnError?.Invoke(this, args);
-        }
-
-        internal void TriggerChannelClosed(SocketStateChangedEventArgs args, bool shouldRejoin = true)
-        {
-            SetState(ChannelState.Closed);
-
-            if (shouldRejoin)
+            switch (args.State)
             {
-                isRejoining = false;
-                rejoinTimer.Start();
+                case ChannelState.Closed:
+                    OnClose?.Invoke(this, args);
+                    break;
+                case ChannelState.Errored:
+                    OnError?.Invoke(this, args);
+                    break;
+                default:
+                    break;
             }
-            else rejoinTimer.Stop();
-
-            OnClose?.Invoke(this, args);
         }
     }
 
