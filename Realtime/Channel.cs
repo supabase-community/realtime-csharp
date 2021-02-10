@@ -133,39 +133,59 @@ namespace Supabase.Realtime
         {
             var tsc = new TaskCompletionSource<Channel>();
 
-            EventHandler<ChannelStateChangedEventArgs> callback = null;
-            callback = (object sender, ChannelStateChangedEventArgs e) =>
+            if (hasJoinedOnce)
+            {
+                tsc.SetException(new Exception("`Subscribe` can only be called a single time per channel instance."));
+                return tsc.Task;
+            }
+
+            EventHandler<ChannelStateChangedEventArgs> channelCallback = null;
+            EventHandler joinPushTimeoutCallback = null;
+
+            channelCallback = (object sender, ChannelStateChangedEventArgs e) =>
             {
                 switch (e.State)
                 {
+                    // Success!
                     case ChannelState.Joined:
-                        StateChanged -= callback;
+                        StateChanged -= channelCallback;
+                        joinPush.OnTimeout -= joinPushTimeoutCallback;
 
                         // Clear buffer
-                        foreach(var item in buffer)
+                        foreach (var item in buffer)
                             item.Send();
                         buffer.Clear();
 
                         tsc.TrySetResult(this);
                         break;
+                    // Failure
                     case ChannelState.Closed:
                     case ChannelState.Errored:
-                        StateChanged -= callback;
+                        StateChanged -= channelCallback;
+                        joinPush.OnTimeout -= joinPushTimeoutCallback;
+
                         tsc.TrySetException(new Exception("Error occurred connecting to channel. Check logs."));
                         break;
                 }
             };
-            StateChanged += callback;
 
-            if (hasJoinedOnce)
+            // Throw an exception if there is a problem receiving a join response
+            joinPushTimeoutCallback = (object sender, EventArgs e) =>
             {
-                tsc.SetException(new Exception("`Subscribe` can only be called a single time per channel instance."));
-            }
-            else
-            {
-                hasJoinedOnce = true;
-                Rejoin(timeoutMs);
-            }
+                StateChanged -= channelCallback;
+                joinPush.OnTimeout -= joinPushTimeoutCallback;
+
+                tsc.TrySetException(new PushTimeoutException());
+            };
+
+            StateChanged += channelCallback;
+
+            // Set a flag to prevent multiple join attempts.
+            hasJoinedOnce = true;
+
+            // Init and send join.
+            Rejoin(timeoutMs);
+            joinPush.OnTimeout += joinPushTimeoutCallback;
 
             return tsc.Task;
         }
@@ -333,44 +353,5 @@ namespace Supabase.Realtime
 
         [JsonProperty("status")]
         public string Status;
-    }
-
-    public class ChannelResponse
-    {
-        [JsonProperty("commit_timestamp")]
-        public string CommitTimestamp { get; set; }
-
-        [JsonProperty("schema")]
-        public string Schema { get; set; }
-
-        [JsonProperty("table")]
-        public string Table { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("columns")]
-        public List<ChannelColumnResponse> Columns { get; set; }
-
-        [JsonProperty("record")]
-        public object Record { get; set; }
-
-        [JsonProperty("old_record")]
-        public object OldRecord { get; set; }
-    }
-
-    public class ChannelColumnResponse
-    {
-        [JsonProperty("flags")]
-        public List<string> Flags { get; set; }
-
-        [JsonProperty("Name")]
-        public string Name { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("type_modifier")]
-        public int TypeModifier { get; set; }
     }
 }

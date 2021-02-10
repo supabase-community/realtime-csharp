@@ -51,7 +51,7 @@ namespace Supabase.Realtime
 
         private int timeoutMs;
         private Timer timer;
-        
+
         private string msgRefEvent;
 
         /// <summary>
@@ -137,4 +137,6 @@ namespace Supabase.Realtime
 
         private void CancelTimeout() => timer.Stop();
     }
+
+    public class PushTimeoutException : Exception { }
 }
