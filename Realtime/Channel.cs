@@ -270,7 +270,7 @@ namespace Supabase.Realtime
         {
             if (args.Response._event == Constants.CHANNEL_EVENT_REPLY)
             {
-                var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Response.Payload));
+                var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Response.Payload, Client.Instance.SerializerSettings), Client.Instance.SerializerSettings);
                 if (obj.Status == Constants.PHEONIX_STATUS_OK)
                 {
                     SetState(ChannelState.Joined);

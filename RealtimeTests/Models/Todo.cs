@@ -17,6 +17,6 @@ namespace RealtimeTests.Models
         public int UserId { get; set; }
 
         [Column("inserted_at")]
-        public DateTime InsertedAt { get; set; }
+        public DateTime InsertedAt { get; set; } = DateTime.UtcNow;
     }
 }

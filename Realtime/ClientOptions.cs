@@ -10,12 +10,12 @@ namespace Supabase.Realtime
         /// <summary>
         /// The function to encode outgoing messages. Defaults to JSON
         /// </summary>
-        public Action<object, Action<string>> Encode { get; set; } = (payload, callback) => callback(JsonConvert.SerializeObject(payload));
+        public Action<object, Action<string>> Encode { get; set; } = (payload, callback) => callback(JsonConvert.SerializeObject(payload,Client.Instance.SerializerSettings));
 
         /// <summary>
         /// The function to decode incoming messages.
         /// </summary>
-        public Action<string, Action<SocketResponse>> Decode { get; set; } = (payload, callback) => callback(JsonConvert.DeserializeObject<SocketResponse>(payload));
+        public Action<string, Action<SocketResponse>> Decode { get; set; } = (payload, callback) => callback(JsonConvert.DeserializeObject<SocketResponse>(payload, Client.Instance.SerializerSettings));
 
         /// <summary>
         /// Logging function
@@ -60,5 +60,15 @@ namespace Supabase.Realtime
         /// The optional params to pass when connecting
         /// </summary>
         public SocketOptionsParameters Parameters = new SocketOptionsParameters();
+
+        /// <summary>
+        /// Datetime Style for JSON Deserialization of Models
+        /// </summary>
+        public System.Globalization.DateTimeStyles DateTimeStyles = System.Globalization.DateTimeStyles.AdjustToUniversal;
+
+        /// <summary>
+        /// Datetime format for JSON Deserialization of Models (Postgrest style)
+        /// </summary>
+        public string DateTimeFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss.FFFFFF";
     }
 }

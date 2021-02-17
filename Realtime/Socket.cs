@@ -214,6 +214,8 @@ namespace Supabase.Realtime
                 // Ignore sending heartbeat event to `OnMessage` handler 
                 if (decoded.Ref == pendingHeartbeatRef) return;
 
+                decoded.Json = args.Data;
+
                 OnMessage?.Invoke(sender, new SocketResponseEventArgs(decoded));
             });
 
@@ -321,7 +323,8 @@ namespace Supabase.Realtime
         {
             if (Payload != null && Payload.Record != null)
             {
-                return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(Payload.Record));
+                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, Client.Instance.SerializerSettings);
+                return response?.Payload?.Record;
             }
             else
             {
@@ -361,6 +364,15 @@ namespace Supabase.Realtime
 
         [JsonProperty("ref")]
         public string Ref { get; set; }
+
+        [JsonIgnore]
+        internal string Json { get; set; }
+    }
+
+    public class SocketResponse<T> : SocketResponse where T : BaseModel, new()
+    {
+        [JsonProperty("payload")]
+        public new SocketResponsePayload<T> Payload { get; set; }
     }
 
     public class SocketResponsePayload
@@ -389,6 +401,13 @@ namespace Supabase.Realtime
         [JsonProperty("response")]
         public object Response { get; set; }
     }
+
+    public class SocketResponsePayload<T> : SocketResponsePayload where T : BaseModel, new()
+    {
+        [JsonProperty("record")]
+        public new T Record { get; set; }
+    }
+
 
     public class SocketStateChangedEventArgs : EventArgs
     {

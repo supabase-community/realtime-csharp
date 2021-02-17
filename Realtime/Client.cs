@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using WebSocketSharp;
 
 namespace Supabase.Realtime
@@ -70,6 +72,37 @@ namespace Supabase.Realtime
         /// Invoked when the socket raises the `message` event.
         /// </summary>
         public event EventHandler<SocketStateChangedEventArgs> OnMessage;
+
+        /// <summary>
+        /// Custom Serializer resolvers and converters that will be used for encoding and decoding Postgrest JSON responses.
+        ///
+        /// By default, Postgrest seems to use a date format that C# and Newtonsoft do not like, so this initial
+        /// configuration handles that.
+        /// </summary>
+        public JsonSerializerSettings SerializerSettings
+        {
+            get
+            {
+                if (Options == null)
+                    Options = new ClientOptions();
+
+                return new JsonSerializerSettings
+                {
+                    ContractResolver = new CustomContractResolver(),
+                    Converters =
+                    {
+                        // 2020-08-28T12:01:54.763231
+                        new IsoDateTimeConverter
+                        {
+                            DateTimeStyles = Options.DateTimeStyles,
+                            DateTimeFormat = Options.DateTimeFormat,
+                        }
+                    },
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                    DateParseHandling = Newtonsoft.Json.DateParseHandling.DateTimeOffset
+                };
+            }
+        }
 
         private string realtimeUrl;
 

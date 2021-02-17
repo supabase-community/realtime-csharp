@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -215,6 +216,30 @@ namespace RealtimeTests
             await channel.Subscribe();
 
             await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
+
+            var result = await tsc.Task;
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod("Channel: Payload Model parses a proper timestamp")]
+        public async Task ChannelPayloadModelParsesTimestamp()
+        {
+            var tsc = new TaskCompletionSource<bool>();
+
+            var timestamp = DateTime.UtcNow;
+
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+
+            channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
+            {
+                var model = e.Response.Model<Todo>();
+                Debug.WriteLine($"{timestamp.ToLongTimeString()} should equal {model.InsertedAt.ToLongTimeString()}");
+                tsc.SetResult(timestamp.ToLongTimeString() == model.InsertedAt.ToLongTimeString());
+            };
+
+            await channel.Subscribe();
+
+            await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Receives Timestamp? ✅", InsertedAt = timestamp });
 
             var result = await tsc.Task;
             Assert.IsTrue(result);
