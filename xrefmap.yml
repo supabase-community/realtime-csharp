@@ -413,6 +413,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Remove
   nameWithType: Client.Remove
+- uid: Supabase.Realtime.Client.SerializerSettings
+  name: SerializerSettings
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_SerializerSettings
+  commentId: P:Supabase.Realtime.Client.SerializerSettings
+  fullName: Supabase.Realtime.Client.SerializerSettings
+  nameWithType: Client.SerializerSettings
+- uid: Supabase.Realtime.Client.SerializerSettings*
+  name: SerializerSettings
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_SerializerSettings_
+  commentId: Overload:Supabase.Realtime.Client.SerializerSettings
+  isSpec: "True"
+  fullName: Supabase.Realtime.Client.SerializerSettings
+  nameWithType: Client.SerializerSettings
 - uid: Supabase.Realtime.Client.Socket
   name: Socket
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Socket
@@ -432,6 +445,18 @@ references:
   commentId: T:Supabase.Realtime.ClientOptions
   fullName: Supabase.Realtime.ClientOptions
   nameWithType: ClientOptions
+- uid: Supabase.Realtime.ClientOptions.DateTimeFormat
+  name: DateTimeFormat
+  href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_DateTimeFormat
+  commentId: F:Supabase.Realtime.ClientOptions.DateTimeFormat
+  fullName: Supabase.Realtime.ClientOptions.DateTimeFormat
+  nameWithType: ClientOptions.DateTimeFormat
+- uid: Supabase.Realtime.ClientOptions.DateTimeStyles
+  name: DateTimeStyles
+  href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_DateTimeStyles
+  commentId: F:Supabase.Realtime.ClientOptions.DateTimeStyles
+  fullName: Supabase.Realtime.ClientOptions.DateTimeStyles
+  nameWithType: ClientOptions.DateTimeStyles
 - uid: Supabase.Realtime.ClientOptions.Decode
   name: Decode
   href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_Decode
@@ -832,6 +857,51 @@ references:
   commentId: T:Supabase.Realtime.PushTimeoutException
   fullName: Supabase.Realtime.PushTimeoutException
   nameWithType: PushTimeoutException
+- uid: Supabase.Realtime.RealtimeTimestampConverter
+  name: RealtimeTimestampConverter
+  href: api/Supabase.Realtime.RealtimeTimestampConverter.html
+  commentId: T:Supabase.Realtime.RealtimeTimestampConverter
+  fullName: Supabase.Realtime.RealtimeTimestampConverter
+  nameWithType: RealtimeTimestampConverter
+- uid: Supabase.Realtime.RealtimeTimestampConverter.CanConvert(Type)
+  name: CanConvert(Type)
+  href: api/Supabase.Realtime.RealtimeTimestampConverter.html#Supabase_Realtime_RealtimeTimestampConverter_CanConvert_Type_
+  commentId: M:Supabase.Realtime.RealtimeTimestampConverter.CanConvert(Type)
+  fullName: Supabase.Realtime.RealtimeTimestampConverter.CanConvert(Type)
+  nameWithType: RealtimeTimestampConverter.CanConvert(Type)
+- uid: Supabase.Realtime.RealtimeTimestampConverter.CanConvert*
+  name: CanConvert
+  href: api/Supabase.Realtime.RealtimeTimestampConverter.html#Supabase_Realtime_RealtimeTimestampConverter_CanConvert_
+  commentId: Overload:Supabase.Realtime.RealtimeTimestampConverter.CanConvert
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeTimestampConverter.CanConvert
+  nameWithType: RealtimeTimestampConverter.CanConvert
+- uid: Supabase.Realtime.RealtimeTimestampConverter.ReadJson(JsonReader,Type,System.Object,JsonSerializer)
+  name: ReadJson(JsonReader, Type, Object, JsonSerializer)
+  href: api/Supabase.Realtime.RealtimeTimestampConverter.html#Supabase_Realtime_RealtimeTimestampConverter_ReadJson_JsonReader_Type_System_Object_JsonSerializer_
+  commentId: M:Supabase.Realtime.RealtimeTimestampConverter.ReadJson(JsonReader,Type,System.Object,JsonSerializer)
+  fullName: Supabase.Realtime.RealtimeTimestampConverter.ReadJson(JsonReader, Type, System.Object, JsonSerializer)
+  nameWithType: RealtimeTimestampConverter.ReadJson(JsonReader, Type, Object, JsonSerializer)
+- uid: Supabase.Realtime.RealtimeTimestampConverter.ReadJson*
+  name: ReadJson
+  href: api/Supabase.Realtime.RealtimeTimestampConverter.html#Supabase_Realtime_RealtimeTimestampConverter_ReadJson_
+  commentId: Overload:Supabase.Realtime.RealtimeTimestampConverter.ReadJson
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeTimestampConverter.ReadJson
+  nameWithType: RealtimeTimestampConverter.ReadJson
+- uid: Supabase.Realtime.RealtimeTimestampConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  name: WriteJson(JsonWriter, Object, JsonSerializer)
+  href: api/Supabase.Realtime.RealtimeTimestampConverter.html#Supabase_Realtime_RealtimeTimestampConverter_WriteJson_JsonWriter_System_Object_JsonSerializer_
+  commentId: M:Supabase.Realtime.RealtimeTimestampConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
+  fullName: Supabase.Realtime.RealtimeTimestampConverter.WriteJson(JsonWriter, System.Object, JsonSerializer)
+  nameWithType: RealtimeTimestampConverter.WriteJson(JsonWriter, Object, JsonSerializer)
+- uid: Supabase.Realtime.RealtimeTimestampConverter.WriteJson*
+  name: WriteJson
+  href: api/Supabase.Realtime.RealtimeTimestampConverter.html#Supabase_Realtime_RealtimeTimestampConverter_WriteJson_
+  commentId: Overload:Supabase.Realtime.RealtimeTimestampConverter.WriteJson
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeTimestampConverter.WriteJson
+  nameWithType: RealtimeTimestampConverter.WriteJson
 - uid: Supabase.Realtime.Socket
   name: Socket
   href: api/Supabase.Realtime.Socket.html
@@ -1092,6 +1162,32 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.SocketResponse.Topic
   nameWithType: SocketResponse.Topic
+- uid: Supabase.Realtime.SocketResponse`1
+  name: SocketResponse<T>
+  href: api/Supabase.Realtime.SocketResponse-1.html
+  commentId: T:Supabase.Realtime.SocketResponse`1
+  name.vb: SocketResponse(Of T)
+  fullName: Supabase.Realtime.SocketResponse<T>
+  fullName.vb: Supabase.Realtime.SocketResponse(Of T)
+  nameWithType: SocketResponse<T>
+  nameWithType.vb: SocketResponse(Of T)
+- uid: Supabase.Realtime.SocketResponse`1.Payload
+  name: Payload
+  href: api/Supabase.Realtime.SocketResponse-1.html#Supabase_Realtime_SocketResponse_1_Payload
+  commentId: P:Supabase.Realtime.SocketResponse`1.Payload
+  fullName: Supabase.Realtime.SocketResponse<T>.Payload
+  fullName.vb: Supabase.Realtime.SocketResponse(Of T).Payload
+  nameWithType: SocketResponse<T>.Payload
+  nameWithType.vb: SocketResponse(Of T).Payload
+- uid: Supabase.Realtime.SocketResponse`1.Payload*
+  name: Payload
+  href: api/Supabase.Realtime.SocketResponse-1.html#Supabase_Realtime_SocketResponse_1_Payload_
+  commentId: Overload:Supabase.Realtime.SocketResponse`1.Payload
+  isSpec: "True"
+  fullName: Supabase.Realtime.SocketResponse<T>.Payload
+  fullName.vb: Supabase.Realtime.SocketResponse(Of T).Payload
+  nameWithType: SocketResponse<T>.Payload
+  nameWithType.vb: SocketResponse(Of T).Payload
 - uid: Supabase.Realtime.SocketResponseEventArgs
   name: SocketResponseEventArgs
   href: api/Supabase.Realtime.SocketResponseEventArgs.html
@@ -1234,6 +1330,32 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.SocketResponsePayload.Type
   nameWithType: SocketResponsePayload.Type
+- uid: Supabase.Realtime.SocketResponsePayload`1
+  name: SocketResponsePayload<T>
+  href: api/Supabase.Realtime.SocketResponsePayload-1.html
+  commentId: T:Supabase.Realtime.SocketResponsePayload`1
+  name.vb: SocketResponsePayload(Of T)
+  fullName: Supabase.Realtime.SocketResponsePayload<T>
+  fullName.vb: Supabase.Realtime.SocketResponsePayload(Of T)
+  nameWithType: SocketResponsePayload<T>
+  nameWithType.vb: SocketResponsePayload(Of T)
+- uid: Supabase.Realtime.SocketResponsePayload`1.Record
+  name: Record
+  href: api/Supabase.Realtime.SocketResponsePayload-1.html#Supabase_Realtime_SocketResponsePayload_1_Record
+  commentId: P:Supabase.Realtime.SocketResponsePayload`1.Record
+  fullName: Supabase.Realtime.SocketResponsePayload<T>.Record
+  fullName.vb: Supabase.Realtime.SocketResponsePayload(Of T).Record
+  nameWithType: SocketResponsePayload<T>.Record
+  nameWithType.vb: SocketResponsePayload(Of T).Record
+- uid: Supabase.Realtime.SocketResponsePayload`1.Record*
+  name: Record
+  href: api/Supabase.Realtime.SocketResponsePayload-1.html#Supabase_Realtime_SocketResponsePayload_1_Record_
+  commentId: Overload:Supabase.Realtime.SocketResponsePayload`1.Record
+  isSpec: "True"
+  fullName: Supabase.Realtime.SocketResponsePayload<T>.Record
+  fullName.vb: Supabase.Realtime.SocketResponsePayload(Of T).Record
+  nameWithType: SocketResponsePayload<T>.Record
+  nameWithType.vb: SocketResponsePayload(Of T).Record
 - uid: Supabase.Realtime.SocketStateChangedEventArgs
   name: SocketStateChangedEventArgs
   href: api/Supabase.Realtime.SocketStateChangedEventArgs.html

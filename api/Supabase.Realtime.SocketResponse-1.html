@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum Constants.EventType
+    <title>Class SocketResponse&lt;T&gt;
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum Constants.EventType
+    <meta name="title" content="Class SocketResponse&lt;T&gt;
    ">
     <meta name="generator" content="docfx 2.56.6.0">
     
@@ -68,47 +68,90 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.Constants.EventType">
+            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.SocketResponse`1">
   
   
-  <h1 id="Supabase_Realtime_Constants_EventType" data-uid="Supabase.Realtime.Constants.EventType" class="text-break">Enum Constants.EventType
+  <h1 id="Supabase_Realtime_SocketResponse_1" data-uid="Supabase.Realtime.SocketResponse`1" class="text-break">Class SocketResponse&lt;T&gt;
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Supabase.Realtime.SocketResponse.html">SocketResponse</a></div>
+    <div class="level2"><span class="xref">SocketResponse&lt;T&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Model__1">SocketResponse.Model&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Topic">SocketResponse.Topic</a>
+    </div>
+    <div>
+      <a class="xref" href="Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse__event">SocketResponse._event</a>
+    </div>
+    <div>
+      <a class="xref" href="Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Event">SocketResponse.Event</a>
+    </div>
+    <div>
+      <a class="xref" href="Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse_Ref">SocketResponse.Ref</a>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.html">Supabase.Realtime</a></h6>
   <h6><strong>Assembly</strong>: Realtime.dll</h6>
-  <h5 id="Supabase_Realtime_Constants_EventType_syntax">Syntax</h5>
+  <h5 id="Supabase_Realtime_SocketResponse_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum EventType : int</code></pre>
+    <pre><code class="lang-csharp hljs">public class SocketResponse&lt;T&gt; : SocketResponse where T : BaseModel, new()</code></pre>
   </div>
-  <h3 id="fields">Fields
-  </h3>
+  <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Name</th>
         <th>Description</th>
       </tr>
-    <thead>
+    </thead>
     <tbody>
       <tr>
-        <td id="Supabase_Realtime_Constants_EventType_Delete">Delete</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_EventType_Insert">Insert</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_EventType_Unknown">Unknown</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_EventType_Update">Update</td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
-  </thead></thead></table>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/supabase/realtime-csharp/new/release/1.0.4/apiSpec/new?filename=Supabase_Realtime_SocketResponse_1_Payload.md&amp;value=---%0Auid%3A%20Supabase.Realtime.SocketResponse%601.Payload%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/supabase/realtime-csharp/blob/release/1.0.4/Realtime/Socket.cs/#L374">View Source</a>
+  </span>
+  <a id="Supabase_Realtime_SocketResponse_1_Payload_" data-uid="Supabase.Realtime.SocketResponse`1.Payload*"></a>
+  <h4 id="Supabase_Realtime_SocketResponse_1_Payload" data-uid="Supabase.Realtime.SocketResponse`1.Payload">Payload</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SocketResponsePayload&lt;T&gt; Payload { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Supabase.Realtime.SocketResponsePayload-1.html">SocketResponsePayload</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
@@ -117,10 +160,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/supabase/realtime-csharp/new/release/1.0.4/apiSpec/new?filename=Supabase_Realtime_Constants_EventType.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Constants.EventType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/supabase/realtime-csharp/new/release/1.0.4/apiSpec/new?filename=Supabase_Realtime_SocketResponse_1.md&amp;value=---%0Auid%3A%20Supabase.Realtime.SocketResponse%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/supabase/realtime-csharp/blob/release/1.0.4/Realtime/Constants.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/supabase/realtime-csharp/blob/release/1.0.4/Realtime/Socket.cs/#L372" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
