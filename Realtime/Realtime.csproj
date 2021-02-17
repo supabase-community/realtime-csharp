@@ -6,7 +6,7 @@
     <Authors>Joseph Schultz &lt;joseph@acupofjose.com&gt;</Authors>
     <Description>Realtime-csharp is written as a client library for supabase/realtime.</Description>
     <RootNamespace>Supabase.Realtime</RootNamespace>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.4</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <Copyright>MIT</Copyright>
     <PackageIconUrl>https://avatars.githubusercontent.com/u/54469796?s=200&amp;v=4</PackageIconUrl>
@@ -17,7 +17,7 @@
     <Summary>Realtime-csharp is written as a client library for supabase/realtime.</Summary>
     <PackageTags>supabase, realtime, phoenix</PackageTags>
     <Title>realtime-csharp</Title>
-    <ReleaseVersion>1.0.3</ReleaseVersion>
+    <ReleaseVersion>1.0.4</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
