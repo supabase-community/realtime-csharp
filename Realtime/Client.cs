@@ -130,9 +130,11 @@ namespace Supabase.Realtime
 
         /// <summary>
         /// Attempts to connect to the socket given the params specified in `Initialize`
+        ///
+        /// Returns when socket has successfully connected.
         /// </summary>
         /// <returns></returns>
-        public Task<Client> Connect()
+        public Task<Client> ConnectAsync()
         {
             var tsc = new TaskCompletionSource<Client>();
 
@@ -181,6 +183,48 @@ namespace Supabase.Realtime
         }
 
         /// <summary>
+        /// Attempts to connect to the socket given the params specified in `Initialize`
+        ///
+        /// Provides a callback for `Task` driven returns.
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <returns></returns>
+        public Client Connect(Action<Client> callback = null)
+        {
+            if (Socket != null)
+            {
+                Debug.WriteLine("Socket already exists.");
+                return this;
+            }
+
+            EventHandler<SocketStateChangedEventArgs> cb = null;
+            cb = (object sender, SocketStateChangedEventArgs args) =>
+            {
+                switch (args.State)
+                {
+                    case SocketStateChangedEventArgs.ConnectionState.Open:
+                        Socket.StateChanged -= cb;
+                        callback?.Invoke(this);
+                        break;
+                    case SocketStateChangedEventArgs.ConnectionState.Close:
+                    case SocketStateChangedEventArgs.ConnectionState.Error:
+                        Socket.StateChanged -= cb;
+                        throw new Exception("Error occurred connecting to Socket. Check logs.");
+                }
+            };
+
+            Socket = new Socket(realtimeUrl, Options);
+
+            Socket.StateChanged += HandleSocketStateChanged;
+            Socket.OnMessage += HandleSocketMessage;
+
+            Socket.StateChanged += cb;
+            Socket.Connect();
+
+            return this;
+        }
+
+        /// <summary>
         /// Disconnects from the socket server (if connected).
         /// </summary>
         /// <param name="code">Status Code</param>
@@ -188,22 +232,14 @@ namespace Supabase.Realtime
         /// <returns></returns>
         public Client Disconnect(CloseStatusCode code = WebSocketSharp.CloseStatusCode.Normal, string reason = "Programmatic Disconnect")
         {
-            try
+            if (Socket != null)
             {
-                if (Socket != null)
-                {
-                    Socket.StateChanged -= HandleSocketStateChanged;
-                    Socket.OnMessage -= HandleSocketMessage;
-                    Socket.Disconnect(code, reason);
-                    Socket = null;
-                }
-                return this;
+                Socket.StateChanged -= HandleSocketStateChanged;
+                Socket.OnMessage -= HandleSocketMessage;
+                Socket.Disconnect(code, reason);
+                Socket = null;
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Failed to disconnect socket.");
-                throw ex;
-            }
+            return this;
         }
 
         /// <summary>

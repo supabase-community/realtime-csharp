@@ -28,7 +28,7 @@ namespace RealtimeTests
         [TestInitialize]
         public async Task InitializeTest()
         {
-            await SocketClient.Connect();
+            await SocketClient.ConnectAsync();
         }
 
         [TestCleanup]

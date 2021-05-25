@@ -86,30 +86,22 @@ namespace Supabase.Realtime
         {
             if (connection != null && connection.IsAlive) return;
 
-            try
+            if (connection == null)
             {
-                if (connection == null)
-                {
-                    connection = new WebSocket(endpointUrl);
+                connection = new WebSocket(endpointUrl);
 
-                    if (endpointUrl.Contains("wss"))
-                        connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+                if (endpointUrl.Contains("wss"))
+                    connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
 
-                    connection.EnableRedirection = true;
-                    connection.WaitTime = options.LongPollerTimeout;
-                    connection.OnOpen += OnConnectionOpened;
-                    connection.OnMessage += OnConnectionMessage;
-                    connection.OnError += OnConnectionError;
-                    connection.OnClose += OnConnectionClosed;
-                }
-
-                connection.Connect();
+                connection.EnableRedirection = true;
+                connection.WaitTime = options.LongPollerTimeout;
+                connection.OnOpen += OnConnectionOpened;
+                connection.OnMessage += OnConnectionMessage;
+                connection.OnError += OnConnectionError;
+                connection.OnClose += OnConnectionClosed;
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                throw ex;
-            }
+
+            connection.Connect();
         }
 
         /// <summary>
@@ -209,7 +201,7 @@ namespace Supabase.Realtime
         {
             options.Decode(args.Data, decoded =>
             {
-                options.Logger("receive", $"{decoded.Payload} {decoded.Topic} {decoded.Event} ({decoded.Ref})", null);
+                options.Logger("receive", $"{args.Data} {decoded.Topic} {decoded.Event} ({decoded.Ref})", null);
 
                 // Ignore sending heartbeat event to `OnMessage` handler 
                 if (decoded.Ref == pendingHeartbeatRef) return;

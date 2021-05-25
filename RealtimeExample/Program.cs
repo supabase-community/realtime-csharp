@@ -19,7 +19,7 @@ namespace RealtimeExample
             realtimeClient.OnClose += (s, args) => Console.WriteLine("CLOSED");
             realtimeClient.OnError += (s, args) => Console.WriteLine("ERROR");
 
-            await realtimeClient.Connect();
+            await realtimeClient.ConnectAsync();
 
             // Subscribe to a channel and events
             var channelUsers = realtimeClient.Channel("realtime", "public", "users");
