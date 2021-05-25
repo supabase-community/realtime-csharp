@@ -311,12 +311,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Channel
   nameWithType: Client.Channel
-- uid: Supabase.Realtime.Client.Connect
-  name: Connect()
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect
-  commentId: M:Supabase.Realtime.Client.Connect
-  fullName: Supabase.Realtime.Client.Connect()
-  nameWithType: Client.Connect()
+- uid: Supabase.Realtime.Client.Connect(Action{Supabase.Realtime.Client})
+  name: Connect(Action<Client>)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_Action_Supabase_Realtime_Client__
+  commentId: M:Supabase.Realtime.Client.Connect(Action{Supabase.Realtime.Client})
+  name.vb: Connect(Action(Of Client))
+  fullName: Supabase.Realtime.Client.Connect(Action<Supabase.Realtime.Client>)
+  fullName.vb: Supabase.Realtime.Client.Connect(Action(Of Supabase.Realtime.Client))
+  nameWithType: Client.Connect(Action<Client>)
+  nameWithType.vb: Client.Connect(Action(Of Client))
 - uid: Supabase.Realtime.Client.Connect*
   name: Connect
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_
@@ -324,6 +327,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Connect
   nameWithType: Client.Connect
+- uid: Supabase.Realtime.Client.ConnectAsync
+  name: ConnectAsync()
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ConnectAsync
+  commentId: M:Supabase.Realtime.Client.ConnectAsync
+  fullName: Supabase.Realtime.Client.ConnectAsync()
+  nameWithType: Client.ConnectAsync()
+- uid: Supabase.Realtime.Client.ConnectAsync*
+  name: ConnectAsync
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ConnectAsync_
+  commentId: Overload:Supabase.Realtime.Client.ConnectAsync
+  isSpec: "True"
+  fullName: Supabase.Realtime.Client.ConnectAsync
+  nameWithType: Client.ConnectAsync
 - uid: Supabase.Realtime.Client.Disconnect(CloseStatusCode,System.String)
   name: Disconnect(CloseStatusCode, String)
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Disconnect_CloseStatusCode_System_String_
