@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.808.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realtime", "Realtime\Realtime.csproj", "{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realtime", "Realtime\Realtime.csproj", "{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeTests", "RealtimeTests\RealtimeTests.csproj", "{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}"
 EndProject
@@ -41,6 +41,6 @@ Global
 		SolutionGuid = {5CFFD342-4DBD-4D79-BD1C-2183939DBFD4}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 1.0.4
+		version = 1.0.5
 	EndGlobalSection
 EndGlobal

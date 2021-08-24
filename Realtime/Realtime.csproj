@@ -1,31 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <PackageId>realtime-csharp</PackageId>
-    <Authors>Joseph Schultz &lt;joseph@acupofjose.com&gt;</Authors>
-    <Description>Realtime-csharp is written as a client library for supabase/realtime.</Description>
-    <RootNamespace>Supabase.Realtime</RootNamespace>
-    <PackageVersion>1.0.4</PackageVersion>
-    <PackOnBuild>true</PackOnBuild>
-    <Copyright>MIT</Copyright>
-    <PackageIconUrl>https://avatars.githubusercontent.com/u/54469796?s=200&amp;v=4</PackageIconUrl>
-    <NeutralLanguage>en</NeutralLanguage>
-    <PackageLicenseUrl>https://github.com/supabase/realtime-csharp/blob/master/LICENSE</PackageLicenseUrl>
-    <Owners>Joseph Schultz &lt;joseph@acupofjose.com&gt;</Owners>
-    <PackageProjectUrl>https://github.com/supabase/realtime-csharp</PackageProjectUrl>
-    <Summary>Realtime-csharp is written as a client library for supabase/realtime.</Summary>
-    <PackageTags>supabase, realtime, phoenix</PackageTags>
-    <Title>realtime-csharp</Title>
-    <ReleaseVersion>1.0.4</ReleaseVersion>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="postgrest-csharp" Version="1.0.6" />
-    <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<PackageId>realtime-csharp</PackageId>
+		<Authors>Joseph Schultz &lt;joseph@acupofjose.com&gt;</Authors>
+		<Description>Realtime-csharp is written as a client library for supabase/realtime.</Description>
+		<RootNamespace>Supabase.Realtime</RootNamespace>
+		<PackageVersion>1.0.4</PackageVersion>
+		<PackOnBuild>true</PackOnBuild>
+		<Copyright>MIT</Copyright>
+		<PackageIconUrl>https://avatars.githubusercontent.com/u/54469796?s=200&amp;v=4</PackageIconUrl>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageLicenseUrl>https://github.com/supabase/realtime-csharp/blob/master/LICENSE</PackageLicenseUrl>
+		<Owners>Joseph Schultz &lt;joseph@acupofjose.com&gt;</Owners>
+		<PackageProjectUrl>https://github.com/supabase/realtime-csharp</PackageProjectUrl>
+		<Summary>Realtime-csharp is written as a client library for supabase/realtime.</Summary>
+		<PackageTags>supabase, realtime, phoenix</PackageTags>
+		<Title>realtime-csharp</Title>
+		<ReleaseVersion>1.0.5</ReleaseVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Version)' == '' ">
+		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">1.0.5</VersionPrefix>
+		<VersionSuffix Condition=" '$(VersionSuffix)' == '' ">
+		</VersionSuffix>
+		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="postgrest-csharp" Version="1.0.6" />
+		<PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Attributes\" />
+	</ItemGroup>
 </Project>
