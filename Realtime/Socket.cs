@@ -76,7 +76,10 @@ namespace Supabase.Realtime
                 options = new ClientOptions();
             }
 
-            options.Headers.Add("X-Client-Info", Utils.GetAssemblyVersion());
+            if (!options.Headers.ContainsKey("X-Client-Info"))
+            {
+                options.Headers.Add("X-Client-Info", Utils.GetAssemblyVersion());
+            }
 
             this.options = options;
         }
