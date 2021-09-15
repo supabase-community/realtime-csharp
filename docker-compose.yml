@@ -30,8 +30,9 @@ services:
       SECURE_CHANNELS: "false"
     depends_on:
       - db
+
   db:
-    image: supabase/postgres
+    image: postgres:13
     restart: unless-stopped
     ports:
       - "5432:5432"
@@ -42,4 +43,7 @@ services:
       - -c
       - wal_level=logical
     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5432

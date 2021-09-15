@@ -32,9 +32,10 @@ namespace RealtimeTests
         }
 
         [TestCleanup]
-        public void CleanupTest()
+        public async Task CleanupTest()
         {
             SocketClient.Disconnect();
+            await Task.Delay(150);
         }
 
 
