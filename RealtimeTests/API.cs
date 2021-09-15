@@ -19,23 +19,18 @@ namespace RealtimeTests
         private Client SocketClient;
         private Postgrest.Client RestClient => Postgrest.Client.Initialize(restEndpoint);
 
-        public API()
-        {
-            SocketClient = Client.Initialize(socketEndpoint);
-        }
-
 
         [TestInitialize]
         public async Task InitializeTest()
         {
+            SocketClient = Client.Initialize(socketEndpoint);
             await SocketClient.ConnectAsync();
         }
 
         [TestCleanup]
-        public async Task CleanupTest()
+        public void CleanupTest()
         {
             SocketClient.Disconnect();
-            await Task.Delay(150);
         }
 
 
@@ -87,7 +82,8 @@ namespace RealtimeTests
             await channel.Subscribe();
             await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
 
-            Assert.IsTrue(await tsc.Task);
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
         }
 
         [TestMethod("Channel: Receives Update Callback")]
@@ -107,7 +103,8 @@ namespace RealtimeTests
 
             await model.Update<Todo>();
 
-            Assert.IsTrue(await tsc.Task);
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
         }
 
         [TestMethod("Channel: Receives Delete Callback")]
@@ -126,7 +123,8 @@ namespace RealtimeTests
 
             await model.Delete<Todo>();
 
-            Assert.IsTrue(await tsc.Task);
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
         }
 
         [TestMethod("Channel: Receives '*' Callback")]
@@ -218,8 +216,8 @@ namespace RealtimeTests
 
             await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
 
-            var result = await tsc.Task;
-            Assert.IsTrue(result);
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
         }
 
         [TestMethod("Channel: Payload Model parses a proper timestamp")]
@@ -242,8 +240,8 @@ namespace RealtimeTests
 
             await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Receives Timestamp? ✅", InsertedAt = timestamp });
 
-            var result = await tsc.Task;
-            Assert.IsTrue(result);
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
         }
 
         [TestMethod("Channel: Close Event Handler")]
@@ -259,9 +257,8 @@ namespace RealtimeTests
             await channel.Subscribe();
             channel.Unsubscribe();
 
-            var result = await tsc.Task;
-
-            Assert.IsTrue(result);
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
         }
     }
 }
