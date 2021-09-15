@@ -134,7 +134,7 @@ namespace Supabase.Realtime
         {
             options.Logger("push", $"{data.Topic} {data.Event} ({data.Ref})", data.Payload);
 
-            var task = new Task(() => options.Encode(data, data => connection.Send(data)));
+            var task = new Task(() => options.Encode(data, encoded => connection.Send(encoded)));
 
             if (connection.IsAlive)
                 task.Start();
