@@ -12,7 +12,7 @@
 
 Realtime-csharp is written as a client library for [supabase/realtime](https://github.com/supabase/realtime).
 
-Documentation can be found [here](https://supabase.github.io/realtime-csharp/api/Supabase.Realtime.Client.html).
+Documentation can be found [here](https://supabase-community.github.io/realtime-csharp/api/Supabase.Realtime.Client.html).
 
 The bulk of this library is a translation and c-sharp-ification of the [supabase/realtime-js](https://github.com/supabase/realtime-js) library.
 
