@@ -13,12 +13,15 @@ references:
   commentId: T:Supabase.Realtime.Channel
   fullName: Supabase.Realtime.Channel
   nameWithType: Channel
-- uid: Supabase.Realtime.Channel.#ctor(System.String,System.String,System.String,System.String,System.String)
-  name: Channel(String, String, String, String, String)
-  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel__ctor_System_String_System_String_System_String_System_String_System_String_
-  commentId: M:Supabase.Realtime.Channel.#ctor(System.String,System.String,System.String,System.String,System.String)
-  fullName: Supabase.Realtime.Channel.Channel(System.String, System.String, System.String, System.String, System.String)
-  nameWithType: Channel.Channel(String, String, String, String, String)
+- uid: Supabase.Realtime.Channel.#ctor(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
+  name: Channel(String, String, String, String, String, Dictionary<String, String>)
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel__ctor_System_String_System_String_System_String_System_String_System_String_Dictionary_System_String_System_String__
+  commentId: M:Supabase.Realtime.Channel.#ctor(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
+  name.vb: Channel(String, String, String, String, String, Dictionary(Of String, String))
+  fullName: Supabase.Realtime.Channel.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary<System.String, System.String>)
+  fullName.vb: Supabase.Realtime.Channel.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary(Of System.String, System.String))
+  nameWithType: Channel.Channel(String, String, String, String, String, Dictionary<String, String>)
+  nameWithType.vb: Channel.Channel(String, String, String, String, String, Dictionary(Of String, String))
 - uid: Supabase.Realtime.Channel.#ctor*
   name: Channel
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel__ctor_
@@ -163,6 +166,12 @@ references:
   commentId: E:Supabase.Realtime.Channel.OnUpdate
   fullName: Supabase.Realtime.Channel.OnUpdate
   nameWithType: Channel.OnUpdate
+- uid: Supabase.Realtime.Channel.Parameters
+  name: Parameters
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Parameters
+  commentId: F:Supabase.Realtime.Channel.Parameters
+  fullName: Supabase.Realtime.Channel.Parameters
+  nameWithType: Channel.Parameters
 - uid: Supabase.Realtime.Channel.Push(System.String,System.Object,System.Int32)
   name: Push(String, Object, Int32)
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Push_System_String_System_Object_System_Int32_
@@ -298,12 +307,15 @@ references:
   commentId: T:Supabase.Realtime.Client
   fullName: Supabase.Realtime.Client
   nameWithType: Client
-- uid: Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String)
-  name: Channel(String, String, String, String, String)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_System_String_System_String_System_String_System_String_System_String_
-  commentId: M:Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String)
-  fullName: Supabase.Realtime.Client.Channel(System.String, System.String, System.String, System.String, System.String)
-  nameWithType: Client.Channel(String, String, String, String, String)
+- uid: Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
+  name: Channel(String, String, String, String, String, Dictionary<String, String>)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_System_String_System_String_System_String_System_String_System_String_Dictionary_System_String_System_String__
+  commentId: M:Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
+  name.vb: Channel(String, String, String, String, String, Dictionary(Of String, String))
+  fullName: Supabase.Realtime.Client.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary<System.String, System.String>)
+  fullName.vb: Supabase.Realtime.Client.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary(Of System.String, System.String))
+  nameWithType: Client.Channel(String, String, String, String, String, Dictionary<String, String>)
+  nameWithType.vb: Client.Channel(String, String, String, String, String, Dictionary(Of String, String))
 - uid: Supabase.Realtime.Client.Channel*
   name: Channel
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_
@@ -790,6 +802,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Push.IsSent
   nameWithType: Push.IsSent
+- uid: Supabase.Realtime.Push.Message
+  name: Message
+  href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push_Message
+  commentId: P:Supabase.Realtime.Push.Message
+  fullName: Supabase.Realtime.Push.Message
+  nameWithType: Push.Message
+- uid: Supabase.Realtime.Push.Message*
+  name: Message
+  href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push_Message_
+  commentId: Overload:Supabase.Realtime.Push.Message
+  isSpec: "True"
+  fullName: Supabase.Realtime.Push.Message
+  nameWithType: Push.Message
 - uid: Supabase.Realtime.Push.OnMessage
   name: OnMessage
   href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push_OnMessage
