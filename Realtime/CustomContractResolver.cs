@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -15,6 +16,11 @@ namespace Supabase.Realtime
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             JsonProperty prop = base.CreateProperty(member, memberSerialization);
+
+            if (prop.PropertyType == typeof(List<int>))
+            {
+                prop.Converter = new IntArrayConverter();
+            }
 
             if (prop.PropertyType == typeof(DateTime))
             {

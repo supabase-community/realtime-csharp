@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Postgrest.Attributes;
 using Postgrest.Models;
 
@@ -15,6 +16,9 @@ namespace RealtimeTests.Models
 
         [Column("user_id")]
         public int UserId { get; set; }
+
+        [Column("numbers")]
+        public List<int> Numbers { get; set; }
 
         [Column("inserted_at")]
         public DateTime InsertedAt { get; set; } = DateTime.UtcNow;

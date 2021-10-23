@@ -127,6 +127,29 @@ namespace RealtimeTests
             Assert.IsTrue(check);
         }
 
+        [TestMethod("Channel: Supports WALRUS Array Changes")]
+        public async Task ChannelSupportsWALRUSArray()
+        {
+            Todo result = null;
+            var tsc = new TaskCompletionSource<bool>();
+
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+            var numbers = new List<int> { 4, 5, 6 };
+
+            await channel.Subscribe();
+
+            channel.OnInsert += (s, args) =>
+            {
+                result = args.Response.Model<Todo>();
+                tsc.SetResult(true);
+            };
+
+            await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Numbers = numbers });
+
+            await tsc.Task;
+            CollectionAssert.AreEqual(numbers, result.Numbers);
+        }
+
         [TestMethod("Channel: Sends Join parameters")]
         public async Task ChannelSendsJoinParameters()
         {
