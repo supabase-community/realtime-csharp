@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using Supabase.Realtime.Attributes;
 using WebSocketSharp;
 using static Supabase.Realtime.Channel;
 
+[assembly: InternalsVisibleTo("RealtimeTests")]
 namespace Supabase.Realtime
 {
     /// <summary>
@@ -84,6 +86,11 @@ namespace Supabase.Realtime
         public ChannelState State { get; private set; } = ChannelState.Closed;
 
         /// <summary>
+        /// Channel Parameters, passed on the Join Push.
+        /// </summary>
+        public Dictionary<string, string> Parameters = new Dictionary<string, string>();
+
+        /// <summary>
         /// The Channel's (unique) topic indentifier.
         /// </summary>
         public string Topic { get => Utils.GenerateChannelTopic(database, schema, table, col, value); }
@@ -94,7 +101,11 @@ namespace Supabase.Realtime
         private string col;
         private string value;
 
-        private Push joinPush;
+        /// <summary>
+        /// The initial request to join a channel (repeated on channel disconnect)
+        /// </summary>
+        internal Push JoinPush;
+
         private bool canPush => IsJoined && Socket.IsConnected;
         private bool hasJoinedOnce = false;
         private List<Push> buffer = new List<Push>();
@@ -109,8 +120,15 @@ namespace Supabase.Realtime
         /// <param name="table"></param>
         /// <param name="col"></param>
         /// <param name="value"></param>
-        public Channel(string database, string schema, string table, string col, string value)
+        public Channel(string database, string schema, string table, string col, string value, Dictionary<string, string> parameters = null)
         {
+            if (parameters == null)
+            {
+                parameters = new Dictionary<string, string>();
+            }
+
+            Parameters = parameters;
+
             this.database = database;
             this.schema = schema;
             this.table = table;
@@ -118,7 +136,7 @@ namespace Supabase.Realtime
             this.col = col;
             this.value = value;
 
-            joinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, null);
+            JoinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, Parameters);
 
             rejoinTimer = new Timer(Client.Instance.Options.Timeout.TotalMilliseconds);
             rejoinTimer.Elapsed += HandleRejoinTimerElapsed;
@@ -149,7 +167,7 @@ namespace Supabase.Realtime
                     // Success!
                     case ChannelState.Joined:
                         StateChanged -= channelCallback;
-                        joinPush.OnTimeout -= joinPushTimeoutCallback;
+                        JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
                         // Clear buffer
                         foreach (var item in buffer)
@@ -162,7 +180,7 @@ namespace Supabase.Realtime
                     case ChannelState.Closed:
                     case ChannelState.Errored:
                         StateChanged -= channelCallback;
-                        joinPush.OnTimeout -= joinPushTimeoutCallback;
+                        JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
                         tsc.TrySetException(new Exception("Error occurred connecting to channel. Check logs."));
                         break;
@@ -173,7 +191,7 @@ namespace Supabase.Realtime
             joinPushTimeoutCallback = (object sender, EventArgs e) =>
             {
                 StateChanged -= channelCallback;
-                joinPush.OnTimeout -= joinPushTimeoutCallback;
+                JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
                 tsc.TrySetException(new PushTimeoutException());
             };
@@ -185,7 +203,7 @@ namespace Supabase.Realtime
 
             // Init and send join.
             Rejoin(timeoutMs);
-            joinPush.OnTimeout += joinPushTimeoutCallback;
+            JoinPush.OnTimeout += joinPushTimeoutCallback;
 
             return tsc.Task;
         }
@@ -250,7 +268,7 @@ namespace Supabase.Realtime
             Client.Instance.Options.Logger?.Invoke(Topic, "attempting to rejoin", null);
 
             // Reset join push instance
-            joinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, null);
+            JoinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, null);
 
             Rejoin();
         }
@@ -260,10 +278,10 @@ namespace Supabase.Realtime
             SetState(ChannelState.Joining);
 
             // Remove handler if exists
-            joinPush.OnMessage -= HandleJoinResponse;
+            JoinPush.OnMessage -= HandleJoinResponse;
 
-            joinPush.OnMessage += HandleJoinResponse;
-            joinPush.Resend(timeoutMs);
+            JoinPush.OnMessage += HandleJoinResponse;
+            JoinPush.Resend(timeoutMs);
         }
 
         private void HandleJoinResponse(object sender, SocketResponseEventArgs args)
@@ -290,7 +308,7 @@ namespace Supabase.Realtime
 
         internal void HandleSocketMessage(SocketResponseEventArgs args)
         {
-            if (args.Response.Ref == joinPush.Ref) return;
+            if (args.Response.Ref == JoinPush.Ref) return;
 
             // If we don't ignore this event we'll end up with double callbacks.
             if (args.Response._event == "*") return;

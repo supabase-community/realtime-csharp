@@ -45,6 +45,11 @@ namespace Supabase.Realtime
         public object Payload { get; private set; }
 
         /// <summary>
+        /// Represents the Pushed (sent) Message
+        /// </summary>
+        public SocketRequest Message { get; private set; }
+
+        /// <summary>
         /// Ref Of this Message
         /// </summary>
         public string Ref { get; private set; }
@@ -96,14 +101,14 @@ namespace Supabase.Realtime
         {
             StartTimeout();
             IsSent = true;
-            var message = new SocketRequest
+            Message = new SocketRequest
             {
                 Topic = Channel.Topic,
                 Event = EventName,
                 Payload = Payload,
                 Ref = Ref
             };
-            Channel.Socket.Push(message);
+            Channel.Socket.Push(Message);
         }
 
         /// <summary>

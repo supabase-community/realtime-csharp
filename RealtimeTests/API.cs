@@ -127,6 +127,17 @@ namespace RealtimeTests
             Assert.IsTrue(check);
         }
 
+        [TestMethod("Channel: Sends Join parameters")]
+        public async Task ChannelSendsJoinParameters()
+        {
+            var parameters = new Dictionary<string, string> { { "key", "value" } };
+            var channel = SocketClient.Channel("realtime", "public", "todos", parameters: parameters);
+
+            await channel.Subscribe();
+
+            Assert.AreEqual(parameters, channel.JoinPush.Message.Payload);
+        }
+
         [TestMethod("Channel: Receives '*' Callback")]
         public async Task ChannelReceivesWildcardCallback()
         {

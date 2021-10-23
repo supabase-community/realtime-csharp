@@ -251,7 +251,7 @@ namespace Supabase.Realtime
         /// <param name="column">Postgres column name</param>
         /// <param name="value">Value the specified column should have</param>
         /// <returns></returns>
-        public Channel Channel(string database = "realtime", string schema = null, string table = null, string column = null, string value = null)
+        public Channel Channel(string database = "realtime", string schema = null, string table = null, string column = null, string value = null, Dictionary<string, string> parameters = null)
         {
             var key = Utils.GenerateChannelTopic(database, schema, table, column, value);
 
@@ -260,7 +260,7 @@ namespace Supabase.Realtime
                 return subscriptions[key] as Channel;
             }
 
-            var subscription = new Channel(database, schema, table, column, value);
+            var subscription = new Channel(database, schema, table, column, value, parameters);
             subscriptions.Add(key, subscription);
 
             return subscription;
