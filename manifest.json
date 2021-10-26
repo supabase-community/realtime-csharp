@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.ChannelState.html",
-          "hash": "CaXRR9f98SG4lbSyRLdXYw=="
+          "hash": "ylcRyO9WNpQGohlRQEZEHw=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.html",
-          "hash": "QyHBMLQYaqYiDbJQBUh2eA=="
+          "hash": "q16BoA6qUV/8U8pyWuV95w=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ChannelStateChangedEventArgs.html",
-          "hash": "oqlED5XJB5Tln3K2B9c00g=="
+          "hash": "+1U5Yb4ygLidevn2NO8BOQ=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Client.html",
-          "hash": "yXPfx58UwxU71T3I/nYzQQ=="
+          "hash": "hpRmRnfY3sogSJZ157hcDA=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ClientOptions.html",
-          "hash": "DMLzC2n5odHTydYQhepLkQ=="
+          "hash": "xNEGNEZfNNpEjJ1zTOFO4g=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.EventType.html",
-          "hash": "byrPHM4lNoiYcGk42xbnBA=="
+          "hash": "6L3EMGIegw5lXDX4jpl8yA=="
         }
       },
       "is_incremental": false,
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.SocketStates.html",
-          "hash": "K4NRzQvvkFWmWWBpFh4BJA=="
+          "hash": "uM7IGHIS8rn59BZ9uok4KA=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.html",
-          "hash": "JMRjMjMWK9wzisuwvdCMmQ=="
+          "hash": "gJLvXuWIjcEzENB2nEP/HQ=="
         }
       },
       "is_incremental": false,
@@ -101,11 +101,47 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.IntArrayConverter.yml",
+      "source_relative_path": "api/Supabase.Realtime.Converters.IntArrayConverter.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Supabase.Realtime.IntArrayConverter.html",
-          "hash": "qRSQxeopA6+vujfmrfxj0A=="
+          "relative_path": "api/Supabase.Realtime.Converters.IntArrayConverter.html",
+          "hash": "PVwucbW14oZG6vUffqJF0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Converters.StringArrayConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Converters.StringArrayConverter.html",
+          "hash": "RgxkRHgwykjpZc8Moa9AuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Converters.TimestampConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Converters.TimestampConverter.html",
+          "hash": "wThjEigcsLHZ9rn82PMb0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Converters.html",
+          "hash": "MIR7qvdqo6pxi6+hQjA4dA=="
         }
       },
       "is_incremental": false,
@@ -117,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.PheonixResponse.html",
-          "hash": "13UQo+jDBn19vF7ekBSImA=="
+          "hash": "bjcpPVu5xTYmFNTcBsKGrw=="
         }
       },
       "is_incremental": false,
@@ -129,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Push.html",
-          "hash": "WTQVvEYxl2+MJmWkXlBN1w=="
+          "hash": "K8ociMjUk6rqscUZni+SCg=="
         }
       },
       "is_incremental": false,
@@ -141,19 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.PushTimeoutException.html",
-          "hash": "+HFWgixmm1xrNshJeOPWfQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.RealtimeTimestampConverter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.RealtimeTimestampConverter.html",
-          "hash": "+XI9wHqIhYi8kMNh4VEP5Q=="
+          "hash": "yMPhB970sR6f80/edbLYTw=="
         }
       },
       "is_incremental": false,
@@ -165,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Socket.html",
-          "hash": "ixuVfqtlRJ/2kGTiWnBlig=="
+          "hash": "9nOyD/IIBMjuyiLDXEe54g=="
         }
       },
       "is_incremental": false,
@@ -177,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketOptionsParameters.html",
-          "hash": "ewnV5aMSV1WjALtVRzi/lw=="
+          "hash": "cZiRIdyKYPj3D6I1BF4Tpg=="
         }
       },
       "is_incremental": false,
@@ -189,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketRequest.html",
-          "hash": "r/7cSiXrFFDjzC/rAvEQbg=="
+          "hash": "LznEo5SkUJhg8HGSRVauEQ=="
         }
       },
       "is_incremental": false,
@@ -201,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketResponse-1.html",
-          "hash": "+Cy710VN9tg9Oimabbp/Xw=="
+          "hash": "I8PCGvqhvD1FoVN1sYlkIA=="
         }
       },
       "is_incremental": false,
@@ -213,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketResponse.html",
-          "hash": "6Cs1/baVCs6gRDysc3h79A=="
+          "hash": "et4oV8h6tL9aDMd27Kyw3Q=="
         }
       },
       "is_incremental": false,
@@ -225,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketResponseEventArgs.html",
-          "hash": "KVxn0Gj8B1uRrLi0eNiLVA=="
+          "hash": "/fH9OARGPuga/LJLRbBaHg=="
         }
       },
       "is_incremental": false,
@@ -237,7 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketResponsePayload-1.html",
-          "hash": "b+ZL9+yrM0VwDSuakxRy0w=="
+          "hash": "q0Dep5XzbK8NPoSFRRUy7A=="
         }
       },
       "is_incremental": false,
@@ -249,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketResponsePayload.html",
-          "hash": "k9EulhIgsTXVq2jlp+TX+g=="
+          "hash": "qFCgr6VepY8mnFFe5HfnlA=="
         }
       },
       "is_incremental": false,
@@ -261,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.html",
-          "hash": "bLkFZqIbqKd80tiDHT99Wg=="
+          "hash": "9Prf7y7AqvHwL/3Pkofivw=="
         }
       },
       "is_incremental": false,
@@ -273,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.html",
-          "hash": "M4WBVqU9ZYiHnicQENXPmQ=="
+          "hash": "RMZhPDqstR7qBaxMk3X32Q=="
         }
       },
       "is_incremental": false,
@@ -285,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.html",
-          "hash": "ZYP3e6bEg8DoGXO6ucYLhQ=="
+          "hash": "lSqF7EjJXqAjzQbZL0SCMw=="
         }
       },
       "is_incremental": false,
@@ -297,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "HuPWDdxFhTjS+A2giPZ8qQ=="
+          "hash": "l0xH2zifJPxRAwLfowRwNg=="
         }
       },
       "is_incremental": false,
@@ -309,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "oIPAoDlNKFzgtX68qQFQ4Q=="
+          "hash": "1antggPuLnvd7OWBIrE1gA=="
         }
       },
       "is_incremental": false,
@@ -321,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "FbY0/+XMVsgWV1AA8uzptQ=="
+          "hash": "PUQL3TMUYjZYzOHISR2fMg=="
         }
       },
       "is_incremental": false,
@@ -360,7 +384,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 24,
+          "total_file_count": 26,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
