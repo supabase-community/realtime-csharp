@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
-namespace Supabase.Realtime
+[assembly: InternalsVisibleTo("RealtimeTests")]
+namespace Supabase.Realtime.Converters
 {
-    public class IntArrayConverter : JsonConverter
+    public class StringArrayConverter : JsonConverter
     {
         public override bool CanRead => true;
 
@@ -27,25 +29,34 @@ namespace Supabase.Realtime
             throw new NotImplementedException();
         }
 
-        private List<int> Parse(string value)
+        internal List<string> Parse(string value)
         {
-            var result = new List<int>();
+            var result = new List<String>();
+
+            var firstChar = value[0];
+            var lastChar = value[value.Length - 1];
 
             // {1,2,3}
-            if (value.Contains("{"))
+            if (firstChar == '{' && lastChar == '}')
             {
                 var array = value.Trim(new char[] { '{', '}' }).Split(',');
                 foreach (var item in array)
-                    result.Add(int.Parse(item));
+                {
+                    if (string.IsNullOrEmpty(item)) continue;
+                    result.Add(item);
+                }
 
                 return result;
             }
             // [1,2,3]
-            else if (value.Contains("["))
+            else if (firstChar == '[' && lastChar == ']')
             {
                 var array = value.Trim(new char[] { '[', ']' }).Split(',');
                 foreach (var item in array)
-                    result.Add(int.Parse(item));
+                {
+                    if (string.IsNullOrEmpty(item)) continue;
+                    result.Add(item);
+                }
 
                 return result;
             }

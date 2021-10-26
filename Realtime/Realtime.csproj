@@ -16,11 +16,11 @@
 		<Summary>Realtime-csharp is written as a client library for supabase/realtime.</Summary>
 		<PackageTags>supabase, realtime, phoenix</PackageTags>
 		<Title>realtime-csharp</Title>
-		<PackageVersion>2.0.2</PackageVersion>
-		<ReleaseVersion>2.0.2</ReleaseVersion>
+		<PackageVersion>2.0.3</PackageVersion>
+		<ReleaseVersion>2.0.3</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Version)' == '' ">
-		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">2.0.2</VersionPrefix>
+		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">2.0.3</VersionPrefix>
 		<VersionSuffix Condition=" '$(VersionSuffix)' == '' ">
 		</VersionSuffix>
 		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
@@ -33,5 +33,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Attributes\" />
+		<Folder Include="Converters\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Converters\" />
 	</ItemGroup>
 </Project>

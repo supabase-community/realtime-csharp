@@ -2,9 +2,9 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Supabase.Realtime
+namespace Supabase.Realtime.Converters
 {
-    public class RealtimeTimestampConverter : JsonConverter
+    public class TimestampConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

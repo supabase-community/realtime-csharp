@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Postgrest.Converters;
+using Supabase.Realtime.Converters;
 
 namespace Supabase.Realtime
 {
@@ -19,12 +21,15 @@ namespace Supabase.Realtime
 
             if (prop.PropertyType == typeof(List<int>))
             {
-                prop.Converter = new IntArrayConverter();
+                prop.Converter = new Converters.IntArrayConverter();
             }
-
-            if (prop.PropertyType == typeof(DateTime))
+            else if (prop.PropertyType == typeof(List<string>))
             {
-                prop.Converter = new RealtimeTimestampConverter();
+                prop.Converter = new Converters.StringArrayConverter();
+            }
+            else if (prop.PropertyType == typeof(DateTime))
+            {
+                prop.Converter = new TimestampConverter();
             }
 
             return prop;
