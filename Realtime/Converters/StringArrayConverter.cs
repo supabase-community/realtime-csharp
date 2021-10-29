@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 [assembly: InternalsVisibleTo("RealtimeTests")]
 namespace Supabase.Realtime.Converters
@@ -16,12 +17,23 @@ namespace Supabase.Realtime.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (reader.Value != null)
+            try
             {
-                return Parse(reader.Value as string);
+                if (reader.Value != null)
+                {
+                    return Parse(reader.Value as string);
+                }
+                else
+                {
+                    JArray jo = JArray.Load(reader);
+                    string json = jo.ToString(Formatting.None);
+                    return jo.ToObject<List<string>>(serializer);
+                }
             }
-
-            return null;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -31,7 +43,7 @@ namespace Supabase.Realtime.Converters
 
         internal List<string> Parse(string value)
         {
-            var result = new List<String>();
+            var result = new List<string>();
 
             var firstChar = value[0];
             var lastChar = value[value.Length - 1];
