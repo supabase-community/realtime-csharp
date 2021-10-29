@@ -39,7 +39,7 @@ namespace Supabase.Realtime
 
             if (!string.IsNullOrEmpty(col) && !string.IsNullOrEmpty(value))
             {
-                channel += $":{col}.eq.{value}";
+                channel += $":{col}=eq.{value}";
             }
 
             return channel;
