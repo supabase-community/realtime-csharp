@@ -61,13 +61,13 @@ namespace RealtimeTests
             Assert.AreEqual("realtime:public:users", channel.Topic);
         }
 
-        [TestMethod("Client: Join channels of format: {database}:{schema}:{table}:{col}.eq.{val}")]
+        [TestMethod("Client: Join channels of format: {database}:{schema}:{table}:{col}=eq.{val}")]
         public async Task ClientJoinsChannel_DB_Schema_Table_Query()
         {
             var channel = SocketClient.Channel("realtime", "public", "users", "id", "1");
             await channel.Subscribe();
 
-            Assert.AreEqual("realtime:public:users:id.eq.1", channel.Topic);
+            Assert.AreEqual("realtime:public:users:id=eq.1", channel.Topic);
         }
 
         [TestMethod("Channel: Receives Insert Callback")]
