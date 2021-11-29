@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
+		CHANGELOG.md = CHANGELOG.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtimeExample", "RealtimeExample\RealtimeExample.csproj", "{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}"
@@ -41,6 +42,6 @@ Global
 		SolutionGuid = {5CFFD342-4DBD-4D79-BD1C-2183939DBFD4}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 2.0.4
+		version = 2.0.5
 	EndGlobalSection
 EndGlobal
