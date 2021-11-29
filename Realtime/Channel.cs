@@ -110,10 +110,15 @@ namespace Supabase.Realtime
         /// The initial request to join a channel (repeated on channel disconnect)
         /// </summary>
         internal Push JoinPush;
+        internal Push LastPush;
+
+        /// <summary>
+        /// Buffer of Pushes held because of Socket availablity
+        /// </summary>
+        internal List<Push> buffer = new List<Push>();
 
         private bool canPush => IsJoined && Socket.IsConnected;
         private bool hasJoinedOnce = false;
-        internal List<Push> buffer = new List<Push>();
         private Timer rejoinTimer;
         private bool isRejoining = false;
 
@@ -240,16 +245,16 @@ namespace Supabase.Realtime
             if (!hasJoinedOnce)
                 throw new Exception($"Tried to push '{eventName}' to '{Topic}' before joining. Use `Channel.Subscribe()` before pushing events");
 
-            var pushEvent = new Push(this, eventName, payload, timeoutMs);
+            LastPush = new Push(this, eventName, payload, timeoutMs);
 
             if (canPush)
             {
-                pushEvent.Send();
+                LastPush.Send();
             }
             else
             {
-                pushEvent.StartTimeout();
-                buffer.Add(pushEvent);
+                LastPush.StartTimeout();
+                buffer.Add(LastPush);
             }
         }
 

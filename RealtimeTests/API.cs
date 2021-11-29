@@ -254,6 +254,31 @@ namespace RealtimeTests
             Assert.IsTrue(check);
         }
 
+        [TestMethod("Client: SetsAuth")]
+        public async Task ClientSetsAuth()
+        {
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+            var channel2 = SocketClient.Channel("realtime", "public", "users");
+
+            var token = "testing123";
+
+            // No subscriptions should show a push
+            Client.Instance.SetAuth(token);
+            foreach (var subscription in Client.Instance.Subscriptions.Values)
+            {
+                Assert.IsNull(subscription.LastPush);
+            }
+
+            await channel.Subscribe();
+            await channel2.Subscribe();
+
+            Client.Instance.SetAuth(token);
+            foreach (var subscription in Client.Instance.Subscriptions.Values)
+            {
+                Assert.IsTrue(subscription.LastPush.EventName == Constants.CHANNEL_ACCESS_TOKEN);
+            }
+        }
+
         [TestMethod("Channel: Payload Model parses a proper timestamp")]
         public async Task ChannelPayloadModelParsesTimestamp()
         {
