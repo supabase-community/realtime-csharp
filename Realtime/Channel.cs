@@ -95,6 +95,11 @@ namespace Supabase.Realtime
         /// </summary>
         public string Topic { get => Utils.GenerateChannelTopic(database, schema, table, col, value); }
 
+        /// <summary>
+        /// Flag stating whether a channel has been joined once or not.
+        /// </summary>
+        public bool HasJoinedOnce { get; private set; }
+
         private string database;
         private string schema;
         private string table;
@@ -108,7 +113,7 @@ namespace Supabase.Realtime
 
         private bool canPush => IsJoined && Socket.IsConnected;
         private bool hasJoinedOnce = false;
-        private List<Push> buffer = new List<Push>();
+        internal List<Push> buffer = new List<Push>();
         private Timer rejoinTimer;
         private bool isRejoining = false;
 
@@ -166,6 +171,7 @@ namespace Supabase.Realtime
                 {
                     // Success!
                     case ChannelState.Joined:
+                        HasJoinedOnce = true;
                         StateChanged -= channelCallback;
                         JoinPush.OnTimeout -= joinPushTimeoutCallback;
 

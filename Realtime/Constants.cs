@@ -56,5 +56,7 @@ namespace Supabase.Realtime
         public static string PHEONIX_STATUS_ERROR = "error";
 
         public static string TRANSPORT_WEBSOCKET = "websocket";
+
+        public static string CHANNEL_ACCESS_TOKEN = "access_token";
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -24,7 +25,12 @@ namespace Supabase.Realtime
         /// Keys are of encoded value: `{database}{:schema?}{:table?}{:col.eq.:value?}`
         /// Values are of type `Channel<T> where T : BaseModel, new()`;
         /// </summary>
-        private Dictionary<string, Channel> subscriptions { get; set; }
+        public Dictionary<string, Channel> subscriptions { get; set; }
+
+        /// <summary>
+        /// Exposes all Realtime Channel Subscriptions for R/O public consumption 
+        /// </summary>
+        public ReadOnlyDictionary<string, Channel> Subscriptions => new ReadOnlyDictionary<string, Channel>(subscriptions);
 
         /// <summary>
         /// The backing Socket class.
@@ -105,6 +111,11 @@ namespace Supabase.Realtime
         }
 
         private string realtimeUrl;
+
+        /// <summary>
+        /// JWT Access token for WALRUS security
+        /// </summary>
+        internal string AccessToken { get; private set; }
 
         /// <summary>
         /// Initializes a Client instance, this method should be called prior to any other method.
@@ -243,6 +254,34 @@ namespace Supabase.Realtime
         }
 
         /// <summary>
+        /// Sets the JWT access token used for channel subscription authorization and Realtime RLS.
+        /// Ref: https://github.com/supabase/realtime-js/pull/117 | https://github.com/supabase/realtime-js/pull/117
+        /// </summary>
+        /// <param name="jwt"></param>
+        public void SetAuth(string jwt)
+        {
+            AccessToken = jwt;
+
+            try
+            {
+                foreach (var channel in subscriptions.Values)
+                {
+                    if (channel.HasJoinedOnce && channel.IsJoined)
+                    {
+                        channel.Push(Constants.CHANNEL_ACCESS_TOKEN, new Dictionary<string, string>
+                        {
+                            { "access_token", AccessToken }
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
         /// Adds a Channel subscription - if a subscription exists with the same signature, the existing subscription will be returned.
         /// </summary>
         /// <param name="database">Database to connect to, with Supabase this will likely be `realtime`.</param>
@@ -295,6 +334,9 @@ namespace Supabase.Realtime
             switch (args.State)
             {
                 case SocketStateChangedEventArgs.ConnectionState.Open:
+                    // Ref: https://github.com/supabase/realtime-js/pull/116/files
+                    SetAuth(AccessToken);
+
                     OnOpen?.Invoke(this, args);
                     break;
                 case SocketStateChangedEventArgs.ConnectionState.Close:

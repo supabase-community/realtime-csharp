@@ -160,6 +160,12 @@ namespace Supabase.Realtime
             pendingHeartbeatRef = MakeMsgRef();
 
             Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
+
+            // Ref: https://github.com/supabase/realtime-js/pull/116
+            if (!string.IsNullOrEmpty(Client.Instance.AccessToken))
+            {
+                Client.Instance.SetAuth(Client.Instance.AccessToken);
+            }
         }
 
         /// <summary>
