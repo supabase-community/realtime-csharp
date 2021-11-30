@@ -25,7 +25,7 @@ namespace Supabase.Realtime
         /// Keys are of encoded value: `{database}{:schema?}{:table?}{:col.eq.:value?}`
         /// Values are of type `Channel<T> where T : BaseModel, new()`;
         /// </summary>
-        public Dictionary<string, Channel> subscriptions { get; set; }
+        private Dictionary<string, Channel> subscriptions { get; set; }
 
         /// <summary>
         /// Exposes all Realtime Channel Subscriptions for R/O public consumption 
