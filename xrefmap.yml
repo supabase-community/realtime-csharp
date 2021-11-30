@@ -493,25 +493,12 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Socket
   nameWithType: Client.Socket
-- uid: Supabase.Realtime.Client.subscriptions
-  name: subscriptions
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_subscriptions
-  commentId: P:Supabase.Realtime.Client.subscriptions
-  fullName: Supabase.Realtime.Client.subscriptions
-  nameWithType: Client.subscriptions
 - uid: Supabase.Realtime.Client.Subscriptions
   name: Subscriptions
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Subscriptions
   commentId: P:Supabase.Realtime.Client.Subscriptions
   fullName: Supabase.Realtime.Client.Subscriptions
   nameWithType: Client.Subscriptions
-- uid: Supabase.Realtime.Client.subscriptions*
-  name: subscriptions
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_subscriptions_
-  commentId: Overload:Supabase.Realtime.Client.subscriptions
-  isSpec: "True"
-  fullName: Supabase.Realtime.Client.subscriptions
-  nameWithType: Client.subscriptions
 - uid: Supabase.Realtime.Client.Subscriptions*
   name: Subscriptions
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Subscriptions_
