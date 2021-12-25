@@ -307,6 +307,12 @@ namespace Supabase.Realtime
                     // Disable Rejoin Timeout
                     rejoinTimer?.Stop();
                     isRejoining = false;
+                } else if (obj.Status == Constants.PHEONIX_STATUS_ERROR)
+                {
+                    SetState(ChannelState.Errored);
+
+                    rejoinTimer.Stop();
+                    isRejoining = false;
                 }
             }
         }
