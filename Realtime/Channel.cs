@@ -279,7 +279,7 @@ namespace Supabase.Realtime
             Client.Instance.Options.Logger?.Invoke(Topic, "attempting to rejoin", null);
 
             // Reset join push instance
-            JoinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, null);
+            JoinPush = new Push(this, Constants.CHANNEL_EVENT_JOIN, Parameters);
 
             Rejoin();
         }

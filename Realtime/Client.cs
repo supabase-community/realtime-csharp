@@ -266,6 +266,9 @@ namespace Supabase.Realtime
             {
                 foreach (var channel in subscriptions.Values)
                 {
+                    // See: https://github.com/supabase/realtime-js/pull/126
+                    channel.Parameters["user_token"] = AccessToken;
+
                     if (channel.HasJoinedOnce && channel.IsJoined)
                     {
                         channel.Push(Constants.CHANNEL_ACCESS_TOKEN, new Dictionary<string, string>
@@ -296,7 +299,7 @@ namespace Supabase.Realtime
 
             if (subscriptions.ContainsKey(key))
             {
-                return subscriptions[key] as Channel;
+                return subscriptions[key];
             }
 
             var subscription = new Channel(database, schema, table, column, value, parameters);
