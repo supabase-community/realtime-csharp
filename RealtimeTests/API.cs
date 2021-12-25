@@ -260,7 +260,7 @@ namespace RealtimeTests
             var channel = SocketClient.Channel("realtime", "public", "todos");
             var channel2 = SocketClient.Channel("realtime", "public", "users");
 
-            var token = "testing123";
+            var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.C8oVtF5DICct_4HcdSKt8pdrxBFMQOAnPpbiiUbaXAY";
 
             // No subscriptions should show a push
             Client.Instance.SetAuth(token);
