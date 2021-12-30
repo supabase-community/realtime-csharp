@@ -403,6 +403,13 @@ namespace Supabase.Realtime
 
         [JsonProperty("response")]
         public object Response { get; set; }
+
+        /// <summary>
+        /// Either null or an array of errors.
+        /// See: https://github.com/supabase/walrus/#error-states
+        /// </summary>
+        [JsonProperty("errors")]
+        public List<string> Errors { get; set; }
     }
 
     public class SocketResponsePayload<T> : SocketResponsePayload where T : BaseModel, new()
