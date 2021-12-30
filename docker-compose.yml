@@ -2,7 +2,7 @@ version: "2.3"
 
 services:
   rest:
-    image: postgrest/postgrest:v7.0.1
+    image: postgrest/postgrest:latest
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -32,7 +32,7 @@ services:
       - db
 
   db:
-    image: postgres:13
+    image: postgres:latest
     restart: unless-stopped
     ports:
       - "5432:5432"
