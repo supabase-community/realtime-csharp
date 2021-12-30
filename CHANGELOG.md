@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+## 2.0.8 - 2012-12-30
+
+- [#12](https://github.com/supabase-community/realtime-csharp/issues/12): Implement Upstream Realtime RLS Error Broadcast Handling
+- `SocketResponse` now exposes a method: `OldModel`, that hydrates the `OldRecord` property into a model.
+
 ## 2.0.7 - 2012-12-25
 
 - [#11](https://github.com/supabase-community/realtime-csharp/issues/11) `user_token` Channel parameter is now set in the `SetAuth` call.

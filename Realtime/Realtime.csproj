@@ -16,18 +16,18 @@
 		<Summary>Realtime-csharp is written as a client library for supabase/realtime.</Summary>
 		<PackageTags>supabase, realtime, phoenix</PackageTags>
 		<Title>realtime-csharp</Title>
-		<PackageVersion>2.0.7</PackageVersion>
-		<ReleaseVersion>2.0.7</ReleaseVersion>
+		<PackageVersion>2.0.8</PackageVersion>
+		<ReleaseVersion>2.0.8</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Version)' == '' ">
-		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">2.0.7</VersionPrefix>
+		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">2.0.8</VersionPrefix>
 		<VersionSuffix Condition=" '$(VersionSuffix)' == '' ">
 		</VersionSuffix>
 		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
 		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="postgrest-csharp" Version="2.0.3" />
+		<PackageReference Include="postgrest-csharp" Version="2.0.5" />
 		<PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
