@@ -322,6 +322,11 @@ namespace Supabase.Realtime
     /// </summary>
     public class SocketResponse
     {
+        /// <summary>
+        /// Hydrates the referenced record into a Model (if possible).
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Model<T>() where T : BaseModel, new()
         {
             if (Payload != null && Payload.Record != null)
@@ -335,6 +340,27 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// Hydrates the old_record into a Model (if possible).
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T OldModel<T>() where T : BaseModel, new()
+        {
+            if (Payload != null && Payload.OldRecord != null)
+            {
+                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, Client.Instance.SerializerSettings);
+                return response?.Payload?.OldRecord;
+            }
+            else
+            {
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// The internal realtime topic.
+        /// </summary>
         [JsonProperty("topic")]
         public string Topic { get; set; }
 
@@ -362,9 +388,15 @@ namespace Supabase.Realtime
             }
         }
 
+        /// <summary>
+        /// The payload/response.
+        /// </summary>
         [JsonProperty("payload")]
         public SocketResponsePayload Payload { get; set; }
 
+        /// <summary>
+        /// An internal reference to this particular feedback loop.
+        /// </summary>
         [JsonProperty("ref")]
         public string Ref { get; set; }
 
@@ -380,24 +412,57 @@ namespace Supabase.Realtime
 
     public class SocketResponsePayload
     {
+        /// <summary>
+        /// Displays Column information from the Database.
+        /// 
+        /// Will always be an array but can be empty
+        /// </summary>
         [JsonProperty("columns")]
         public List<object> Columns { get; set; }
 
+        /// <summary>
+        /// The timestamp of the commit referenced.
+        /// 
+        /// Will either be a string or null
+        /// </summary>
         [JsonProperty("commit_timestamp")]
         public DateTimeOffset CommitTimestamp { get; set; }
 
+        /// <summary>
+        /// The record referenced.
+        /// 
+        /// Will always be an object but can be empty.
+        /// </summary>
         [JsonProperty("record")]
         public object Record { get; set; }
 
+        /// <summary>
+        /// The previous state of the referenced record.
+        /// 
+        /// Will always be an object but can be empty.
+        /// </summary>
+        [JsonProperty("old_record")]
+        public object OldRecord { get; set; }
+
+        /// <summary>
+        /// The Schema affected.
+        /// </summary>
         [JsonProperty("schema")]
         public string Schema { get; set; }
 
+        /// <summary>
+        /// The Table affected.
+        /// </summary>
         [JsonProperty("table")]
         public string Table { get; set; }
 
+        /// <summary>
+        /// The action type performed (INSERT, UPDATE, DELETE, etc.)
+        /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
 
+        [Obsolete("Property no longer used in responses.")]
         [JsonProperty("status")]
         public string Status { get; set; }
 
@@ -414,8 +479,17 @@ namespace Supabase.Realtime
 
     public class SocketResponsePayload<T> : SocketResponsePayload where T : BaseModel, new()
     {
+        /// <summary>
+        /// The record referenced.
+        /// </summary>
         [JsonProperty("record")]
         public new T Record { get; set; }
+
+        /// <summary>
+        /// The previous state of the referenced record.
+        /// </summary>
+        [JsonProperty("old_record")]
+        public new T OldRecord { get; set; }
     }
 
 
