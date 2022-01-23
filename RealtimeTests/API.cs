@@ -161,6 +161,25 @@ namespace RealtimeTests
             Assert.AreEqual(parameters, channel.JoinPush.Message.Payload);
         }
 
+        [TestMethod("Channel: Returns single subscription per unique topic.")]
+        public async Task ChannelJoinsDuplicateSubscription()
+        {
+            var subscription1 = SocketClient.Channel("realtime", "public", "todos");
+            var subscription2 = SocketClient.Channel("realtime", "public", "todos");
+            var subscription3 = SocketClient.Channel("realtime", "public", "todos", "user_id", "1"); 
+
+            Assert.AreEqual(subscription1.Topic, subscription2.Topic);
+
+            await subscription1.Subscribe();
+
+            Assert.AreEqual(subscription1.HasJoinedOnce, subscription2.HasJoinedOnce);
+            Assert.AreNotEqual(subscription1.HasJoinedOnce, subscription3.HasJoinedOnce);
+
+            var subscription4 = SocketClient.Channel("realtime", "public", "todos");
+
+            Assert.AreEqual(subscription1.HasJoinedOnce, subscription4.HasJoinedOnce);
+        }
+
         [TestMethod("Channel: Receives '*' Callback")]
         public async Task ChannelReceivesWildcardCallback()
         {
