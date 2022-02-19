@@ -83,9 +83,11 @@ await channel.Subscribe();
 
 Join the ranks! See a problem? Help fix it!
 
-| <img src="https://github.com/acupofjose.png" width="150" height="150"> |
-| :--------------------------------------------------------------------: |
-|              [acupofjose](https://github.com/acupofjose)               |
+<a href="https://github.com/supabase-community/realtime-csharp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=supabase-community/realtime-csharp" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks/preview?repo=supabase-community%2Frealtime-csharp).
 
 ## Contributing
 
