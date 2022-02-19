@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Timers;
-using Newtonsoft.Json;
-using WebSocketSharp;
 
 namespace Supabase.Realtime
 {

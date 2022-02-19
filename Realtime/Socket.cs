@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Postgrest.Models;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Authentication;
+using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
-using Newtonsoft.Json;
-using Postgrest.Models;
-using WebSocketSharp;
+using Websocket.Client;
 using static Supabase.Realtime.Constants;
 using static Supabase.Realtime.SocketStateChangedEventArgs;
 
@@ -16,12 +14,12 @@ namespace Supabase.Realtime
     /// <summary>
     /// Socket connection handler.
     /// </summary>
-    public class Socket
+    public class Socket : IDisposable
     {
         /// <summary>
         /// Returns whether or not the connection is alive.
         /// </summary>
-        public bool IsConnected => connection.IsAlive;
+        public bool IsConnected => connection.IsRunning;
 
         /// <summary>
         /// Invoked when the socket state changes.
@@ -35,7 +33,7 @@ namespace Supabase.Realtime
 
         private string endpoint;
         private ClientOptions options;
-        private WebSocket connection;
+        private WebsocketClient connection;
 
         private Task heartbeatTask;
         private CancellationTokenSource heartbeatTokenSource;
@@ -84,29 +82,61 @@ namespace Supabase.Realtime
             this.options = options;
         }
 
+        void IDisposable.Dispose()
+        {
+            DisposeConnection();
+        }
+
+        /// <summary>
+        /// Dispose of the web socket connection.
+        /// </summary>
+        private async void DisposeConnection()
+        {
+            if (connection == null) return;
+
+            await connection.Stop(WebSocketCloseStatus.NormalClosure, string.Empty);
+            connection.Dispose();
+        }
+
         /// <summary>
         /// Connects to a socket server and registers event listeners.
         /// </summary>
-        public void Connect()
+        public async void Connect()
         {
-            if (connection != null && connection.IsAlive) return;
+            if (connection != null && connection.IsRunning) return;
 
             if (connection == null)
             {
-                connection = new WebSocket(endpointUrl);
+                connection = new WebsocketClient(new Uri(endpointUrl));
 
-                if (endpointUrl.Contains("wss"))
-                    connection.SslConfiguration.EnabledSslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+                // I'm not sure what the WebsocketSharp
+                connection.ReconnectTimeout = TimeSpan.FromSeconds(120);
+                connection.ErrorReconnectTimeout = TimeSpan.FromSeconds(30);
 
-                connection.EnableRedirection = true;
-                connection.WaitTime = options.LongPollerTimeout;
-                connection.OnOpen += OnConnectionOpened;
-                connection.OnMessage += OnConnectionMessage;
-                connection.OnError += OnConnectionError;
-                connection.OnClose += OnConnectionClosed;
+                connection.ReconnectionHappened.Subscribe(reconnectionInfo =>
+                {
+                    OnConnectionOpened(this, new EventArgs { });
+                });
+
+                connection.DisconnectionHappened.Subscribe(disconnectionInfo =>
+                {
+                    if (disconnectionInfo.Exception != null)
+                    {
+                        OnConnectionError(this, disconnectionInfo);
+                    }
+                    else
+                    {
+                        OnConnectionClosed(this, disconnectionInfo);
+                    }
+                });
+
+                connection.MessageReceived.Subscribe(msg =>
+                {
+                    OnConnectionMessage(this, msg);
+                });
             }
 
-            connection.Connect();
+            await connection.Start();
         }
 
         /// <summary>
@@ -114,12 +144,11 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="code"></param>
         /// <param name="reason"></param>
-        public void Disconnect(CloseStatusCode code = CloseStatusCode.Normal, string reason = "")
+        public void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "")
         {
             if (connection != null)
             {
-                connection.OnClose -= OnConnectionClosed;
-                connection.Close(code, reason);
+                connection.Stop(code, reason);
                 connection = null;
             }
         }
@@ -136,7 +165,7 @@ namespace Supabase.Realtime
 
             var task = new Task(() => options.Encode(data, encoded => connection.Send(encoded)));
 
-            if (connection.IsAlive)
+            if (connection.IsRunning)
                 task.Start();
             else
                 buffer.Add(task);
@@ -147,13 +176,13 @@ namespace Supabase.Realtime
         /// </summary>
         private void SendHeartbeat()
         {
-            if (!connection.IsAlive) return;
+            if (!connection.IsRunning) return;
 
             if (hasPendingHeartbeat)
             {
                 hasPendingHeartbeat = false;
                 options.Logger("transport", "heartbeat timeout. Attempting to re-establish connection.", null);
-                connection.Close(CloseStatusCode.Normal, "heartbeat timeout");
+                connection.Stop(WebSocketCloseStatus.NormalClosure, "heartbeat timeout");
                 return;
             }
 
@@ -208,26 +237,26 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void OnConnectionMessage(object sender, MessageEventArgs args)
+        private void OnConnectionMessage(object sender, ResponseMessage args)
         {
-            options.Decode(args.Data, decoded =>
+            options.Decode(args.Text, decoded =>
             {
-                options.Logger("receive", $"{args.Data} {decoded.Topic} {decoded.Event} ({decoded.Ref})", null);
+                options.Logger("receive", $"{args.Text} {decoded.Topic} {decoded.Event} ({decoded.Ref})", null);
 
                 // Ignore sending heartbeat event to `OnMessage` handler 
                 if (decoded.Ref == pendingHeartbeatRef) return;
 
-                decoded.Json = args.Data;
+                decoded.Json = args.Text;
 
                 OnMessage?.Invoke(sender, new SocketResponseEventArgs(decoded));
             });
 
-            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Message, args));
+            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Message, new EventArgs()));
         }
 
-        private void OnConnectionError(object sender, ErrorEventArgs args)
+        private void OnConnectionError(object sender, DisconnectionInfo args)
         {
-            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Error, args));
+            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Error, new EventArgs()));
         }
 
         /// <summary>
@@ -235,7 +264,7 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void OnConnectionClosed(object sender, CloseEventArgs args)
+        private void OnConnectionClosed(object sender, DisconnectionInfo args)
         {
             // Make sure that the connection closed handler doesn't get called
             // multiple times making the reconnectTask redundant.
@@ -254,7 +283,7 @@ namespace Supabase.Realtime
                 var tries = 1;
                 while (!reconnectTokenSource.IsCancellationRequested)
                 {
-                    connection.Close();
+                    await connection.Stop(WebSocketCloseStatus.NormalClosure, "Closed");
 
                     // Delay reconnection for a set interval, by default it increases the
                     // time between executions.
@@ -264,7 +293,7 @@ namespace Supabase.Realtime
                 }
             }, reconnectTokenSource.Token);
 
-            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Close, args));
+            StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Close, new EventArgs()));
         }
 
         /// <summary>
@@ -280,7 +309,7 @@ namespace Supabase.Realtime
         /// </summary>
         private void FlushBuffer()
         {
-            if (connection.IsAlive)
+            if (connection.IsRunning)
             {
                 foreach (var item in buffer)
                     item.Start();
