@@ -30,7 +30,7 @@ namespace Supabase.Realtime.Converters
                     return jo.ToObject<List<int>>(serializer);
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

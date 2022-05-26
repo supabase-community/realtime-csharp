@@ -27,13 +27,12 @@
 		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="postgrest-csharp" Version="2.0.6" />
+		<PackageReference Include="postgrest-csharp" Version="2.0.8" />
 		<PackageReference Include="Websocket.Client" Version="4.4.43" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="Attributes\" />
-		<Folder Include="Converters\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Converters\" />

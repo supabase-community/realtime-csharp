@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using Newtonsoft.Json;
 
 namespace Supabase.Realtime
@@ -64,11 +65,11 @@ namespace Supabase.Realtime
         /// <summary>
         /// Datetime Style for JSON Deserialization of Models
         /// </summary>
-        public System.Globalization.DateTimeStyles DateTimeStyles = System.Globalization.DateTimeStyles.AdjustToUniversal;
+        public DateTimeStyles DateTimeStyles = DateTimeStyles.AdjustToUniversal;
 
         /// <summary>
         /// Datetime format for JSON Deserialization of Models (Postgrest style)
         /// </summary>
-        public string DateTimeFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss.FFFFFF";
+        public string DateTimeFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss.FFFFFFK";
     }
 }

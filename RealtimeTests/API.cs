@@ -273,6 +273,39 @@ namespace RealtimeTests
             Assert.IsTrue(check);
         }
 
+        [TestMethod("Channel: Deserializes Datetimes in Model")]
+        public async Task ChannelDeserializesDateTimes()
+        {
+            var tsc = new TaskCompletionSource<bool>();
+
+            var insertedAt = DateTime.Now;
+            var expected = insertedAt.ToLocalTime().ToLongTimeString();
+
+            var channel = SocketClient.Channel("realtime", "public", "todos");
+
+            channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
+            {
+                var model = e.Response.Model<Todo>();
+                var actual = model.InsertedAt.ToLocalTime().ToLongTimeString();
+
+                Assert.AreEqual(expected, actual);
+
+                tsc.SetResult(true);
+            };
+
+            await channel.Subscribe();
+
+            await Task.Delay(2000);
+
+            var todo = new Todo { UserId = 1, Details = "Client Models a response? ✅", InsertedAt = insertedAt };
+            var dbResponse = await RestClient.Table<Todo>().Insert(todo);
+
+            Assert.AreEqual(expected, dbResponse.Models[0].InsertedAt.ToLocalTime().ToLongTimeString());
+
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
+        }
+
         [TestMethod("Client: SetsAuth")]
         public async Task ClientSetsAuth()
         {
@@ -296,30 +329,6 @@ namespace RealtimeTests
             {
                 Assert.IsTrue(subscription.LastPush.EventName == Constants.CHANNEL_ACCESS_TOKEN);
             }
-        }
-
-        [TestMethod("Channel: Payload Model parses a proper timestamp")]
-        public async Task ChannelPayloadModelParsesTimestamp()
-        {
-            var tsc = new TaskCompletionSource<bool>();
-
-            var timestamp = DateTime.UtcNow;
-
-            var channel = SocketClient.Channel("realtime", "public", "todos");
-
-            channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
-            {
-                var model = e.Response.Model<Todo>();
-                Debug.WriteLine($"{timestamp.ToLongTimeString()} should equal {model.InsertedAt.ToLongTimeString()}");
-                tsc.SetResult(timestamp.ToLongTimeString() == model.InsertedAt.ToLongTimeString());
-            };
-
-            await channel.Subscribe();
-
-            await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Receives Timestamp? ✅", InsertedAt = timestamp });
-
-            var check = await tsc.Task;
-            Assert.IsTrue(check);
         }
 
         [TestMethod("Channel: Close Event Handler")]

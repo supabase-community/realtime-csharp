@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Postgrest.Models;
+using Supabase.Realtime.Converters;
 using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
