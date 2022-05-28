@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 3.0.1 - 2022-05-28
+
+- Fixed deserialization of `DateTimes`
+
 ## 3.0.0 - 2022-02-18
 
 - Exchange existing websocket client: [WebSocketSharp](https://github.com/sta/websocket-sharp) for [Marfusios/websocket-client](https://github.com/Marfusios/websocket-client) which adds support for Blazor WASM apps.
