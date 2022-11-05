@@ -25,34 +25,39 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the socket state changes.
         /// </summary>
-        public event EventHandler<SocketStateChangedEventArgs> StateChanged;
+        public event EventHandler<SocketStateChangedEventArgs>? StateChanged;
 
         /// <summary>
         /// Invoked when a message has been recieved and decoded.
         /// </summary>
-        public event EventHandler<SocketResponseEventArgs> OnMessage;
+        public event EventHandler<SocketResponseEventArgs>? OnMessage;
+
+        public event EventHandler<SocketResponseEventArgs>? OnHeartbeat;
 
         private string endpoint;
         private ClientOptions options;
         private WebsocketClient connection;
 
-        private Task heartbeatTask;
-        private CancellationTokenSource heartbeatTokenSource;
+        private Task? heartbeatTask;
+        private CancellationTokenSource? heartbeatTokenSource;
 
         private bool hasPendingHeartbeat = false;
-        private string pendingHeartbeatRef = null;
+        private string? pendingHeartbeatRef = null;
 
-        private Task reconnectTask;
-        private CancellationTokenSource reconnectTokenSource;
+        private Task? reconnectTask;
+        private CancellationTokenSource? reconnectTokenSource;
 
         private List<Task> buffer = new List<Task>();
         private bool isReconnecting = false;
+        private bool hasConnectBeenCalled = false;
+
+        private JsonSerializerSettings serializerSettings;
 
         private string endpointUrl
         {
             get
             {
-                var parameters = new Dictionary<string, string> {
+                var parameters = new Dictionary<string, string?> {
                     { "token", options.Parameters.Token },
                     { "apikey", options.Parameters.ApiKey }
                 };
@@ -66,21 +71,18 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="endpoint"></param>
         /// <param name="options"></param>
-        public Socket(string endpoint, ClientOptions options = null)
+        public Socket(string endpoint, ClientOptions options, JsonSerializerSettings serializerSettings)
         {
+            this.serializerSettings = serializerSettings;
             this.endpoint = $"{endpoint}/{Constants.TRANSPORT_WEBSOCKET}";
-
-            if (options == null)
-            {
-                options = new ClientOptions();
-            }
+            this.options = options;
 
             if (!options.Headers.ContainsKey("X-Client-Info"))
             {
                 options.Headers.Add("X-Client-Info", Utils.GetAssemblyVersion());
             }
 
-            this.options = options;
+            connection = new WebsocketClient(new Uri(endpointUrl));
         }
 
         void IDisposable.Dispose()
@@ -104,38 +106,34 @@ namespace Supabase.Realtime
         /// </summary>
         public async void Connect()
         {
-            if (connection != null && connection.IsRunning) return;
+            if (connection.IsRunning || hasConnectBeenCalled) return;
 
-            if (connection == null)
+            connection.ReconnectTimeout = TimeSpan.FromSeconds(120);
+            connection.ErrorReconnectTimeout = TimeSpan.FromSeconds(30);
+
+            connection.ReconnectionHappened.Subscribe(reconnectionInfo =>
             {
-                connection = new WebsocketClient(new Uri(endpointUrl));
+                OnConnectionOpened(this, new EventArgs { });
+            });
 
-                // I'm not sure what the WebsocketSharp
-                connection.ReconnectTimeout = TimeSpan.FromSeconds(120);
-                connection.ErrorReconnectTimeout = TimeSpan.FromSeconds(30);
-
-                connection.ReconnectionHappened.Subscribe(reconnectionInfo =>
+            connection.DisconnectionHappened.Subscribe(disconnectionInfo =>
+            {
+                if (disconnectionInfo.Exception != null)
                 {
-                    OnConnectionOpened(this, new EventArgs { });
-                });
-
-                connection.DisconnectionHappened.Subscribe(disconnectionInfo =>
+                    OnConnectionError(this, disconnectionInfo);
+                }
+                else
                 {
-                    if (disconnectionInfo.Exception != null)
-                    {
-                        OnConnectionError(this, disconnectionInfo);
-                    }
-                    else
-                    {
-                        OnConnectionClosed(this, disconnectionInfo);
-                    }
-                });
+                    OnConnectionClosed(this, disconnectionInfo);
+                }
+            });
 
-                connection.MessageReceived.Subscribe(msg =>
-                {
-                    OnConnectionMessage(this, msg);
-                });
-            }
+            connection.MessageReceived.Subscribe(msg =>
+            {
+                OnConnectionMessage(this, msg);
+            });
+
+            hasConnectBeenCalled = true;
 
             await connection.Start();
         }
@@ -145,14 +143,7 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="code"></param>
         /// <param name="reason"></param>
-        public void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "")
-        {
-            if (connection != null)
-            {
-                connection.Stop(code, reason);
-                connection = null;
-            }
-        }
+        public void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "") => connection?.Stop(code, reason);
 
         /// <summary>
         /// Pushes formatted data to the socket server.
@@ -164,7 +155,7 @@ namespace Supabase.Realtime
         {
             options.Logger("push", $"{data.Topic} {data.Event} ({data.Ref})", data.Payload);
 
-            var task = new Task(() => options.Encode(data, encoded => connection.Send(encoded)));
+            var task = new Task(() => options.Encode!(data, encoded => connection.Send(encoded)));
 
             if (connection.IsRunning)
                 task.Start();
@@ -190,12 +181,6 @@ namespace Supabase.Realtime
             pendingHeartbeatRef = MakeMsgRef();
 
             Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
-
-            // Ref: https://github.com/supabase/realtime-js/pull/116
-            if (!string.IsNullOrEmpty(Client.Instance.AccessToken))
-            {
-                Client.Instance.SetAuth(Client.Instance.AccessToken);
-            }
         }
 
         /// <summary>
@@ -240,14 +225,17 @@ namespace Supabase.Realtime
         /// <param name="args"></param>
         private void OnConnectionMessage(object sender, ResponseMessage args)
         {
-            options.Decode(args.Text, decoded =>
+            options.Decode!(args.Text, decoded =>
             {
-                options.Logger("receive", $"{args.Text} {decoded.Topic} {decoded.Event} ({decoded.Ref})", null);
+                if (decoded == null) return;
 
-                // Ignore sending heartbeat event to `OnMessage` handler 
-                if (decoded.Ref == pendingHeartbeatRef) return;
+                options.Logger("receive", $"{args.Text} {decoded?.Topic} {decoded?.Event} ({decoded?.Ref})", null);
 
-                decoded.Json = args.Text;
+                // Send Separate heartbeat event
+                if (decoded!.Ref == pendingHeartbeatRef)
+                    OnHeartbeat?.Invoke(sender, new SocketResponseEventArgs(decoded));
+
+                decoded!.Json = args.Text;
 
                 OnMessage?.Invoke(sender, new SocketResponseEventArgs(decoded));
             });
@@ -323,10 +311,10 @@ namespace Supabase.Realtime
     public class SocketOptionsParameters
     {
         [JsonProperty("token")]
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
         [JsonProperty("apikey")]
-        public string ApiKey { get; set; }
+        public string? ApiKey { get; set; }
     }
 
     /// <summary>
@@ -335,16 +323,16 @@ namespace Supabase.Realtime
     public class SocketRequest
     {
         [JsonProperty("topic")]
-        public string Topic { get; set; }
+        public string? Topic { get; set; }
 
         [JsonProperty("event")]
-        public string Event { get; set; }
+        public string? Event { get; set; }
 
         [JsonProperty("payload")]
-        public object Payload { get; set; }
+        public object? Payload { get; set; }
 
         [JsonProperty("ref")]
-        public string Ref { get; set; }
+        public string? Ref { get; set; }
     }
 
     /// <summary>
@@ -352,16 +340,22 @@ namespace Supabase.Realtime
     /// </summary>
     public class SocketResponse
     {
+        private JsonSerializerSettings serializerSettings;
+        public SocketResponse(JsonSerializerSettings serializerSettings)
+        {
+            this.serializerSettings = serializerSettings;
+        }
+
         /// <summary>
         /// Hydrates the referenced record into a Model (if possible).
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Model<T>() where T : BaseModel, new()
+        public T? Model<T>() where T : BaseModel, new()
         {
-            if (Payload != null && Payload.Record != null)
+            if (Json != null && Payload != null && Payload.Record != null)
             {
-                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, Client.Instance.SerializerSettings);
+                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, serializerSettings);
                 return response?.Payload?.Record;
             }
             else
@@ -375,11 +369,11 @@ namespace Supabase.Realtime
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T OldModel<T>() where T : BaseModel, new()
+        public T? OldModel<T>() where T : BaseModel, new()
         {
-            if (Payload != null && Payload.OldRecord != null)
+            if (Json != null && Payload != null && Payload.OldRecord != null)
             {
-                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, Client.Instance.SerializerSettings);
+                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, serializerSettings);
                 return response?.Payload?.OldRecord;
             }
             else
@@ -392,10 +386,10 @@ namespace Supabase.Realtime
         /// The internal realtime topic.
         /// </summary>
         [JsonProperty("topic")]
-        public string Topic { get; set; }
+        public string? Topic { get; set; }
 
         [JsonProperty("event")]
-        public string _event { get; set; }
+        public string? _event { get; set; }
 
         [JsonIgnore]
         public EventType Event
@@ -422,22 +416,25 @@ namespace Supabase.Realtime
         /// The payload/response.
         /// </summary>
         [JsonProperty("payload")]
-        public SocketResponsePayload Payload { get; set; }
+        public SocketResponsePayload? Payload { get; set; }
 
         /// <summary>
         /// An internal reference to this particular feedback loop.
         /// </summary>
         [JsonProperty("ref")]
-        public string Ref { get; set; }
+        public string? Ref { get; set; }
 
         [JsonIgnore]
-        internal string Json { get; set; }
+        internal string? Json { get; set; }
     }
 
     public class SocketResponse<T> : SocketResponse where T : BaseModel, new()
     {
+        public SocketResponse(JsonSerializerSettings serializerSettings) : base(serializerSettings)
+        { }
+
         [JsonProperty("payload")]
-        public new SocketResponsePayload<T> Payload { get; set; }
+        public new SocketResponsePayload<T>? Payload { get; set; }
     }
 
     public class SocketResponsePayload
@@ -448,7 +445,7 @@ namespace Supabase.Realtime
         /// Will always be an array but can be empty
         /// </summary>
         [JsonProperty("columns")]
-        public List<object> Columns { get; set; }
+        public List<object>? Columns { get; set; }
 
         /// <summary>
         /// The timestamp of the commit referenced.
@@ -456,7 +453,7 @@ namespace Supabase.Realtime
         /// Will either be a string or null
         /// </summary>
         [JsonProperty("commit_timestamp")]
-        public DateTimeOffset CommitTimestamp { get; set; }
+        public DateTimeOffset? CommitTimestamp { get; set; }
 
         /// <summary>
         /// The record referenced.
@@ -464,7 +461,7 @@ namespace Supabase.Realtime
         /// Will always be an object but can be empty.
         /// </summary>
         [JsonProperty("record")]
-        public object Record { get; set; }
+        public object? Record { get; set; }
 
         /// <summary>
         /// The previous state of the referenced record.
@@ -472,39 +469,39 @@ namespace Supabase.Realtime
         /// Will always be an object but can be empty.
         /// </summary>
         [JsonProperty("old_record")]
-        public object OldRecord { get; set; }
+        public object? OldRecord { get; set; }
 
         /// <summary>
         /// The Schema affected.
         /// </summary>
         [JsonProperty("schema")]
-        public string Schema { get; set; }
+        public string? Schema { get; set; }
 
         /// <summary>
         /// The Table affected.
         /// </summary>
         [JsonProperty("table")]
-        public string Table { get; set; }
+        public string? Table { get; set; }
 
         /// <summary>
         /// The action type performed (INSERT, UPDATE, DELETE, etc.)
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         [Obsolete("Property no longer used in responses.")]
         [JsonProperty("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         [JsonProperty("response")]
-        public object Response { get; set; }
+        public object? Response { get; set; }
 
         /// <summary>
         /// Either null or an array of errors.
         /// See: https://github.com/supabase/walrus/#error-states
         /// </summary>
         [JsonProperty("errors")]
-        public List<string> Errors { get; set; }
+        public List<string>? Errors { get; set; }
     }
 
     public class SocketResponsePayload<T> : SocketResponsePayload where T : BaseModel, new()
@@ -513,13 +510,13 @@ namespace Supabase.Realtime
         /// The record referenced.
         /// </summary>
         [JsonProperty("record")]
-        public new T Record { get; set; }
+        public new T? Record { get; set; }
 
         /// <summary>
         /// The previous state of the referenced record.
         /// </summary>
         [JsonProperty("old_record")]
-        public new T OldRecord { get; set; }
+        public new T? OldRecord { get; set; }
     }
 
 

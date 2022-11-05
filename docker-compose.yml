@@ -32,7 +32,7 @@ services:
       - db
 
   db:
-    image: postgres:latest
+    image: supabase/postgres:14.1.0.77
     restart: unless-stopped
     ports:
       - "5432:5432"

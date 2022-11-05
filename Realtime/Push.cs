@@ -19,13 +19,13 @@ namespace Supabase.Realtime
         /// <summary>
         /// Invoked when the server has responded to a request.
         /// </summary>
-        public event EventHandler<SocketResponseEventArgs> OnMessage;
+        public event EventHandler<SocketResponseEventArgs>? OnMessage;
 
         /// <summary>
         /// Invoked when this `Push` has not been responded to within the timeout interval.
         /// </summary>
-        public event EventHandler OnTimeout;
-        public SocketResponse Response { get; private set; }
+        public event EventHandler? OnTimeout;
+        public SocketResponse? Response { get; private set; }
 
         /// <summary>
         /// The associated channel.
@@ -40,22 +40,24 @@ namespace Supabase.Realtime
         /// <summary>
         /// Payload of data to be sent.
         /// </summary>
-        public object Payload { get; private set; }
+        public object? Payload { get; private set; }
 
         /// <summary>
         /// Represents the Pushed (sent) Message
         /// </summary>
-        public SocketRequest Message { get; private set; }
+        public SocketRequest? Message { get; private set; }
 
         /// <summary>
         /// Ref Of this Message
         /// </summary>
-        public string Ref { get; private set; }
+        public string? Ref { get; private set; }
 
         private int timeoutMs;
         private Timer timer;
 
-        private string msgRefEvent;
+        private string? msgRefEvent;
+
+        private Socket socket;
 
         /// <summary>
         /// Initilizes a single request that will be `Pushed` to the Socket server.
@@ -64,8 +66,10 @@ namespace Supabase.Realtime
         /// <param name="eventName"></param>
         /// <param name="payload"></param>
         /// <param name="timeoutMs"></param>
-        public Push(Channel channel, string eventName, object payload, int timeoutMs = Constants.DEFAULT_TIMEOUT)
+        public Push(Socket socket, Channel channel, string eventName, object? payload, int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
+            this.socket = socket;
+
             Channel = channel;
             EventName = eventName;
             Payload = payload;
@@ -75,7 +79,7 @@ namespace Supabase.Realtime
             timer = new Timer(this.timeoutMs);
             timer.Elapsed += TimeoutReached;
 
-            Channel.Socket.OnMessage += HandleSocketMessage;
+            socket.OnMessage += HandleSocketMessage;
         }
 
         /// <summary>
@@ -106,7 +110,7 @@ namespace Supabase.Realtime
                 Payload = Payload,
                 Ref = Ref
             };
-            Channel.Socket.Push(Message);
+            socket.Push(Message);
         }
 
         /// <summary>
@@ -116,8 +120,8 @@ namespace Supabase.Realtime
         {
             timer.Stop();
             timer.Start();
-            Ref = Client.Instance.Socket.MakeMsgRef();
-            msgRefEvent = Client.Instance.Socket.ReplyEventName(Ref);
+            Ref = socket.MakeMsgRef();
+            msgRefEvent = socket.ReplyEventName(Ref);
         }
 
         /// <summary>
@@ -132,7 +136,7 @@ namespace Supabase.Realtime
                 CancelTimeout();
                 Response = args.Response;
                 OnMessage?.Invoke(this, args);
-                Channel.Socket.OnMessage -= HandleSocketMessage;
+                socket.OnMessage -= HandleSocketMessage;
             }
         }
 

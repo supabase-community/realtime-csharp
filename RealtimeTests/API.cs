@@ -16,14 +16,14 @@ namespace RealtimeTests
         private string socketEndpoint = "ws://localhost:4000/socket";
         private string restEndpoint = "http://localhost:3000";
 
-        private Client SocketClient;
         private Postgrest.Client RestClient => Postgrest.Client.Initialize(restEndpoint);
+        private Client SocketClient;
 
 
         [TestInitialize]
         public async Task InitializeTest()
         {
-            SocketClient = Client.Initialize(socketEndpoint);
+            SocketClient = new Client(socketEndpoint);
             await SocketClient.ConnectAsync();
         }
 
@@ -166,7 +166,7 @@ namespace RealtimeTests
         {
             var subscription1 = SocketClient.Channel("realtime", "public", "todos");
             var subscription2 = SocketClient.Channel("realtime", "public", "todos");
-            var subscription3 = SocketClient.Channel("realtime", "public", "todos", "user_id", "1"); 
+            var subscription3 = SocketClient.Channel("realtime", "public", "todos", "user_id", "1");
 
             Assert.AreEqual(subscription1.Topic, subscription2.Topic);
 
@@ -257,7 +257,7 @@ namespace RealtimeTests
         {
             var tsc = new TaskCompletionSource<bool>();
 
-            var channel = SocketClient.Channel("realtime", "public", "todos");
+            var channel = SocketClient.Channel("realtime", "*");
 
             channel.OnInsert += (object sender, SocketResponseEventArgs e) =>
             {
@@ -315,8 +315,8 @@ namespace RealtimeTests
             var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.C8oVtF5DICct_4HcdSKt8pdrxBFMQOAnPpbiiUbaXAY";
 
             // No subscriptions should show a push
-            Client.Instance.SetAuth(token);
-            foreach (var subscription in Client.Instance.Subscriptions.Values)
+            SocketClient.SetAuth(token);
+            foreach (var subscription in SocketClient.Subscriptions.Values)
             {
                 Assert.IsNull(subscription.LastPush);
             }
@@ -324,8 +324,8 @@ namespace RealtimeTests
             await channel.Subscribe();
             await channel2.Subscribe();
 
-            Client.Instance.SetAuth(token);
-            foreach (var subscription in Client.Instance.Subscriptions.Values)
+            SocketClient.SetAuth(token);
+            foreach (var subscription in SocketClient.Subscriptions.Values)
             {
                 Assert.IsTrue(subscription.LastPush.EventName == Constants.CHANNEL_ACCESS_TOKEN);
             }
