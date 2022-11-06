@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
 using Supabase.Realtime.Attributes;
+using Supabase.Realtime.Interfaces;
 using static Supabase.Realtime.Channel;
 
 [assembly: InternalsVisibleTo("RealtimeTests")]
@@ -13,7 +14,7 @@ namespace Supabase.Realtime
     /// <summary>
     /// Class representation of a channel subscription
     /// </summary>
-    public class Channel
+    public class Channel : IRealtimeChannel
     {
         /// <summary>
         /// Channel state with associated string representations.
@@ -93,7 +94,7 @@ namespace Supabase.Realtime
         /// </summary>
         public bool HasJoinedOnce { get; private set; }
 
-        private Socket socket;
+        private IRealtimeSocket socket;
 
         /// <summary>
         /// The initial request to join a channel (repeated on channel disconnect)
@@ -119,7 +120,7 @@ namespace Supabase.Realtime
         /// <param name="table"></param>
         /// <param name="col"></param>
         /// <param name="value"></param>
-        public Channel(Socket socket, ChannelOptions options)
+        public Channel(IRealtimeSocket socket, ChannelOptions options)
         {
             this.socket = socket;
 
@@ -138,9 +139,9 @@ namespace Supabase.Realtime
         /// Subscribes to the channel given supplied Options/params.
         /// </summary>
         /// <param name="timeoutMs"></param>
-        public Task<Channel> Subscribe(int timeoutMs = Constants.DEFAULT_TIMEOUT)
+        public Task<IRealtimeChannel> Subscribe(int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
-            var tsc = new TaskCompletionSource<Channel>();
+            var tsc = new TaskCompletionSource<IRealtimeChannel>();
 
             if (hasJoinedOnce)
             {

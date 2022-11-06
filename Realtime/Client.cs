@@ -6,6 +6,7 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Supabase.Realtime.Interfaces;
 
 namespace Supabase.Realtime
 {
@@ -17,7 +18,7 @@ namespace Supabase.Realtime
     /// <example>
     ///     client = Client.Instance
     /// </example>
-    public class Client
+    public class Client : IRealtimeClient<Socket, Channel>
     {
         /// <summary>
         /// Contains all Realtime Channel Subscriptions - state managed internally.
@@ -37,8 +38,8 @@ namespace Supabase.Realtime
         ///
         /// Most methods of the Client act as proxies to the Socket class.
         /// </summary>
-        public Socket? Socket { get => socket; }
-        private Socket? socket;
+        public IRealtimeSocket? Socket { get => socket; }
+        private IRealtimeSocket? socket;
 
         /// <summary>
         /// Client Options - most of which are regarding Socket connection Options
@@ -112,7 +113,7 @@ namespace Supabase.Realtime
         public Client(string realtimeUrl, ClientOptions? options = null)
         {
             this.realtimeUrl = realtimeUrl;
-            
+
             if (options == null)
                 options = new ClientOptions();
 
@@ -139,9 +140,9 @@ namespace Supabase.Realtime
         /// Returns when socket has successfully connected.
         /// </summary>
         /// <returns></returns>
-        public Task<Client> ConnectAsync()
+        public Task<IRealtimeClient<Socket, Channel>> ConnectAsync()
         {
-            var tsc = new TaskCompletionSource<Client>();
+            var tsc = new TaskCompletionSource<IRealtimeClient<Socket, Channel>>();
 
             try
             {
@@ -192,7 +193,7 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="callback"></param>
         /// <returns></returns>
-        public Client Connect(Action<Client>? callback = null)
+        public IRealtimeClient<Socket, Channel> Connect(Action<IRealtimeClient<Socket, Channel>>? callback = null)
         {
             if (socket != null)
             {
@@ -246,7 +247,7 @@ namespace Supabase.Realtime
         /// <param name="code">Status Code</param>
         /// <param name="reason">Reason for disconnect</param>
         /// <returns></returns>
-        public Client Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "Programmatic Disconnect")
+        public IRealtimeClient<Socket, Channel> Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "Programmatic Disconnect")
         {
             if (socket != null)
             {

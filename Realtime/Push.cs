@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supabase.Realtime.Interfaces;
+using System;
 using System.Timers;
 
 namespace Supabase.Realtime
@@ -9,7 +10,7 @@ namespace Supabase.Realtime
     /// `Push` also adds additional functionality for retrying, timeouts, and listeners
     /// for its associated response from the server.
     /// </summary>
-    public class Push
+    public class Push : IRealtimePush<Channel, SocketResponse>
     {
         /// <summary>
         /// Flag representing the `sent` state of a request.
@@ -25,7 +26,7 @@ namespace Supabase.Realtime
         /// Invoked when this `Push` has not been responded to within the timeout interval.
         /// </summary>
         public event EventHandler? OnTimeout;
-        public SocketResponse? Response { get; private set; }
+        public IRealtimeSocketResponse? Response { get; private set; }
 
         /// <summary>
         /// The associated channel.
@@ -52,12 +53,11 @@ namespace Supabase.Realtime
         /// </summary>
         public string? Ref { get; private set; }
 
+        private string? msgRefEvent;
         private int timeoutMs;
         private Timer timer;
 
-        private string? msgRefEvent;
-
-        private Socket socket;
+        private IRealtimeSocket socket;
 
         /// <summary>
         /// Initilizes a single request that will be `Pushed` to the Socket server.
@@ -66,7 +66,7 @@ namespace Supabase.Realtime
         /// <param name="eventName"></param>
         /// <param name="payload"></param>
         /// <param name="timeoutMs"></param>
-        public Push(Socket socket, Channel channel, string eventName, object? payload, int timeoutMs = Constants.DEFAULT_TIMEOUT)
+        public Push(IRealtimeSocket socket, Channel channel, string eventName, object? payload, int timeoutMs = Constants.DEFAULT_TIMEOUT)
         {
             this.socket = socket;
 

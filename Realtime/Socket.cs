@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Postgrest.Models;
 using Supabase.Realtime.Converters;
+using Supabase.Realtime.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Websocket.Client;
-using static Supabase.Realtime.Constants;
 using static Supabase.Realtime.SocketStateChangedEventArgs;
 
 namespace Supabase.Realtime
@@ -15,7 +15,7 @@ namespace Supabase.Realtime
     /// <summary>
     /// Socket connection handler.
     /// </summary>
-    public class Socket : IDisposable
+    public class Socket : IDisposable, IRealtimeSocket
     {
         /// <summary>
         /// Returns whether or not the connection is alive.
@@ -290,8 +290,14 @@ namespace Supabase.Realtime
         /// to coordinate requests with their responses.
         /// </summary>
         /// <returns></returns>
-        internal string MakeMsgRef() => Guid.NewGuid().ToString();
-        internal string ReplyEventName(string msgRef) => $"chan_reply_{msgRef}";
+        public string MakeMsgRef() => Guid.NewGuid().ToString();
+        
+        /// <summary>
+        /// Returns the expected reply event name based off a generated message ref.
+        /// </summary>
+        /// <param name="msgRef"></param>
+        /// <returns></returns>
+        public string ReplyEventName(string msgRef) => $"chan_reply_{msgRef}";
 
         /// <summary>
         /// Flushes `Push` requests added while a socket was disconnected.
@@ -333,108 +339,6 @@ namespace Supabase.Realtime
 
         [JsonProperty("ref")]
         public string? Ref { get; set; }
-    }
-
-    /// <summary>
-    /// Representation of a Socket Response.
-    /// </summary>
-    public class SocketResponse
-    {
-        private JsonSerializerSettings serializerSettings;
-        public SocketResponse(JsonSerializerSettings serializerSettings)
-        {
-            this.serializerSettings = serializerSettings;
-        }
-
-        /// <summary>
-        /// Hydrates the referenced record into a Model (if possible).
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public T? Model<T>() where T : BaseModel, new()
-        {
-            if (Json != null && Payload != null && Payload.Record != null)
-            {
-                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, serializerSettings);
-                return response?.Payload?.Record;
-            }
-            else
-            {
-                return default;
-            }
-        }
-
-        /// <summary>
-        /// Hydrates the old_record into a Model (if possible).
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public T? OldModel<T>() where T : BaseModel, new()
-        {
-            if (Json != null && Payload != null && Payload.OldRecord != null)
-            {
-                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, serializerSettings);
-                return response?.Payload?.OldRecord;
-            }
-            else
-            {
-                return default;
-            }
-        }
-
-        /// <summary>
-        /// The internal realtime topic.
-        /// </summary>
-        [JsonProperty("topic")]
-        public string? Topic { get; set; }
-
-        [JsonProperty("event")]
-        public string? _event { get; set; }
-
-        [JsonIgnore]
-        public EventType Event
-        {
-            get
-            {
-                if (Payload == null) return EventType.Unknown;
-
-                switch (Payload.Type)
-                {
-                    case "INSERT":
-                        return EventType.Insert;
-                    case "UPDATE":
-                        return EventType.Update;
-                    case "DELETE":
-                        return EventType.Delete;
-                }
-
-                return EventType.Unknown;
-            }
-        }
-
-        /// <summary>
-        /// The payload/response.
-        /// </summary>
-        [JsonProperty("payload")]
-        public SocketResponsePayload? Payload { get; set; }
-
-        /// <summary>
-        /// An internal reference to this particular feedback loop.
-        /// </summary>
-        [JsonProperty("ref")]
-        public string? Ref { get; set; }
-
-        [JsonIgnore]
-        internal string? Json { get; set; }
-    }
-
-    public class SocketResponse<T> : SocketResponse where T : BaseModel, new()
-    {
-        public SocketResponse(JsonSerializerSettings serializerSettings) : base(serializerSettings)
-        { }
-
-        [JsonProperty("payload")]
-        public new SocketResponsePayload<T>? Payload { get; set; }
     }
 
     public class SocketResponsePayload
