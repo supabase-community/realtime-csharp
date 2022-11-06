@@ -79,14 +79,14 @@ namespace Supabase.Realtime
         public ChannelState State { get; private set; } = ChannelState.Closed;
 
         /// <summary>
-        /// Channel Parameters, passed on the Join Push.
+        /// Options passed to this channel instance.
         /// </summary>
-        public Dictionary<string, string> Parameters = new Dictionary<string, string>();
+        public ChannelOptions Options { get; private set; }
 
         /// <summary>
         /// The Channel's (unique) topic indentifier.
         /// </summary>
-        public string Topic { get => Utils.GenerateChannelTopic(options.Database, options.Schema, options.Table, options.Column, options.Value); }
+        public string Topic { get => Utils.GenerateChannelTopic(Options.Database, Options.Schema, Options.Table, Options.Column, Options.Value); }
 
         /// <summary>
         /// Flag stating whether a channel has been joined once or not.
@@ -94,7 +94,6 @@ namespace Supabase.Realtime
         public bool HasJoinedOnce { get; private set; }
 
         private Socket socket;
-        private ChannelOptions options;
 
         /// <summary>
         /// The initial request to join a channel (repeated on channel disconnect)
@@ -122,15 +121,13 @@ namespace Supabase.Realtime
         /// <param name="value"></param>
         public Channel(Socket socket, ChannelOptions options)
         {
-            this.options = options;
             this.socket = socket;
 
             if (options.Parameters == null)
-            {
                 options.Parameters = new Dictionary<string, string>();
-            }
 
-            JoinPush = new Push(socket, this, Constants.CHANNEL_EVENT_JOIN, Parameters);
+            Options = options;
+            JoinPush = new Push(socket, this, Constants.CHANNEL_EVENT_JOIN, Options.Parameters);
 
             rejoinTimer = new Timer(options.ClientOptions.Timeout.TotalMilliseconds);
             rejoinTimer.Elapsed += HandleRejoinTimerElapsed;
@@ -138,7 +135,7 @@ namespace Supabase.Realtime
         }
 
         /// <summary>
-        /// Subscribes to the channel given supplied options/params.
+        /// Subscribes to the channel given supplied Options/params.
         /// </summary>
         /// <param name="timeoutMs"></param>
         public Task<Channel> Subscribe(int timeoutMs = Constants.DEFAULT_TIMEOUT)
@@ -260,10 +257,10 @@ namespace Supabase.Realtime
             if (State != ChannelState.Closed && State != ChannelState.Errored)
                 return;
 
-            options.ClientOptions.Logger?.Invoke(Topic, "attempting to rejoin", null);
+            Options.ClientOptions.Logger?.Invoke(Topic, "attempting to rejoin", null);
 
             // Reset join push instance
-            JoinPush = new Push(socket, this, Constants.CHANNEL_EVENT_JOIN, Parameters);
+            JoinPush = new Push(socket, this, Constants.CHANNEL_EVENT_JOIN, Options.Parameters);
 
             Rejoin();
         }
@@ -283,7 +280,7 @@ namespace Supabase.Realtime
         {
             if (args.Response._event == Constants.CHANNEL_EVENT_REPLY)
             {
-                var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Response.Payload, options.SerializerSettings), options.SerializerSettings);
+                var obj = JsonConvert.DeserializeObject<PheonixResponse>(JsonConvert.SerializeObject(args.Response.Payload, Options.SerializerSettings), Options.SerializerSettings);
 
                 if (obj == null) return;
 

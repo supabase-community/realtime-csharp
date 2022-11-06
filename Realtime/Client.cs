@@ -41,7 +41,7 @@ namespace Supabase.Realtime
         private Socket? socket;
 
         /// <summary>
-        /// Client Options - most of which are regarding Socket connection options
+        /// Client Options - most of which are regarding Socket connection Options
         /// </summary>
         public ClientOptions Options { get; private set; }
 
@@ -272,7 +272,7 @@ namespace Supabase.Realtime
                 foreach (var channel in subscriptions.Values)
                 {
                     // See: https://github.com/supabase/realtime-js/pull/126
-                    channel.Parameters["user_token"] = accessToken;
+                    channel.Options.Parameters!["user_token"] = accessToken;
 
                     if (channel.HasJoinedOnce && channel.IsJoined)
                     {
