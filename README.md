@@ -10,6 +10,28 @@
 
 ---
 
+## BREAKING CHANGES MOVING FROM v3.x.x to v4.x.x
+
+- `Client` is no longer a singleton class.
+- `Channel` has a new constructor that uses `ChannelOptions`
+- `Channel.Parameters` has been changed in favor of `Channel.Options`
+- `Channel` and `Push` are now directly dependent on having `Socket` and `SerializerSettings` passed in as opposed to referencing the `Singleton` instance.
+- All publicly facing classes (that offer functionality) now include an Interface.
+
+In reality, not much should affect the developer as most of these classes/methods are only being referenced internally by the `Client`. The removal of the Singleton aspect may offer some design changes for those leveraging this library by itself (as opposed to using it only in supabase-csharp.)
+
+```c#
+// What was:
+var client = Supabase.Realtime.Client.Initialize(options);
+await client.ConnectAsync()
+
+// Becomes:
+var client = new Client(options);
+await client.ConnectAsync()
+```
+
+---
+
 Realtime-csharp is written as a client library for [supabase/realtime](https://github.com/supabase/realtime).
 
 Documentation can be found [here](https://supabase-community.github.io/realtime-csharp/api/Supabase.Realtime.Client.html).

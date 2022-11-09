@@ -1,5 +1,14 @@
 ﻿# Changelog
 
+## 4.0.0 - 2022-11-08
+
+- Re: [#17](https://github.com/supabase-community/realtime-csharp/pull/17) Restructure Project to support Dependency Injection and Enable Nullity
+	- `Client` is no longer a singleton class.
+	- `Channel` has a new constructor that uses `ChannelOptions`
+	- `Channel.Parameters` has been changed in favor of `Channel.Options`
+	- `Channel` and `Push` are now directly dependent on having `Socket` and `SerializerSettings` passed in as opposed to referencing the `Singleton` instance.
+	- All publicly facing classes (that offer functionality) now include an Interface.
+
 ## 3.0.1 - 2022-05-28
 
 - Fixed deserialization of `DateTimes`
