@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.WebSockets;
+using System.Threading.Tasks;
 
 namespace Supabase.Realtime.Interfaces
 {
@@ -11,7 +12,7 @@ namespace Supabase.Realtime.Interfaces
         event EventHandler<SocketResponseEventArgs> OnMessage;
         event EventHandler<SocketStateChangedEventArgs> StateChanged;
 
-        void Connect();
+        Task Connect();
         void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "");
         string MakeMsgRef();
         void Push(SocketRequest data);

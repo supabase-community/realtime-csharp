@@ -278,7 +278,7 @@ namespace Supabase.Realtime
                     // time between executions.
                     await Task.Delay(options.ReconnectAfterInterval(tries++), reconnectTokenSource.Token);
 
-                    Connect();
+                    await Connect();
                 }
             }, reconnectTokenSource.Token);
 
