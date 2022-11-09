@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 4.0.1 - 2022-11-08
+
+- Bugfixes on previous release.
+
 ## 4.0.0 - 2022-11-08
 
 - Re: [#17](https://github.com/supabase-community/realtime-csharp/pull/17) Restructure Project to support Dependency Injection and Enable Nullity
