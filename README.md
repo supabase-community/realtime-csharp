@@ -47,7 +47,7 @@ which allow Users to be assured that a connection exists prior to interacting wi
 
 ```c#
 var endpoint = "ws://localhost:3000";
-client = Client.Initialize(endpoint);
+client = new Client(endpoint);
 
 await client.Connect();
 
