@@ -104,7 +104,7 @@ namespace Supabase.Realtime
         /// <summary>
         /// Connects to a socket server and registers event listeners.
         /// </summary>
-        public async void Connect()
+        public async Task Connect()
         {
             if (connection.IsRunning || hasConnectBeenCalled) return;
 

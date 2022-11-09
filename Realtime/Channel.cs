@@ -107,7 +107,7 @@ namespace Supabase.Realtime
         /// </summary>
         internal List<Push> buffer = new List<Push>();
 
-        private bool canPush => IsJoined;
+        private bool canPush => IsJoined && socket.IsConnected;
         private bool hasJoinedOnce = false;
         private Timer rejoinTimer;
         private bool isRejoining = false;
