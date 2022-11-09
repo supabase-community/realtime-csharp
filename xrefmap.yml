@@ -13,15 +13,12 @@ references:
   commentId: T:Supabase.Realtime.Channel
   fullName: Supabase.Realtime.Channel
   nameWithType: Channel
-- uid: Supabase.Realtime.Channel.#ctor(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
-  name: Channel(String, String, String, String, String, Dictionary<String, String>)
-  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel__ctor_System_String_System_String_System_String_System_String_System_String_Dictionary_System_String_System_String__
-  commentId: M:Supabase.Realtime.Channel.#ctor(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
-  name.vb: Channel(String, String, String, String, String, Dictionary(Of String, String))
-  fullName: Supabase.Realtime.Channel.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary<System.String, System.String>)
-  fullName.vb: Supabase.Realtime.Channel.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary(Of System.String, System.String))
-  nameWithType: Channel.Channel(String, String, String, String, String, Dictionary<String, String>)
-  nameWithType.vb: Channel.Channel(String, String, String, String, String, Dictionary(Of String, String))
+- uid: Supabase.Realtime.Channel.#ctor(Supabase.Realtime.Interfaces.IRealtimeSocket,Supabase.Realtime.ChannelOptions)
+  name: Channel(IRealtimeSocket, ChannelOptions)
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel__ctor_Supabase_Realtime_Interfaces_IRealtimeSocket_Supabase_Realtime_ChannelOptions_
+  commentId: M:Supabase.Realtime.Channel.#ctor(Supabase.Realtime.Interfaces.IRealtimeSocket,Supabase.Realtime.ChannelOptions)
+  fullName: Supabase.Realtime.Channel.Channel(Supabase.Realtime.Interfaces.IRealtimeSocket, Supabase.Realtime.ChannelOptions)
+  nameWithType: Channel.Channel(IRealtimeSocket, ChannelOptions)
 - uid: Supabase.Realtime.Channel.#ctor*
   name: Channel
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel__ctor_
@@ -179,12 +176,19 @@ references:
   commentId: E:Supabase.Realtime.Channel.OnUpdate
   fullName: Supabase.Realtime.Channel.OnUpdate
   nameWithType: Channel.OnUpdate
-- uid: Supabase.Realtime.Channel.Parameters
-  name: Parameters
-  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Parameters
-  commentId: F:Supabase.Realtime.Channel.Parameters
-  fullName: Supabase.Realtime.Channel.Parameters
-  nameWithType: Channel.Parameters
+- uid: Supabase.Realtime.Channel.Options
+  name: Options
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Options
+  commentId: P:Supabase.Realtime.Channel.Options
+  fullName: Supabase.Realtime.Channel.Options
+  nameWithType: Channel.Options
+- uid: Supabase.Realtime.Channel.Options*
+  name: Options
+  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Options_
+  commentId: Overload:Supabase.Realtime.Channel.Options
+  isSpec: "True"
+  fullName: Supabase.Realtime.Channel.Options
+  nameWithType: Channel.Options
 - uid: Supabase.Realtime.Channel.Push(System.String,System.Object,System.Int32)
   name: Push(String, Object, Int32)
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Push_System_String_System_Object_System_Int32_
@@ -211,19 +215,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.Rejoin
   nameWithType: Channel.Rejoin
-- uid: Supabase.Realtime.Channel.Socket
-  name: Socket
-  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Socket
-  commentId: P:Supabase.Realtime.Channel.Socket
-  fullName: Supabase.Realtime.Channel.Socket
-  nameWithType: Channel.Socket
-- uid: Supabase.Realtime.Channel.Socket*
-  name: Socket
-  href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_Socket_
-  commentId: Overload:Supabase.Realtime.Channel.Socket
-  isSpec: "True"
-  fullName: Supabase.Realtime.Channel.Socket
-  nameWithType: Channel.Socket
 - uid: Supabase.Realtime.Channel.State
   name: State
   href: api/Supabase.Realtime.Channel.html#Supabase_Realtime_Channel_State
@@ -282,6 +273,129 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.Unsubscribe
   nameWithType: Channel.Unsubscribe
+- uid: Supabase.Realtime.ChannelOptions
+  name: ChannelOptions
+  href: api/Supabase.Realtime.ChannelOptions.html
+  commentId: T:Supabase.Realtime.ChannelOptions
+  fullName: Supabase.Realtime.ChannelOptions
+  nameWithType: ChannelOptions
+- uid: Supabase.Realtime.ChannelOptions.#ctor(System.String,Supabase.Realtime.ClientOptions,JsonSerializerSettings)
+  name: ChannelOptions(String, ClientOptions, JsonSerializerSettings)
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions__ctor_System_String_Supabase_Realtime_ClientOptions_JsonSerializerSettings_
+  commentId: M:Supabase.Realtime.ChannelOptions.#ctor(System.String,Supabase.Realtime.ClientOptions,JsonSerializerSettings)
+  fullName: Supabase.Realtime.ChannelOptions.ChannelOptions(System.String, Supabase.Realtime.ClientOptions, JsonSerializerSettings)
+  nameWithType: ChannelOptions.ChannelOptions(String, ClientOptions, JsonSerializerSettings)
+- uid: Supabase.Realtime.ChannelOptions.#ctor*
+  name: ChannelOptions
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions__ctor_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.#ctor
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.ChannelOptions
+  nameWithType: ChannelOptions.ChannelOptions
+- uid: Supabase.Realtime.ChannelOptions.ClientOptions
+  name: ClientOptions
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_ClientOptions
+  commentId: P:Supabase.Realtime.ChannelOptions.ClientOptions
+  fullName: Supabase.Realtime.ChannelOptions.ClientOptions
+  nameWithType: ChannelOptions.ClientOptions
+- uid: Supabase.Realtime.ChannelOptions.ClientOptions*
+  name: ClientOptions
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_ClientOptions_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.ClientOptions
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.ClientOptions
+  nameWithType: ChannelOptions.ClientOptions
+- uid: Supabase.Realtime.ChannelOptions.Column
+  name: Column
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Column
+  commentId: P:Supabase.Realtime.ChannelOptions.Column
+  fullName: Supabase.Realtime.ChannelOptions.Column
+  nameWithType: ChannelOptions.Column
+- uid: Supabase.Realtime.ChannelOptions.Column*
+  name: Column
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Column_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.Column
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.Column
+  nameWithType: ChannelOptions.Column
+- uid: Supabase.Realtime.ChannelOptions.Database
+  name: Database
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Database
+  commentId: P:Supabase.Realtime.ChannelOptions.Database
+  fullName: Supabase.Realtime.ChannelOptions.Database
+  nameWithType: ChannelOptions.Database
+- uid: Supabase.Realtime.ChannelOptions.Database*
+  name: Database
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Database_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.Database
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.Database
+  nameWithType: ChannelOptions.Database
+- uid: Supabase.Realtime.ChannelOptions.Parameters
+  name: Parameters
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Parameters
+  commentId: P:Supabase.Realtime.ChannelOptions.Parameters
+  fullName: Supabase.Realtime.ChannelOptions.Parameters
+  nameWithType: ChannelOptions.Parameters
+- uid: Supabase.Realtime.ChannelOptions.Parameters*
+  name: Parameters
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Parameters_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.Parameters
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.Parameters
+  nameWithType: ChannelOptions.Parameters
+- uid: Supabase.Realtime.ChannelOptions.Schema
+  name: Schema
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Schema
+  commentId: P:Supabase.Realtime.ChannelOptions.Schema
+  fullName: Supabase.Realtime.ChannelOptions.Schema
+  nameWithType: ChannelOptions.Schema
+- uid: Supabase.Realtime.ChannelOptions.Schema*
+  name: Schema
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Schema_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.Schema
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.Schema
+  nameWithType: ChannelOptions.Schema
+- uid: Supabase.Realtime.ChannelOptions.SerializerSettings
+  name: SerializerSettings
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_SerializerSettings
+  commentId: P:Supabase.Realtime.ChannelOptions.SerializerSettings
+  fullName: Supabase.Realtime.ChannelOptions.SerializerSettings
+  nameWithType: ChannelOptions.SerializerSettings
+- uid: Supabase.Realtime.ChannelOptions.SerializerSettings*
+  name: SerializerSettings
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_SerializerSettings_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.SerializerSettings
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.SerializerSettings
+  nameWithType: ChannelOptions.SerializerSettings
+- uid: Supabase.Realtime.ChannelOptions.Table
+  name: Table
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Table
+  commentId: P:Supabase.Realtime.ChannelOptions.Table
+  fullName: Supabase.Realtime.ChannelOptions.Table
+  nameWithType: ChannelOptions.Table
+- uid: Supabase.Realtime.ChannelOptions.Table*
+  name: Table
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Table_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.Table
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.Table
+  nameWithType: ChannelOptions.Table
+- uid: Supabase.Realtime.ChannelOptions.Value
+  name: Value
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Value
+  commentId: P:Supabase.Realtime.ChannelOptions.Value
+  fullName: Supabase.Realtime.ChannelOptions.Value
+  nameWithType: ChannelOptions.Value
+- uid: Supabase.Realtime.ChannelOptions.Value*
+  name: Value
+  href: api/Supabase.Realtime.ChannelOptions.html#Supabase_Realtime_ChannelOptions_Value_
+  commentId: Overload:Supabase.Realtime.ChannelOptions.Value
+  isSpec: "True"
+  fullName: Supabase.Realtime.ChannelOptions.Value
+  nameWithType: ChannelOptions.Value
 - uid: Supabase.Realtime.ChannelStateChangedEventArgs
   name: ChannelStateChangedEventArgs
   href: api/Supabase.Realtime.ChannelStateChangedEventArgs.html
@@ -320,15 +434,28 @@ references:
   commentId: T:Supabase.Realtime.Client
   fullName: Supabase.Realtime.Client
   nameWithType: Client
-- uid: Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
-  name: Channel(String, String, String, String, String, Dictionary<String, String>)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_System_String_System_String_System_String_System_String_System_String_Dictionary_System_String_System_String__
-  commentId: M:Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String,Dictionary{System.String,System.String})
-  name.vb: Channel(String, String, String, String, String, Dictionary(Of String, String))
-  fullName: Supabase.Realtime.Client.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary<System.String, System.String>)
-  fullName.vb: Supabase.Realtime.Client.Channel(System.String, System.String, System.String, System.String, System.String, Dictionary(Of System.String, System.String))
-  nameWithType: Client.Channel(String, String, String, String, String, Dictionary<String, String>)
-  nameWithType.vb: Client.Channel(String, String, String, String, String, Dictionary(Of String, String))
+- uid: Supabase.Realtime.Client.#ctor(System.String,Supabase.Realtime.ClientOptions)
+  name: Client(String, ClientOptions)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client__ctor_System_String_Supabase_Realtime_ClientOptions_
+  commentId: M:Supabase.Realtime.Client.#ctor(System.String,Supabase.Realtime.ClientOptions)
+  fullName: Supabase.Realtime.Client.Client(System.String, Supabase.Realtime.ClientOptions)
+  nameWithType: Client.Client(String, ClientOptions)
+- uid: Supabase.Realtime.Client.#ctor*
+  name: Client
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client__ctor_
+  commentId: Overload:Supabase.Realtime.Client.#ctor
+  isSpec: "True"
+  fullName: Supabase.Realtime.Client.Client
+  nameWithType: Client.Client
+- uid: Supabase.Realtime.Client.Channel(System.String,System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{Dictionary{System.String,System.String}})
+  name: Channel(String, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<Dictionary<String, String>>)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_System_String_System_Nullable_System_String__System_Nullable_System_String__System_Nullable_System_String__System_Nullable_System_String__System_Nullable_Dictionary_System_String_System_String___
+  commentId: M:Supabase.Realtime.Client.Channel(System.String,System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{Dictionary{System.String,System.String}})
+  name.vb: Channel(String, Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of Dictionary(Of String, String)))
+  fullName: Supabase.Realtime.Client.Channel(System.String, System.Nullable<System.String>, System.Nullable<System.String>, System.Nullable<System.String>, System.Nullable<System.String>, System.Nullable<Dictionary<System.String, System.String>>)
+  fullName.vb: Supabase.Realtime.Client.Channel(System.String, System.Nullable(Of System.String), System.Nullable(Of System.String), System.Nullable(Of System.String), System.Nullable(Of System.String), System.Nullable(Of Dictionary(Of System.String, System.String)))
+  nameWithType: Client.Channel(String, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<Dictionary<String, String>>)
+  nameWithType.vb: Client.Channel(String, Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of Dictionary(Of String, String)))
 - uid: Supabase.Realtime.Client.Channel*
   name: Channel
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_
@@ -336,15 +463,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Channel
   nameWithType: Client.Channel
-- uid: Supabase.Realtime.Client.Connect(Action{Supabase.Realtime.Client})
-  name: Connect(Action<Client>)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_Action_Supabase_Realtime_Client__
-  commentId: M:Supabase.Realtime.Client.Connect(Action{Supabase.Realtime.Client})
-  name.vb: Connect(Action(Of Client))
-  fullName: Supabase.Realtime.Client.Connect(Action<Supabase.Realtime.Client>)
-  fullName.vb: Supabase.Realtime.Client.Connect(Action(Of Supabase.Realtime.Client))
-  nameWithType: Client.Connect(Action<Client>)
-  nameWithType.vb: Client.Connect(Action(Of Client))
+- uid: Supabase.Realtime.Client.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.Socket,Supabase.Realtime.Channel}}})
+  name: Connect(Nullable<Action<IRealtimeClient<Socket, Channel>>>)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_System_Nullable_Action_Supabase_Realtime_Interfaces_IRealtimeClient_Supabase_Realtime_Socket_Supabase_Realtime_Channel____
+  commentId: M:Supabase.Realtime.Client.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.Socket,Supabase.Realtime.Channel}}})
+  name.vb: Connect(Nullable(Of Action(Of IRealtimeClient(Of Socket, Channel))))
+  fullName: Supabase.Realtime.Client.Connect(System.Nullable<Action<Supabase.Realtime.Interfaces.IRealtimeClient<Supabase.Realtime.Socket, Supabase.Realtime.Channel>>>)
+  fullName.vb: Supabase.Realtime.Client.Connect(System.Nullable(Of Action(Of Supabase.Realtime.Interfaces.IRealtimeClient(Of Supabase.Realtime.Socket, Supabase.Realtime.Channel))))
+  nameWithType: Client.Connect(Nullable<Action<IRealtimeClient<Socket, Channel>>>)
+  nameWithType.vb: Client.Connect(Nullable(Of Action(Of IRealtimeClient(Of Socket, Channel))))
 - uid: Supabase.Realtime.Client.Connect*
   name: Connect
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_
@@ -378,32 +505,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Disconnect
   nameWithType: Client.Disconnect
-- uid: Supabase.Realtime.Client.Initialize(System.String,Supabase.Realtime.ClientOptions)
-  name: Initialize(String, ClientOptions)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Initialize_System_String_Supabase_Realtime_ClientOptions_
-  commentId: M:Supabase.Realtime.Client.Initialize(System.String,Supabase.Realtime.ClientOptions)
-  fullName: Supabase.Realtime.Client.Initialize(System.String, Supabase.Realtime.ClientOptions)
-  nameWithType: Client.Initialize(String, ClientOptions)
-- uid: Supabase.Realtime.Client.Initialize*
-  name: Initialize
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Initialize_
-  commentId: Overload:Supabase.Realtime.Client.Initialize
-  isSpec: "True"
-  fullName: Supabase.Realtime.Client.Initialize
-  nameWithType: Client.Initialize
-- uid: Supabase.Realtime.Client.Instance
-  name: Instance
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Instance
-  commentId: P:Supabase.Realtime.Client.Instance
-  fullName: Supabase.Realtime.Client.Instance
-  nameWithType: Client.Instance
-- uid: Supabase.Realtime.Client.Instance*
-  name: Instance
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Instance_
-  commentId: Overload:Supabase.Realtime.Client.Instance
-  isSpec: "True"
-  fullName: Supabase.Realtime.Client.Instance
-  nameWithType: Client.Instance
 - uid: Supabase.Realtime.Client.OnClose
   name: OnClose
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_OnClose
@@ -822,12 +923,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Converters.IntArrayConverter.CanWrite
   nameWithType: IntArrayConverter.CanWrite
-- uid: Supabase.Realtime.Converters.IntArrayConverter.ReadJson(JsonReader,Type,System.Object,JsonSerializer)
-  name: ReadJson(JsonReader, Type, Object, JsonSerializer)
-  href: api/Supabase.Realtime.Converters.IntArrayConverter.html#Supabase_Realtime_Converters_IntArrayConverter_ReadJson_JsonReader_Type_System_Object_JsonSerializer_
-  commentId: M:Supabase.Realtime.Converters.IntArrayConverter.ReadJson(JsonReader,Type,System.Object,JsonSerializer)
-  fullName: Supabase.Realtime.Converters.IntArrayConverter.ReadJson(JsonReader, Type, System.Object, JsonSerializer)
-  nameWithType: IntArrayConverter.ReadJson(JsonReader, Type, Object, JsonSerializer)
+- uid: Supabase.Realtime.Converters.IntArrayConverter.ReadJson(JsonReader,Type,System.Nullable{System.Object},JsonSerializer)
+  name: ReadJson(JsonReader, Type, Nullable<Object>, JsonSerializer)
+  href: api/Supabase.Realtime.Converters.IntArrayConverter.html#Supabase_Realtime_Converters_IntArrayConverter_ReadJson_JsonReader_Type_System_Nullable_System_Object__JsonSerializer_
+  commentId: M:Supabase.Realtime.Converters.IntArrayConverter.ReadJson(JsonReader,Type,System.Nullable{System.Object},JsonSerializer)
+  name.vb: ReadJson(JsonReader, Type, Nullable(Of Object), JsonSerializer)
+  fullName: Supabase.Realtime.Converters.IntArrayConverter.ReadJson(JsonReader, Type, System.Nullable<System.Object>, JsonSerializer)
+  fullName.vb: Supabase.Realtime.Converters.IntArrayConverter.ReadJson(JsonReader, Type, System.Nullable(Of System.Object), JsonSerializer)
+  nameWithType: IntArrayConverter.ReadJson(JsonReader, Type, Nullable<Object>, JsonSerializer)
+  nameWithType.vb: IntArrayConverter.ReadJson(JsonReader, Type, Nullable(Of Object), JsonSerializer)
 - uid: Supabase.Realtime.Converters.IntArrayConverter.ReadJson*
   name: ReadJson
   href: api/Supabase.Realtime.Converters.IntArrayConverter.html#Supabase_Realtime_Converters_IntArrayConverter_ReadJson_
@@ -835,12 +939,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Converters.IntArrayConverter.ReadJson
   nameWithType: IntArrayConverter.ReadJson
-- uid: Supabase.Realtime.Converters.IntArrayConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
-  name: WriteJson(JsonWriter, Object, JsonSerializer)
-  href: api/Supabase.Realtime.Converters.IntArrayConverter.html#Supabase_Realtime_Converters_IntArrayConverter_WriteJson_JsonWriter_System_Object_JsonSerializer_
-  commentId: M:Supabase.Realtime.Converters.IntArrayConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
-  fullName: Supabase.Realtime.Converters.IntArrayConverter.WriteJson(JsonWriter, System.Object, JsonSerializer)
-  nameWithType: IntArrayConverter.WriteJson(JsonWriter, Object, JsonSerializer)
+- uid: Supabase.Realtime.Converters.IntArrayConverter.WriteJson(JsonWriter,System.Nullable{System.Object},JsonSerializer)
+  name: WriteJson(JsonWriter, Nullable<Object>, JsonSerializer)
+  href: api/Supabase.Realtime.Converters.IntArrayConverter.html#Supabase_Realtime_Converters_IntArrayConverter_WriteJson_JsonWriter_System_Nullable_System_Object__JsonSerializer_
+  commentId: M:Supabase.Realtime.Converters.IntArrayConverter.WriteJson(JsonWriter,System.Nullable{System.Object},JsonSerializer)
+  name.vb: WriteJson(JsonWriter, Nullable(Of Object), JsonSerializer)
+  fullName: Supabase.Realtime.Converters.IntArrayConverter.WriteJson(JsonWriter, System.Nullable<System.Object>, JsonSerializer)
+  fullName.vb: Supabase.Realtime.Converters.IntArrayConverter.WriteJson(JsonWriter, System.Nullable(Of System.Object), JsonSerializer)
+  nameWithType: IntArrayConverter.WriteJson(JsonWriter, Nullable<Object>, JsonSerializer)
+  nameWithType.vb: IntArrayConverter.WriteJson(JsonWriter, Nullable(Of Object), JsonSerializer)
 - uid: Supabase.Realtime.Converters.IntArrayConverter.WriteJson*
   name: WriteJson
   href: api/Supabase.Realtime.Converters.IntArrayConverter.html#Supabase_Realtime_Converters_IntArrayConverter_WriteJson_
@@ -893,12 +1000,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Converters.StringArrayConverter.CanWrite
   nameWithType: StringArrayConverter.CanWrite
-- uid: Supabase.Realtime.Converters.StringArrayConverter.ReadJson(JsonReader,Type,System.Object,JsonSerializer)
-  name: ReadJson(JsonReader, Type, Object, JsonSerializer)
-  href: api/Supabase.Realtime.Converters.StringArrayConverter.html#Supabase_Realtime_Converters_StringArrayConverter_ReadJson_JsonReader_Type_System_Object_JsonSerializer_
-  commentId: M:Supabase.Realtime.Converters.StringArrayConverter.ReadJson(JsonReader,Type,System.Object,JsonSerializer)
-  fullName: Supabase.Realtime.Converters.StringArrayConverter.ReadJson(JsonReader, Type, System.Object, JsonSerializer)
-  nameWithType: StringArrayConverter.ReadJson(JsonReader, Type, Object, JsonSerializer)
+- uid: Supabase.Realtime.Converters.StringArrayConverter.ReadJson(JsonReader,Type,System.Nullable{System.Object},JsonSerializer)
+  name: ReadJson(JsonReader, Type, Nullable<Object>, JsonSerializer)
+  href: api/Supabase.Realtime.Converters.StringArrayConverter.html#Supabase_Realtime_Converters_StringArrayConverter_ReadJson_JsonReader_Type_System_Nullable_System_Object__JsonSerializer_
+  commentId: M:Supabase.Realtime.Converters.StringArrayConverter.ReadJson(JsonReader,Type,System.Nullable{System.Object},JsonSerializer)
+  name.vb: ReadJson(JsonReader, Type, Nullable(Of Object), JsonSerializer)
+  fullName: Supabase.Realtime.Converters.StringArrayConverter.ReadJson(JsonReader, Type, System.Nullable<System.Object>, JsonSerializer)
+  fullName.vb: Supabase.Realtime.Converters.StringArrayConverter.ReadJson(JsonReader, Type, System.Nullable(Of System.Object), JsonSerializer)
+  nameWithType: StringArrayConverter.ReadJson(JsonReader, Type, Nullable<Object>, JsonSerializer)
+  nameWithType.vb: StringArrayConverter.ReadJson(JsonReader, Type, Nullable(Of Object), JsonSerializer)
 - uid: Supabase.Realtime.Converters.StringArrayConverter.ReadJson*
   name: ReadJson
   href: api/Supabase.Realtime.Converters.StringArrayConverter.html#Supabase_Realtime_Converters_StringArrayConverter_ReadJson_
@@ -906,12 +1016,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Converters.StringArrayConverter.ReadJson
   nameWithType: StringArrayConverter.ReadJson
-- uid: Supabase.Realtime.Converters.StringArrayConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
-  name: WriteJson(JsonWriter, Object, JsonSerializer)
-  href: api/Supabase.Realtime.Converters.StringArrayConverter.html#Supabase_Realtime_Converters_StringArrayConverter_WriteJson_JsonWriter_System_Object_JsonSerializer_
-  commentId: M:Supabase.Realtime.Converters.StringArrayConverter.WriteJson(JsonWriter,System.Object,JsonSerializer)
-  fullName: Supabase.Realtime.Converters.StringArrayConverter.WriteJson(JsonWriter, System.Object, JsonSerializer)
-  nameWithType: StringArrayConverter.WriteJson(JsonWriter, Object, JsonSerializer)
+- uid: Supabase.Realtime.Converters.StringArrayConverter.WriteJson(JsonWriter,System.Nullable{System.Object},JsonSerializer)
+  name: WriteJson(JsonWriter, Nullable<Object>, JsonSerializer)
+  href: api/Supabase.Realtime.Converters.StringArrayConverter.html#Supabase_Realtime_Converters_StringArrayConverter_WriteJson_JsonWriter_System_Nullable_System_Object__JsonSerializer_
+  commentId: M:Supabase.Realtime.Converters.StringArrayConverter.WriteJson(JsonWriter,System.Nullable{System.Object},JsonSerializer)
+  name.vb: WriteJson(JsonWriter, Nullable(Of Object), JsonSerializer)
+  fullName: Supabase.Realtime.Converters.StringArrayConverter.WriteJson(JsonWriter, System.Nullable<System.Object>, JsonSerializer)
+  fullName.vb: Supabase.Realtime.Converters.StringArrayConverter.WriteJson(JsonWriter, System.Nullable(Of System.Object), JsonSerializer)
+  nameWithType: StringArrayConverter.WriteJson(JsonWriter, Nullable<Object>, JsonSerializer)
+  nameWithType.vb: StringArrayConverter.WriteJson(JsonWriter, Nullable(Of Object), JsonSerializer)
 - uid: Supabase.Realtime.Converters.StringArrayConverter.WriteJson*
   name: WriteJson
   href: api/Supabase.Realtime.Converters.StringArrayConverter.html#Supabase_Realtime_Converters_StringArrayConverter_WriteJson_
@@ -919,6 +1032,825 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Converters.StringArrayConverter.WriteJson
   nameWithType: StringArrayConverter.WriteJson
+- uid: Supabase.Realtime.Interfaces
+  name: Supabase.Realtime.Interfaces
+  href: api/Supabase.Realtime.Interfaces.html
+  commentId: N:Supabase.Realtime.Interfaces
+  fullName: Supabase.Realtime.Interfaces
+  nameWithType: Supabase.Realtime.Interfaces
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel
+  name: IRealtimeChannel
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeChannel
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel
+  nameWithType: IRealtimeChannel
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.HasJoinedOnce
+  name: HasJoinedOnce
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_HasJoinedOnce
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.HasJoinedOnce
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.HasJoinedOnce
+  nameWithType: IRealtimeChannel.HasJoinedOnce
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.HasJoinedOnce*
+  name: HasJoinedOnce
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_HasJoinedOnce_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.HasJoinedOnce
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.HasJoinedOnce
+  nameWithType: IRealtimeChannel.HasJoinedOnce
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsClosed
+  name: IsClosed
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsClosed
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.IsClosed
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsClosed
+  nameWithType: IRealtimeChannel.IsClosed
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsClosed*
+  name: IsClosed
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsClosed_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.IsClosed
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsClosed
+  nameWithType: IRealtimeChannel.IsClosed
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsErrored
+  name: IsErrored
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsErrored
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.IsErrored
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsErrored
+  nameWithType: IRealtimeChannel.IsErrored
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsErrored*
+  name: IsErrored
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsErrored_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.IsErrored
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsErrored
+  nameWithType: IRealtimeChannel.IsErrored
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoined
+  name: IsJoined
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsJoined
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoined
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoined
+  nameWithType: IRealtimeChannel.IsJoined
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoined*
+  name: IsJoined
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsJoined_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoined
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoined
+  nameWithType: IRealtimeChannel.IsJoined
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoining
+  name: IsJoining
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsJoining
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoining
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoining
+  nameWithType: IRealtimeChannel.IsJoining
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoining*
+  name: IsJoining
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsJoining_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoining
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsJoining
+  nameWithType: IRealtimeChannel.IsJoining
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsLeaving
+  name: IsLeaving
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsLeaving
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.IsLeaving
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsLeaving
+  nameWithType: IRealtimeChannel.IsLeaving
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.IsLeaving*
+  name: IsLeaving
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_IsLeaving_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.IsLeaving
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.IsLeaving
+  nameWithType: IRealtimeChannel.IsLeaving
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnClose
+  name: OnClose
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnClose
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeChannel.OnClose
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnClose
+  nameWithType: IRealtimeChannel.OnClose
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnDelete
+  name: OnDelete
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnDelete
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeChannel.OnDelete
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnDelete
+  nameWithType: IRealtimeChannel.OnDelete
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnError
+  name: OnError
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnError
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeChannel.OnError
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnError
+  nameWithType: IRealtimeChannel.OnError
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnInsert
+  name: OnInsert
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnInsert
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeChannel.OnInsert
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnInsert
+  nameWithType: IRealtimeChannel.OnInsert
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnMessage
+  name: OnMessage
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnMessage
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeChannel.OnMessage
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnMessage
+  nameWithType: IRealtimeChannel.OnMessage
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnUpdate
+  name: OnUpdate
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnUpdate
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeChannel.OnUpdate
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnUpdate
+  nameWithType: IRealtimeChannel.OnUpdate
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Options
+  name: Options
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Options
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.Options
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Options
+  nameWithType: IRealtimeChannel.Options
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Options*
+  name: Options
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Options_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.Options
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Options
+  nameWithType: IRealtimeChannel.Options
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Push(System.String,System.Object,System.Int32)
+  name: Push(String, Object, Int32)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Push_System_String_System_Object_System_Int32_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeChannel.Push(System.String,System.Object,System.Int32)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Push(System.String, System.Object, System.Int32)
+  nameWithType: IRealtimeChannel.Push(String, Object, Int32)
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Push*
+  name: Push
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Push_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.Push
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Push
+  nameWithType: IRealtimeChannel.Push
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Rejoin(System.Int32)
+  name: Rejoin(Int32)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Rejoin_System_Int32_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeChannel.Rejoin(System.Int32)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Rejoin(System.Int32)
+  nameWithType: IRealtimeChannel.Rejoin(Int32)
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Rejoin*
+  name: Rejoin
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Rejoin_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.Rejoin
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Rejoin
+  nameWithType: IRealtimeChannel.Rejoin
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.State
+  name: State
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_State
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.State
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.State
+  nameWithType: IRealtimeChannel.State
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.State*
+  name: State
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_State_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.State
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.State
+  nameWithType: IRealtimeChannel.State
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.StateChanged
+  name: StateChanged
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_StateChanged
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeChannel.StateChanged
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.StateChanged
+  nameWithType: IRealtimeChannel.StateChanged
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Subscribe(System.Int32)
+  name: Subscribe(Int32)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Subscribe_System_Int32_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeChannel.Subscribe(System.Int32)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Subscribe(System.Int32)
+  nameWithType: IRealtimeChannel.Subscribe(Int32)
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Subscribe*
+  name: Subscribe
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Subscribe_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.Subscribe
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Subscribe
+  nameWithType: IRealtimeChannel.Subscribe
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Topic
+  name: Topic
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Topic
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeChannel.Topic
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Topic
+  nameWithType: IRealtimeChannel.Topic
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Topic*
+  name: Topic
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Topic_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.Topic
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Topic
+  nameWithType: IRealtimeChannel.Topic
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Unsubscribe
+  name: Unsubscribe()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Unsubscribe
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeChannel.Unsubscribe
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Unsubscribe()
+  nameWithType: IRealtimeChannel.Unsubscribe()
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Unsubscribe*
+  name: Unsubscribe
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Unsubscribe_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.Unsubscribe
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Unsubscribe
+  nameWithType: IRealtimeChannel.Unsubscribe
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2
+  name: IRealtimeClient<TSocket, TChannel>
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeClient`2
+  name.vb: IRealtimeClient(Of TSocket, TChannel)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel)
+  nameWithType: IRealtimeClient<TSocket, TChannel>
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel(System.String,System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{Dictionary{System.String,System.String}})
+  name: Channel(String, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<Dictionary<String, String>>)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Channel_System_String_System_Nullable_System_String__System_Nullable_System_String__System_Nullable_System_String__System_Nullable_System_String__System_Nullable_Dictionary_System_String_System_String___
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel(System.String,System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{System.String},System.Nullable{Dictionary{System.String,System.String}})
+  name.vb: Channel(String, Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of Dictionary(Of String, String)))
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Channel(System.String, System.Nullable<System.String>, System.Nullable<System.String>, System.Nullable<System.String>, System.Nullable<System.String>, System.Nullable<Dictionary<System.String, System.String>>)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Channel(System.String, System.Nullable(Of System.String), System.Nullable(Of System.String), System.Nullable(Of System.String), System.Nullable(Of System.String), System.Nullable(Of Dictionary(Of System.String, System.String)))
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Channel(String, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<String>, Nullable<Dictionary<String, String>>)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Channel(String, Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of String), Nullable(Of Dictionary(Of String, String)))
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel*
+  name: Channel
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Channel_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Channel
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Channel
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Channel
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Channel
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}}})
+  name: Connect(Nullable<Action<IRealtimeClient<TSocket, TChannel>>>)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Connect_System_Nullable_Action_Supabase_Realtime_Interfaces_IRealtimeClient__0__1____
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}}})
+  name.vb: Connect(Nullable(Of Action(Of IRealtimeClient(Of TSocket, TChannel))))
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Connect(System.Nullable<Action<Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>>>)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Connect(System.Nullable(Of Action(Of Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel))))
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Connect(Nullable<Action<IRealtimeClient<TSocket, TChannel>>>)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Connect(Nullable(Of Action(Of IRealtimeClient(Of TSocket, TChannel))))
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect*
+  name: Connect
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Connect_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Connect
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Connect
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Connect
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Connect
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ConnectAsync
+  name: ConnectAsync()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ConnectAsync
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.ConnectAsync
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ConnectAsync()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ConnectAsync()
+  nameWithType: IRealtimeClient<TSocket, TChannel>.ConnectAsync()
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ConnectAsync()
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ConnectAsync*
+  name: ConnectAsync
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ConnectAsync_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.ConnectAsync
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ConnectAsync
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ConnectAsync
+  nameWithType: IRealtimeClient<TSocket, TChannel>.ConnectAsync
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ConnectAsync
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Disconnect(WebSocketCloseStatus,System.String)
+  name: Disconnect(WebSocketCloseStatus, String)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Disconnect_WebSocketCloseStatus_System_String_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.Disconnect(WebSocketCloseStatus,System.String)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Disconnect(WebSocketCloseStatus, System.String)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Disconnect(WebSocketCloseStatus, System.String)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Disconnect(WebSocketCloseStatus, String)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Disconnect(WebSocketCloseStatus, String)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Disconnect*
+  name: Disconnect
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Disconnect_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.Disconnect
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Disconnect
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Disconnect
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Disconnect
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Disconnect
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.OnClose
+  name: OnClose
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_OnClose
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeClient`2.OnClose
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.OnClose
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).OnClose
+  nameWithType: IRealtimeClient<TSocket, TChannel>.OnClose
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).OnClose
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.OnError
+  name: OnError
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_OnError
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeClient`2.OnError
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.OnError
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).OnError
+  nameWithType: IRealtimeClient<TSocket, TChannel>.OnError
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).OnError
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.OnMessage
+  name: OnMessage
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_OnMessage
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeClient`2.OnMessage
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.OnMessage
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).OnMessage
+  nameWithType: IRealtimeClient<TSocket, TChannel>.OnMessage
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).OnMessage
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.OnOpen
+  name: OnOpen
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_OnOpen
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeClient`2.OnOpen
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.OnOpen
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).OnOpen
+  nameWithType: IRealtimeClient<TSocket, TChannel>.OnOpen
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).OnOpen
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Options
+  name: Options
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Options
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeClient`2.Options
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Options
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Options
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Options
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Options
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Options*
+  name: Options
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Options_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.Options
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Options
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Options
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Options
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Options
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Remove(`1)
+  name: Remove(TChannel)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Remove__1_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.Remove(`1)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Remove(TChannel)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Remove(TChannel)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Remove(TChannel)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Remove(TChannel)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Remove*
+  name: Remove
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Remove_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.Remove
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Remove
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Remove
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Remove
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Remove
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.SerializerSettings
+  name: SerializerSettings
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_SerializerSettings
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeClient`2.SerializerSettings
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SerializerSettings
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SerializerSettings
+  nameWithType: IRealtimeClient<TSocket, TChannel>.SerializerSettings
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).SerializerSettings
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.SerializerSettings*
+  name: SerializerSettings
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_SerializerSettings_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.SerializerSettings
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SerializerSettings
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SerializerSettings
+  nameWithType: IRealtimeClient<TSocket, TChannel>.SerializerSettings
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).SerializerSettings
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.SetAuth(System.String)
+  name: SetAuth(String)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_SetAuth_System_String_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.SetAuth(System.String)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SetAuth(System.String)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SetAuth(System.String)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.SetAuth(String)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).SetAuth(String)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.SetAuth*
+  name: SetAuth
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_SetAuth_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.SetAuth
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SetAuth
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SetAuth
+  nameWithType: IRealtimeClient<TSocket, TChannel>.SetAuth
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).SetAuth
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Socket
+  name: Socket
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Socket
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeClient`2.Socket
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Socket
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Socket
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Socket
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Socket
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Socket*
+  name: Socket
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Socket_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.Socket
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Socket
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Socket
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Socket
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Socket
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Subscriptions
+  name: Subscriptions
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Subscriptions
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeClient`2.Subscriptions
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Subscriptions
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Subscriptions
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Subscriptions
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Subscriptions
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Subscriptions*
+  name: Subscriptions
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Subscriptions_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.Subscriptions
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Subscriptions
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Subscriptions
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Subscriptions
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Subscriptions
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2
+  name: IRealtimePush<TChannel, TSocketResponse>
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimePush`2
+  name.vb: IRealtimePush(Of TChannel, TSocketResponse)
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse)
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse)
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Channel
+  name: Channel
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Channel
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimePush`2.Channel
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Channel
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Channel
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Channel
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Channel
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Channel*
+  name: Channel
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Channel_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.Channel
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Channel
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Channel
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Channel
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Channel
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.EventName
+  name: EventName
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_EventName
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimePush`2.EventName
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.EventName
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).EventName
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.EventName
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).EventName
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.EventName*
+  name: EventName
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_EventName_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.EventName
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.EventName
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).EventName
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.EventName
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).EventName
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.IsSent
+  name: IsSent
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_IsSent
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimePush`2.IsSent
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.IsSent
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).IsSent
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.IsSent
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).IsSent
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.IsSent*
+  name: IsSent
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_IsSent_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.IsSent
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.IsSent
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).IsSent
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.IsSent
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).IsSent
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Message
+  name: Message
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Message
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimePush`2.Message
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Message
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Message
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Message
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Message
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Message*
+  name: Message
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Message_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.Message
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Message
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Message
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Message
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Message
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.OnMessage
+  name: OnMessage
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_OnMessage
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimePush`2.OnMessage
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.OnMessage
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).OnMessage
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.OnMessage
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).OnMessage
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.OnTimeout
+  name: OnTimeout
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_OnTimeout
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimePush`2.OnTimeout
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.OnTimeout
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).OnTimeout
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.OnTimeout
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).OnTimeout
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Payload
+  name: Payload
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Payload
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimePush`2.Payload
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Payload
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Payload
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Payload
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Payload
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Payload*
+  name: Payload
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Payload_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.Payload
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Payload
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Payload
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Payload
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Payload
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Ref
+  name: Ref
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Ref
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimePush`2.Ref
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Ref
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Ref
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Ref
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Ref
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Ref*
+  name: Ref
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Ref_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.Ref
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Ref
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Ref
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Ref
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Ref
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Resend(System.Int32)
+  name: Resend(Int32)
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Resend_System_Int32_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.Resend(System.Int32)
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Resend(System.Int32)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Resend(System.Int32)
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Resend(Int32)
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Resend(Int32)
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Resend*
+  name: Resend
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Resend_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.Resend
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Resend
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Resend
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Resend
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Resend
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Response
+  name: Response
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Response
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimePush`2.Response
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Response
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Response
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Response
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Response
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Response*
+  name: Response
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Response_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.Response
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Response
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Response
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Response
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Response
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Send
+  name: Send()
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Send
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.Send
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Send()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Send()
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Send()
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Send()
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Send*
+  name: Send
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Send_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.Send
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.Send
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Send
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.Send
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Send
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket
+  name: IRealtimeSocket
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeSocket
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket
+  nameWithType: IRealtimeSocket
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.Connect
+  name: Connect()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_Connect
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.Connect
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Connect()
+  nameWithType: IRealtimeSocket.Connect()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.Connect*
+  name: Connect
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_Connect_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.Connect
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Connect
+  nameWithType: IRealtimeSocket.Connect
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.Disconnect(WebSocketCloseStatus,System.String)
+  name: Disconnect(WebSocketCloseStatus, String)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_Disconnect_WebSocketCloseStatus_System_String_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.Disconnect(WebSocketCloseStatus,System.String)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Disconnect(WebSocketCloseStatus, System.String)
+  nameWithType: IRealtimeSocket.Disconnect(WebSocketCloseStatus, String)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.Disconnect*
+  name: Disconnect
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_Disconnect_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.Disconnect
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Disconnect
+  nameWithType: IRealtimeSocket.Disconnect
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.IsConnected
+  name: IsConnected
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_IsConnected
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeSocket.IsConnected
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.IsConnected
+  nameWithType: IRealtimeSocket.IsConnected
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.IsConnected*
+  name: IsConnected
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_IsConnected_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.IsConnected
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.IsConnected
+  nameWithType: IRealtimeSocket.IsConnected
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.MakeMsgRef
+  name: MakeMsgRef()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_MakeMsgRef
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.MakeMsgRef
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.MakeMsgRef()
+  nameWithType: IRealtimeSocket.MakeMsgRef()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.MakeMsgRef*
+  name: MakeMsgRef
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_MakeMsgRef_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.MakeMsgRef
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.MakeMsgRef
+  nameWithType: IRealtimeSocket.MakeMsgRef
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.OnHeartbeat
+  name: OnHeartbeat
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_OnHeartbeat
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeSocket.OnHeartbeat
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.OnHeartbeat
+  nameWithType: IRealtimeSocket.OnHeartbeat
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.OnMessage
+  name: OnMessage
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_OnMessage
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeSocket.OnMessage
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.OnMessage
+  nameWithType: IRealtimeSocket.OnMessage
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.Push(Supabase.Realtime.SocketRequest)
+  name: Push(SocketRequest)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_Push_Supabase_Realtime_SocketRequest_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.Push(Supabase.Realtime.SocketRequest)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Push(Supabase.Realtime.SocketRequest)
+  nameWithType: IRealtimeSocket.Push(SocketRequest)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.Push*
+  name: Push
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_Push_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.Push
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Push
+  nameWithType: IRealtimeSocket.Push
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName(System.String)
+  name: ReplyEventName(String)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ReplyEventName_System_String_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName(System.String)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName(System.String)
+  nameWithType: IRealtimeSocket.ReplyEventName(String)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName*
+  name: ReplyEventName
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ReplyEventName_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName
+  nameWithType: IRealtimeSocket.ReplyEventName
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.StateChanged
+  name: StateChanged
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_StateChanged
+  commentId: E:Supabase.Realtime.Interfaces.IRealtimeSocket.StateChanged
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.StateChanged
+  nameWithType: IRealtimeSocket.StateChanged
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse
+  name: IRealtimeSocketResponse
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeSocketResponse
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse
+  nameWithType: IRealtimeSocketResponse
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse._event
+  name: _event
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse__event
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeSocketResponse._event
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse._event
+  nameWithType: IRealtimeSocketResponse._event
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse._event*
+  name: _event
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse__event_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocketResponse._event
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse._event
+  nameWithType: IRealtimeSocketResponse._event
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Event
+  name: Event
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Event
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Event
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Event
+  nameWithType: IRealtimeSocketResponse.Event
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Event*
+  name: Event
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Event_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Event
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Event
+  nameWithType: IRealtimeSocketResponse.Event
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Model*
+  name: Model
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Model_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Model
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Model
+  nameWithType: IRealtimeSocketResponse.Model
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Model``1
+  name: Model<T>()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Model__1
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Model``1
+  name.vb: Model(Of T)()
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Model<T>()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Model(Of T)()
+  nameWithType: IRealtimeSocketResponse.Model<T>()
+  nameWithType.vb: IRealtimeSocketResponse.Model(Of T)()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.OldModel*
+  name: OldModel
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_OldModel_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.OldModel
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.OldModel
+  nameWithType: IRealtimeSocketResponse.OldModel
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.OldModel``1
+  name: OldModel<T>()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_OldModel__1
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.OldModel``1
+  name.vb: OldModel(Of T)()
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.OldModel<T>()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.OldModel(Of T)()
+  nameWithType: IRealtimeSocketResponse.OldModel<T>()
+  nameWithType.vb: IRealtimeSocketResponse.OldModel(Of T)()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Payload
+  name: Payload
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Payload
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Payload
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Payload
+  nameWithType: IRealtimeSocketResponse.Payload
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Payload*
+  name: Payload
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Payload_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Payload
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Payload
+  nameWithType: IRealtimeSocketResponse.Payload
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Ref
+  name: Ref
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Ref
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Ref
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Ref
+  nameWithType: IRealtimeSocketResponse.Ref
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Ref*
+  name: Ref
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Ref_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Ref
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Ref
+  nameWithType: IRealtimeSocketResponse.Ref
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Topic
+  name: Topic
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Topic
+  commentId: P:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Topic
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Topic
+  nameWithType: IRealtimeSocketResponse.Topic
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Topic*
+  name: Topic
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html#Supabase_Realtime_Interfaces_IRealtimeSocketResponse_Topic_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Topic
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocketResponse.Topic
+  nameWithType: IRealtimeSocketResponse.Topic
 - uid: Supabase.Realtime.PheonixResponse
   name: PheonixResponse
   href: api/Supabase.Realtime.PheonixResponse.html
@@ -943,12 +1875,15 @@ references:
   commentId: T:Supabase.Realtime.Push
   fullName: Supabase.Realtime.Push
   nameWithType: Push
-- uid: Supabase.Realtime.Push.#ctor(Supabase.Realtime.Channel,System.String,System.Object,System.Int32)
-  name: Push(Channel, String, Object, Int32)
-  href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push__ctor_Supabase_Realtime_Channel_System_String_System_Object_System_Int32_
-  commentId: M:Supabase.Realtime.Push.#ctor(Supabase.Realtime.Channel,System.String,System.Object,System.Int32)
-  fullName: Supabase.Realtime.Push.Push(Supabase.Realtime.Channel, System.String, System.Object, System.Int32)
-  nameWithType: Push.Push(Channel, String, Object, Int32)
+- uid: Supabase.Realtime.Push.#ctor(Supabase.Realtime.Interfaces.IRealtimeSocket,Supabase.Realtime.Channel,System.String,System.Nullable{System.Object},System.Int32)
+  name: Push(IRealtimeSocket, Channel, String, Nullable<Object>, Int32)
+  href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push__ctor_Supabase_Realtime_Interfaces_IRealtimeSocket_Supabase_Realtime_Channel_System_String_System_Nullable_System_Object__System_Int32_
+  commentId: M:Supabase.Realtime.Push.#ctor(Supabase.Realtime.Interfaces.IRealtimeSocket,Supabase.Realtime.Channel,System.String,System.Nullable{System.Object},System.Int32)
+  name.vb: Push(IRealtimeSocket, Channel, String, Nullable(Of Object), Int32)
+  fullName: Supabase.Realtime.Push.Push(Supabase.Realtime.Interfaces.IRealtimeSocket, Supabase.Realtime.Channel, System.String, System.Nullable<System.Object>, System.Int32)
+  fullName.vb: Supabase.Realtime.Push.Push(Supabase.Realtime.Interfaces.IRealtimeSocket, Supabase.Realtime.Channel, System.String, System.Nullable(Of System.Object), System.Int32)
+  nameWithType: Push.Push(IRealtimeSocket, Channel, String, Nullable<Object>, Int32)
+  nameWithType.vb: Push.Push(IRealtimeSocket, Channel, String, Nullable(Of Object), Int32)
 - uid: Supabase.Realtime.Push.#ctor*
   name: Push
   href: api/Supabase.Realtime.Push.html#Supabase_Realtime_Push__ctor_
@@ -1097,12 +2032,12 @@ references:
   commentId: T:Supabase.Realtime.Socket
   fullName: Supabase.Realtime.Socket
   nameWithType: Socket
-- uid: Supabase.Realtime.Socket.#ctor(System.String,Supabase.Realtime.ClientOptions)
-  name: Socket(String, ClientOptions)
-  href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket__ctor_System_String_Supabase_Realtime_ClientOptions_
-  commentId: M:Supabase.Realtime.Socket.#ctor(System.String,Supabase.Realtime.ClientOptions)
-  fullName: Supabase.Realtime.Socket.Socket(System.String, Supabase.Realtime.ClientOptions)
-  nameWithType: Socket.Socket(String, ClientOptions)
+- uid: Supabase.Realtime.Socket.#ctor(System.String,Supabase.Realtime.ClientOptions,JsonSerializerSettings)
+  name: Socket(String, ClientOptions, JsonSerializerSettings)
+  href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket__ctor_System_String_Supabase_Realtime_ClientOptions_JsonSerializerSettings_
+  commentId: M:Supabase.Realtime.Socket.#ctor(System.String,Supabase.Realtime.ClientOptions,JsonSerializerSettings)
+  fullName: Supabase.Realtime.Socket.Socket(System.String, Supabase.Realtime.ClientOptions, JsonSerializerSettings)
+  nameWithType: Socket.Socket(String, ClientOptions, JsonSerializerSettings)
 - uid: Supabase.Realtime.Socket.#ctor*
   name: Socket
   href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket__ctor_
@@ -1149,6 +2084,25 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Socket.IsConnected
   nameWithType: Socket.IsConnected
+- uid: Supabase.Realtime.Socket.MakeMsgRef
+  name: MakeMsgRef()
+  href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_MakeMsgRef
+  commentId: M:Supabase.Realtime.Socket.MakeMsgRef
+  fullName: Supabase.Realtime.Socket.MakeMsgRef()
+  nameWithType: Socket.MakeMsgRef()
+- uid: Supabase.Realtime.Socket.MakeMsgRef*
+  name: MakeMsgRef
+  href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_MakeMsgRef_
+  commentId: Overload:Supabase.Realtime.Socket.MakeMsgRef
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.MakeMsgRef
+  nameWithType: Socket.MakeMsgRef
+- uid: Supabase.Realtime.Socket.OnHeartbeat
+  name: OnHeartbeat
+  href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_OnHeartbeat
+  commentId: E:Supabase.Realtime.Socket.OnHeartbeat
+  fullName: Supabase.Realtime.Socket.OnHeartbeat
+  nameWithType: Socket.OnHeartbeat
 - uid: Supabase.Realtime.Socket.OnMessage
   name: OnMessage
   href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_OnMessage
@@ -1168,6 +2122,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Socket.Push
   nameWithType: Socket.Push
+- uid: Supabase.Realtime.Socket.ReplyEventName(System.String)
+  name: ReplyEventName(String)
+  href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_ReplyEventName_System_String_
+  commentId: M:Supabase.Realtime.Socket.ReplyEventName(System.String)
+  fullName: Supabase.Realtime.Socket.ReplyEventName(System.String)
+  nameWithType: Socket.ReplyEventName(String)
+- uid: Supabase.Realtime.Socket.ReplyEventName*
+  name: ReplyEventName
+  href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_ReplyEventName_
+  commentId: Overload:Supabase.Realtime.Socket.ReplyEventName
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.ReplyEventName
+  nameWithType: Socket.ReplyEventName
 - uid: Supabase.Realtime.Socket.StateChanged
   name: StateChanged
   href: api/Supabase.Realtime.Socket.html#Supabase_Realtime_Socket_StateChanged
@@ -1270,6 +2237,19 @@ references:
   commentId: T:Supabase.Realtime.SocketResponse
   fullName: Supabase.Realtime.SocketResponse
   nameWithType: SocketResponse
+- uid: Supabase.Realtime.SocketResponse.#ctor(JsonSerializerSettings)
+  name: SocketResponse(JsonSerializerSettings)
+  href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse__ctor_JsonSerializerSettings_
+  commentId: M:Supabase.Realtime.SocketResponse.#ctor(JsonSerializerSettings)
+  fullName: Supabase.Realtime.SocketResponse.SocketResponse(JsonSerializerSettings)
+  nameWithType: SocketResponse.SocketResponse(JsonSerializerSettings)
+- uid: Supabase.Realtime.SocketResponse.#ctor*
+  name: SocketResponse
+  href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse__ctor_
+  commentId: Overload:Supabase.Realtime.SocketResponse.#ctor
+  isSpec: "True"
+  fullName: Supabase.Realtime.SocketResponse.SocketResponse
+  nameWithType: SocketResponse.SocketResponse
 - uid: Supabase.Realtime.SocketResponse._event
   name: _event
   href: api/Supabase.Realtime.SocketResponse.html#Supabase_Realtime_SocketResponse__event
@@ -1376,6 +2356,23 @@ references:
   fullName.vb: Supabase.Realtime.SocketResponse(Of T)
   nameWithType: SocketResponse<T>
   nameWithType.vb: SocketResponse(Of T)
+- uid: Supabase.Realtime.SocketResponse`1.#ctor(JsonSerializerSettings)
+  name: SocketResponse(JsonSerializerSettings)
+  href: api/Supabase.Realtime.SocketResponse-1.html#Supabase_Realtime_SocketResponse_1__ctor_JsonSerializerSettings_
+  commentId: M:Supabase.Realtime.SocketResponse`1.#ctor(JsonSerializerSettings)
+  fullName: Supabase.Realtime.SocketResponse<T>.SocketResponse(JsonSerializerSettings)
+  fullName.vb: Supabase.Realtime.SocketResponse(Of T).SocketResponse(JsonSerializerSettings)
+  nameWithType: SocketResponse<T>.SocketResponse(JsonSerializerSettings)
+  nameWithType.vb: SocketResponse(Of T).SocketResponse(JsonSerializerSettings)
+- uid: Supabase.Realtime.SocketResponse`1.#ctor*
+  name: SocketResponse
+  href: api/Supabase.Realtime.SocketResponse-1.html#Supabase_Realtime_SocketResponse_1__ctor_
+  commentId: Overload:Supabase.Realtime.SocketResponse`1.#ctor
+  isSpec: "True"
+  fullName: Supabase.Realtime.SocketResponse<T>.SocketResponse
+  fullName.vb: Supabase.Realtime.SocketResponse(Of T).SocketResponse
+  nameWithType: SocketResponse<T>.SocketResponse
+  nameWithType.vb: SocketResponse(Of T).SocketResponse
 - uid: Supabase.Realtime.SocketResponse`1.Payload
   name: Payload
   href: api/Supabase.Realtime.SocketResponse-1.html#Supabase_Realtime_SocketResponse_1_Payload
