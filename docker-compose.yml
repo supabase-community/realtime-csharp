@@ -14,7 +14,7 @@ services:
       - db
 
   realtime:
-    image: supabase/realtime:latest
+    image: supabase/realtime:v0.25.1
     restart: unless-stopped
     ports:
       - "4000:4000"
@@ -32,7 +32,7 @@ services:
       - db
 
   db:
-    image: postgres:latest
+    image: postgres:15
     restart: unless-stopped
     ports:
       - "5432:5432"

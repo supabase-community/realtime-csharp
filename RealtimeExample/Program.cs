@@ -12,7 +12,7 @@ namespace RealtimeExample
         {
             // Connect to db and web socket server
             var postgrestClient = Postgrest.Client.Initialize("http://localhost:3000");
-            var realtimeClient = Supabase.Realtime.Client.Initialize("ws://localhost:4000/socket");
+            var realtimeClient = new Client("ws://localhost:4000/socket");
 
             //Socket events
             realtimeClient.OnOpen += (s, args) => Console.WriteLine("OPEN");

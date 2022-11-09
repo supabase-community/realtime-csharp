@@ -19,6 +19,11 @@
 		<PackageVersion>3.0.1</PackageVersion>
 		<ReleaseVersion>3.0.1</ReleaseVersion>
 	</PropertyGroup>
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<LangVersion>8.0</LangVersion>
+		<WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
+	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Version)' == '' ">
 		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">3.0.1</VersionPrefix>
 		<VersionSuffix Condition=" '$(VersionSuffix)' == '' ">
@@ -27,7 +32,7 @@
 		<Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="postgrest-csharp" Version="2.0.8" />
+		<PackageReference Include="postgrest-csharp" Version="2.1.1" />
 		<PackageReference Include="Websocket.Client" Version="4.4.43" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>

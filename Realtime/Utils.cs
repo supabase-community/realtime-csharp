@@ -12,7 +12,7 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="dict"></param>
         /// <returns></returns>
-        public static string QueryString(IDictionary<string, string> dict)
+        public static string QueryString(IDictionary<string, string?> dict)
         {
             var list = new List<string>();
             foreach (var item in dict)
@@ -32,10 +32,10 @@ namespace Supabase.Realtime
         /// <param name="col"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GenerateChannelTopic(string database, string schema, string table, string col, string value)
+        public static string GenerateChannelTopic(string database, string? schema, string? table, string? col, string? value)
         {
-            var list = new List<String> { database, schema, table };
-            string channel = String.Join(":", list.Where(s => !string.IsNullOrEmpty(s)));
+            var list = new List<string?> { database, schema, table };
+            string channel = string.Join(":", list.Where(s => !string.IsNullOrEmpty(s)));
 
             if (!string.IsNullOrEmpty(col) && !string.IsNullOrEmpty(value))
             {

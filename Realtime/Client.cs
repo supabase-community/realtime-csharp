@@ -6,6 +6,7 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Supabase.Realtime.Interfaces;
 
 namespace Supabase.Realtime
 {
@@ -17,7 +18,7 @@ namespace Supabase.Realtime
     /// <example>
     ///     client = Client.Instance
     /// </example>
-    public class Client
+    public class Client : IRealtimeClient<Socket, Channel>
     {
         /// <summary>
         /// Contains all Realtime Channel Subscriptions - state managed internally.
@@ -37,47 +38,33 @@ namespace Supabase.Realtime
         ///
         /// Most methods of the Client act as proxies to the Socket class.
         /// </summary>
-        public Socket Socket { get; private set; }
+        public IRealtimeSocket? Socket { get => socket; }
+        private IRealtimeSocket? socket;
 
         /// <summary>
-        /// Client Options - most of which are regarding Socket connection options
+        /// Client Options - most of which are regarding Socket connection Options
         /// </summary>
         public ClientOptions Options { get; private set; }
-
-        private static Client instance;
-        /// <summary>
-        /// The Client Instance (singleton)
-        /// </summary>
-        public static Client Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new Client();
-
-                return instance;
-            }
-        }
 
         /// <summary>
         /// Invoked when the socket raises the `open` event.
         /// </summary>
-        public event EventHandler<SocketStateChangedEventArgs> OnOpen;
+        public event EventHandler<SocketStateChangedEventArgs>? OnOpen;
 
         /// <summary>
         /// Invoked when the socket raises the `close` event.
         /// </summary>
-        public event EventHandler<SocketStateChangedEventArgs> OnClose;
+        public event EventHandler<SocketStateChangedEventArgs>? OnClose;
 
         /// <summary>
         /// Invoked when the socket raises the `error` event.
         /// </summary>
-        public event EventHandler<SocketStateChangedEventArgs> OnError;
+        public event EventHandler<SocketStateChangedEventArgs>? OnError;
 
         /// <summary>
         /// Invoked when the socket raises the `message` event.
         /// </summary>
-        public event EventHandler<SocketStateChangedEventArgs> OnMessage;
+        public event EventHandler<SocketStateChangedEventArgs>? OnMessage;
 
         /// <summary>
         /// Custom Serializer resolvers and converters that will be used for encoding and decoding Postgrest JSON responses.
@@ -103,7 +90,8 @@ namespace Supabase.Realtime
                             DateTimeStyles = Options.DateTimeStyles,
                             DateTimeFormat = Options.DateTimeFormat
                         }
-                    }
+                    },
+                    MissingMemberHandling = MissingMemberHandling.Ignore
                 };
             }
         }
@@ -113,7 +101,8 @@ namespace Supabase.Realtime
         /// <summary>
         /// JWT Access token for WALRUS security
         /// </summary>
-        internal string AccessToken { get; private set; }
+        internal string? AccessToken { get => accessToken; }
+        private string? accessToken;
 
         /// <summary>
         /// Initializes a Client instance, this method should be called prior to any other method.
@@ -121,21 +110,28 @@ namespace Supabase.Realtime
         /// <param name="realtimeUrl">The connection url (ex: "ws://localhost:4000/socket" - no trailing slash required)</param>
         /// <param name="options"></param>
         /// <returns>Client</returns>
-        public static Client Initialize(string realtimeUrl, ClientOptions options = null)
+        public Client(string realtimeUrl, ClientOptions? options = null)
         {
+            this.realtimeUrl = realtimeUrl;
+
             if (options == null)
-            {
                 options = new ClientOptions();
+
+            if (options.Encode == null)
+                options.Encode = (payload, callback) => callback(JsonConvert.SerializeObject(payload, SerializerSettings));
+
+            if (options.Decode == null)
+            {
+                options.Decode = (payload, callback) =>
+                {
+                    var response = new SocketResponse(SerializerSettings);
+                    JsonConvert.PopulateObject(payload, response, SerializerSettings);
+                    callback(response);
+                };
             }
 
-            instance = new Client
-            {
-                Options = options,
-                realtimeUrl = realtimeUrl,
-                subscriptions = new Dictionary<string, Channel>()
-            };
-
-            return instance;
+            Options = options;
+            subscriptions = new Dictionary<string, Channel>();
         }
 
         /// <summary>
@@ -144,45 +140,43 @@ namespace Supabase.Realtime
         /// Returns when socket has successfully connected.
         /// </summary>
         /// <returns></returns>
-        public Task<Client> ConnectAsync()
+        public Task<IRealtimeClient<Socket, Channel>> ConnectAsync()
         {
-            var tsc = new TaskCompletionSource<Client>();
+            var tsc = new TaskCompletionSource<IRealtimeClient<Socket, Channel>>();
 
             try
             {
-                if (Socket != null)
+                if (socket != null)
                 {
                     Debug.WriteLine("Socket already exists.");
-
                     tsc.TrySetResult(this);
-
                     return tsc.Task;
                 }
 
-                EventHandler<SocketStateChangedEventArgs> callback = null;
+                EventHandler<SocketStateChangedEventArgs>? callback = null;
                 callback = (object sender, SocketStateChangedEventArgs args) =>
                 {
                     switch (args.State)
                     {
                         case SocketStateChangedEventArgs.ConnectionState.Open:
-                            Socket.StateChanged -= callback;
+                            Socket!.StateChanged -= callback;
                             tsc.TrySetResult(this);
                             break;
                         case SocketStateChangedEventArgs.ConnectionState.Close:
                         case SocketStateChangedEventArgs.ConnectionState.Error:
-                            Socket.StateChanged -= callback;
+                            Socket!.StateChanged -= callback;
                             tsc.TrySetException(new Exception("Error occurred connecting to Socket. Check logs."));
                             break;
                     }
                 };
 
-                Socket = new Socket(realtimeUrl, Options);
+                socket = new Socket(realtimeUrl, Options, SerializerSettings);
 
-                Socket.StateChanged += HandleSocketStateChanged;
-                Socket.OnMessage += HandleSocketMessage;
+                socket.StateChanged += HandleSocketStateChanged;
+                socket.OnMessage += HandleSocketMessage;
 
-                Socket.StateChanged += callback;
-                Socket.Connect();
+                socket.StateChanged += callback;
+                socket.Connect();
             }
             catch (Exception ex)
             {
@@ -199,39 +193,52 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="callback"></param>
         /// <returns></returns>
-        public Client Connect(Action<Client> callback = null)
+        public IRealtimeClient<Socket, Channel> Connect(Action<IRealtimeClient<Socket, Channel>>? callback = null)
         {
-            if (Socket != null)
+            if (socket != null)
             {
                 Debug.WriteLine("Socket already exists.");
                 return this;
             }
 
-            EventHandler<SocketStateChangedEventArgs> cb = null;
+            EventHandler<SocketStateChangedEventArgs>? cb = null;
+
             cb = (object sender, SocketStateChangedEventArgs args) =>
             {
                 switch (args.State)
                 {
                     case SocketStateChangedEventArgs.ConnectionState.Open:
-                        Socket.StateChanged -= cb;
+                        socket!.StateChanged -= cb;
                         callback?.Invoke(this);
                         break;
                     case SocketStateChangedEventArgs.ConnectionState.Close:
                     case SocketStateChangedEventArgs.ConnectionState.Error:
-                        Socket.StateChanged -= cb;
+                        socket!.StateChanged -= cb;
                         throw new Exception("Error occurred connecting to Socket. Check logs.");
                 }
             };
 
-            Socket = new Socket(realtimeUrl, Options);
+            socket = new Socket(realtimeUrl, Options, SerializerSettings);
 
-            Socket.StateChanged += HandleSocketStateChanged;
-            Socket.OnMessage += HandleSocketMessage;
+            socket.StateChanged += HandleSocketStateChanged;
+            socket.OnMessage += HandleSocketMessage;
+            socket.OnHeartbeat += HandleSocketHeartbeat;
 
-            Socket.StateChanged += cb;
-            Socket.Connect();
+            socket.StateChanged += cb;
+            socket.Connect();
 
             return this;
+        }
+
+        /// <summary>
+        /// Sets the current Access Token every heartbeat (see: https://github.com/supabase/realtime-js/blob/59bd47956ebe4e23b3e1a6c07f5fe2cfe943e8ad/src/RealtimeClient.ts#L437)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HandleSocketHeartbeat(object sender, SocketResponseEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(accessToken))
+                SetAuth(accessToken!);
         }
 
         /// <summary>
@@ -240,14 +247,14 @@ namespace Supabase.Realtime
         /// <param name="code">Status Code</param>
         /// <param name="reason">Reason for disconnect</param>
         /// <returns></returns>
-        public Client Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "Programmatic Disconnect")
+        public IRealtimeClient<Socket, Channel> Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "Programmatic Disconnect")
         {
-            if (Socket != null)
+            if (socket != null)
             {
-                Socket.StateChanged -= HandleSocketStateChanged;
-                Socket.OnMessage -= HandleSocketMessage;
-                Socket.Disconnect(code, reason);
-                Socket = null;
+                socket.StateChanged -= HandleSocketStateChanged;
+                socket.OnMessage -= HandleSocketMessage;
+                socket.Disconnect(code, reason);
+                socket = null;
             }
             return this;
         }
@@ -259,20 +266,20 @@ namespace Supabase.Realtime
         /// <param name="jwt"></param>
         public void SetAuth(string jwt)
         {
-            AccessToken = jwt;
+            accessToken = jwt;
 
             try
             {
                 foreach (var channel in subscriptions.Values)
                 {
                     // See: https://github.com/supabase/realtime-js/pull/126
-                    channel.Parameters["user_token"] = AccessToken;
+                    channel.Options.Parameters!["user_token"] = accessToken;
 
                     if (channel.HasJoinedOnce && channel.IsJoined)
                     {
                         channel.Push(Constants.CHANNEL_ACCESS_TOKEN, new Dictionary<string, string>
                         {
-                            { "access_token", AccessToken }
+                            { "access_token", accessToken }
                         });
                     }
                 }
@@ -292,7 +299,7 @@ namespace Supabase.Realtime
         /// <param name="column">Postgres column name</param>
         /// <param name="value">Value the specified column should have</param>
         /// <returns></returns>
-        public Channel Channel(string database = "realtime", string schema = null, string table = null, string column = null, string value = null, Dictionary<string, string> parameters = null)
+        public Channel Channel(string database = "realtime", string? schema = null, string? table = null, string? column = null, string? value = null, Dictionary<string, string>? parameters = null)
         {
             var key = Utils.GenerateChannelTopic(database, schema, table, column, value);
 
@@ -301,7 +308,18 @@ namespace Supabase.Realtime
                 return subscriptions[key];
             }
 
-            var subscription = new Channel(database, schema, table, column, value, parameters);
+            if (socket == null) throw new Exception("Socket must exist, was Connect called?");
+
+            var channelOptions = new ChannelOptions(database, Options, SerializerSettings)
+            {
+                Schema = schema,
+                Table = table,
+                Column = column,
+                Value = value,
+                Parameters = parameters
+            };
+
+            var subscription = new Channel(socket!, channelOptions);
             subscriptions.Add(key, subscription);
 
             return subscription;
@@ -324,7 +342,7 @@ namespace Supabase.Realtime
 
         private void HandleSocketMessage(object sender, SocketResponseEventArgs args)
         {
-            if (subscriptions.ContainsKey(args.Response.Topic))
+            if (args.Response.Topic != null && subscriptions.ContainsKey(args.Response.Topic))
             {
                 subscriptions[args.Response.Topic].HandleSocketMessage(args);
             }
@@ -337,7 +355,10 @@ namespace Supabase.Realtime
             {
                 case SocketStateChangedEventArgs.ConnectionState.Open:
                     // Ref: https://github.com/supabase/realtime-js/pull/116/files
-                    SetAuth(AccessToken);
+                    if (!string.IsNullOrEmpty(AccessToken))
+                    {
+                        SetAuth(AccessToken!);
+                    }
 
                     OnOpen?.Invoke(this, args);
                     break;
