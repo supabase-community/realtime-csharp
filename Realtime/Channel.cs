@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
-using Supabase.Realtime.Attributes;
+using Supabase.Core.Attributes;
 using Supabase.Realtime.Interfaces;
 using static Supabase.Realtime.Channel;
 

@@ -16,7 +16,7 @@ namespace RealtimeTests
         private string socketEndpoint = "ws://localhost:4000/socket";
         private string restEndpoint = "http://localhost:3000";
 
-        private Postgrest.Client RestClient => Postgrest.Client.Initialize(restEndpoint);
+        private Postgrest.Client RestClient => new Postgrest.Client(restEndpoint);
         private Client SocketClient;
 
 
@@ -346,6 +346,13 @@ namespace RealtimeTests
 
             var check = await tsc.Task;
             Assert.IsTrue(check);
+        }
+
+        [TestMethod("Client: Can reconnect after programmatic disconnect")]
+        public async Task ClientCanReconnectAfterProgrammaticDisconnect()
+        {
+            SocketClient.Disconnect();
+            await SocketClient.ConnectAsync();
         }
     }
 }

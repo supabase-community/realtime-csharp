@@ -11,7 +11,7 @@ namespace RealtimeExample
         static async Task Main(string[] args)
         {
             // Connect to db and web socket server
-            var postgrestClient = Postgrest.Client.Initialize("http://localhost:3000");
+            var postgrestClient = new Postgrest.Client("http://localhost:3000");
             var realtimeClient = new Client("ws://localhost:4000/socket");
 
             //Socket events

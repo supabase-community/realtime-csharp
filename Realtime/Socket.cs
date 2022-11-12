@@ -79,7 +79,7 @@ namespace Supabase.Realtime
 
             if (!options.Headers.ContainsKey("X-Client-Info"))
             {
-                options.Headers.Add("X-Client-Info", Utils.GetAssemblyVersion());
+                options.Headers.Add("X-Client-Info", Core.Util.GetAssemblyVersion(typeof(Client)));
             }
 
             connection = new WebsocketClient(new Uri(endpointUrl));
