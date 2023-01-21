@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supabase.Realtime.Socket;
+using System;
 
 namespace Supabase.Realtime.Interfaces
 {

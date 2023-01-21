@@ -2,20 +2,21 @@
 using Postgrest.Models;
 using Supabase.Realtime.Converters;
 using Supabase.Realtime.Interfaces;
+using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Websocket.Client;
-using static Supabase.Realtime.SocketStateChangedEventArgs;
+using static Supabase.Realtime.Socket.SocketStateChangedEventArgs;
 
 namespace Supabase.Realtime
 {
     /// <summary>
     /// Socket connection handler.
     /// </summary>
-    public class Socket : IDisposable, IRealtimeSocket
+    public class RealtimeSocket : IDisposable, IRealtimeSocket
     {
         /// <summary>
         /// Returns whether or not the connection is alive.
@@ -71,7 +72,7 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="endpoint"></param>
         /// <param name="options"></param>
-        public Socket(string endpoint, ClientOptions options, JsonSerializerSettings serializerSettings)
+        public RealtimeSocket(string endpoint, ClientOptions options, JsonSerializerSettings serializerSettings)
         {
             this.serializerSettings = serializerSettings;
             this.endpoint = $"{endpoint}/{Constants.TRANSPORT_WEBSOCKET}";
@@ -311,146 +312,6 @@ namespace Supabase.Realtime
 
                 buffer.Clear();
             }
-        }
-    }
-
-    public class SocketOptionsParameters
-    {
-        [JsonProperty("token")]
-        public string? Token { get; set; }
-
-        [JsonProperty("apikey")]
-        public string? ApiKey { get; set; }
-    }
-
-    /// <summary>
-    /// Representation of a Socket Request.
-    /// </summary>
-    public class SocketRequest
-    {
-        [JsonProperty("topic")]
-        public string? Topic { get; set; }
-
-        [JsonProperty("event")]
-        public string? Event { get; set; }
-
-        [JsonProperty("payload")]
-        public object? Payload { get; set; }
-
-        [JsonProperty("ref")]
-        public string? Ref { get; set; }
-    }
-
-    public class SocketResponsePayload
-    {
-        /// <summary>
-        /// Displays Column information from the Database.
-        /// 
-        /// Will always be an array but can be empty
-        /// </summary>
-        [JsonProperty("columns")]
-        public List<object>? Columns { get; set; }
-
-        /// <summary>
-        /// The timestamp of the commit referenced.
-        /// 
-        /// Will either be a string or null
-        /// </summary>
-        [JsonProperty("commit_timestamp")]
-        public DateTimeOffset? CommitTimestamp { get; set; }
-
-        /// <summary>
-        /// The record referenced.
-        /// 
-        /// Will always be an object but can be empty.
-        /// </summary>
-        [JsonProperty("record")]
-        public object? Record { get; set; }
-
-        /// <summary>
-        /// The previous state of the referenced record.
-        /// 
-        /// Will always be an object but can be empty.
-        /// </summary>
-        [JsonProperty("old_record")]
-        public object? OldRecord { get; set; }
-
-        /// <summary>
-        /// The Schema affected.
-        /// </summary>
-        [JsonProperty("schema")]
-        public string? Schema { get; set; }
-
-        /// <summary>
-        /// The Table affected.
-        /// </summary>
-        [JsonProperty("table")]
-        public string? Table { get; set; }
-
-        /// <summary>
-        /// The action type performed (INSERT, UPDATE, DELETE, etc.)
-        /// </summary>
-        [JsonProperty("type")]
-        public string? Type { get; set; }
-
-        [Obsolete("Property no longer used in responses.")]
-        [JsonProperty("status")]
-        public string? Status { get; set; }
-
-        [JsonProperty("response")]
-        public object? Response { get; set; }
-
-        /// <summary>
-        /// Either null or an array of errors.
-        /// See: https://github.com/supabase/walrus/#error-states
-        /// </summary>
-        [JsonProperty("errors")]
-        public List<string>? Errors { get; set; }
-    }
-
-    public class SocketResponsePayload<T> : SocketResponsePayload where T : BaseModel, new()
-    {
-        /// <summary>
-        /// The record referenced.
-        /// </summary>
-        [JsonProperty("record")]
-        public new T? Record { get; set; }
-
-        /// <summary>
-        /// The previous state of the referenced record.
-        /// </summary>
-        [JsonProperty("old_record")]
-        public new T? OldRecord { get; set; }
-    }
-
-
-    public class SocketStateChangedEventArgs : EventArgs
-    {
-        public enum ConnectionState
-        {
-            Open,
-            Close,
-            Error,
-            Message
-        }
-
-        public ConnectionState State { get; set; }
-        public EventArgs Args { get; set; }
-
-        public SocketStateChangedEventArgs(ConnectionState state, EventArgs args)
-        {
-            State = state;
-            Args = args;
-        }
-    }
-
-    public class SocketResponseEventArgs : EventArgs
-    {
-        public SocketResponse Response { get; private set; }
-
-        public SocketResponseEventArgs(SocketResponse response)
-        {
-            Response = response;
         }
     }
 }

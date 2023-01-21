@@ -3,7 +3,7 @@ using Postgrest.Models;
 using Supabase.Realtime.Interfaces;
 using static Supabase.Realtime.Constants;
 
-namespace Supabase.Realtime
+namespace Supabase.Realtime.Socket
 {
     /// <summary>
     /// Representation of a Socket Response.
@@ -66,6 +66,16 @@ namespace Supabase.Realtime
         {
             get
             {
+                switch(_event)
+                {
+                    case "presence_state":
+                        return EventType.PresenceState;
+                    case "presence_diff":
+                        return EventType.PresenceDiff;
+                    case "broadcast":
+                        return EventType.Broadcast;
+                }
+
                 if (Payload == null) return EventType.Unknown;
 
                 switch (Payload.Type)

@@ -1,4 +1,5 @@
 ﻿using Postgrest.Models;
+using Supabase.Realtime.Socket;
 
 namespace Supabase.Realtime.Interfaces
 {

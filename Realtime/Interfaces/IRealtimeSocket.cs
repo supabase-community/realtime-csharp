@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supabase.Realtime.Socket;
+using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 

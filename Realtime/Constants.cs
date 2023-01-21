@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Supabase.Core.Attributes;
+using System;
 namespace Supabase.Realtime
 {
     public static class Constants
     {
-        public static string VERSION = "1.0.0";
-
         public enum SocketStates
         {
             connecting = 0,
@@ -18,13 +17,54 @@ namespace Supabase.Realtime
             Insert,
             Update,
             Delete,
+            Broadcast,
+            PresenceState,
+            PresenceDiff,
+            PostgresChanges,
             Unknown
         }
 
-        /// <summary>
-        /// Timeout interval for requests (used in Socket and Push)
-        /// </summary>
-        public const int DEFAULT_TIMEOUT = 10000;
+		public enum PresenceListenEventTypes
+		{
+			[MapTo("sync")]
+			Sync,
+			[MapTo("join")]
+			Join,
+			[MapTo("leave")]
+			Leave
+		}
+
+        public enum ChannelType
+        {
+            [MapTo("broadcast")]
+            Broadcast,
+            [MapTo("presence")]
+            Presence,
+            [MapTo("postgres_changes")]
+            PostgresChanges
+        }
+
+		/// <summary>
+		/// Channel state with associated string representations.
+		/// </summary>
+		public enum ChannelState
+		{
+			[MapTo("closed")]
+			Closed,
+			[MapTo("errored")]
+			Errored,
+			[MapTo("joined")]
+			Joined,
+			[MapTo("joining")]
+			Joining,
+			[MapTo("leaving")]
+			Leaving
+		}
+
+		/// <summary>
+		/// Timeout interval for requests (used in Socket and Push)
+		/// </summary>
+		public const int DEFAULT_TIMEOUT = 10000;
         public const int WS_CLOSE_NORMAL = 1000;
 
         /// <summary>

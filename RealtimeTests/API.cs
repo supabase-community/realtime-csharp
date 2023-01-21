@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RealtimeTests.Models;
 using Supabase.Realtime;
-using static Supabase.Realtime.Channel;
+using Supabase.Realtime.Channel;
+using Supabase.Realtime.Socket;
+using static Supabase.Realtime.Constants;
 
 namespace RealtimeTests
 {
