@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Supabase.Realtime.Channel
+namespace Supabase.Realtime.Presence
 {
     public class PresenceOptions
     {
@@ -8,9 +8,9 @@ namespace Supabase.Realtime.Channel
         /// key option is used to track presence payload across clients
         /// </summary>
         [JsonProperty("key")]
-        public string? PresenceKey { get; set; }
+        public string PresenceKey { get; set; }
 
-        public PresenceOptions(string? presenceKey)
+        public PresenceOptions(string presenceKey)
         {
             PresenceKey = presenceKey;
         }

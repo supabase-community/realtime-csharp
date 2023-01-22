@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Supabase.Realtime.Channel
+namespace Supabase.Realtime.Broadcast
 {
     public class BroadcastOptions
     {

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Supabase.Realtime.Broadcast;
+using Supabase.Realtime.Presence;
 
 namespace Supabase.Realtime.Channel
 {
-	internal class JoinPush
+    internal class JoinPush
 	{
 		[JsonProperty("config")]
 		public JoinPushConfig Config { get; private set; }

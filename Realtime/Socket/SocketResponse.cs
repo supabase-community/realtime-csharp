@@ -5,10 +5,23 @@ using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Socket
 {
-    /// <summary>
-    /// Representation of a Socket Response.
-    /// </summary>
-    public class SocketResponse : IRealtimeSocketResponse
+	/// <summary>
+	/// A SocketResponse with support for Generically typed Payload
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	public class SocketResponse<T> : SocketResponse where T : class
+	{
+		public SocketResponse(JsonSerializerSettings serializerSettings) : base(serializerSettings)
+		{ }
+
+		[JsonProperty("payload")]
+		public new T? Payload { get; set; }
+	}
+
+	/// <summary>
+	/// Representation of a Socket Response.
+	/// </summary>
+	public class SocketResponse : IRealtimeSocketResponse
     {
         private JsonSerializerSettings serializerSettings;
         public SocketResponse(JsonSerializerSettings serializerSettings)
@@ -21,11 +34,11 @@ namespace Supabase.Realtime.Socket
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T? Model<T>() where T : BaseModel, new()
+        public TModel? Model<TModel>() where TModel : BaseModel, new()
         {
             if (Json != null && Payload != null && Payload.Record != null)
             {
-                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, serializerSettings);
+                var response = JsonConvert.DeserializeObject<SocketResponse<SocketResponsePayload<TModel>>>(Json, serializerSettings);
                 return response?.Payload?.Record;
             }
             else
@@ -39,11 +52,11 @@ namespace Supabase.Realtime.Socket
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T? OldModel<T>() where T : BaseModel, new()
-        {
+        public TModel? OldModel<TModel>() where TModel : BaseModel, new()
+		{
             if (Json != null && Payload != null && Payload.OldRecord != null)
             {
-                var response = JsonConvert.DeserializeObject<SocketResponse<T>>(Json, serializerSettings);
+                var response = JsonConvert.DeserializeObject<SocketResponse<SocketResponsePayload<TModel>>>(Json, serializerSettings);
                 return response?.Payload?.OldRecord;
             }
             else
@@ -106,18 +119,5 @@ namespace Supabase.Realtime.Socket
 
         [JsonIgnore]
         internal string? Json { get; set; }
-    }
-
-    /// <summary>
-    /// A SocketResponse with support for Generically typed Payload
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SocketResponse<T> : SocketResponse where T : BaseModel, new()
-    {
-        public SocketResponse(JsonSerializerSettings serializerSettings) : base(serializerSettings)
-        { }
-
-        [JsonProperty("payload")]
-        public new SocketResponsePayload<T>? Payload { get; set; }
     }
 }

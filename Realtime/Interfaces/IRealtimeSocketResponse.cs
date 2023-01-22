@@ -11,7 +11,7 @@ namespace Supabase.Realtime.Interfaces
         string? Ref { get; set; }
         string? Topic { get; set; }
 
-        T? Model<T>() where T : BaseModel, new();
-        T? OldModel<T>() where T : BaseModel, new();
+        TModel? Model<TModel>() where TModel: BaseModel, new();
+        TModel? OldModel<TModel>() where TModel: BaseModel, new();
     }
 }

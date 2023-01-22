@@ -5,20 +5,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
+using Postgrest.Models;
+using Postgrest.Responses;
+using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
+using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
+using Supabase.Realtime.Socket.Responses;
 using static Supabase.Realtime.Constants;
 using Timer = System.Timers.Timer;
 
 [assembly: InternalsVisibleTo("RealtimeTests")]
 namespace Supabase.Realtime
 {
-	/// <summary>
-	/// Class representation of a channel subscription
-	/// </summary>
-	public class RealtimeChannel : IRealtimeChannel
+    /// <summary>
+    /// Class representation of a channel subscription
+    /// </summary>
+    public class RealtimeChannel : IRealtimeChannel
 	{
 		/// <summary>
 		/// Invoked when the `INSERT` event is raised.
@@ -55,13 +60,6 @@ namespace Supabase.Realtime
 		/// </summary>
 		public event EventHandler<ChannelStateChangedEventArgs>? OnClose;
 
-		public event EventHandler<EventArgs>? OnJoin;
-		public event EventHandler<EventArgs>? OnLeave;
-		public event EventHandler<EventArgs>? OnSync;
-		public event EventHandler<EventArgs>? OnBroadcast;
-
-		public Dictionary<string, object> PresenceState { get; set; } = new Dictionary<string, object>();
-
 		public bool IsClosed => State == ChannelState.Closed;
 		public bool IsErrored => State == ChannelState.Errored;
 		public bool IsJoined => State == ChannelState.Joined;
@@ -88,7 +86,10 @@ namespace Supabase.Realtime
 		/// </summary>
 		public bool HasJoinedOnce { get; private set; }
 
-		public RealtimePresence<Presence>? Presence { get; set; }
+		public RealtimePresence? Presence { get; private set; }
+		internal event EventHandler<SocketResponseEventArgs>? OnPresenceDiff;
+		internal event EventHandler<SocketResponseEventArgs>? OnPresenceSync;
+		internal event EventHandler<SocketResponseEventArgs>? OnBroadcast;
 
 		private IRealtimeSocket socket;
 
@@ -104,14 +105,9 @@ namespace Supabase.Realtime
 		internal List<Push> buffer = new List<Push>();
 
 		private bool canPush => IsJoined && socket.IsConnected;
-
-
 		private bool hasJoinedOnce = false;
 		private Timer rejoinTimer;
 		private bool isRejoining = false;
-
-		private Type? broadcastResponseType;
-		private Type? presenceResponseType;
 
 		/// <summary>
 		/// Initializes a Channel - must call `Subscribe()` to receive events.
@@ -140,15 +136,17 @@ namespace Supabase.Realtime
 		public IRealtimeChannel Register<TBroadcastResponse>(BroadcastOptions broadcastOptions, string eventName) where TBroadcastResponse : struct
 		{
 			BroadcastOptions = broadcastOptions;
-			broadcastResponseType = typeof(TBroadcastResponse);
 
 			return this;
 		}
 
-		public IRealtimeChannel Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : Presence
+		public IRealtimeChannel Register(PresenceOptions presenceOptions)
 		{
 			PresenceOptions = presenceOptions;
-			presenceResponseType = typeof(TPresenceResponse);
+			Presence = new RealtimePresence(this, presenceOptions);
+
+			OnPresenceSync += (sender, args) => Presence.TriggerSync(args);
+			OnPresenceDiff += (sender, args) => Presence.TriggerDiff(args);
 
 			return this;
 		}
@@ -388,9 +386,10 @@ namespace Supabase.Realtime
 					OnBroadcast?.Invoke(this, args);
 					break;
 				case EventType.PresenceState:
-					PresenceState = JsonConvert.DeserializeObject<Dictionary<string, object>>(args.Response.Json);
+					OnPresenceSync?.Invoke(this, args);
 					break;
 				case EventType.PresenceDiff:
+					OnPresenceDiff?.Invoke(this, args);
 					break;
 			}
 		}

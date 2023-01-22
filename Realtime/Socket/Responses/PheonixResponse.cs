@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Supabase.Realtime.Channel
+namespace Supabase.Realtime.Socket.Responses
 {
     public class PheonixResponse
     {
