@@ -87,6 +87,10 @@ namespace Supabase.Realtime
 		public bool HasJoinedOnce { get; private set; }
 
 		public RealtimePresence? Presence { get; private set; }
+		/// <summary>
+		/// Flag stating if a channel is currently subscribed.
+		/// </summary>
+		public bool IsSubscribed = false;
 		internal event EventHandler<SocketResponseEventArgs>? OnPresenceDiff;
 		internal event EventHandler<SocketResponseEventArgs>? OnPresenceSync;
 		internal event EventHandler<SocketResponseEventArgs>? OnBroadcast;
@@ -128,6 +132,15 @@ namespace Supabase.Realtime
 
 			Options = options;
 
+			socket.StateChanged += (sender, args) =>
+			{
+				if (args.State == SocketStateChangedEventArgs.ConnectionState.Reconnected && IsSubscribed)
+				{
+					IsSubscribed = false;
+					Rejoin(DEFAULT_TIMEOUT);
+				}
+			};
+
 			rejoinTimer = new Timer(options.ClientOptions.Timeout.TotalMilliseconds);
 			rejoinTimer.Elapsed += HandleRejoinTimerElapsed;
 			rejoinTimer.AutoReset = true;
@@ -166,7 +179,7 @@ namespace Supabase.Realtime
 		{
 			var tsc = new TaskCompletionSource<IRealtimeChannel>();
 
-			if (hasJoinedOnce)
+			if (hasJoinedOnce && IsSubscribed)
 			{
 				tsc.SetException(new Exception("`Subscribe` can only be called a single time per channel instance."));
 				return tsc.Task;
@@ -183,6 +196,8 @@ namespace Supabase.Realtime
 					// Success!
 					case ChannelState.Joined:
 						HasJoinedOnce = true;
+						IsSubscribed = true;
+
 						StateChanged -= channelCallback;
 						JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
@@ -196,6 +211,7 @@ namespace Supabase.Realtime
 					// Failure
 					case ChannelState.Closed:
 					case ChannelState.Errored:
+						IsSubscribed = false;
 						StateChanged -= channelCallback;
 						JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
@@ -230,6 +246,7 @@ namespace Supabase.Realtime
 		/// </summary>
 		public void Unsubscribe()
 		{
+			IsSubscribed = false;
 			SetState(ChannelState.Leaving);
 
 			var leavePush = new Push(socket, this, CHANNEL_EVENT_LEAVE);

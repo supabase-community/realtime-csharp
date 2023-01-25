@@ -60,6 +60,11 @@ namespace Supabase.Realtime
 		public event EventHandler<SocketStateChangedEventArgs>? OnClose;
 
 		/// <summary>
+		/// Invoked when the socket raises the `reconnected` event.
+		/// </summary>
+		public event EventHandler<SocketStateChangedEventArgs>? OnReconnect;
+
+		/// <summary>
 		/// Invoked when the socket raises the `error` event.
 		/// </summary>
 		public event EventHandler<SocketStateChangedEventArgs>? OnError;
@@ -375,7 +380,6 @@ namespace Supabase.Realtime
 					{
 						SetAuth(AccessToken!);
 					}
-
 					OnOpen?.Invoke(this, args);
 					break;
 				case SocketStateChangedEventArgs.ConnectionState.Close:
@@ -386,6 +390,9 @@ namespace Supabase.Realtime
 					break;
 				case SocketStateChangedEventArgs.ConnectionState.Message:
 					OnMessage?.Invoke(this, args);
+					break;
+				case SocketStateChangedEventArgs.ConnectionState.Reconnected:
+					OnReconnect?.Invoke(this, args);
 					break;
 			}
 		}
