@@ -20,10 +20,10 @@ using Timer = System.Timers.Timer;
 [assembly: InternalsVisibleTo("RealtimeTests")]
 namespace Supabase.Realtime
 {
-    /// <summary>
-    /// Class representation of a channel subscription
-    /// </summary>
-    public class RealtimeChannel : IRealtimeChannel
+	/// <summary>
+	/// Class representation of a channel subscription
+	/// </summary>
+	public class RealtimeChannel : IRealtimeChannel
 	{
 		/// <summary>
 		/// Invoked when the `INSERT` event is raised.
@@ -66,6 +66,9 @@ namespace Supabase.Realtime
 		public bool IsJoining => State == ChannelState.Joining;
 		public bool IsLeaving => State == ChannelState.Leaving;
 
+		/// <summary>
+		/// The channel's topic (identifier)
+		/// </summary>
 		public string Topic { get; private set; }
 
 		/// <summary>
@@ -77,8 +80,20 @@ namespace Supabase.Realtime
 		/// Options passed to this channel instance.
 		/// </summary>
 		public ChannelOptions Options { get; private set; }
-		public BroadcastOptions? BroadcastOptions { get; private set; }
-		public PresenceOptions? PresenceOptions { get; private set; }
+
+		/// <summary>
+		/// The saved Broadcast Options, set in <see cref="Register{TBroadcastResponse}(BroadcastOptions)"/>
+		/// </summary>
+		public BroadcastOptions? BroadcastOptions { get; protected set; }
+
+		/// <summary>
+		/// The saved Presence Options, set in <see cref="Register{TPresenceResponse}(PresenceOptions)"/>
+		/// </summary>
+		public PresenceOptions? PresenceOptions { get; protected set; }
+
+		/// <summary>
+		/// The saved Postgres Changes Options, set in <see cref="Register(Channel.PostgresChangesOptions)"/>
+		/// </summary>
 		public List<PostgresChangesOptions> PostgresChangesOptions { get; private set; } = new List<PostgresChangesOptions>();
 
 		/// <summary>
@@ -86,16 +101,36 @@ namespace Supabase.Realtime
 		/// </summary>
 		public bool HasJoinedOnce { get; private set; }
 
-		public RealtimePresence? Presence { get; private set; }
 		/// <summary>
 		/// Flag stating if a channel is currently subscribed.
 		/// </summary>
 		public bool IsSubscribed = false;
-		internal event EventHandler<SocketResponseEventArgs>? OnPresenceDiff;
-		internal event EventHandler<SocketResponseEventArgs>? OnPresenceSync;
-		internal event EventHandler<SocketResponseEventArgs>? OnBroadcast;
 
-		private IRealtimeSocket socket;
+		/// <summary>
+		/// Returns the <see cref="IRealtimeBroadcast"/> instance.
+		/// </summary>
+		/// <returns></returns>
+		public IRealtimeBroadcast? Broadcast() => broadcast;
+
+		/// <summary>
+		/// Returns a typed <see cref="RealtimeBroadcast{TBroadcastModel}" /> instance.
+		/// </summary>
+		/// <typeparam name="TBroadcastModel"></typeparam>
+		/// <returns></returns>
+		public RealtimeBroadcast<TBroadcastModel>? Broadcast<TBroadcastModel>() where TBroadcastModel : BaseBroadcast => broadcast != null ? (RealtimeBroadcast<TBroadcastModel>)broadcast : default;
+
+		/// <summary>
+		/// Returns the <see cref="IRealtimePresence"/> instance.
+		/// </summary>
+		/// <returns></returns>
+		public IRealtimePresence? Presence() => presence;
+
+		/// <summary>
+		/// Returns a typed <see cref="RealtimePresence{T}"/> instance.
+		/// </summary>
+		/// <typeparam name="TPresenceModel">Model representing a Presence payload</typeparam>
+		/// <returns></returns>
+		public RealtimePresence<TPresenceModel>? Presence<TPresenceModel>() where TPresenceModel : BasePresence => presence != null ? (RealtimePresence<TPresenceModel>)presence : default;
 
 		/// <summary>
 		/// The initial request to join a channel (repeated on channel disconnect)
@@ -103,11 +138,19 @@ namespace Supabase.Realtime
 		internal Push? JoinPush;
 		internal Push? LastPush;
 
+		// Event handlers that pass events to typed instances for broadcast and presence.
+		internal event EventHandler<SocketResponseEventArgs>? OnBroadcast;
+		internal event EventHandler<SocketResponseEventArgs>? OnPresenceDiff;
+		internal event EventHandler<SocketResponseEventArgs>? OnPresenceSync;
+
 		/// <summary>
 		/// Buffer of Pushes held because of Socket availablity
 		/// </summary>
 		internal List<Push> buffer = new List<Push>();
 
+		private IRealtimeSocket socket;
+		private IRealtimePresence? presence;
+		private IRealtimeBroadcast? broadcast;
 		private bool canPush => IsJoined && socket.IsConnected;
 		private bool hasJoinedOnce = false;
 		private Timer rejoinTimer;
@@ -146,28 +189,55 @@ namespace Supabase.Realtime
 			rejoinTimer.AutoReset = true;
 		}
 
-		public IRealtimeChannel Register<TBroadcastResponse>(BroadcastOptions broadcastOptions, string eventName) where TBroadcastResponse : struct
+		/// <summary>
+		/// Registers a <see cref="RealtimeBroadcast{TBroadcastModel}"/> instance - allowing broadcast responses to be parsed.
+		/// </summary>
+		/// <typeparam name="TBroadcastResponse"></typeparam>
+		/// <param name="broadcastOptions"></param>
+		/// <returns></returns>
+		/// <exception cref="InvalidOperationException"></exception>
+		public IRealtimeChannel Register<TBroadcastResponse>(BroadcastOptions broadcastOptions) where TBroadcastResponse : BaseBroadcast
 		{
+			if (broadcast != null)
+				throw new InvalidOperationException("Register can only be called with broadcast options for a channel once.");
+
 			BroadcastOptions = broadcastOptions;
+			broadcast = new RealtimeBroadcast<TBroadcastResponse>(this, broadcastOptions, Options.SerializerSettings);
+
+			OnBroadcast += (sender, args) => broadcast.TriggerReceived(args);
 
 			return this;
 		}
 
-		public IRealtimeChannel Register(PresenceOptions presenceOptions)
+		/// <summary>
+		/// Registers a <see cref="RealtimePresence{TPresenceResponse}"/> instance - allowing presence responses to be parsed and state to be tracked.
+		/// </summary>
+		/// <typeparam name="TPresenceResponse">The model representing a presence payload.</typeparam>
+		/// <param name="presenceOptions"></param>
+		/// <returns></returns>
+		/// <exception cref="InvalidOperationException">Thrown if called multiple times.</exception>
+		public IRealtimeChannel Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : BasePresence
 		{
-			PresenceOptions = presenceOptions;
-			Presence = new RealtimePresence(this, presenceOptions);
+			if (presence != null)
+				throw new InvalidOperationException("Register can only be called with presence options for a channel once.");
 
-			OnPresenceSync += (sender, args) => Presence.TriggerSync(args);
-			OnPresenceDiff += (sender, args) => Presence.TriggerDiff(args);
+			PresenceOptions = presenceOptions;
+			presence = new RealtimePresence<TPresenceResponse>(this, presenceOptions, Options.SerializerSettings);
+
+			OnPresenceSync += (sender, args) => presence.TriggerSync(args);
+			OnPresenceDiff += (sender, args) => presence.TriggerDiff(args);
 
 			return this;
 		}
 
+		/// <summary>
+		/// Registers postgres_changes options, can be called multiple times.
+		/// </summary>
+		/// <param name="postgresChangesOptions"></param>
+		/// <returns></returns>
 		public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)
 		{
 			PostgresChangesOptions.Add(postgresChangesOptions);
-
 			return this;
 		}
 
@@ -263,24 +333,51 @@ namespace Supabase.Realtime
 		/// <param name="eventName"></param>
 		/// <param name="payload"></param>
 		/// <param name="timeoutMs"></param>
-		public void Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DEFAULT_TIMEOUT)
+		public Push Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DEFAULT_TIMEOUT)
 		{
 			if (!hasJoinedOnce)
 				throw new Exception($"Tried to push '{eventName}' to '{Topic}' before joining. Use `Channel.Subscribe()` before pushing events");
 
-			Enqueue(new Push(socket, this, eventName, type, payload, timeoutMs));
+			var push = new Push(socket, this, eventName, type, payload, timeoutMs);
+			Enqueue(push);
+
+			return push;
 		}
 
-		public void Send(ChannelType payloadType, Dictionary<string, object> payload, int timeoutMs = DEFAULT_TIMEOUT)
+		/// <summary>
+		/// Sends an arbitrary payload with a given payload type (<see cref="ChannelType"/>)
+		/// </summary>
+		/// <param name="payloadType"></param>
+		/// <param name="payload"></param>
+		/// <param name="timeoutMs"></param>
+		public Task<bool> Send(ChannelType payloadType, object payload, int timeoutMs = DEFAULT_TIMEOUT)
 		{
+			var tsc = new TaskCompletionSource<bool>();
+
 			var type = Core.Helpers.GetMappedToAttr(payloadType).Mapping;
-			Push(type, payload: payload, timeoutMs: timeoutMs);
+			var push = Push(type, payload: payload, timeoutMs: timeoutMs);
+
+			EventHandler<SocketResponseEventArgs>? messageCallback = null;
+			messageCallback = (object sender, SocketResponseEventArgs args) =>
+			{
+				tsc.SetResult(args.Response?.Event != EventType.Unknown);
+				push.OnMessage -= messageCallback;
+			};
+
+			push.OnMessage += messageCallback;
+
+			return tsc.Task;
 		}
 
-		public void Track(Dictionary<string, object> payload, int timeoutMs = DEFAULT_TIMEOUT)
+		/// <summary>
+		/// "Tracks" an event, used with <see cref="Presence"/>.
+		/// </summary>
+		/// <param name="payload"></param>
+		/// <param name="timeoutMs"></param>
+		public void Track(object payload, int timeoutMs = DEFAULT_TIMEOUT)
 		{
 			var type = Core.Helpers.GetMappedToAttr(ChannelType.Presence).Mapping;
-			Push(type, "track", payload, timeoutMs);
+			Push(type, "track", new Dictionary<string, object> { { "event", "track" }, { "payload", payload } }, timeoutMs);
 		}
 
 		public void Untrack()
@@ -299,6 +396,10 @@ namespace Supabase.Realtime
 			SendJoin(timeoutMs);
 		}
 
+		/// <summary>
+		/// Enqueues a message.
+		/// </summary>
+		/// <param name="push"></param>
 		private void Enqueue(Push push)
 		{
 			LastPush = push;
@@ -314,8 +415,17 @@ namespace Supabase.Realtime
 			}
 		}
 
+		/// <summary>
+		/// Generates the Join Push message by merging broadcast, presence, and postgres_changes options.
+		/// </summary>
+		/// <returns></returns>
 		private Push GenerateJoinPush() => new Push(socket, this, CHANNEL_EVENT_JOIN, payload: new JoinPush(BroadcastOptions, PresenceOptions, PostgresChangesOptions));
 
+		/// <summary>
+		/// If the channel errors internally (pheonix error, not transport) attempt rejoining.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void HandleRejoinTimerElapsed(object sender, ElapsedEventArgs e)
 		{
 			if (isRejoining) return;
@@ -332,6 +442,10 @@ namespace Supabase.Realtime
 			Rejoin();
 		}
 
+		/// <summary>
+		/// Sends the pheonix server a join message.
+		/// </summary>
+		/// <param name="timeoutMs"></param>
 		private void SendJoin(int timeoutMs = DEFAULT_TIMEOUT)
 		{
 			SetState(ChannelState.Joining);
@@ -347,6 +461,11 @@ namespace Supabase.Realtime
 			JoinPush.Resend(timeoutMs);
 		}
 
+		/// <summary>
+		/// Handles a recieved join response (received after sending on subscribe/reconnection)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="args"></param>
 		private void HandleJoinResponse(object sender, SocketResponseEventArgs args)
 		{
 			if (args.Response._event == CHANNEL_EVENT_REPLY)
@@ -373,12 +492,20 @@ namespace Supabase.Realtime
 			}
 		}
 
+		/// <summary>
+		/// Sets the instance's current state.
+		/// </summary>
+		/// <param name="state"></param>
 		private void SetState(ChannelState state)
 		{
 			State = state;
 			StateChanged?.Invoke(this, new ChannelStateChangedEventArgs(state));
 		}
 
+		/// <summary>
+		/// Called when a socket message is recieved, parses the correct event handler to pass to.
+		/// </summary>
+		/// <param name="args"></param>
 		internal void HandleSocketMessage(SocketResponseEventArgs args)
 		{
 			if (args.Response.Ref == JoinPush?.Ref) return;
@@ -411,6 +538,11 @@ namespace Supabase.Realtime
 			}
 		}
 
+		/// <summary>
+		/// Triggers events for a channel's state changing.
+		/// </summary>
+		/// <param name="args"></param>
+		/// <param name="shouldRejoin"></param>
 		private void TriggerChannelStateEvent(ChannelStateChangedEventArgs args, bool shouldRejoin = true)
 		{
 			SetState(args.State);

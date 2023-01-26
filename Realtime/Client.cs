@@ -6,22 +6,24 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
+using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
 
 namespace Supabase.Realtime
 {
-    /// <summary>
-    /// Singleton that represents a Client connection to a Realtime Server.
-    ///
-    /// It maintains a singular Websocket with asynchronous listeners (RealtimeChannels).
-    /// </summary>
-    /// <example>
-    ///     client = Client.Instance
-    /// </example>
-    public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
+	/// <summary>
+	/// Singleton that represents a Client connection to a Realtime Server.
+	///
+	/// It maintains a singular Websocket with asynchronous listeners (RealtimeChannels).
+	/// </summary>
+	/// <example>
+	///     client = Client.Instance
+	/// </example>
+	public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
 	{
 		/// <summary>
 		/// Contains all Realtime RealtimeChannel Subscriptions - state managed internally.
@@ -371,15 +373,16 @@ namespace Supabase.Realtime
 
 		private void HandleSocketStateChanged(object sender, SocketStateChangedEventArgs args)
 		{
-			Options.Logger("socket", "state changed", args.State);
+			if (args.State != SocketStateChangedEventArgs.ConnectionState.Message)
+				Options.Logger("socket", "state changed", args.State.ToString().ToLower());
+
 			switch (args.State)
 			{
 				case SocketStateChangedEventArgs.ConnectionState.Open:
 					// Ref: https://github.com/supabase/realtime-js/pull/116/files
 					if (!string.IsNullOrEmpty(AccessToken))
-					{
 						SetAuth(AccessToken!);
-					}
+
 					OnOpen?.Invoke(this, args);
 					break;
 				case SocketStateChangedEventArgs.ConnectionState.Close:

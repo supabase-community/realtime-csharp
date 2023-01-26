@@ -5,10 +5,13 @@ using System.Text;
 
 namespace Supabase.Realtime.Broadcast
 {
+    /// <summary>
+    /// Options 
+    /// </summary>
     public class BroadcastOptions
     {
         /// <summary>
-        /// self option enables client to receive message it broadcast
+        /// self option enables client to receive message it broadcasted
         /// </summary>
         [JsonProperty("self")]
         public bool BroadcastSelf { get; set; } = false;

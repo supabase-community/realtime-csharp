@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Supabase.Realtime.Models
 {
+	/// <summary>
+	/// Represents an arbitrary Presence response.
+	/// </summary>
 	public class BasePresence
 	{
 		[JsonProperty("phx_ref")]
@@ -12,5 +15,8 @@ namespace Supabase.Realtime.Models
 
 		[JsonProperty("phx_ref_prev")]
 		public string? PheonixPrevRef { get; set; }
+
+		public bool ShouldSerializePheonixRef() => false;
+		public bool ShouldSerializePheonixPrevRef() => false;
 	}
 }

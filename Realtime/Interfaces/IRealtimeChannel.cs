@@ -10,7 +10,7 @@ using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Interfaces
 {
-    public interface IRealtimeChannel
+	public interface IRealtimeChannel
 	{
 		bool HasJoinedOnce { get; }
 		bool IsClosed { get; }
@@ -33,14 +33,17 @@ namespace Supabase.Realtime.Interfaces
 		event EventHandler<SocketResponseEventArgs> OnUpdate;
 		event EventHandler<ChannelStateChangedEventArgs> StateChanged;
 
-		RealtimePresence? Presence { get; }
+		IRealtimeBroadcast? Broadcast();
+		IRealtimePresence? Presence();
 
-		void Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DEFAULT_TIMEOUT);
+		Push Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DEFAULT_TIMEOUT);
 		void Rejoin(int timeoutMs = DEFAULT_TIMEOUT);
-		void Send(ChannelType payloadType, Dictionary<string, object> payload, int timeoutMs = DEFAULT_TIMEOUT);
+		Task<bool> Send(ChannelType payloadType, object payload, int timeoutMs = DEFAULT_TIMEOUT);
 
-		IRealtimeChannel Register<TBroadcastResponse>(BroadcastOptions broadcastOptions, string eventName) where TBroadcastResponse : struct;
-		IRealtimeChannel Register(PresenceOptions presenceOptions);
+		void Track(object payload, int timeoutMs = DEFAULT_TIMEOUT);
+
+		IRealtimeChannel Register<TBroadcastResponse>(BroadcastOptions broadcastOptions) where TBroadcastResponse : BaseBroadcast;
+		IRealtimeChannel Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : BasePresence;
 		IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions);
 
 		Task<IRealtimeChannel> Subscribe(int timeoutMs = DEFAULT_TIMEOUT);

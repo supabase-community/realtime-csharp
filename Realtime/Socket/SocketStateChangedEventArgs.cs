@@ -9,7 +9,8 @@ namespace Supabase.Realtime.Socket
             Open,
             Close,
             Error,
-            Message
+            Message,
+            Reconnected
         }
 
         public ConnectionState State { get; set; }

@@ -2,6 +2,9 @@
 
 namespace Supabase.Realtime.Presence
 {
+    /// <summary>
+    /// Options used to initialize Realtime Presence
+    /// </summary>
     public class PresenceOptions
     {
         /// <summary>

@@ -114,9 +114,7 @@ namespace Supabase.Realtime
 
 			connection.ReconnectionHappened.Subscribe(reconnectionInfo =>
 			{
-				var type = reconnectionInfo.Type;
-
-				if (type == ReconnectionType.Error || type == ReconnectionType.Lost || type == ReconnectionType.NoMessageReceived || type == ReconnectionType.ByServer)
+				if (reconnectionInfo.Type != ReconnectionType.Initial)
 					isReconnecting = true;
 
 				OnConnectionOpened(this, new EventArgs { });
