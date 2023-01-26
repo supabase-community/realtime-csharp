@@ -28,12 +28,12 @@ namespace Supabase.Realtime
 		/// <summary>
 		/// The Last State of this Presence instance.
 		/// </summary>
-		public Dictionary<string, List<TPresenceModel>> LastState { get; private set; } = new();
+		public Dictionary<string, List<TPresenceModel>> LastState { get; private set; } = new Dictionary<string, List<TPresenceModel>>();
 
 		/// <summary>
 		/// The Current State of this Presence instance.
 		/// </summary>
-		public Dictionary<string, List<TPresenceModel>> CurrentState { get; private set; } = new();
+		public Dictionary<string, List<TPresenceModel>> CurrentState { get; private set; } = new Dictionary<string, List<TPresenceModel>>();
 
 		/// <summary>
 		/// Called when Presence Joins (incoming changes) are present in a websocket response.

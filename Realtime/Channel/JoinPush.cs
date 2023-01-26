@@ -22,13 +22,13 @@ namespace Supabase.Realtime.Channel
 
 		internal class JoinPushConfig
 		{
-			[JsonProperty("broadcast")]
+			[JsonProperty("broadcast", NullValueHandling = NullValueHandling.Ignore)]
 			public BroadcastOptions? Broadcast { get; set; }
 
-			[JsonProperty("presence")]
+			[JsonProperty("presence", NullValueHandling = NullValueHandling.Ignore)]
 			public PresenceOptions? Presence { get; set; }
 
-			[JsonProperty("postgres_changes")]
+			[JsonProperty("postgres_changes", NullValueHandling = NullValueHandling.Ignore)]
 			public List<PostgresChangesOptions> PostgresChanges { get; set; } = new List<PostgresChangesOptions> { };
 		}
 	}
