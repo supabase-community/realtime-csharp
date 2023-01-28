@@ -1,20 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.808.2
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realtime", "Realtime\Realtime.csproj", "{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realtime", "Realtime\Realtime.csproj", "{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeTests", "RealtimeTests\RealtimeTests.csproj", "{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DA83318-C23A-4202-82C3-88ECB41998CD}"
 	ProjectSection(SolutionItems) = preProject
+		RealtimeTests\.runsettings = RealtimeTests\.runsettings
+		CHANGELOG.md = CHANGELOG.md
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
-		CHANGELOG.md = CHANGELOG.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtimeExample", "RealtimeExample\RealtimeExample.csproj", "{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeExample", "RealtimeExample\RealtimeExample.csproj", "{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

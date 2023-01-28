@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Postgrest.Models;
 using Supabase.Realtime.Interfaces;
+using Supabase.Realtime.PostgresChanges;
 using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Socket
@@ -23,64 +24,10 @@ namespace Supabase.Realtime.Socket
 	/// </summary>
 	public class SocketResponse : IRealtimeSocketResponse
 	{
-		private JsonSerializerSettings serializerSettings;
+		protected JsonSerializerSettings serializerSettings;
 		public SocketResponse(JsonSerializerSettings serializerSettings)
 		{
 			this.serializerSettings = serializerSettings;
-		}
-
-		/// <summary>
-		/// Converts an arbitrary payload response to a given type. This will likely be a derivative of `BasePresence` or `BaseBroadcast`
-		/// </summary>
-		/// <typeparam name="TPayload"></typeparam>
-		/// <returns></returns>
-		public TPayload? GetPayload<TPayload>() where TPayload : class
-		{
-			if (Json != null)
-			{
-				var response = JsonConvert.DeserializeObject<SocketResponse<TPayload>>(Json, serializerSettings);
-				return response?.Payload;
-			}
-			else
-			{
-				return default;
-			}
-		}
-
-		/// <summary>
-		/// Hydrates the referenced record into a Model (if possible).
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public TModel? Model<TModel>() where TModel : BaseModel, new()
-		{
-			if (Json != null && Payload != null && Payload.Record != null)
-			{
-				var response = JsonConvert.DeserializeObject<SocketResponse<SocketResponsePayload<TModel>>>(Json, serializerSettings);
-				return response?.Payload?.Record;
-			}
-			else
-			{
-				return default;
-			}
-		}
-
-		/// <summary>
-		/// Hydrates the old_record into a Model (if possible).
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public TModel? OldModel<TModel>() where TModel : BaseModel, new()
-		{
-			if (Json != null && Payload != null && Payload.OldRecord != null)
-			{
-				var response = JsonConvert.DeserializeObject<SocketResponse<SocketResponsePayload<TModel>>>(Json, serializerSettings);
-				return response?.Payload?.OldRecord;
-			}
-			else
-			{
-				return default;
-			}
 		}
 
 		/// <summary>
@@ -105,21 +52,13 @@ namespace Supabase.Realtime.Socket
 						return EventType.PresenceDiff;
 					case "broadcast":
 						return EventType.Broadcast;
+					case "postgres_changes":
+						return EventType.PostgresChanges;
 				}
 
 				if (Payload == null) return EventType.Unknown;
 
-				switch (Payload.Type)
-				{
-					case "INSERT":
-						return EventType.Insert;
-					case "UPDATE":
-						return EventType.Update;
-					case "DELETE":
-						return EventType.Delete;
-				}
-
-				return EventType.Unknown;
+				return Payload.Type;
 			}
 		}
 

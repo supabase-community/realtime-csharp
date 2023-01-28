@@ -10,6 +10,7 @@ using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
+using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
 
@@ -184,6 +185,7 @@ namespace Supabase.Realtime
 
 				socket.StateChanged += HandleSocketStateChanged;
 				socket.OnMessage += HandleSocketMessage;
+				socket.OnHeartbeat += HandleSocketHeartbeat;
 
 				socket.StateChanged += callback;
 				socket.Connect();
@@ -337,7 +339,7 @@ namespace Supabase.Realtime
 			if (socket == null)
 				throw new Exception("Socket must exist, was `Connect` called?");
 
-			var changesOptions = new PostgresChangesOptions(schema, table, column != null && value != null ? $"{column}=eq.{value}" : null, parameters);
+			var changesOptions = new PostgresChangesOptions(schema, table, filter: column != null && value != null ? $"{column}=eq.{value}" : null, parameters: parameters);
 			var options = new ChannelOptions(Options, SerializerSettings);
 
 			var subscription = new RealtimeChannel(socket!, key, options);

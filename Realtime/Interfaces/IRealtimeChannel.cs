@@ -1,6 +1,7 @@
 ﻿using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Models;
+using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
 using System;
@@ -10,7 +11,7 @@ using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Interfaces
 {
-	public interface IRealtimeChannel
+    public interface IRealtimeChannel
 	{
 		bool HasJoinedOnce { get; }
 		bool IsClosed { get; }
@@ -25,13 +26,14 @@ namespace Supabase.Realtime.Interfaces
 		ChannelState State { get; }
 		string Topic { get; }
 
-		event EventHandler<ChannelStateChangedEventArgs> OnClose;
-		event EventHandler<SocketResponseEventArgs> OnDelete;
-		event EventHandler<ChannelStateChangedEventArgs> OnError;
-		event EventHandler<SocketResponseEventArgs> OnInsert;
 		event EventHandler<SocketResponseEventArgs> OnMessage;
-		event EventHandler<SocketResponseEventArgs> OnUpdate;
 		event EventHandler<ChannelStateChangedEventArgs> StateChanged;
+		event EventHandler<ChannelStateChangedEventArgs> OnClose;
+		event EventHandler<ChannelStateChangedEventArgs> OnError;
+		event EventHandler<PostgresChangesEventArgs> OnDelete;
+		event EventHandler<PostgresChangesEventArgs> OnInsert;
+		event EventHandler<PostgresChangesEventArgs> OnUpdate;
+		event EventHandler<PostgresChangesEventArgs> OnPostgresChange;
 
 		IRealtimeBroadcast? Broadcast();
 		IRealtimePresence? Presence();

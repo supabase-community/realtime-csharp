@@ -11,6 +11,7 @@ using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
+using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
 using Supabase.Realtime.Socket.Responses;
@@ -20,25 +21,30 @@ using Timer = System.Timers.Timer;
 [assembly: InternalsVisibleTo("RealtimeTests")]
 namespace Supabase.Realtime
 {
-	/// <summary>
-	/// Class representation of a channel subscription
-	/// </summary>
-	public class RealtimeChannel : IRealtimeChannel
+    /// <summary>
+    /// Class representation of a channel subscription
+    /// </summary>
+    public class RealtimeChannel : IRealtimeChannel
 	{
 		/// <summary>
 		/// Invoked when the `INSERT` event is raised.
 		/// </summary>
-		public event EventHandler<SocketResponseEventArgs>? OnInsert;
+		public event EventHandler<PostgresChangesEventArgs>? OnInsert;
 
 		/// <summary>
 		/// Invoked when the `UPDATE` event is raised.
 		/// </summary>
-		public event EventHandler<SocketResponseEventArgs>? OnUpdate;
+		public event EventHandler<PostgresChangesEventArgs>? OnUpdate;
 
 		/// <summary>
 		/// Invoked when the `DELETE` event is raised.
 		/// </summary>
-		public event EventHandler<SocketResponseEventArgs>? OnDelete;
+		public event EventHandler<PostgresChangesEventArgs>? OnDelete;
+
+		/// <summary>
+		/// Invoked when an Postgres Change event is raised.
+		/// </summary>
+		public event EventHandler<PostgresChangesEventArgs>? OnPostgresChange;
 
 		/// <summary>
 		/// Invoked anytime a message is decoded within this topic.
@@ -92,7 +98,7 @@ namespace Supabase.Realtime
 		public PresenceOptions? PresenceOptions { get; protected set; }
 
 		/// <summary>
-		/// The saved Postgres Changes Options, set in <see cref="Register(Channel.PostgresChangesOptions)"/>
+		/// The saved Postgres Changes Options, set in <see cref="Register(PostgresChanges.PostgresChangesOptions)"/>
 		/// </summary>
 		public List<PostgresChangesOptions> PostgresChangesOptions { get; private set; } = new List<PostgresChangesOptions>();
 
@@ -517,14 +523,26 @@ namespace Supabase.Realtime
 
 			switch (args.Response.Event)
 			{
-				case EventType.Insert:
-					OnInsert?.Invoke(this, args);
-					break;
-				case EventType.Update:
-					OnUpdate?.Invoke(this, args);
-					break;
-				case EventType.Delete:
-					OnDelete?.Invoke(this, args);
+				case EventType.PostgresChanges:
+					var deserialize = JsonConvert.DeserializeObject<PostgresChangesResponse>(args.Response.Json!, Options.SerializerSettings);
+					deserialize!.Json = args.Response.Json;
+					var newArgs = new PostgresChangesEventArgs(deserialize!);
+
+					// Invoke '*' listener
+					OnPostgresChange?.Invoke(this, newArgs);
+
+					switch (deserialize!.Payload!.Data!.Type)
+					{
+						case EventType.Insert:
+							OnInsert?.Invoke(this, newArgs);
+							break;
+						case EventType.Update:
+							OnUpdate?.Invoke(this, newArgs);
+							break;
+						case EventType.Delete:
+							OnDelete?.Invoke(this, newArgs);
+							break;
+					}
 					break;
 				case EventType.Broadcast:
 					OnBroadcast?.Invoke(this, args);

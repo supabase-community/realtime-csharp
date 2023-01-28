@@ -10,8 +10,5 @@ namespace Supabase.Realtime.Interfaces
         SocketResponsePayload? Payload { get; set; }
         string? Ref { get; set; }
         string? Topic { get; set; }
-
-        TModel? Model<TModel>() where TModel: BaseModel, new();
-        TModel? OldModel<TModel>() where TModel: BaseModel, new();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Supabase.Realtime.Broadcast;
+using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Presence;
 
 namespace Supabase.Realtime.Channel

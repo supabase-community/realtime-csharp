@@ -3,6 +3,7 @@ using Postgrest.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Socket
 {
@@ -70,7 +71,26 @@ namespace Supabase.Realtime.Socket
 		/// The action type performed (INSERT, UPDATE, DELETE, etc.)
 		/// </summary>
 		[JsonProperty("type")]
-		public string? Type { get; set; }
+		public string? _type { get; set; }
+
+		[JsonIgnore]
+		public EventType Type
+		{
+			get
+			{
+				switch (_type)
+				{
+					case "INSERT":
+						return EventType.Insert;
+					case "UPDATE":
+						return EventType.Update;
+					case "DELETE":
+						return EventType.Delete;
+				}
+
+				return EventType.Unknown;
+			}
+		}
 
 		[Obsolete("Property no longer used in responses.")]
 		[JsonProperty("status")]
