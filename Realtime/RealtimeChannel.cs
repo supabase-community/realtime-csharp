@@ -202,17 +202,19 @@ namespace Supabase.Realtime
 		/// <param name="broadcastOptions"></param>
 		/// <returns></returns>
 		/// <exception cref="InvalidOperationException"></exception>
-		public IRealtimeChannel Register<TBroadcastResponse>(BroadcastOptions broadcastOptions) where TBroadcastResponse : BaseBroadcast
+		public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(BroadcastOptions broadcastOptions) where TBroadcastResponse : BaseBroadcast
 		{
 			if (broadcast != null)
 				throw new InvalidOperationException("Register can only be called with broadcast options for a channel once.");
 
 			BroadcastOptions = broadcastOptions;
-			broadcast = new RealtimeBroadcast<TBroadcastResponse>(this, broadcastOptions, Options.SerializerSettings);
+			
+			var instance = new RealtimeBroadcast<TBroadcastResponse>(this, broadcastOptions, Options.SerializerSettings);
+			broadcast = instance;
 
 			OnBroadcast += (sender, args) => broadcast.TriggerReceived(args);
 
-			return this;
+			return instance;
 		}
 
 		/// <summary>
@@ -222,18 +224,19 @@ namespace Supabase.Realtime
 		/// <param name="presenceOptions"></param>
 		/// <returns></returns>
 		/// <exception cref="InvalidOperationException">Thrown if called multiple times.</exception>
-		public IRealtimeChannel Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : BasePresence
+		public RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : BasePresence
 		{
 			if (presence != null)
 				throw new InvalidOperationException("Register can only be called with presence options for a channel once.");
 
 			PresenceOptions = presenceOptions;
-			presence = new RealtimePresence<TPresenceResponse>(this, presenceOptions, Options.SerializerSettings);
+			var instance = new RealtimePresence<TPresenceResponse>(this, presenceOptions, Options.SerializerSettings);
+			presence = instance;
 
 			OnPresenceSync += (sender, args) => presence.TriggerSync(args);
 			OnPresenceDiff += (sender, args) => presence.TriggerDiff(args);
 
-			return this;
+			return instance;
 		}
 
 		/// <summary>

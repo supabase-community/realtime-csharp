@@ -30,6 +30,8 @@ namespace Supabase.Realtime
 		private BroadcastOptions options;
 		private JsonSerializerSettings serializerSettings;
 
+		private SocketResponse lastSocketResponse;
+
 		/// <summary>
 		/// The last received broadcast.
 		/// </summary>
@@ -52,6 +54,7 @@ namespace Supabase.Realtime
 			if (args.Response == null || args.Response.Json == null)
 				throw new ArgumentException(string.Format("Expected parsable JSON response, instead recieved: `{0}`", JsonConvert.SerializeObject(args.Response)));
 
+			lastSocketResponse = args.Response;
 			var obj = JsonConvert.DeserializeObject<SocketResponse<TBroadcastModel>>(args.Response.Json, serializerSettings);
 
 			if (obj == null || obj.Payload == null) return;

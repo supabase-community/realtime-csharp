@@ -44,8 +44,8 @@ namespace Supabase.Realtime.Interfaces
 
 		void Track(object payload, int timeoutMs = DEFAULT_TIMEOUT);
 
-		IRealtimeChannel Register<TBroadcastResponse>(BroadcastOptions broadcastOptions) where TBroadcastResponse : BaseBroadcast;
-		IRealtimeChannel Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : BasePresence;
+		RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(BroadcastOptions broadcastOptions) where TBroadcastResponse : BaseBroadcast;
+		RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : BasePresence;
 		IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions);
 
 		Task<IRealtimeChannel> Subscribe(int timeoutMs = DEFAULT_TIMEOUT);

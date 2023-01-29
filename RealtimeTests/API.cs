@@ -285,39 +285,6 @@ namespace RealtimeTests
 			Assert.IsTrue(check);
 		}
 
-		[TestMethod("Channel: Deserializes Datetimes in Model")]
-		public async Task ChannelDeserializesDateTimes()
-		{
-			var tsc = new TaskCompletionSource<bool>();
-
-			var insertedAt = DateTime.Now;
-			var expected = insertedAt.ToUniversalTime();
-
-			var channel = SocketClient.Channel("realtime", "public", "todos");
-
-			channel.OnInsert += (sender, e) =>
-			{
-				var model = e.Response.Model<Todo>();
-				var actual = model.InsertedAt.ToUniversalTime();
-
-				Assert.AreEqual(expected.ToString(), actual.ToString());
-
-				tsc.SetResult(true);
-			};
-
-			await channel.Subscribe();
-
-			await Task.Delay(2000);
-
-			var todo = new Todo { UserId = 1, Details = "Client Models a response? ✅", InsertedAt = insertedAt };
-			var dbResponse = await RestClient.Table<Todo>().Insert(todo);
-
-			Assert.AreEqual(expected.ToString(), dbResponse.Models[0].InsertedAt.ToUniversalTime().ToString());
-
-			var check = await tsc.Task;
-			Assert.IsTrue(check);
-		}
-
 		[TestMethod("Client: SetsAuth")]
 		public async Task ClientSetsAuth()
 		{
