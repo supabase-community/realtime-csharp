@@ -39,14 +39,14 @@ namespace RealtimeTests
 
 		public static Task<Session> GetSession() => AuthClient.SignInWithPassword(supabaseUsername, supabasePassword);
 
-		public static Client SocketClient()
+		public static Supabase.Realtime.Client SocketClient()
 		{
-			var client = new Client(socketEndpoint, new ClientOptions
-			{
+			var client = new Supabase.Realtime.Client(socketEndpoint, new ClientOptions
+            {
 				Parameters = new SocketOptionsParameters
-				{
+                {
 					ApiKey = supabasePublicKey
-				}
+                }
 			});
 
 			return client;
