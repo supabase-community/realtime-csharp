@@ -54,10 +54,10 @@ namespace RealtimeTests
 			var guid2 = Guid.NewGuid().ToString();
 
 			var channel1 = SocketClient.Channel("online-users");
-			var presence = channel1.Register<TimePresence>(new PresenceOptions(guid1));
-			presence.OnSync += (sender, args) =>
+			var presence1 = channel1.Register<TimePresence>(guid1);
+			presence1.OnSync += (sender, args) =>
 			{
-				if (presence.CurrentState.ContainsKey(guid2))
+				if (presence1.CurrentState.ContainsKey(guid2))
 				{
 					tsc.SetResult(true);
 				}
@@ -66,7 +66,7 @@ namespace RealtimeTests
 			var client2 = Helpers.SocketClient();
 			await client2.ConnectAsync();
 			var channel2 = client2.Channel("online-users");
-			channel2.Register<TimePresence>(new PresenceOptions(guid2));
+			var presence2 = channel2.Register<TimePresence>(guid2);
 			channel2.Presence<TimePresence>().OnSync += (sender, args) =>
 			{
 				if (channel2.Presence<TimePresence>().CurrentState.ContainsKey(guid1))
@@ -78,8 +78,8 @@ namespace RealtimeTests
 			await channel1.Subscribe();
 			await channel2.Subscribe();
 
-			channel1.Track(new TimePresence { Time = DateTime.Now });
-			channel2.Track(new TimePresence { Time = DateTime.Now });
+			presence1.Track(new TimePresence { Time = DateTime.Now });
+			presence2.Track(new TimePresence { Time = DateTime.Now });
 
 			await Task.WhenAll(new [] { tsc.Task, tsc2.Task });
 		}

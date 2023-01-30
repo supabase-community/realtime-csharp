@@ -168,6 +168,35 @@ namespace Supabase.Realtime
 		}
 
 		/// <summary>
+		/// Returns the latency (in millis) of roundtrip time from socket to server and back.
+		/// </summary>
+		/// <returns></returns>
+		public Task<double> GetLatency()
+		{
+			var tsc = new TaskCompletionSource<double>();
+
+			var start = DateTime.Now;
+			var pingRef = Guid.NewGuid().ToString();
+
+			EventHandler<SocketResponseEventArgs>? handler = null;
+
+			handler = (sender, args) =>
+			{
+				if (args.Response.Ref == pingRef)
+				{
+					OnMessage -= handler;
+					tsc.SetResult((DateTime.Now - start).TotalMilliseconds);
+				}
+			};
+
+			OnMessage += handler;
+
+			Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pingRef });
+
+			return tsc.Task;
+		}
+
+		/// <summary>
 		/// Maintains a heartbeat connection with the socket server to prevent disconnection.
 		/// </summary>
 		private void SendHeartbeat()
