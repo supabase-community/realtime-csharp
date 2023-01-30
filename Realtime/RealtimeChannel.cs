@@ -21,10 +21,10 @@ using Timer = System.Timers.Timer;
 [assembly: InternalsVisibleTo("RealtimeTests")]
 namespace Supabase.Realtime
 {
-    /// <summary>
-    /// Class representation of a channel subscription
-    /// </summary>
-    public class RealtimeChannel : IRealtimeChannel
+	/// <summary>
+	/// Class representation of a channel subscription
+	/// </summary>
+	public class RealtimeChannel : IRealtimeChannel
 	{
 		/// <summary>
 		/// Invoked when the `INSERT` event is raised.
@@ -199,17 +199,18 @@ namespace Supabase.Realtime
 		/// Registers a <see cref="RealtimeBroadcast{TBroadcastModel}"/> instance - allowing broadcast responses to be parsed.
 		/// </summary>
 		/// <typeparam name="TBroadcastResponse"></typeparam>
-		/// <param name="broadcastOptions"></param>
+		/// <param name="broadcastSelf">enables client to receive message it broadcasted</param>
+		/// <param name="broadcastAck">instructs server to acknowledge that broadcast message was received</param>
 		/// <returns></returns>
 		/// <exception cref="InvalidOperationException"></exception>
-		public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(BroadcastOptions broadcastOptions) where TBroadcastResponse : BaseBroadcast
+		public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(bool broadcastSelf = false, bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast
 		{
 			if (broadcast != null)
 				throw new InvalidOperationException("Register can only be called with broadcast options for a channel once.");
 
-			BroadcastOptions = broadcastOptions;
-			
-			var instance = new RealtimeBroadcast<TBroadcastResponse>(this, broadcastOptions, Options.SerializerSettings);
+			BroadcastOptions = new BroadcastOptions(broadcastSelf, broadcastAck);
+
+			var instance = new RealtimeBroadcast<TBroadcastResponse>(this, BroadcastOptions, Options.SerializerSettings);
 			broadcast = instance;
 
 			OnBroadcast += (sender, args) => broadcast.TriggerReceived(args);
@@ -221,16 +222,16 @@ namespace Supabase.Realtime
 		/// Registers a <see cref="RealtimePresence{TPresenceResponse}"/> instance - allowing presence responses to be parsed and state to be tracked.
 		/// </summary>
 		/// <typeparam name="TPresenceResponse">The model representing a presence payload.</typeparam>
-		/// <param name="presenceOptions"></param>
+		/// <param name="presenceKey">used to track presence payload across clients</param>
 		/// <returns></returns>
 		/// <exception cref="InvalidOperationException">Thrown if called multiple times.</exception>
-		public RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(PresenceOptions presenceOptions) where TPresenceResponse : BasePresence
+		public RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(string presenceKey) where TPresenceResponse : BasePresence
 		{
 			if (presence != null)
 				throw new InvalidOperationException("Register can only be called with presence options for a channel once.");
 
-			PresenceOptions = presenceOptions;
-			var instance = new RealtimePresence<TPresenceResponse>(this, presenceOptions, Options.SerializerSettings);
+			PresenceOptions = new PresenceOptions(presenceKey);
+			var instance = new RealtimePresence<TPresenceResponse>(this, PresenceOptions, Options.SerializerSettings);
 			presence = instance;
 
 			OnPresenceSync += (sender, args) => presence.TriggerSync(args);
@@ -354,19 +355,20 @@ namespace Supabase.Realtime
 		}
 
 		/// <summary>
-		/// Sends an arbitrary payload with a given payload type (<see cref="ChannelType"/>)
+		/// Sends an arbitrary payload with a given payload type (<see cref="ChannelEventName"/>)
 		/// </summary>
-		/// <param name="payloadType"></param>
+		/// <param name="eventType"></param>
 		/// <param name="payload"></param>
 		/// <param name="timeoutMs"></param>
-		public Task<bool> Send(ChannelType payloadType, object payload, int timeoutMs = DEFAULT_TIMEOUT)
+		public Task<bool> Send(ChannelEventName eventType, string? type, object payload, int timeoutMs = DEFAULT_TIMEOUT)
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
-			var type = Core.Helpers.GetMappedToAttr(payloadType).Mapping;
-			var push = Push(type, payload: payload, timeoutMs: timeoutMs);
+			var eventName = Core.Helpers.GetMappedToAttr(eventType).Mapping;
+			var push = Push(eventName, type, payload, timeoutMs);
 
 			EventHandler<SocketResponseEventArgs>? messageCallback = null;
+
 			messageCallback = (object sender, SocketResponseEventArgs args) =>
 			{
 				tsc.SetResult(args.Response?.Event != EventType.Unknown);
@@ -376,23 +378,6 @@ namespace Supabase.Realtime
 			push.OnMessage += messageCallback;
 
 			return tsc.Task;
-		}
-
-		/// <summary>
-		/// "Tracks" an event, used with <see cref="Presence"/>.
-		/// </summary>
-		/// <param name="payload"></param>
-		/// <param name="timeoutMs"></param>
-		public void Track(object payload, int timeoutMs = DEFAULT_TIMEOUT)
-		{
-			var type = Core.Helpers.GetMappedToAttr(ChannelType.Presence).Mapping;
-			Push(type, "track", new Dictionary<string, object> { { "event", "track" }, { "payload", payload } }, timeoutMs);
-		}
-
-		public void Untrack()
-		{
-			var type = Core.Helpers.GetMappedToAttr(ChannelType.Presence).Mapping;
-			Push(type, "untrack");
 		}
 
 		/// <summary>

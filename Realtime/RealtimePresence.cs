@@ -1,17 +1,12 @@
 ﻿using Newtonsoft.Json;
-using Supabase.Core.Attributes;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
 using Supabase.Realtime.Presence;
 using Supabase.Realtime.Presence.Responses;
 using Supabase.Realtime.Socket;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
+using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime
 {
@@ -100,6 +95,23 @@ namespace Supabase.Realtime
 
 			if (obj.Payload.Leaves!.Count > 0)
 				OnLeave?.Invoke(this, null);
+		}
+
+		/// <summary>
+		/// "Tracks" an event, used with <see cref="Presence"/>.
+		/// </summary>
+		/// <param name="payload"></param>
+		/// <param name="timeoutMs"></param>
+		public void Track(object? payload, int timeoutMs = DEFAULT_TIMEOUT)
+		{
+			var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
+			channel.Push(eventName, "track", new Dictionary<string, object> { { "event", "track" }, { "payload", payload } }, timeoutMs);
+		}
+
+		public void Untrack()
+		{
+			var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
+			channel.Push(eventName, "untrack");
 		}
 
 		/// <summary>

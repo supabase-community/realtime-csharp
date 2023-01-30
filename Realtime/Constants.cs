@@ -34,7 +34,7 @@ namespace Supabase.Realtime
 			Leave
 		}
 
-        public enum ChannelType
+        public enum ChannelEventName
         {
             [MapTo("broadcast")]
             Broadcast,

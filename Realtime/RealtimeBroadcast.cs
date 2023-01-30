@@ -8,6 +8,8 @@ using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime
 {
@@ -30,12 +32,21 @@ namespace Supabase.Realtime
 		private BroadcastOptions options;
 		private JsonSerializerSettings serializerSettings;
 
-		private SocketResponse lastSocketResponse;
+		private SocketResponse? lastSocketResponse;
 
 		/// <summary>
 		/// The last received broadcast.
 		/// </summary>
-		public TBroadcastModel? Current { get; private set; }
+		public TBroadcastModel? Current()
+		{
+			if (lastSocketResponse == null) return null;
+
+			var obj = JsonConvert.DeserializeObject<SocketResponse<TBroadcastModel>>(lastSocketResponse.Json!, serializerSettings);
+
+			if (obj == null || obj.Payload == null) return null;
+
+			return obj.Payload;
+		}
 
 		public RealtimeBroadcast(RealtimeChannel channel, BroadcastOptions options, JsonSerializerSettings serializerSettings)
 		{
@@ -55,12 +66,15 @@ namespace Supabase.Realtime
 				throw new ArgumentException(string.Format("Expected parsable JSON response, instead recieved: `{0}`", JsonConvert.SerializeObject(args.Response)));
 
 			lastSocketResponse = args.Response;
-			var obj = JsonConvert.DeserializeObject<SocketResponse<TBroadcastModel>>(args.Response.Json, serializerSettings);
-
-			if (obj == null || obj.Payload == null) return;
-
-			Current = obj.Payload;
 			OnBroadcast?.Invoke(this, null);
 		}
+
+		/// <summary>
+		/// Broadcasts an arbitrary payload
+		/// </summary>
+		/// <param name="payloadType"></param>
+		/// <param name="payload"></param>
+		/// <param name="timeoutMs"></param>
+		public Task<bool> Send(string? type, object payload, int timeoutMs = 10000) => channel.Send(ChannelEventName.Broadcast, type, payload, timeoutMs);
 	}
 }
