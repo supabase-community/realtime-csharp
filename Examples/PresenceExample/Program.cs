@@ -7,8 +7,8 @@ using Supabase.Realtime.Socket;
 using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-var supabaseUrl = Environment.GetEnvironmentVariable("SUPABASE_URL");
-var supabasePublicKey = Environment.GetEnvironmentVariable("SUPABASE_PUBLIC_KEY");
+var supabaseUrl = "https://ttbkuxsncbeeqnyeltrv.supabase.co";
+var supabasePublicKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxMjIwMjE2MCwiZXhwIjoxOTI3Nzc4MTYwfQ.W03Slc1IFkth06FwutNVmorSKLLIjQ2f-bLJkNi51_Y";
 var realtimeUrl = string.Format("{0}/realtime/v1", supabaseUrl).Replace("https", "wss");
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -19,7 +19,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddSingleton(builder => new Client(realtimeUrl, new ClientOptions
 {
-	Logger = (kind, msg, data) => Debug.WriteLine($"{kind}: {msg}, {JsonConvert.SerializeObject(data, Formatting.Indented)}"),
 	Parameters = new SocketOptionsParameters
 	{
 		ApiKey = supabasePublicKey,
