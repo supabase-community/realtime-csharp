@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
 
-      - name: Initialize Testing Stack
-        run: docker-compose up -d
-
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
