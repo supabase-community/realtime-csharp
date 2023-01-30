@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Realtime\Realtime.csproj" />
+    <ProjectReference Include="..\..\Realtime\Realtime.csproj" />
   </ItemGroup>
 
 </Project>
