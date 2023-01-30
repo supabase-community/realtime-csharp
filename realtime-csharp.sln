@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{59
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeExample", "Examples\RealtimeExample\RealtimeExample.csproj", "{A5BF740D-402B-40D5-954C-18DD2C6D6BE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresenceExample", "Examples\PresenceExample\PresenceExample.csproj", "{05D46011-4365-4BC6-AD7F-71BE7198EC0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

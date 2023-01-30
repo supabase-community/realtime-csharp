@@ -1,0 +1,141 @@
+﻿@page "/"
+@using Newtonsoft.Json;
+@using PresenceExample.Components;
+@using PresenceExample.Models;
+@using Supabase.Realtime;
+@using Supabase.Realtime.Broadcast;
+@using Supabase.Realtime.Models;
+@using Supabase.Realtime.Presence;
+@using System.Diagnostics;
+@using static Supabase.Realtime.Socket.SocketStateChangedEventArgs;
+@inject IJSRuntime JS
+@inject Client realtime;
+
+<PageTitle>Realtime Example</PageTitle>
+
+<div class="flex justify-between">
+	<div class="dark:bg-brand-1200 bg-scale-200 border border-scale-500 dark:border-scale-300 p-3 rounded-md space-y-8 transition-all max-h-[70px] duration-500 overflow-hidden shadow-2xl dark:shadow-lg">
+		<img class="w-auto h-full" src="/logo.png" />
+	</div>
+</div>
+
+@if (isConnected)
+{
+	<div class="flex items-end justify-between">
+		<Pill Text="Connected" />
+		<Pill Text="@($"Online: {userCount}")" />
+		<Pill Text="@($"{latency} ms")"/>
+	</div>
+}
+
+@foreach (var position in mousePositions)
+{
+	<Cursor UserId="@position.UserId" MouseX="@position.MouseX" MouseY="@position.MouseY" />
+}
+
+@code {
+	private bool isConnected = false;
+	private double latency = -1;
+	private int userCount = 0;
+
+	private string? userId;
+	private RealtimeChannel? channel;
+	private RealtimeBroadcast<MousePosition>? broadcast;
+	private RealtimePresence<BasePresence>? presence;
+	private DotNetObjectReference<Index>? objRef;
+
+	private List<MousePosition> mousePositions = new List<MousePosition>();
+
+	override protected async Task OnInitializedAsync()
+	{
+		objRef = DotNetObjectReference.Create(this);
+
+		await JS.InvokeAsync<double[]>("registerMouseMoveListener", objRef);
+
+		realtime.OnOpen += (sender, args) => isConnected = args.State == ConnectionState.Open;
+
+		await realtime.ConnectAsync();
+
+		userId = Guid.NewGuid().ToString();
+		channel = realtime.Channel("presence");
+
+		broadcast = channel.Register<MousePosition>(true, true);
+		broadcast.OnBroadcast += HandleBroadcastReceived;
+
+		presence = channel.Register<BasePresence>(userId);
+		presence.OnSync += HandlePresenceSync;
+
+		await channel.Subscribe();
+
+		InitializeLatencyTimer();
+		InitializeCleanupMousePositionsTimer();
+	}
+
+	public void Dispose()
+	{
+		objRef?.Dispose();
+		channel?.Unsubscribe();
+	}
+
+	private void HandlePresenceSync(object? sender, EventArgs? args)
+	{
+		var state = presence!.CurrentState;
+		userCount = state.Keys.Count;
+		StateHasChanged();
+	}
+
+	private void HandleBroadcastReceived(object? sender, EventArgs? args)
+	{
+		var item = broadcast?.Current();
+
+		if (item == null) return;
+
+		item.AddedAt = DateTime.Now;
+
+		var index = mousePositions.FindIndex(x => x.UserId == item.UserId);
+
+		if (index > -1)
+			mousePositions[index] = item;
+		else
+			mousePositions.Add(item);
+
+		StateHasChanged();
+	}
+
+	private void InitializeCleanupMousePositionsTimer()
+	{
+		var timer = new System.Timers.Timer();
+
+		timer.Elapsed += (sender, elapsed) =>
+		{
+			mousePositions
+				.FindAll(x => x.AddedAt < (DateTime.Now - TimeSpan.FromSeconds(15)))
+				.ForEach(x => mousePositions.Remove(x));
+			StateHasChanged();
+		};
+
+		timer.Interval = 15;
+		timer.Enabled = true;
+	}
+
+	private void InitializeLatencyTimer()
+	{
+		var timer = new System.Timers.Timer();
+
+		timer.Elapsed += async (sender, elapsed) =>
+		{
+			latency = await realtime.Socket!.GetLatency();
+			presence!.Track(new BasePresence());
+			StateHasChanged();
+		};
+
+		timer.Interval = 2000;
+		timer.Enabled = true;
+	}
+
+	[JSInvokable]
+	public void HandleMouseMoved(double[] position)
+	{
+		broadcast?.Send(null, new MousePosition { UserId = userId, MouseX = position[0], MouseY = position[1] });
+	}
+}
