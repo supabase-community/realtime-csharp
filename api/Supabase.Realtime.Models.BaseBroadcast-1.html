@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum Constants.SocketStates
+    <title>Class BaseBroadcast&lt;T&gt;
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum Constants.SocketStates
+    <meta name="title" content="Class BaseBroadcast&lt;T&gt;
    ">
     <meta name="generator" content="docfx 2.56.7.0">
     
@@ -68,47 +68,79 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.Constants.SocketStates">
+            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.Models.BaseBroadcast`1">
   
   
-  <h1 id="Supabase_Realtime_Constants_SocketStates" data-uid="Supabase.Realtime.Constants.SocketStates" class="text-break">Enum Constants.SocketStates
+  <h1 id="Supabase_Realtime_Models_BaseBroadcast_1" data-uid="Supabase.Realtime.Models.BaseBroadcast`1" class="text-break">Class BaseBroadcast&lt;T&gt;
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Represents a Broadcast response with a modeled payload.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.html">Supabase.Realtime</a></h6>
-  <h6><strong>Assembly</strong>: Realtime.dll</h6>
-  <h5 id="Supabase_Realtime_Constants_SocketStates_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum SocketStates : int</code></pre>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="Supabase.Realtime.Models.BaseBroadcast.html">BaseBroadcast</a></div>
+    <div class="level2"><span class="xref">BaseBroadcast&lt;T&gt;</span></div>
   </div>
-  <h3 id="fields">Fields
-  </h3>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Supabase.Realtime.Models.BaseBroadcast.html#Supabase_Realtime_Models_BaseBroadcast_Event">BaseBroadcast.Event</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.Models.html">Supabase.Realtime.Models</a></h6>
+  <h6><strong>Assembly</strong>: Realtime.dll</h6>
+  <h5 id="Supabase_Realtime_Models_BaseBroadcast_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BaseBroadcast&lt;T&gt; : BaseBroadcast where T : class</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Name</th>
         <th>Description</th>
       </tr>
-    <thead>
+    </thead>
     <tbody>
       <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_closed">closed</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_closing">closing</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_connecting">connecting</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_open">open</td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
-  </thead></thead></table>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Models_BaseBroadcast_1_Payload.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Models.BaseBroadcast%601.Payload%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Models/BaseBroadcast.cs/#L14">View Source</a>
+  </span>
+  <a id="Supabase_Realtime_Models_BaseBroadcast_1_Payload_" data-uid="Supabase.Realtime.Models.BaseBroadcast`1.Payload*"></a>
+  <h4 id="Supabase_Realtime_Models_BaseBroadcast_1_Payload" data-uid="Supabase.Realtime.Models.BaseBroadcast`1.Payload">Payload</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Payload { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
@@ -117,10 +149,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Constants_SocketStates.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Constants.SocketStates%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Models_BaseBroadcast_1.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Models.BaseBroadcast%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Constants.cs/#L7" class="contribution-link">View Source</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Models/BaseBroadcast.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

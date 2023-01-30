@@ -5,11 +5,71 @@
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.Channel.ChannelState.yml",
+      "source_relative_path": "api/Supabase.Realtime.Broadcast.BroadcastOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Supabase.Realtime.Channel.ChannelState.html",
-          "hash": "xL7aHHPGlrVPEgo5d4y+pw=="
+          "relative_path": "api/Supabase.Realtime.Broadcast.BroadcastOptions.html",
+          "hash": "OVLC7rmK0RAL2F1x84vZTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Broadcast.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Broadcast.html",
+          "hash": "Yir8IQyQPAf9V2S071VkBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.ChannelOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.ChannelOptions.html",
+          "hash": "3RMOWqdf/UEAXp/s8S8IOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.ChannelStateChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.ChannelStateChangedEventArgs.html",
+          "hash": "NLcNrWXh4yZvOiMDb+ybvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.Push.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.Push.html",
+          "hash": "tocQBRvbSWlrQvJ+2phZeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Channel.PushTimeoutException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Channel.PushTimeoutException.html",
+          "hash": "Q8TjuXpMAI1uOWy6b8UdYg=="
         }
       },
       "is_incremental": false,
@@ -21,31 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Channel.html",
-          "hash": "0dbDOn+8H/Km6QYxwOmXpg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.ChannelOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.ChannelOptions.html",
-          "hash": "cuwLxoqTeYYP+vSd6wXmyg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.ChannelStateChangedEventArgs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.ChannelStateChangedEventArgs.html",
-          "hash": "FEumPF7393Wp8KhDC//DUA=="
+          "hash": "YFF3DJXwv/YtT7ZhbAvI4w=="
         }
       },
       "is_incremental": false,
@@ -57,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Client.html",
-          "hash": "8ThHziPaGGjHK/M86YUB2Q=="
+          "hash": "r4DWYsXMYmqCB/3Bh98zMQ=="
         }
       },
       "is_incremental": false,
@@ -69,7 +105,31 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.ClientOptions.html",
-          "hash": "jO7MsKpP8ZzLafoPEBklXg=="
+          "hash": "WKd16cgaZpqV2RdlYVhdGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Constants.ChannelEventName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Constants.ChannelEventName.html",
+          "hash": "Hzsq5DiPwqwYcGP3VprgdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Constants.ChannelState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Constants.ChannelState.html",
+          "hash": "JrUEGwmWZpJDjRcN+NvoYA=="
         }
       },
       "is_incremental": false,
@@ -81,7 +141,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.EventType.html",
-          "hash": "byrPHM4lNoiYcGk42xbnBA=="
+          "hash": "kxTw4TK+IfhMsVkuxsFdbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Constants.PresenceListenEventTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Constants.PresenceListenEventTypes.html",
+          "hash": "VYzBumWQvIVSzaJ5KKaUsw=="
         }
       },
       "is_incremental": false,
@@ -93,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.SocketStates.html",
-          "hash": "K4NRzQvvkFWmWWBpFh4BJA=="
+          "hash": "zy2VU4Qqa/zkNeKJBaSmiQ=="
         }
       },
       "is_incremental": false,
@@ -105,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Constants.html",
-          "hash": "CwQw9G2tqSjoEY/3B9MznQ=="
+          "hash": "qhOPofPD4zGyaOuEAaACgg=="
         }
       },
       "is_incremental": false,
@@ -149,11 +221,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.html",
+          "hash": "DQ+d7JTjcxNAOutJzsWBzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.yml",
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.html",
-          "hash": "jpHseTQPImIjYRMLngm1+A=="
+          "hash": "ZjhVeGDfF8QmBCI4VEv4Pg=="
         }
       },
       "is_incremental": false,
@@ -165,7 +249,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html",
-          "hash": "WQQArLluTbLBYOi7EUhLGA=="
+          "hash": "pFjyL89YTtCjtu/lEGv35A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePresence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePresence.html",
+          "hash": "m2xzKSzXdAp2tvSPrp9/ZA=="
         }
       },
       "is_incremental": false,
@@ -177,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePush-2.html",
-          "hash": "DdtnoQA36TeK95tWQg8+Ww=="
+          "hash": "RYZXizzv5iljkD5+UYmRjw=="
         }
       },
       "is_incremental": false,
@@ -189,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.html",
-          "hash": "KfLapmvUq28JKn5vbg1KKQ=="
+          "hash": "u+5HImAaa03B4at//rlq/g=="
         }
       },
       "is_incremental": false,
@@ -201,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html",
-          "hash": "poiPVHVAmZg8Z5TzBP5Ayw=="
+          "hash": "SSoxONoh1Q4fRTUFwRehGA=="
         }
       },
       "is_incremental": false,
@@ -213,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Interfaces.html",
-          "hash": "grCtPC34t415NzS3XFvZqg=="
+          "hash": "WvYud2DXrr3t/H/qCypxsg=="
         }
       },
       "is_incremental": false,
@@ -221,11 +317,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.PheonixResponse.yml",
+      "source_relative_path": "api/Supabase.Realtime.Models.BaseBroadcast-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Supabase.Realtime.PheonixResponse.html",
-          "hash": "iPzE0fHRw8BtW1pdSFwZRg=="
+          "relative_path": "api/Supabase.Realtime.Models.BaseBroadcast-1.html",
+          "hash": "Iy5fM+RrD5uo5sRvpM1ClQ=="
         }
       },
       "is_incremental": false,
@@ -233,11 +329,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.Push.yml",
+      "source_relative_path": "api/Supabase.Realtime.Models.BaseBroadcast.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Supabase.Realtime.Push.html",
-          "hash": "q8a7FHbbXHDI6MKhBBaxeA=="
+          "relative_path": "api/Supabase.Realtime.Models.BaseBroadcast.html",
+          "hash": "N7B22iLa3LUsxfuaefGEsg=="
         }
       },
       "is_incremental": false,
@@ -245,11 +341,395 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.PushTimeoutException.yml",
+      "source_relative_path": "api/Supabase.Realtime.Models.BasePresence.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Supabase.Realtime.PushTimeoutException.html",
-          "hash": "K4nl9vO9nR4zHTU71oKVsQ=="
+          "relative_path": "api/Supabase.Realtime.Models.BasePresence.html",
+          "hash": "mNvtBIykbVBPU6201lhXwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Models.html",
+          "hash": "1DIWkf6S82DaZNSjLOmLIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesEventArgs.html",
+          "hash": "2sBLViHl8yLazrVWERe8xw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType.html",
+          "hash": "v9RkfyCpO8QqvYWV+r8Jow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html",
+          "hash": "MIHnoOb+TGiX86L037WGmA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesPayload-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesPayload-1.html",
+          "hash": "xW7nVyegwiMqvqea51q9eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse-1.html",
+          "hash": "rAmEsg+G27joFlBNhu8uIw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse.html",
+          "hash": "UvEkVkz4sw3LxHbpc75GRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.html",
+          "hash": "Hm7s2fXu3frgNpT60dP5Uw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.PresenceDiffPayload-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.PresenceDiffPayload-1.html",
+          "hash": "rSVf/kW0RMBXzy+PDDM8MA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.PresenceDiffPayloadMeta-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.PresenceDiffPayloadMeta-1.html",
+          "hash": "plfgyAJneo9JgGiRhD/eGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.PresenceOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.PresenceOptions.html",
+          "hash": "EYws3pvlrygGu1FBUk9maw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.RealtimePresenceDiff-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.RealtimePresenceDiff-1.html",
+          "hash": "GMUoxY8gURywEnBEQq57OQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.Responses.PresenceStatePayload-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.Responses.PresenceStatePayload-1.html",
+          "hash": "6usaB0DMYU2vV8xpPdsjiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.Responses.PresenceStateSocketResponse-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.Responses.PresenceStateSocketResponse-1.html",
+          "hash": "dVpUQbFPiVnvQapyISX+xw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.Responses.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.Responses.html",
+          "hash": "3kqhyxycAPMkJidaDMO3xQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Presence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Presence.html",
+          "hash": "ysyGgDOAdRFHUGiGB6mJ0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.RealtimeBroadcast-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.RealtimeBroadcast-1.html",
+          "hash": "LcQksTjOyKY3it/U8GkoRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.RealtimeChannel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.RealtimeChannel.html",
+          "hash": "PxscLV+C0bSsN75tvecpAQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.RealtimePresence-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.RealtimePresence-1.html",
+          "hash": "KcwbROhiRiW3TPwpZGDg0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.RealtimeSocket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.RealtimeSocket.html",
+          "hash": "NCYuZcHelV9iCZj/lp0UtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.Responses.PheonixResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.Responses.PheonixResponse.html",
+          "hash": "Oja+7Y4Fnf4shMMs54CYmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.Responses.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.Responses.html",
+          "hash": "731ubrBi7zet0Wcj4fWReQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketOptionsParameters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketOptionsParameters.html",
+          "hash": "YcbgJ3aGhapqs6rBJ++Mxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketRequest.html",
+          "hash": "EOE3VXmgGlGGCJxpHoHzlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketResponse-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketResponse-1.html",
+          "hash": "rpt5vC74kHykhKQ8OQ8uUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketResponse.html",
+          "hash": "cPJgoK0VLXt4AI9FUgca6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketResponseEventArgs-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketResponseEventArgs-1.html",
+          "hash": "gl6mgE2HxQPODG9/mbqscA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketResponseEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketResponseEventArgs.html",
+          "hash": "dGHekkjjwfMIqmMxNIdLVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketResponsePayload-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketResponsePayload-1.html",
+          "hash": "Q583Zn5UtQnfobinq4V8bA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketResponsePayload.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketResponsePayload.html",
+          "hash": "4CUeaEtyEWW2RdXcNrpcDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.html",
+          "hash": "O8Pss9mL/6RnvmOSS3OiEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html",
+          "hash": "hs+EXF0Cc231J8TNaOE6YQ=="
         }
       },
       "is_incremental": false,
@@ -261,115 +741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Socket.html",
-          "hash": "n2Gl6ygpyOnmrGjBIM8o4w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketOptionsParameters.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketOptionsParameters.html",
-          "hash": "poTaJkBv1kzLaZjzOWulmw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketRequest.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketRequest.html",
-          "hash": "Xvt1FzCyoh5xNcl+VagX0g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketResponse-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketResponse-1.html",
-          "hash": "Uf/aJ6YeNo9TQo0Dug5uLg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketResponse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketResponse.html",
-          "hash": "PqBM1lQML1nsWq6km1k9FQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketResponseEventArgs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketResponseEventArgs.html",
-          "hash": "s3+KB24kgYkgK8FQVsuiMg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketResponsePayload-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketResponsePayload-1.html",
-          "hash": "kl+yGTnANMMupILmgVLYJA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketResponsePayload.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketResponsePayload.html",
-          "hash": "8EqR4CJdzsVgC6wojrt/tg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.ConnectionState.html",
-          "hash": "ATejK7fEF0O6yzY3ug7fVg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Supabase.Realtime.SocketStateChangedEventArgs.html",
-          "hash": "w812WL7+W6mbvD5lWQOZ4g=="
+          "hash": "w4AXm+OTp1xw/Ga3VePXKQ=="
         }
       },
       "is_incremental": false,
@@ -381,7 +753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.html",
-          "hash": "ymf6FMHKytbjxKLOhQQwKw=="
+          "hash": "x4IYaLLY9Vr0jOfmu9nYkw=="
         }
       },
       "is_incremental": false,
@@ -405,7 +777,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "0gU2pNOFLbNS0OyArX6moQ=="
+          "hash": "5RLiOy+D0losjBqVJq7mww=="
         }
       },
       "is_incremental": false,
@@ -456,7 +828,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 32,
+          "total_file_count": 63,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
