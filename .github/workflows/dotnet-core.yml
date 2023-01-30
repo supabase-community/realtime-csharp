@@ -2,29 +2,33 @@ name: Build And Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
-jobs: 
+jobs:
   buildAndTest:
     runs-on: ubuntu-latest
+
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_PUBLIC_KEY: ${{ secrets.SUPABASE_PUBLIC_KEY }}
+      SUPABASE_USERNAME: ${{ secrets.SUPABASE_USERNAME }}
+      SUPABASE_PASSWORD: ${{ secrets.SUPABASE_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.301
-      
+
       - name: Install dependencies
         run: dotnet restore
-        
-      - name: Initialize Testing Stack
-        run: docker-compose up -d
-      
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      
+
       - name: Test
         run: dotnet test --no-restore

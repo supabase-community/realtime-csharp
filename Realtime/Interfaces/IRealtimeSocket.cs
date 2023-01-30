@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Supabase.Realtime.Socket;
+using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 
@@ -12,7 +13,8 @@ namespace Supabase.Realtime.Interfaces
         event EventHandler<SocketResponseEventArgs> OnMessage;
         event EventHandler<SocketStateChangedEventArgs> StateChanged;
 
-        Task Connect();
+        Task<double> GetLatency();
+		Task Connect();
         void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "");
         string MakeMsgRef();
         void Push(SocketRequest data);

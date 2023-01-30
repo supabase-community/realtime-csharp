@@ -1,20 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.808.2
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Realtime", "Realtime\Realtime.csproj", "{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Realtime", "Realtime\Realtime.csproj", "{194E6AEF-7ABB-41AD-BB96-59B5995B62A5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeTests", "RealtimeTests\RealtimeTests.csproj", "{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DA83318-C23A-4202-82C3-88ECB41998CD}"
 	ProjectSection(SolutionItems) = preProject
+		RealtimeTests\.runsettings = RealtimeTests\.runsettings
+		CHANGELOG.md = CHANGELOG.md
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
-		CHANGELOG.md = CHANGELOG.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealtimeExample", "RealtimeExample\RealtimeExample.csproj", "{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{595D76A4-2809-4D38-A6FE-18785E1B3749}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeExample", "Examples\RealtimeExample\RealtimeExample.csproj", "{A5BF740D-402B-40D5-954C-18DD2C6D6BE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresenceExample", "Examples\PresenceExample\PresenceExample.csproj", "{05D46011-4365-4BC6-AD7F-71BE7198EC0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,13 +35,21 @@ Global
 		{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD3699C8-F50D-44B3-9DF3-2365AF8B8BB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B90E9A77-DF54-4FE9-BA89-77C4185DFA58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BF740D-402B-40D5-954C-18DD2C6D6BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BF740D-402B-40D5-954C-18DD2C6D6BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BF740D-402B-40D5-954C-18DD2C6D6BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BF740D-402B-40D5-954C-18DD2C6D6BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05D46011-4365-4BC6-AD7F-71BE7198EC0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D46011-4365-4BC6-AD7F-71BE7198EC0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D46011-4365-4BC6-AD7F-71BE7198EC0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D46011-4365-4BC6-AD7F-71BE7198EC0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A5BF740D-402B-40D5-954C-18DD2C6D6BE5} = {595D76A4-2809-4D38-A6FE-18785E1B3749}
+		{05D46011-4365-4BC6-AD7F-71BE7198EC0C} = {595D76A4-2809-4D38-A6FE-18785E1B3749}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CFFD342-4DBD-4D79-BD1C-2183939DBFD4}

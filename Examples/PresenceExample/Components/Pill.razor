@@ -1,0 +1,11 @@
+﻿@if (!string.IsNullOrEmpty(Text))
+{
+	<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-opacity-10 bg-brand-200 text-brand-1100 border border-brand-700">
+		@Text
+	</span>
+}
+
+@code {
+	[Parameter]
+	public string? Text { get; set; }
+}

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Supabase.Realtime.Socket;
 
 namespace Supabase.Realtime
 {
@@ -33,6 +34,8 @@ namespace Supabase.Realtime
         /// The default timeout in milliseconds to trigger push timeouts.
         /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(Constants.DEFAULT_TIMEOUT);
+
+        public int EventsPerSecond { get; set; } = 10;
 
         /// <summary>
         /// The interval to send a heartbeat message

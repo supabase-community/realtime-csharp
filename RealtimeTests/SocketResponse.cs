@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Supabase.Realtime;
+using Supabase.Realtime.Socket;
 
 namespace RealtimeTests
 {

@@ -1,5 +1,7 @@
 ﻿using RealtimeExample.Models;
 using Supabase.Realtime;
+using Supabase.Realtime.Channel;
+using Supabase.Realtime.Socket;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,9 +25,9 @@ namespace RealtimeExample
 
             // Subscribe to a channel and events
             var channelUsers = realtimeClient.Channel("realtime", "public", "users");
-            channelUsers.OnInsert += (object s, SocketResponseEventArgs args) => Console.WriteLine("New item inserted: " + args.Response.Payload.Record);
-            channelUsers.OnUpdate += (object s, SocketResponseEventArgs args) => Console.WriteLine("Item updated: " + args.Response.Payload.Record);
-            channelUsers.OnDelete += (object s, SocketResponseEventArgs args) => Console.WriteLine("Item deleted");
+            channelUsers.OnInsert += (s, args) => Console.WriteLine("New item inserted: " + args.Response.Payload.Data.Record);
+            channelUsers.OnUpdate += (s, args) => Console.WriteLine("Item updated: " + args.Response.Payload.Data.Record);
+            channelUsers.OnDelete += (s, args) => Console.WriteLine("Item deleted");
 
             Console.WriteLine("Subscribing to users channel");
             await channelUsers.Subscribe();
