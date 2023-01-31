@@ -15,58 +15,122 @@
 
 <div class="flex justify-between">
 	<div class="dark:bg-brand-1200 bg-scale-200 border border-scale-500 dark:border-scale-300 p-3 rounded-md space-y-8 transition-all max-h-[70px] duration-500 overflow-hidden shadow-2xl dark:shadow-lg">
-		<img class="w-auto h-full" src="/logo.png" />
+		<a href="https://github.com/supabase-community/supabase-csharp">
+			<img class="w-auto h-full" src="/logo.png" />
+		</a>
 	</div>
+
+	<a href="https://github.com/supabase-community/realtime-csharp/tree/master/Examples/PresenceExample">
+		<img class="w-8 h-8" src="/github-mark-white.png"/>
+	</a>
 </div>
 
-@if (isConnected)
-{
-	<div class="flex items-end justify-between">
+<div class="flex items-start flex-col">
+	@if (isConnected)
+	{
 		<Pill Text="Connected" />
 		<Pill Text="@($"Online: {userCount}")" />
-		<Pill Text="@($"{latency} ms")"/>
-	</div>
-}
+		<Pill Text="@($"{latency} ms")" />
+	}
+	else
+	{
+		<Pill Text="Disconnected" Color="red" />
+	}
+</div>
 
 @foreach (var position in mousePositions)
 {
-	<Cursor UserId="@position.UserId" MouseX="@position.MouseX" MouseY="@position.MouseY" />
+	<Cursor Color="@position.Color" UserId="@position.UserId" MouseX="@position.MouseX" MouseY="@position.MouseY" />
 }
+
+<div class="flex flex-col gap-1 absolute bottom-24 right-5 justify-end items-end overflow-hidden">
+	@foreach (var message in messages)
+	{
+		<Pill Text="@message.Content" Color="@message.Color" Size="md" />
+	}
+</div>
+
+<div class="grid grid-cols-6 gap-4 absolute bottom-10 w-full right-5 h-10">
+	<div class="col-end-7 col-span-2">
+
+		<InputText @ref="chatInput"
+				   @onfocus="HandleChatInputFocus"
+				   @onfocusout="HandleChatInputLostFocus"
+				   @bind-Value="chatMessage"
+				   placeholder="Send a message..."
+				   type="text"
+				   class="w-full bg-scale-500 h-10 rounded-md px-2.5" />
+	</div>
+</div>
 
 @code {
 	private bool isConnected = false;
 	private double latency = -1;
 	private int userCount = 0;
+	private bool isTyping = false;
 
 	private string? userId;
-	private RealtimeChannel? channel;
-	private RealtimeBroadcast<MousePosition>? broadcast;
+	private RealtimeChannel? userChannel;
+	private RealtimeBroadcast<MousePosition>? mousePositionBroadcast;
 	private RealtimePresence<BasePresence>? presence;
+
+	private RealtimeChannel? messageChannel;
+	private RealtimeBroadcast<Message>? messageBroadcast;
+
 	private DotNetObjectReference<Index>? objRef;
 
+	private InputText? chatInput;
+	private string? chatMessage;
+
+	private static Random rnd = new Random();
+
+	private string? userColor;
+
 	private List<MousePosition> mousePositions = new List<MousePosition>();
+	private List<Message> messages = new List<Message>();
+	private List<string> colorOptions = new List<string> { "slate", "stone", "red", "orange", "amber", "yellow", "green", "blue", "indigo", "purple", "fuchsia", "pink", "rose" };
+
+
+	[JSInvokable]
+	public void HandleMouseMoved(double[] position)
+	{
+		mousePositionBroadcast?.Send(null, new MousePosition { UserId = userId, MouseX = position[0], MouseY = position[1], Color = userColor });
+	}
+
+	[JSInvokable]
+	public void HandleKeydown(KeydownEvent keydownEvent)
+	{
+		switch (keydownEvent.key)
+		{
+			case "Enter":
+				if (!isTyping)
+					chatInput?.Element!.Value.FocusAsync();
+				else
+					SendMessage();
+				break;
+			case "Escape":
+				chatMessage = "";
+				StateHasChanged();
+				break;
+		}
+	}
 
 	override protected async Task OnInitializedAsync()
 	{
 		objRef = DotNetObjectReference.Create(this);
 
 		await JS.InvokeAsync<double[]>("registerMouseMoveListener", objRef);
+		await JS.InvokeAsync<KeydownEvent>("registerKeydownListener", objRef);
 
 		realtime.OnOpen += (sender, args) => isConnected = args.State == ConnectionState.Open;
 
 		await realtime.ConnectAsync();
 
 		userId = Guid.NewGuid().ToString();
-		channel = realtime.Channel("presence");
+		userColor = colorOptions[rnd.Next(colorOptions.Count)];
 
-		broadcast = channel.Register<MousePosition>(true, true);
-		broadcast.OnBroadcast += HandleBroadcastReceived;
-
-		presence = channel.Register<BasePresence>(userId);
-		presence.OnSync += HandlePresenceSync;
-
-		await channel.Subscribe();
-
+		InitializeUserChannel();
+		InitializeMessageChannel();
 		InitializeLatencyTimer();
 		InitializeCleanupMousePositionsTimer();
 	}
@@ -74,34 +138,42 @@
 	public void Dispose()
 	{
 		objRef?.Dispose();
-		channel?.Unsubscribe();
+		userChannel?.Unsubscribe();
+		messageChannel?.Unsubscribe();
 	}
 
-	private void HandlePresenceSync(object? sender, EventArgs? args)
+	/// <summary>
+	/// Inits the user presence channel for mouse events
+	/// </summary>
+	private async void InitializeUserChannel()
 	{
-		var state = presence!.CurrentState;
-		userCount = state.Keys.Count;
-		StateHasChanged();
+		userChannel = realtime.Channel("presence");
+
+		mousePositionBroadcast = userChannel.Register<MousePosition>(true, true);
+		mousePositionBroadcast.OnBroadcast += HandleMousePositionBroadcastReceived;
+
+		presence = userChannel.Register<BasePresence>(userId!);
+		presence.OnSync += HandlePresenceSync;
+
+		await userChannel.Subscribe();
 	}
 
-	private void HandleBroadcastReceived(object? sender, EventArgs? args)
+	/// <summary>
+	/// Inits the message channel for message broadcasts
+	/// </summary>
+	private async void InitializeMessageChannel()
 	{
-		var item = broadcast?.Current();
+		messageChannel = realtime.Channel("messages");
 
-		if (item == null) return;
+		messageBroadcast = messageChannel.Register<Message>(true, true);
+		messageBroadcast.OnBroadcast += HandleMessageBroadcastReceived;
 
-		item.AddedAt = DateTime.Now;
-
-		var index = mousePositions.FindIndex(x => x.UserId == item.UserId);
-
-		if (index > -1)
-			mousePositions[index] = item;
-		else
-			mousePositions.Add(item);
-
-		StateHasChanged();
+		await messageChannel.Subscribe();
 	}
 
+	/// <summary>
+	/// Removes old mousePositions after a set timeout.
+	/// </summary>
 	private void InitializeCleanupMousePositionsTimer()
 	{
 		var timer = new System.Timers.Timer();
@@ -118,6 +190,9 @@
 		timer.Enabled = true;
 	}
 
+	/// <summary>
+	/// Sets repeating timer to show latency on screen.
+	/// </summary>
 	private void InitializeLatencyTimer()
 	{
 		var timer = new System.Timers.Timer();
@@ -133,9 +208,79 @@
 		timer.Enabled = true;
 	}
 
-	[JSInvokable]
-	public void HandleMouseMoved(double[] position)
+	/// <summary>
+	/// Keeps track of current count of users.
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="args"></param>
+	private void HandlePresenceSync(object? sender, EventArgs? args)
 	{
-		broadcast?.Send(null, new MousePosition { UserId = userId, MouseX = position[0], MouseY = position[1] });
+		var state = presence!.CurrentState;
+		userCount = state.Keys.Count;
+		StateHasChanged();
+	}
+
+	/// <summary>
+	/// Keeps track of the list of active users, updating positions if the user already exists.
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="args"></param>
+	private void HandleMousePositionBroadcastReceived(object? sender, EventArgs? args)
+	{
+		var item = mousePositionBroadcast?.Current();
+
+		if (item == null) return;
+
+		item.AddedAt = DateTime.Now;
+
+		var index = mousePositions.FindIndex(x => x.UserId == item.UserId);
+
+		if (index > -1)
+			mousePositions[index] = item;
+		else
+			mousePositions.Add(item);
+
+		StateHasChanged();
+	}
+
+	/// <summary>
+	/// Keeps track of messages received.
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="args"></param>
+	private void HandleMessageBroadcastReceived(object? sender, EventArgs? args)
+	{
+		var item = messageBroadcast?.Current();
+
+		if (item == null) return;
+
+		messages.Add(item);
+		messages.Sort((x, y) => x.CreatedAt >= y.CreatedAt ? 1 : -1);
+
+		StateHasChanged();
+	}
+
+	/// <summary>
+	/// Broadcast a message
+	/// </summary>
+	private void SendMessage()
+	{
+		if (string.IsNullOrEmpty(chatMessage)) return;
+
+		messageBroadcast?.Send("message", new Message { UserId = userId, Color = userColor, Content = chatMessage, CreatedAt = DateTime.Now });
+		chatMessage = "";
+		StateHasChanged();
+	}
+
+	private void HandleChatInputFocus(FocusEventArgs args)
+	{
+		isTyping = true;
+		StateHasChanged();
+	}
+
+	private void HandleChatInputLostFocus(FocusEventArgs args)
+	{
+		isTyping = false;
+		StateHasChanged();
 	}
 }

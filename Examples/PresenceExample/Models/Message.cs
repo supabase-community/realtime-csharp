@@ -3,7 +3,7 @@ using Supabase.Realtime.Models;
 
 namespace PresenceExample.Models
 {
-	class MousePosition : BaseBroadcast
+	class Message : BaseBroadcast
 	{
 		[JsonProperty("color")]
 		public string? Color { get; set; }
@@ -11,13 +11,10 @@ namespace PresenceExample.Models
 		[JsonProperty("userId")]
 		public string? UserId { get; set; }
 
-		[JsonProperty("mouseX")]
-		public double MouseX { get; set; }
+		[JsonProperty("content")]
+		public string? Content { get; set; }
 
-		[JsonProperty("mouseY")]
-		public double MouseY { get; set; }
-
-		[JsonIgnore]
-		public DateTime AddedAt { get; set; }
+		[JsonProperty("createdAt")]
+		public DateTime CreatedAt { get; set; }
 	}
 }

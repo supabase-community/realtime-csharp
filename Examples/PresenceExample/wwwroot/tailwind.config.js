@@ -1,4 +1,5 @@
 ﻿tailwind.config = {
+    mode: 'jit',
     theme: {
         extend: {
             colors: {
