@@ -1,5 +1,22 @@
 ﻿# Changelog
 
+## 5.0.0 - 2023-01-31
+
+- Re: [#21](https://github.com/supabase-community/realtime-csharp/pull/21) Provide API for `presence`, `broadcast` and `postgres_changes`
+	- [Major, New] `Channel.PostgresChanges` event will receive the wildcard `*` changes event, not `Channel.OnMessage`.
+	- [Major] `Channel.OnInsert`, `Channel.OnUpdate`, and `Channel.OnDelete` now conform to the server's payload of `Response.Payload.**Data**`
+	- [Major] `Channel.OnInsert`, `Channel.OnUpdate`, and `Channel.OnDelete` now return `PostgresChangesEventArgs`
+	- [Minor] Rename `Channel` to `RealtimeChannel`
+	- Supports better handling of disconnects in `RealtimeSocket` and adds a `Client.OnReconnect` event.
+	- [Minor] Moves `ChannelOptions` to `Channel.ChannelOptions`
+	- [Minor] Moves `ChannelStateChangedEventArgs` to `Channel.ChannelStateChangedEventArgs`
+	- [Minor] Moves `Push` to `Channel.Push`
+	- [Minor] Moves `Channel.ChannelState` to `Constants.ChannelState`
+	- [Minor] Moves `SocketResponse`, `SocketRequest`, `SocketResponsePayload`, `SocketResponseEventArgs`, and `SocketStateChangedEventArgs` to `Socket` namespace.
+	- [New] Adds `RealtimeBroadcast`
+	- [New] Adds `RealtimePresence`
+	- [Improvement] Better handling of disconnection/reconnection
+
 ## 4.0.1 - 2022-11-08
 
 - Bugfixes on previous release.

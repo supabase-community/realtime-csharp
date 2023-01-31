@@ -10,29 +10,29 @@
 
 ---
 
-## BREAKING CHANGES MOVING FROM v3.x.x to v4.x.x
+## BREAKING CHANGES MOVING FROM v4.x.x to v5.x.x
 
-- `Client` is no longer a singleton class.
-- `Channel` has a new constructor that uses `ChannelOptions`
-- `Channel.Parameters` has been changed in favor of `Channel.Options`
-- `Channel` and `Push` are now directly dependent on having `Socket` and `SerializerSettings` passed in as opposed to referencing the `Singleton` instance.
-- All publicly facing classes (that offer functionality) now include an Interface.
+**See realtime-csharp in action [here](https://multiplayer-csharp.azurewebsites.net/).** 
 
-In reality, not much should affect the developer as most of these classes/methods are only being referenced internally by the `Client`. The removal of the Singleton aspect may offer some design changes for those leveraging this library by itself (as opposed to using it only in supabase-csharp.)
+## Changes:
 
-```c#
-// What was:
-var client = Supabase.Realtime.Client.Initialize(options);
-await client.ConnectAsync()
-
-// Becomes:
-var client = new Client(options);
-await client.ConnectAsync()
-```
+- [Major, New] `Channel.PostgresChanges` event will receive the wildcard `*` changes event, not `Channel.OnMessage`.
+- [Major] `Channel.OnInsert`, `Channel.OnUpdate`, and `Channel.OnDelete` now conform to the server's payload of `Response.Payload.**Data**`
+- [Major] `Channel.OnInsert`, `Channel.OnUpdate`, and `Channel.OnDelete` now return `PostgresChangesEventArgs`
+- [Minor] Rename `Channel` to `RealtimeChannel`
+- Supports better handling of disconnects in `RealtimeSocket` and adds a `Client.OnReconnect` event.
+- [Minor] Moves `ChannelOptions` to `Channel.ChannelOptions`
+- [Minor] Moves `ChannelStateChangedEventArgs` to `Channel.ChannelStateChangedEventArgs`
+- [Minor] Moves `Push` to `Channel.Push`
+- [Minor] Moves `Channel.ChannelState` to `Constants.ChannelState`
+- [Minor] Moves `SocketResponse`, `SocketRequest`, `SocketResponsePayload`, `SocketResponseEventArgs`, and `SocketStateChangedEventArgs` to `Socket` namespace.
+- [New] Adds `RealtimeBroadcast`
+- [New] Adds `RealtimePresence`
+- [Improvement] Better handling of disconnection/reconnection
 
 ---
 
-Realtime-csharp is written as a client library for [supabase/realtime](https://github.com/supabase/realtime).
+`realtime-csharp` is written as a client library for [supabase/realtime](https://github.com/supabase/realtime).
 
 Documentation can be found [here](https://supabase-community.github.io/realtime-csharp/api/Supabase.Realtime.Client.html).
 
@@ -59,12 +59,13 @@ channel.OnUpdate += (sender, args) => Console.WriteLine("Item updated: " + args.
 channel.OnDelete += (sender, args) => Console.WriteLine("Item deleted");
 
 // Callback for any event, INSERT, UPDATE, or DELETE
-channel.OnMessage += (sender, args) => Debug.WriteLine(args.Message.Event);
+channel.OnPostgresChange += (sender, args) => Debug.WriteLine(args.Message.Event);
 
 await channel.Subscribe();
 ```
 
 Leveraging `Postgrest.BaseModel`s, one ought to be able to coerce SocketResponse Records into their associated models by calling:
+
 ```c#
 // ...
 var channel = client.Channel("realtime", "public", "users");
@@ -73,6 +74,143 @@ channel.OnInsert += (sender, args) => {
     var model = args.Response.Model<User>();
 };
 
+await channel.Subscribe();
+```
+
+## Broadcast
+
+"Broadcast follows the publish-subscribe pattern where a client publishes messages to a channel with a unique identifier. For example, a user could send a message to a channel with id room-1.
+
+Other clients can elect to receive the message in real-time by subscribing to the channel with id room-1. If these clients are online and subscribed then they will receive the message.
+
+Broadcast works by connecting your client to the nearest Realtime server, which will communicate with other servers to relay messages to other clients.
+
+A common use-case is sharing a user's cursor position with other clients in an online game."
+
+[Find more information here](https://supabase.com/docs/guides/realtime#broadcast)
+
+**Given the following model (`CursorBroadcast`):**
+
+```c#
+class MouseBroadcast : BaseBroadcast<MouseStatus> { }
+class MouseStatus
+{
+	[JsonProperty("mouseX")]
+	public float MouseX { get; set; }
+
+	[JsonProperty("mouseY")]
+	public float MouseY { get; set; }
+
+	[JsonProperty("userId")]
+	public string UserId { get; set; }
+}
+```
+
+**Listen for typed broadcast events**:
+
+```c#
+var channel = supabase.Realtime.Channel("cursor");
+
+var broadcast = channel.Register<MouseBroadcast>(false, true);
+broadcast<MouseBroadcast>().OnBroadcast += (sender, args) =>
+{
+	var state = broadcast.Current();
+	Debug.WriteLine($"{state.Payload}: {state.Payload.MouseX}:{state.Payload.MouseY}");
+};
+await channel.Subscribe();
+```
+
+**Broadcast an event**:
+
+```c#
+var channel = supabase.Realtime.Channel("cursor");
+var data = new CursorBroadcast { Event = "cursor", Payload = new MouseStatus { MouseX = 123, MouseY = 456 } };
+channel.Send(ChannelType.Broadcast, data);
+```
+
+## Presence
+
+"Presence utilizes an in-memory conflict-free replicated data type (CRDT) to track and synchronize shared state in an eventually consistent manner. It computes the difference between existing state and new state changes and sends the necessary updates to clients via Broadcast.
+
+When a new client subscribes to a channel, it will immediately receive the channel's latest state in a single message instead of waiting for all other clients to send their individual states.
+
+Clients are free to come-and-go as they please, and as long as they are all subscribed to the same channel then they will all have the same Presence state as each other.
+
+The neat thing about Presence is that if a client is suddenly disconnected (for example, they go offline), their state will be automatically removed from the shared state. If you've ever tried to build an “I'm online” feature which handles unexpected disconnects, you'll appreciate how useful this is."
+
+[Find more information here](https://supabase.com/docs/guides/realtime#presence)
+
+**Given the following model: (`UserPresence`)**
+
+```c#
+class UserPresence: BasePresence
+{
+    [JsonProperty("lastSeen")]
+    public DateTime LastSeen { get; set; }
+}
+```
+
+**Listen for typed presence events**:
+
+```c#
+var presenceId = Guid.NewGuid().ToString();
+
+var channel = supabase.Realtime.Channel("last-seen");
+var presence = channel.Register<UserPresence>(presenceId);
+presence.OnSync += (sender, args) =>
+{
+	foreach (var state in presence.CurrentState)
+	{
+                var userId = state.Key;
+                var lastSeen = state.Value.First().LastSeen;
+		Debug.WriteLine($"{userId}: {lastSeen}");
+	}
+};
+await channel.Subscribe();
+```
+
+**Track a user presence event**:
+
+```c#
+var presenceId = Guid.NewGuid().ToString();
+var channel = supabase.Realtime.Channel("last-seen");
+
+var presence = channel.Register<UserPresence>(presenceId);
+presence.Track(new UserPresence { LastSeen = DateTime.Now });
+```
+
+## Postgres Changes
+
+"Postgres Changes enable you to listen to database changes and have them broadcast to authorized clients based on [Row Level Security (RLS)](https://supabase.com/docs/guides/auth/row-level-security) policies.
+
+This works by Realtime polling your database's logical replication slot for changes, passing those changes to the [apply_rls](https://github.com/supabase/walrus#reading-wal) SQL function to determine which clients have permission, and then using Broadcast to send those changes to clients.
+
+Realtime requires a publication called `supabase_realtime` to determine which tables to poll. You must add tables to this publication prior to clients subscribing to channels that want to listen for database changes.
+
+We strongly encourage you to enable RLS on your database tables and have RLS policies in place to prevent unauthorized parties from accessing your data."
+
+[Find More Information here](https://supabase.com/docs/guides/realtime#postgres-changes)
+
+**Using the new `Register` method:**
+
+```c#
+var channel = supabase.Realtime.Channel("public-users");
+channel.Register(new PostgresChangesOptions("public", "users"));
+channel.PostgresChanges += (sender, args) =>
+{
+	switch (args.Response.Data.Type)
+	{
+		case EventType.Insert:
+			// Handle user created
+			break;
+		case EventType.Update:
+			// Handle user updated
+			break;
+		case EventType.Delete:
+			// Handle user deleted
+			break;
+	}
+};
 await channel.Subscribe();
 ```
 
