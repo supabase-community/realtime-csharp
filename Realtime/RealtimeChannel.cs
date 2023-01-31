@@ -357,15 +357,15 @@ namespace Supabase.Realtime
 		/// <summary>
 		/// Sends an arbitrary payload with a given payload type (<see cref="ChannelEventName"/>)
 		/// </summary>
-		/// <param name="eventType"></param>
+		/// <param name="eventName"></param>
 		/// <param name="payload"></param>
 		/// <param name="timeoutMs"></param>
-		public Task<bool> Send(ChannelEventName eventType, string? type, object payload, int timeoutMs = DEFAULT_TIMEOUT)
+		public Task<bool> Send(ChannelEventName eventName, string? type, object payload, int timeoutMs = DEFAULT_TIMEOUT)
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
-			var eventName = Core.Helpers.GetMappedToAttr(eventType).Mapping;
-			var push = Push(eventName, type, payload, timeoutMs);
+			var ev = Core.Helpers.GetMappedToAttr(eventName).Mapping;
+			var push = Push(ev, type, payload, timeoutMs);
 
 			EventHandler<SocketResponseEventArgs>? messageCallback = null;
 

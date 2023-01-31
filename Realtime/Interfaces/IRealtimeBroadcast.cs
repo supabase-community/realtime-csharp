@@ -8,7 +8,7 @@ namespace Supabase.Realtime.Interfaces
     public interface IRealtimeBroadcast
     {
         event EventHandler<EventArgs?>? OnBroadcast;
-		Task<bool> Send(string? type, object payload, int timeoutMs = DEFAULT_TIMEOUT);
+		Task<bool> Send(string? broadcastEventName, object payload, int timeoutMs = DEFAULT_TIMEOUT);
 
 		void TriggerReceived(SocketResponseEventArgs args);
     }

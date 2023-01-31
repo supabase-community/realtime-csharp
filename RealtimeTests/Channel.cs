@@ -21,6 +21,12 @@ namespace RealtimeTests
 		public DateTime? Time { get; set; }
 	}
 
+	public class BroadcastExample : BaseBroadcast
+	{
+		[JsonProperty("userId")]
+		public string? UserId { get; set; }
+	}
+
 	[TestClass]
 	public class Channel
 	{
@@ -57,7 +63,8 @@ namespace RealtimeTests
 			var presence1 = channel1.Register<TimePresence>(guid1);
 			presence1.OnSync += (sender, args) =>
 			{
-				if (presence1.CurrentState.ContainsKey(guid2))
+				var state = presence1.CurrentState;
+				if (state.ContainsKey(guid2) && state[guid2].First().Time != null)
 				{
 					tsc.SetResult(true);
 				}
@@ -67,9 +74,10 @@ namespace RealtimeTests
 			await client2.ConnectAsync();
 			var channel2 = client2.Channel("online-users");
 			var presence2 = channel2.Register<TimePresence>(guid2);
-			channel2.Presence<TimePresence>().OnSync += (sender, args) =>
+			presence2.OnSync += (sender, args) =>
 			{
-				if (channel2.Presence<TimePresence>().CurrentState.ContainsKey(guid1))
+				var state = presence2.CurrentState;
+				if (state.ContainsKey(guid1) && state[guid1].First().Time != null)
 				{
 					tsc2.SetResult(true);
 				}
@@ -81,7 +89,49 @@ namespace RealtimeTests
 			presence1.Track(new TimePresence { Time = DateTime.Now });
 			presence2.Track(new TimePresence { Time = DateTime.Now });
 
-			await Task.WhenAll(new [] { tsc.Task, tsc2.Task });
+			await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
+		}
+
+		[TestMethod("Channel: Can listen for broadcast")]
+		public async Task ClientCanListenForBroadcast()
+		{
+			var tsc = new TaskCompletionSource<bool>();
+			var tsc2 = new TaskCompletionSource<bool>();
+
+			var guid1 = Guid.NewGuid().ToString();
+			var guid2 = Guid.NewGuid().ToString();
+
+			var channel1 = SocketClient.Channel("online-users");
+			var broadcast1 = channel1.Register<BroadcastExample>(true, true);
+			broadcast1.OnBroadcast += (sender, args) =>
+			{
+				var broadcast = broadcast1.Current();
+				if (broadcast.UserId != guid1 && broadcast.Event == "user")
+				{
+					tsc.TrySetResult(true);
+				}
+			};
+
+			var client2 = Helpers.SocketClient();
+			await client2.ConnectAsync();
+			var channel2 = client2.Channel("online-users");
+			var broadcast2 = channel2.Register<BroadcastExample>(true, true);
+			broadcast2.OnBroadcast += (sender, args) =>
+			{
+				var broadcast = broadcast2.Current();
+				if (broadcast.UserId != guid2 && broadcast.Event == "user")
+				{
+					tsc2.TrySetResult(true);
+				}
+			};
+
+			await channel1.Subscribe();
+			await channel2.Subscribe();
+
+			await broadcast1.Send("user", new BroadcastExample { UserId = guid1 });
+			await broadcast2.Send("user", new BroadcastExample { UserId = guid2 });
+
+			await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
 		}
 
 		[TestMethod("Channel: Payload returns a modeled response (if possible)")]

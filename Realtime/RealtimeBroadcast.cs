@@ -72,9 +72,15 @@ namespace Supabase.Realtime
 		/// <summary>
 		/// Broadcasts an arbitrary payload
 		/// </summary>
-		/// <param name="payloadType"></param>
+		/// <param name="broadcastEventName"></param>
 		/// <param name="payload"></param>
 		/// <param name="timeoutMs"></param>
-		public Task<bool> Send(string? type, object payload, int timeoutMs = 10000) => channel.Send(ChannelEventName.Broadcast, type, payload, timeoutMs);
+		public Task<bool> Send(string? broadcastEventName, object payload, int timeoutMs = 10000)
+		{
+			if (payload is BaseBroadcast baseBroadcast && string.IsNullOrEmpty(baseBroadcast.Event))
+				baseBroadcast.Event = broadcastEventName;
+
+			return channel.Send(ChannelEventName.Broadcast, broadcastEventName, payload, timeoutMs);
+		}
 	}
 }
