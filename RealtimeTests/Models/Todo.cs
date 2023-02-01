@@ -15,7 +15,7 @@ namespace RealtimeTests.Models
         public string Details { get; set; }
 
         [Column("user_id")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [Column("numbers")]
         public List<int> Numbers { get; set; }

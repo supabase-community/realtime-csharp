@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		RealtimeTests\.runsettings = RealtimeTests\.runsettings
 		CHANGELOG.md = CHANGELOG.md
-		docker-compose.yml = docker-compose.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -48,7 +47,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0DA83318-C23A-4202-82C3-88ECB41998CD} = {595D76A4-2809-4D38-A6FE-18785E1B3749}
 		{A5BF740D-402B-40D5-954C-18DD2C6D6BE5} = {595D76A4-2809-4D38-A6FE-18785E1B3749}
 		{05D46011-4365-4BC6-AD7F-71BE7198EC0C} = {595D76A4-2809-4D38-A6FE-18785E1B3749}
 	EndGlobalSection
