@@ -17,7 +17,7 @@ namespace Supabase.Realtime.PostgresChanges
 	public class PostgresChangesResponse : SocketResponse<PostgresChangesPayload<SocketResponsePayload>>
 	{
 		public PostgresChangesResponse(JsonSerializerSettings serializerSettings) : base(serializerSettings)
-		{ }
+		{}
 
 		/// <summary>
 		/// Hydrates the referenced record into a Model (if possible).

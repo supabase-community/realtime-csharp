@@ -194,17 +194,25 @@ namespace RealtimeTests
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
+			var result = await RestClient.Table<Todo>().Order(x => x.InsertedAt, Postgrest.Constants.Ordering.Descending).Get();
+			var model = result.Models.First();
+			var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
+
 			var channel = SocketClient.Channel("realtime", "public", "todos");
 
-			channel.OnUpdate += (s, args) => tsc.SetResult(true);
+			channel.OnUpdate += (s, args) =>
+			{
+				var updated = args.Response.Model<Todo>();
+				Assert.AreEqual(newDetails, updated.Details);
+				Assert.AreEqual(model.Id, updated.Id);
+				Assert.AreEqual(model.UserId, updated.UserId);
+				tsc.SetResult(true);
+			};
 
 			await channel.Subscribe();
 
-			var result = await RestClient.Table<Todo>().Get();
-			var model = result.Models.Last();
-
 			await RestClient.Table<Todo>()
-				.Set(x => x.Details, "I'm an updated item ✏️")
+				.Set(x => x.Details, newDetails)
 				.Match(model)
 				.Update();
 

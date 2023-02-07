@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Postgrest.Models;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.PostgresChanges;
@@ -24,7 +25,8 @@ namespace Supabase.Realtime.Socket
 	/// </summary>
 	public class SocketResponse : IRealtimeSocketResponse
 	{
-		protected JsonSerializerSettings serializerSettings;
+		internal JsonSerializerSettings serializerSettings;
+
 		public SocketResponse(JsonSerializerSettings serializerSettings)
 		{
 			this.serializerSettings = serializerSettings;
