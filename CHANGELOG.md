@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 5.0.1 - 2023-02-06
+
+- Re: [#22](https://github.com/supabase-community/realtime-csharp/issues/22) - `SerializerSettings` were not being passed to `PostgresChangesResponse` - Thanks [@Shenrak](https://github.com/Shenrak) for the help debugging!
+
 ## 5.0.0 - 2023-01-31
 
 - Re: [#21](https://github.com/supabase-community/realtime-csharp/pull/21) Provide API for `presence`, `broadcast` and `postgres_changes`
