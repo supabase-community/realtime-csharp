@@ -39,6 +39,8 @@ namespace Supabase.Realtime.PostgresChanges
 
 		/// <summary>
 		/// Hydrates the old_record into a Model (if possible).
+		/// 
+		/// NOTE: If you want to receive the "previous" data for updates and deletes, you will need to set `REPLICA IDENTITY to FULL`, like this: `ALTER TABLE your_table REPLICA IDENTITY FULL`;
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>

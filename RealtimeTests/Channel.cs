@@ -196,16 +196,22 @@ namespace RealtimeTests
 
 			var result = await RestClient.Table<Todo>().Order(x => x.InsertedAt, Postgrest.Constants.Ordering.Descending).Get();
 			var model = result.Models.First();
+			var oldDetails = model.Details;
 			var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
 
 			var channel = SocketClient.Channel("realtime", "public", "todos");
 
 			channel.OnUpdate += (s, args) =>
 			{
+				var oldModel = args.Response.OldModel<Todo>();
+
+				Assert.AreEqual(oldDetails, oldModel.Details);
+
 				var updated = args.Response.Model<Todo>();
 				Assert.AreEqual(newDetails, updated.Details);
 				Assert.AreEqual(model.Id, updated.Id);
 				Assert.AreEqual(model.UserId, updated.UserId);
+
 				tsc.SetResult(true);
 			};
 
