@@ -533,6 +533,8 @@ namespace Supabase.Realtime
 			{
 				case EventType.PostgresChanges:
 					var deserialize = JsonConvert.DeserializeObject<PostgresChangesResponse>(args.Response.Json!, Options.SerializerSettings);
+				
+					if (deserialize?.Payload?.Data == null) return;
 
 					deserialize!.Json = args.Response.Json;
 					deserialize.serializerSettings = Options.SerializerSettings;
@@ -541,6 +543,7 @@ namespace Supabase.Realtime
 
 					// Invoke '*' listener
 					OnPostgresChange?.Invoke(this, newArgs);
+
 
 					switch (deserialize!.Payload!.Data!.Type)
 					{
