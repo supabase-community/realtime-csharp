@@ -56,6 +56,10 @@ namespace Supabase.Realtime.Socket
 						return EventType.Broadcast;
 					case "postgres_changes":
 						return EventType.PostgresChanges;
+					case "system":
+						return EventType.System;
+					case "phx_reply":
+						return EventType.PostgresChanges;
 				}
 
 				if (Payload == null) return EventType.Unknown;

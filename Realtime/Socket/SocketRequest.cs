@@ -7,7 +7,7 @@ namespace Supabase.Realtime.Socket
     /// </summary>
     public class SocketRequest
     {
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string? Type { get; set; }
 
         [JsonProperty("topic")]
@@ -21,5 +21,8 @@ namespace Supabase.Realtime.Socket
 
         [JsonProperty("ref")]
         public string? Ref { get; set; }
-    }
+
+		[JsonProperty("join_ref", NullValueHandling = NullValueHandling.Ignore)]
+		public string? JoinRef { get; set; }
+	}
 }

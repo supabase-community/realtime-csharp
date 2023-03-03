@@ -1,6 +1,9 @@
-﻿using Supabase.Realtime.Interfaces;
+﻿using Newtonsoft.Json;
+using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Socket;
 using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace Supabase.Realtime.Channel
@@ -78,7 +81,6 @@ namespace Supabase.Realtime.Channel
 			EventName = eventName;
 			Payload = payload;
 
-
 			this.timeoutMs = timeoutMs;
 
 			timer = new Timer(this.timeoutMs);
@@ -102,7 +104,7 @@ namespace Supabase.Realtime.Channel
 		}
 
 		/// <summary>
-		/// Sends a `Push` request and initializes the Timeout timer.
+		/// Sends a `Push` request and initializes the Timeout.
 		/// </summary>
 		public void Send()
 		{
@@ -114,7 +116,8 @@ namespace Supabase.Realtime.Channel
 				Type = Type,
 				Event = EventName,
 				Payload = Payload,
-				Ref = Ref
+				Ref = Ref,
+				JoinRef = EventName == Constants.CHANNEL_EVENT_JOIN ?  Ref : null,
 			};
 			socket.Push(Message);
 		}

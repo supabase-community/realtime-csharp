@@ -5,6 +5,7 @@ using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
@@ -60,7 +61,8 @@ namespace Supabase.Realtime
 			{
 				var parameters = new Dictionary<string, string?> {
 					{ "token", options.Parameters.Token },
-					{ "apikey", options.Parameters.ApiKey }
+					{ "apikey", options.Parameters.ApiKey },
+					{ "vsn", "1.0.0" }
 				};
 
 				return string.Format($"{endpoint}?{Utils.QueryString(parameters)}");
@@ -79,9 +81,7 @@ namespace Supabase.Realtime
 			this.options = options;
 
 			if (!options.Headers.ContainsKey("X-Client-Info"))
-			{
 				options.Headers.Add("X-Client-Info", Core.Util.GetAssemblyVersion(typeof(Client)));
-			}
 
 			connection = new WebsocketClient(new Uri(endpointUrl));
 		}
@@ -107,6 +107,7 @@ namespace Supabase.Realtime
 		/// </summary>
 		public async Task Connect()
 		{
+			// Ignore calling connect multiple times.
 			if (connection.IsRunning || hasConnectBeenCalled) return;
 
 			connection.ReconnectTimeout = TimeSpan.FromSeconds(120);
@@ -123,23 +124,16 @@ namespace Supabase.Realtime
 			connection.DisconnectionHappened.Subscribe(disconnectionInfo =>
 			{
 				if (disconnectionInfo.Exception != null)
-				{
 					OnConnectionError(this, disconnectionInfo);
-				}
 				else
-				{
 					OnConnectionClosed(this, disconnectionInfo);
-				}
 			});
 
-			connection.MessageReceived.Subscribe(msg =>
-			{
-				OnConnectionMessage(this, msg);
-			});
+			connection.MessageReceived.Subscribe(msg => OnConnectionMessage(this, msg));
 
 			hasConnectBeenCalled = true;
 
-			await connection.Start();
+			await connection.StartOrFail();
 		}
 
 		/// <summary>
@@ -213,7 +207,7 @@ namespace Supabase.Realtime
 
 			pendingHeartbeatRef = MakeMsgRef();
 
-			Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString() });
+			Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pendingHeartbeatRef.ToString(), Payload = new Dictionary<string, string>() });
 		}
 
 		/// <summary>
@@ -262,28 +256,40 @@ namespace Supabase.Realtime
 		/// <param name="args"></param>
 		private void OnConnectionMessage(object sender, ResponseMessage args)
 		{
-			options.Decode!(args.Text, decoded =>
+			Task.Run(() =>
 			{
-				if (decoded == null) return;
+				options.Decode!(args.Text, decoded =>
+				{
+					try
+					{
+						options.Logger("receive", args.Text, null);
 
-				options.Logger("receive", $"{args.Text} {decoded?.Topic} {decoded?.Event} ({decoded?.Ref})", null);
+						// Send Separate heartbeat event
+						if (decoded!.Ref == pendingHeartbeatRef)
+						{
+							OnHeartbeat?.Invoke(sender, new SocketResponseEventArgs(decoded));
+							return;
+						}
 
-				// Send Separate heartbeat event
-				if (decoded!.Ref == pendingHeartbeatRef)
-					OnHeartbeat?.Invoke(sender, new SocketResponseEventArgs(decoded));
+						if (decoded.Event != Constants.EventType.System)
+						{
+							decoded!.Json = args.Text;
 
-				decoded!.Json = args.Text;
-
-				OnMessage?.Invoke(sender, new SocketResponseEventArgs(decoded));
+							StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Message, new EventArgs()));
+							OnMessage?.Invoke(sender, new SocketResponseEventArgs(decoded));
+						}
+					}
+					catch (Exception ex)
+					{
+						Debug.WriteLine($"{ex.Message}");
+					}
+				});
 			});
-
-			StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Message, new EventArgs()));
 		}
 
 		private void OnConnectionError(object sender, DisconnectionInfo args)
 		{
 			AttemptReconnection();
-
 			StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Error, new EventArgs()));
 		}
 
@@ -296,7 +302,8 @@ namespace Supabase.Realtime
 		{
 			options.Logger("transport", "close", args);
 
-			AttemptReconnection();
+			if (args.Type != DisconnectionType.ByUser)
+				AttemptReconnection();
 
 			StateChanged?.Invoke(sender, new SocketStateChangedEventArgs(ConnectionState.Close, new EventArgs()));
 		}

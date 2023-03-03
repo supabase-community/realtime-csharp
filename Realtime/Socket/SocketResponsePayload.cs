@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Postgrest.Models;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace Supabase.Realtime.Socket
 	}
 	public class SocketResponsePayload
 	{
+		#region Postgres Changes
 		/// <summary>
 		/// Displays Column information from the Database.
 		/// 
@@ -99,11 +101,7 @@ namespace Supabase.Realtime.Socket
 		[JsonProperty("response")]
 		public object? Response { get; set; }
 
-		[JsonProperty("joins")]
-		public object? Joins { get; set; }
-
-		[JsonProperty("leaves")]
-		public object? Leaves { get; set; }
+		#endregion
 
 		/// <summary>
 		/// Either null or an array of errors.
@@ -111,5 +109,27 @@ namespace Supabase.Realtime.Socket
 		/// </summary>
 		[JsonProperty("errors")]
 		public List<string>? Errors { get; set; }
+
+		#region Presence
+
+		[JsonProperty("joins")]
+		public object? Joins { get; set; }
+
+		[JsonProperty("leaves")]
+		public object? Leaves { get; set; }
+
+		#endregion
+
+		#region System Messages
+
+		[JsonProperty("channel")]
+		public string? Channel { get; set; }
+
+		[JsonProperty("extension")]
+		public string? Extension { get; set; }
+
+		[JsonProperty("message")]
+		public string? Message { get; set; }
+		#endregion
 	}
 }

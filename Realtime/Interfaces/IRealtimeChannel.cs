@@ -41,11 +41,9 @@ namespace Supabase.Realtime.Interfaces
 		Push Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DEFAULT_TIMEOUT);
 		void Rejoin(int timeoutMs = DEFAULT_TIMEOUT);
 		Task<bool> Send(ChannelEventName eventType, string? type, object payload, int timeoutMs = DEFAULT_TIMEOUT);
-
 		RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(bool broadcastSelf = false, bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast;
 		RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(string presenceKey) where TPresenceResponse : BasePresence;
 		IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions);
-
 		Task<IRealtimeChannel> Subscribe(int timeoutMs = DEFAULT_TIMEOUT);
 
 		void Unsubscribe();

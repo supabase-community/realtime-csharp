@@ -21,6 +21,8 @@ namespace Supabase.Realtime
             PresenceState,
             PresenceDiff,
             PostgresChanges,
+            System,
+            Internal,
             Unknown
         }
 

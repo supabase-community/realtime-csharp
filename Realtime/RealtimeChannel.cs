@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
@@ -85,17 +86,17 @@ namespace Supabase.Realtime
 		/// <summary>
 		/// Options passed to this channel instance.
 		/// </summary>
-		public ChannelOptions Options { get; private set; }
+		public Channel.ChannelOptions Options { get; private set; }
 
 		/// <summary>
 		/// The saved Broadcast Options, set in <see cref="Register{TBroadcastResponse}(BroadcastOptions)"/>
 		/// </summary>
-		public BroadcastOptions? BroadcastOptions { get; protected set; }
+		public BroadcastOptions? BroadcastOptions { get; protected set; } = new BroadcastOptions(false, false);
 
 		/// <summary>
 		/// The saved Presence Options, set in <see cref="Register{TPresenceResponse}(PresenceOptions)"/>
 		/// </summary>
-		public PresenceOptions? PresenceOptions { get; protected set; }
+		public PresenceOptions? PresenceOptions { get; protected set; } = new PresenceOptions(string.Empty);
 
 		/// <summary>
 		/// The saved Postgres Changes Options, set in <see cref="Register(PostgresChanges.PostgresChangesOptions)"/>
@@ -170,7 +171,7 @@ namespace Supabase.Realtime
 		/// <param name="table"></param>
 		/// <param name="col"></param>
 		/// <param name="value"></param>
-		public RealtimeChannel(IRealtimeSocket socket, string channelName, ChannelOptions options)
+		public RealtimeChannel(IRealtimeSocket socket, string channelName, Channel.ChannelOptions options)
 		{
 			Topic = channelName;
 
@@ -416,6 +417,27 @@ namespace Supabase.Realtime
 		private Push GenerateJoinPush() => new Push(socket, this, CHANNEL_EVENT_JOIN, payload: new JoinPush(BroadcastOptions, PresenceOptions, PostgresChangesOptions));
 
 		/// <summary>
+		/// Generates an auth push.
+		/// </summary>
+		/// <returns></returns>
+		private Push? GenerateAuthPush()
+		{
+			var accessToken = Options.RetrieveAccessToken();
+
+			if (!string.IsNullOrEmpty(accessToken))
+			{
+				return new Push(socket, this, CHANNEL_ACCESS_TOKEN, payload: new Dictionary<string, string>
+				{
+					{ "access_token",  accessToken!}
+				});
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+		/// <summary>
 		/// If the channel errors internally (pheonix error, not transport) attempt rejoining.
 		/// </summary>
 		/// <param name="sender"></param>
@@ -444,11 +466,9 @@ namespace Supabase.Realtime
 		{
 			SetState(ChannelState.Joining);
 
+			// Remove handler if exists
 			if (JoinPush != null)
-			{
-				// Remove handler if exists
 				JoinPush.OnMessage -= HandleJoinResponse;
-			}
 
 			JoinPush = GenerateJoinPush();
 			JoinPush.OnMessage += HandleJoinResponse;
@@ -470,18 +490,18 @@ namespace Supabase.Realtime
 
 				if (obj.Status == PHEONIX_STATUS_OK)
 				{
-					SetState(ChannelState.Joined);
-
 					// Disable Rejoin Timeout
 					rejoinTimer?.Stop();
 					isRejoining = false;
+
+					GenerateAuthPush()?.Send();
+					SetState(ChannelState.Joined);
 				}
 				else if (obj.Status == PHEONIX_STATUS_ERROR)
 				{
-					SetState(ChannelState.Errored);
-
 					rejoinTimer.Stop();
 					isRejoining = false;
+					SetState(ChannelState.Errored);
 				}
 			}
 		}
@@ -513,7 +533,7 @@ namespace Supabase.Realtime
 			{
 				case EventType.PostgresChanges:
 					var deserialize = JsonConvert.DeserializeObject<PostgresChangesResponse>(args.Response.Json!, Options.SerializerSettings);
-					
+
 					deserialize!.Json = args.Response.Json;
 					deserialize.serializerSettings = Options.SerializerSettings;
 

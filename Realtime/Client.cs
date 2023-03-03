@@ -157,38 +157,7 @@ namespace Supabase.Realtime
 
 			try
 			{
-				if (socket != null)
-				{
-					Debug.WriteLine("Socket already exists.");
-					tsc.TrySetResult(this);
-					return tsc.Task;
-				}
-
-				EventHandler<SocketStateChangedEventArgs>? callback = null;
-				callback = (object sender, SocketStateChangedEventArgs args) =>
-				{
-					switch (args.State)
-					{
-						case SocketStateChangedEventArgs.ConnectionState.Open:
-							Socket!.StateChanged -= callback;
-							tsc.TrySetResult(this);
-							break;
-						case SocketStateChangedEventArgs.ConnectionState.Close:
-						case SocketStateChangedEventArgs.ConnectionState.Error:
-							Socket!.StateChanged -= callback;
-							tsc.TrySetException(new Exception("Error occurred connecting to Socket. Check logs."));
-							break;
-					}
-				};
-
-				socket = new RealtimeSocket(realtimeUrl, Options, SerializerSettings);
-
-				socket.StateChanged += HandleSocketStateChanged;
-				socket.OnMessage += HandleSocketMessage;
-				socket.OnHeartbeat += HandleSocketHeartbeat;
-
-				socket.StateChanged += callback;
-				socket.Connect();
+				Connect(tsc.SetResult);
 			}
 			catch (Exception ex)
 			{
@@ -209,7 +178,7 @@ namespace Supabase.Realtime
 		{
 			if (socket != null)
 			{
-				Debug.WriteLine("Socket already exists.");
+				Options.Logger("error", "Socket already exists.", null);
 				return this;
 			}
 
@@ -298,10 +267,16 @@ namespace Supabase.Realtime
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex);
+				Options.Logger("exception", "Error in SetAuth()", ex);
 			}
 		}
 
+		/// <summary>
+		/// Adds a RealtimeChannel subscription - if a subscription exists with the same signature, the existing subscription will be returned.
+		/// </summary>
+		/// <param name="channelName">The name of the Channel to join (totally arbitrary)</param>
+		/// <returns></returns>
+		/// <exception cref="Exception"></exception>
 		public RealtimeChannel Channel(string channelName)
 		{
 			var topic = $"realtime:{channelName}";
@@ -312,7 +287,7 @@ namespace Supabase.Realtime
 			if (socket == null)
 				throw new Exception("Socket must exist, was `Connect` called?");
 
-			var subscription = new RealtimeChannel(socket!, topic, new ChannelOptions(Options, SerializerSettings));
+			var subscription = new RealtimeChannel(socket!, topic, new ChannelOptions(Options, () => AccessToken, SerializerSettings));
 			subscriptions.Add(topic, subscription);
 
 			return subscription;
@@ -332,15 +307,13 @@ namespace Supabase.Realtime
 			var key = Utils.GenerateChannelTopic(database, schema, table, column, value);
 
 			if (subscriptions.ContainsKey(key))
-			{
 				return subscriptions[key];
-			}
 
 			if (socket == null)
 				throw new Exception("Socket must exist, was `Connect` called?");
 
 			var changesOptions = new PostgresChangesOptions(schema, table, filter: column != null && value != null ? $"{column}=eq.{value}" : null, parameters: parameters);
-			var options = new ChannelOptions(Options, SerializerSettings);
+			var options = new ChannelOptions(Options, () => AccessToken, SerializerSettings);
 
 			var subscription = new RealtimeChannel(socket!, key, options);
 			subscription.Register(changesOptions);
@@ -387,17 +360,21 @@ namespace Supabase.Realtime
 
 					OnOpen?.Invoke(this, args);
 					break;
+				case SocketStateChangedEventArgs.ConnectionState.Reconnected:
+					// Ref: https://github.com/supabase/realtime-js/pull/116/files
+					if (!string.IsNullOrEmpty(AccessToken))
+						SetAuth(AccessToken!);
+
+					OnReconnect?.Invoke(this, args);
+					break;
+				case SocketStateChangedEventArgs.ConnectionState.Message:
+					OnMessage?.Invoke(this, args);
+					break;
 				case SocketStateChangedEventArgs.ConnectionState.Close:
 					OnClose?.Invoke(this, args);
 					break;
 				case SocketStateChangedEventArgs.ConnectionState.Error:
 					OnError?.Invoke(this, args);
-					break;
-				case SocketStateChangedEventArgs.ConnectionState.Message:
-					OnMessage?.Invoke(this, args);
-					break;
-				case SocketStateChangedEventArgs.ConnectionState.Reconnected:
-					OnReconnect?.Invoke(this, args);
 					break;
 			}
 		}
