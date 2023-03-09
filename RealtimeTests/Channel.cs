@@ -10,6 +10,7 @@ using RealtimeTests.Models;
 using Supabase.Realtime;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Models;
+using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Presence;
 using static Supabase.Realtime.Constants;
 

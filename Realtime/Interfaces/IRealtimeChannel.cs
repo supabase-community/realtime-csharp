@@ -45,6 +45,6 @@ namespace Supabase.Realtime.Interfaces
 		RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(string presenceKey) where TPresenceResponse : BasePresence;
 		IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions);
 		Task<IRealtimeChannel> Subscribe(int timeoutMs = DEFAULT_TIMEOUT);
-		Task<IRealtimeChannel> Unsubscribe();
+		IRealtimeChannel Unsubscribe();
 	}
 }

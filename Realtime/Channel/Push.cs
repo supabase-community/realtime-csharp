@@ -125,35 +125,6 @@ namespace Supabase.Realtime.Channel
 		}
 
 		/// <summary>
-		/// Sends a `Push` request and initializes the Timeout.
-		/// </summary>
-		public Task<bool> SendAsync()
-		{
-			var tsc = new TaskCompletionSource<bool>();
-
-			OnTimeout += (sender, args) =>
-			{
-				tsc.SetException(new TimeoutException("Timeout occurred during attempted send."));
-			};
-
-			OnMessage += (sender, args) =>
-			{
-				if (args.Response._event == Constants.CHANNEL_EVENT_REPLY)
-				{
-					tsc.SetResult(args?.Response?.Payload?.Status == Constants.PHEONIX_STATUS_OK);
-				}
-				else
-				{
-					tsc.SetResult(args.Response != null);
-				}
-			};
-
-			Send();
-
-			return tsc.Task;
-		}
-
-		/// <summary>
 		/// Keeps an internal timer for raising an event if this message is not responded to.
 		/// </summary>
 		internal void StartTimeout()

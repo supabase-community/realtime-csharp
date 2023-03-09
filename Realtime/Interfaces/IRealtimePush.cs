@@ -20,7 +20,6 @@ namespace Supabase.Realtime.Interfaces
 		event EventHandler? OnTimeout;
 
 		void Resend(int timeoutMs = 10000);
-		Task<bool> SendAsync();
 		void Send();
 	}
 }

@@ -324,13 +324,13 @@ namespace Supabase.Realtime
 		/// <summary>
 		/// Unsubscribes from the channel.
 		/// </summary>
-		public async Task<IRealtimeChannel> Unsubscribe()
+		public IRealtimeChannel Unsubscribe()
 		{
 			IsSubscribed = false;
 			SetState(ChannelState.Leaving);
 
 			var leavePush = new Push(socket, this, CHANNEL_EVENT_LEAVE);
-			await leavePush.SendAsync();
+			leavePush.Send();
 
 			TriggerChannelStateEvent(new ChannelStateChangedEventArgs(ChannelState.Closed), false);
 
@@ -481,7 +481,7 @@ namespace Supabase.Realtime
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		private async void HandleJoinResponse(object sender, SocketResponseEventArgs args)
+		private void HandleJoinResponse(object sender, SocketResponseEventArgs args)
 		{
 			if (args.Response._event == CHANNEL_EVENT_REPLY)
 			{
@@ -498,8 +498,8 @@ namespace Supabase.Realtime
 					var authPush = GenerateAuthPush();
 
 					if (authPush != null)
-						await authPush.SendAsync();
-					
+						authPush.Send();
+
 					SetState(ChannelState.Joined);
 				}
 				else if (obj.Status == PHEONIX_STATUS_ERROR)
