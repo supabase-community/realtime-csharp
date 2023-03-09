@@ -260,10 +260,9 @@ namespace Supabase.Realtime
 		{
 			var tsc = new TaskCompletionSource<IRealtimeChannel>();
 
-			if (hasJoinedOnce && IsSubscribed)
+			if (IsSubscribed)
 			{
-				tsc.SetException(new Exception("`Subscribe` can only be called a single time per channel instance."));
-				return tsc.Task;
+				return Task.FromResult(this as IRealtimeChannel);
 			}
 
 			JoinPush = GenerateJoinPush();
@@ -325,15 +324,17 @@ namespace Supabase.Realtime
 		/// <summary>
 		/// Unsubscribes from the channel.
 		/// </summary>
-		public void Unsubscribe()
+		public async Task<IRealtimeChannel> Unsubscribe()
 		{
 			IsSubscribed = false;
 			SetState(ChannelState.Leaving);
 
 			var leavePush = new Push(socket, this, CHANNEL_EVENT_LEAVE);
-			leavePush.Send();
+			await leavePush.SendAsync();
 
-			TriggerChannelStateEvent(new ChannelStateChangedEventArgs(ChannelState.Closed));
+			TriggerChannelStateEvent(new ChannelStateChangedEventArgs(ChannelState.Closed), false);
+
+			return this;
 		}
 
 		/// <summary>

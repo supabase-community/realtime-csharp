@@ -165,8 +165,9 @@ namespace RealtimeTests
 			{
 				tsc.SetResult(ChannelState.Closed == args.State);
 			};
+			
 			await channel.Subscribe();
-			channel.Unsubscribe();
+			await channel.Unsubscribe();
 
 			var check = await tsc.Task;
 			Assert.IsTrue(check);

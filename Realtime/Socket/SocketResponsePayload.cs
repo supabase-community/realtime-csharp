@@ -94,7 +94,6 @@ namespace Supabase.Realtime.Socket
 			}
 		}
 
-		[Obsolete("Property no longer used in responses.")]
 		[JsonProperty("status")]
 		public string? Status { get; set; }
 

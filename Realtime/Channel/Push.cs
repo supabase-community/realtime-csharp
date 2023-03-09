@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Socket;
+using Supabase.Realtime.Socket.Responses;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -110,6 +111,7 @@ namespace Supabase.Realtime.Channel
 		{
 			StartTimeout();
 			IsSent = true;
+
 			Message = new SocketRequest
 			{
 				Topic = Channel.Topic,
@@ -117,9 +119,38 @@ namespace Supabase.Realtime.Channel
 				Event = EventName,
 				Payload = Payload,
 				Ref = Ref,
-				JoinRef = EventName == Constants.CHANNEL_EVENT_JOIN ?  Ref : null,
+				JoinRef = EventName == Constants.CHANNEL_EVENT_JOIN ? Ref : null,
 			};
 			socket.Push(Message);
+		}
+
+		/// <summary>
+		/// Sends a `Push` request and initializes the Timeout.
+		/// </summary>
+		public Task<bool> SendAsync()
+		{
+			var tsc = new TaskCompletionSource<bool>();
+
+			OnTimeout += (sender, args) =>
+			{
+				tsc.SetException(new TimeoutException("Timeout occurred during attempted send."));
+			};
+
+			OnMessage += (sender, args) =>
+			{
+				if (args.Response._event == Constants.CHANNEL_EVENT_REPLY)
+				{
+					tsc.SetResult(args?.Response?.Payload?.Status == Constants.PHEONIX_STATUS_OK);
+				}
+				else
+				{
+					tsc.SetResult(args.Response != null);
+				}
+			};
+
+			Send();
+
+			return tsc.Task;
 		}
 
 		/// <summary>
