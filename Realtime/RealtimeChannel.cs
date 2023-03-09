@@ -481,7 +481,7 @@ namespace Supabase.Realtime
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="args"></param>
-		private void HandleJoinResponse(object sender, SocketResponseEventArgs args)
+		private async void HandleJoinResponse(object sender, SocketResponseEventArgs args)
 		{
 			if (args.Response._event == CHANNEL_EVENT_REPLY)
 			{
@@ -495,7 +495,11 @@ namespace Supabase.Realtime
 					rejoinTimer?.Stop();
 					isRejoining = false;
 
-					GenerateAuthPush()?.Send();
+					var authPush = GenerateAuthPush();
+
+					if (authPush != null)
+						await authPush.SendAsync();
+					
 					SetState(ChannelState.Joined);
 				}
 				else if (obj.Status == PHEONIX_STATUS_ERROR)
@@ -534,7 +538,7 @@ namespace Supabase.Realtime
 			{
 				case EventType.PostgresChanges:
 					var deserialize = JsonConvert.DeserializeObject<PostgresChangesResponse>(args.Response.Json!, Options.SerializerSettings);
-				
+
 					if (deserialize?.Payload?.Data == null) return;
 
 					deserialize!.Json = args.Response.Json;
