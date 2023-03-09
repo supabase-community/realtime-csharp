@@ -321,6 +321,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.Push.Send
   nameWithType: Push.Send
+- uid: Supabase.Realtime.Channel.Push.SendAsync
+  name: SendAsync()
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_SendAsync
+  commentId: M:Supabase.Realtime.Channel.Push.SendAsync
+  fullName: Supabase.Realtime.Channel.Push.SendAsync()
+  nameWithType: Push.SendAsync()
+- uid: Supabase.Realtime.Channel.Push.SendAsync*
+  name: SendAsync
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_SendAsync_
+  commentId: Overload:Supabase.Realtime.Channel.Push.SendAsync
+  isSpec: "True"
+  fullName: Supabase.Realtime.Channel.Push.SendAsync
+  nameWithType: Push.SendAsync
 - uid: Supabase.Realtime.Channel.Push.Type
   name: Type
   href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_Type
@@ -1941,6 +1954,23 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Send
   nameWithType: IRealtimePush<TChannel, TSocketResponse>.Send
   nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Send
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.SendAsync
+  name: SendAsync()
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_SendAsync
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.SendAsync
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.SendAsync()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).SendAsync()
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.SendAsync()
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).SendAsync()
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.SendAsync*
+  name: SendAsync
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_SendAsync_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.SendAsync
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.SendAsync
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).SendAsync
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.SendAsync
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).SendAsync
 - uid: Supabase.Realtime.Interfaces.IRealtimeSocket
   name: IRealtimeSocket
   href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html
