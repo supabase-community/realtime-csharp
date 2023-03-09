@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 5.0.3 - 2023-03-09
+
+- Re: [#25](https://github.com/supabase-community/realtime-csharp/issues/25) - Support Channel being resubscribed after having been unsubscribed, fixes rejoin timer being erroneously called on channel `Unsubscribe`. Thanks [@Kuffs2205](https://github.com/Kuffs2205)!
+
 ## 5.0.2 - 2023-03-02
 
 - Re: [#24](https://github.com/supabase-community/realtime-csharp/issues/24) - Fixes join failing until reconnect happened + adds access token push on channel join. Big thank you to [@Honeyhead](https://github.com/honeyhead) for the help debugging and identifying!
