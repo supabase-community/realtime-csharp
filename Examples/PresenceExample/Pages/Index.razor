@@ -8,8 +8,9 @@
 @using Supabase.Realtime.Presence;
 @using System.Diagnostics;
 @using static Supabase.Realtime.Socket.SocketStateChangedEventArgs;
-@inject IJSRuntime JS
+@inject IJSRuntime JS;
 @inject Client realtime;
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage;
 
 <PageTitle>Realtime Example</PageTitle>
 
@@ -26,15 +27,15 @@
 </div>
 
 <div class="flex items-start flex-col pt-2">
-	@if (isConnected)
+	<div class="my-1">
+		<button @onclick="HandleConnectionButton" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-opacity-50 bg-brand-700 text-brand-1100 border border-brand-700">
+			@(userChannel?.IsJoined ?? false ? "Disconnect" : "Connect")
+		</button>
+	</div>
+	@if ((realtime?.Socket?.IsConnected ?? false) && (userChannel?.IsJoined ?? false))
 	{
-		<Pill Text="Connected" />
 		<Pill Text="@($"Online: {userCount}")" />
 		<Pill Text="@($"{latency} ms")" />
-	}
-	else
-	{
-		<Pill Text="Disconnected" Color="red" />
 	}
 </div>
 
@@ -67,7 +68,6 @@
 	private int userCount = 0;
 	private bool isTyping = false;
 
-	private string? userId;
 	private RealtimeChannel? userChannel;
 	private RealtimeBroadcast<MousePosition>? mousePositionBroadcast;
 	private RealtimePresence<BasePresence>? presence;
@@ -83,11 +83,50 @@
 	private static Random rnd = new Random();
 
 	private string? userColor;
+	private string userId
+	{
+		get
+		{
+			var id = localStorage.GetItem<string?>("userId");
+			if (string.IsNullOrEmpty(id))
+			{
+				id = Guid.NewGuid().ToString();
+				localStorage.SetItem("userId", id);
+			}
+
+			return id!;
+		}
+	}
 
 	private List<MousePosition> mousePositions = new List<MousePosition>();
 	private List<Message> messages = new List<Message>();
 	private List<string> colorOptions = new List<string> { "slate", "stone", "red", "orange", "amber", "yellow", "green", "blue", "indigo", "purple", "fuchsia", "pink", "rose" };
 
+	override protected async Task OnInitializedAsync()
+	{
+		objRef = DotNetObjectReference.Create(this);
+
+		await JS.InvokeAsync<double[]>("registerMouseMoveListener", objRef);
+		await JS.InvokeAsync<KeydownEvent>("registerKeydownListener", objRef);
+
+		realtime.OnOpen += (sender, args) => isConnected = args.State == ConnectionState.Open;
+
+		await realtime.ConnectAsync();
+
+		userColor = colorOptions[rnd.Next(colorOptions.Count)];
+
+		InitializeUserChannel();
+		InitializeMessageChannel();
+		InitializeLatencyTimer();
+		InitializeCleanupMousePositionsTimer();
+	}
+
+	public void Dispose()
+	{
+		objRef?.Dispose();
+		userChannel?.Unsubscribe();
+		messageChannel?.Unsubscribe();
+	}
 
 	[JSInvokable]
 	public void HandleMouseMoved(double[] position)
@@ -113,31 +152,20 @@
 		}
 	}
 
-	override protected async Task OnInitializedAsync()
+	private async void HandleConnectionButton(MouseEventArgs args)
 	{
-		objRef = DotNetObjectReference.Create(this);
+		if (userChannel == null) return;
 
-		await JS.InvokeAsync<double[]>("registerMouseMoveListener", objRef);
-		await JS.InvokeAsync<KeydownEvent>("registerKeydownListener", objRef);
-
-		realtime.OnOpen += (sender, args) => isConnected = args.State == ConnectionState.Open;
-
-		await realtime.ConnectAsync();
-
-		userId = Guid.NewGuid().ToString();
-		userColor = colorOptions[rnd.Next(colorOptions.Count)];
-
-		InitializeUserChannel();
-		InitializeMessageChannel();
-		InitializeLatencyTimer();
-		InitializeCleanupMousePositionsTimer();
-	}
-
-	public void Dispose()
-	{
-		objRef?.Dispose();
-		userChannel?.Unsubscribe();
-		messageChannel?.Unsubscribe();
+		if (userChannel.IsJoined)
+		{
+			userChannel?.Unsubscribe();
+		}
+		else
+		{
+			await userChannel.Subscribe();
+			presence!.Track(new BasePresence());
+		}
+		StateHasChanged();
 	}
 
 	/// <summary>
@@ -154,6 +182,8 @@
 		presence.OnSync += HandlePresenceSync;
 
 		await userChannel.Subscribe();
+
+		presence!.Track(new BasePresence());
 	}
 
 	/// <summary>
@@ -215,6 +245,8 @@
 	{
 		var state = presence!.CurrentState;
 		userCount = state.Keys.Count;
+
+		Console.WriteLine($"Online: {JsonConvert.SerializeObject(state.Keys)}");
 		StateHasChanged();
 	}
 
