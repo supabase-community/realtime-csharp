@@ -179,6 +179,7 @@ namespace Supabase.Realtime
 			if (socket != null)
 			{
 				Options.Logger("error", "Socket already exists.", null);
+				callback?.Invoke(this);
 				return this;
 			}
 
