@@ -16,8 +16,8 @@
 		<Summary>Realtime-csharp is written as a client library for supabase/realtime.</Summary>
 		<PackageTags>supabase, realtime, phoenix</PackageTags>
 		<Title>realtime-csharp</Title>
-		<PackageVersion>5.0.3</PackageVersion>
-		<ReleaseVersion>5.0.3</ReleaseVersion>
+		<PackageVersion>5.0.4</PackageVersion>
+		<ReleaseVersion>5.0.4</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
@@ -25,7 +25,7 @@
 		<WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Version)' == '' ">
-		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">5.0.3</VersionPrefix>
+		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">5.0.4</VersionPrefix>
 		<VersionSuffix Condition=" '$(VersionSuffix)' == '' ">
 		</VersionSuffix>
 		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>

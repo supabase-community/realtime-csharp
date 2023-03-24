@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 5.0.4 - 2023-03-23
+
+- Re: [#26](https://github.com/supabase-community/realtime-csharp/pull/26) - Fixes Connect() not returning callback result when the socket isn't null. Thanks [@BlueWaterCrystal](https://github.com/BlueWaterCrystal)!
+
 ## 5.0.3 - 2023-03-09
 
 - Re: [#25](https://github.com/supabase-community/realtime-csharp/issues/25) - Support Channel being resubscribed after having been unsubscribed, fixes rejoin timer being erroneously called on channel `Unsubscribe`. Thanks [@Kuffs2205](https://github.com/Kuffs2205)!
