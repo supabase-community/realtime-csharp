@@ -53,7 +53,7 @@ namespace Supabase.Realtime.PostgresChanges
 
         public PostgresChangesOptions(string schema, string? table = null, ListenType eventType = ListenType.All, string? filter = null, Dictionary<string, string>? parameters = null)
         {
-            listenType = ListenType.All;
+            listenType = eventType;
             Schema = schema;
             Table = table;
             Filter = filter;
