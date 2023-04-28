@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 5.0.5 - 2023-04-27
+
+- Re: [#27](https://github.com/supabase-community/realtime-csharp/issues/27) `PostgresChangesOptions` was not setting `listenType` in constructor. Thanks [@Kuffs2205](https://github.com/Kuffs2205)
+
 ## 5.0.4 - 2023-03-23
 
 - Re: [#26](https://github.com/supabase-community/realtime-csharp/pull/26) - Fixes Connect() not returning callback result when the socket isn't null. Thanks [@BlueWaterCrystal](https://github.com/BlueWaterCrystal)!
