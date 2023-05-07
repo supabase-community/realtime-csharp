@@ -8,15 +8,13 @@ namespace RealtimeTests
 {
     internal class TestJson
     {
-        [JsonProperty("intArray")]
-        public List<int> intArray { get; set; }
+        [JsonProperty("intArray")] public List<int> intArray { get; set; } = new();
 
-        [JsonProperty("stringArray")]
-        public List<string> stringArray { get; set; }
+        [JsonProperty("stringArray")] public List<string> stringArray { get; set; } = new();
     }
 
     [TestClass]
-    public class Converters
+    public class ConverterTests
     {
         [TestMethod("Support Array Conversions (WALRUS + Backwards Compat.)")]
         public void SupportArrayConversions()
@@ -28,8 +26,8 @@ namespace RealtimeTests
                 ContractResolver = new CustomContractResolver()
             });
 
-            CollectionAssert.AreEqual(new List<int> { 9999, 99, 99999 }, parsed.intArray);
-            CollectionAssert.AreEqual(new List<string> { "testing", "1", "2" }, parsed.stringArray);
+            CollectionAssert.AreEqual(new List<int> { 9999, 99, 99999 }, parsed?.intArray);
+            CollectionAssert.AreEqual(new List<string> { "testing", "1", "2" }, parsed?.stringArray);
 
             var intConverter = new IntArrayConverter();
             CollectionAssert.AreEqual(new List<int>(), intConverter.Parse("{}"));

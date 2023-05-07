@@ -6,7 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Postgrest.Interfaces;
 using RealtimeTests.Models;
-using Supabase.Realtime.Channel;
+using Supabase.Realtime;
+using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
 using static Supabase.Realtime.Constants;
 
@@ -25,26 +26,26 @@ namespace RealtimeTests
 	}
 
 	[TestClass]
-	public class Channel
+	public class ChannelTests
 	{
-		private IPostgrestClient RestClient;
-		private Supabase.Realtime.Client SocketClient;
+		private IPostgrestClient? restClient;
+		private IRealtimeClient<RealtimeSocket, RealtimeChannel>? socketClient;
 
 		[TestInitialize]
 		public async Task InitializeTest()
 		{
 			var session = await Helpers.GetSession();
-			RestClient = Helpers.RestClient(session.AccessToken);
-			SocketClient = Helpers.SocketClient();
+			restClient = Helpers.RestClient(session!.AccessToken!);
+			socketClient = Helpers.SocketClient();
 
-			await SocketClient.ConnectAsync();
-			SocketClient.SetAuth(session.AccessToken);
+			await socketClient!.ConnectAsync();
+			socketClient!.SetAuth(session.AccessToken!);
 		}
 
 		[TestCleanup]
 		public void CleanupTest()
 		{
-			SocketClient.Disconnect();
+			socketClient!.Disconnect();
 		}
 
 		[TestMethod("Channel: Can create presence")]
@@ -56,9 +57,9 @@ namespace RealtimeTests
 			var guid1 = Guid.NewGuid().ToString();
 			var guid2 = Guid.NewGuid().ToString();
 
-			var channel1 = SocketClient.Channel("online-users");
+			var channel1 = socketClient!.Channel("online-users");
 			var presence1 = channel1.Register<TimePresence>(guid1);
-			presence1.OnSync += (sender, args) =>
+			presence1.OnSync += (_, _) =>
 			{
 				var state = presence1.CurrentState;
 				if (state.ContainsKey(guid2) && state[guid2].First().Time != null)
@@ -71,7 +72,7 @@ namespace RealtimeTests
 			await client2.ConnectAsync();
 			var channel2 = client2.Channel("online-users");
 			var presence2 = channel2.Register<TimePresence>(guid2);
-			presence2.OnSync += (sender, args) =>
+			presence2.OnSync += (_, _) =>
 			{
 				var state = presence2.CurrentState;
 				if (state.ContainsKey(guid1) && state[guid1].First().Time != null)
@@ -98,12 +99,12 @@ namespace RealtimeTests
 			var guid1 = Guid.NewGuid().ToString();
 			var guid2 = Guid.NewGuid().ToString();
 
-			var channel1 = SocketClient.Channel("online-users");
+			var channel1 = socketClient!.Channel("online-users");
 			var broadcast1 = channel1.Register<BroadcastExample>(true, true);
-			broadcast1.OnBroadcast += (sender, args) =>
+			broadcast1.OnBroadcast += (_, _) =>
 			{
 				var broadcast = broadcast1.Current();
-				if (broadcast.UserId != guid1 && broadcast.Event == "user")
+				if (broadcast?.UserId != guid1 && broadcast?.Event == "user")
 				{
 					tsc.TrySetResult(true);
 				}
@@ -113,10 +114,10 @@ namespace RealtimeTests
 			await client2.ConnectAsync();
 			var channel2 = client2.Channel("online-users");
 			var broadcast2 = channel2.Register<BroadcastExample>(true, true);
-			broadcast2.OnBroadcast += (sender, args) =>
+			broadcast2.OnBroadcast += (_, _) =>
 			{
 				var broadcast = broadcast2.Current();
-				if (broadcast.UserId != guid2 && broadcast.Event == "user")
+				if (broadcast?.UserId != guid2 && broadcast?.Event == "user")
 				{
 					tsc2.TrySetResult(true);
 				}
@@ -136,17 +137,17 @@ namespace RealtimeTests
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
-			var channel = SocketClient.Channel("realtime", "public", "*");
+			var channel = socketClient!.Channel("realtime", "public", "*");
 
-			channel.OnInsert += (sender, e) =>
+			channel.OnInsert += (_, e) =>
 			{
-				var model = e.Response.Model<Todo>();
-				tsc.SetResult(model is Todo);
+				var model = e.Response?.Model<Todo>();
+				tsc.SetResult(model != null);
 			};
 
 			await channel.Subscribe();
 
-			await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
+			await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
 
 			var check = await tsc.Task;
 			Assert.IsTrue(check);
@@ -157,8 +158,8 @@ namespace RealtimeTests
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
-			var channel = SocketClient.Channel("realtime", "public", "todos");
-			channel.OnClose += (object sender, ChannelStateChangedEventArgs args) =>
+			var channel = socketClient!.Channel("realtime", "public", "todos");
+			channel.OnClose += (_, args) =>
 			{
 				tsc.SetResult(ChannelState.Closed == args.State);
 			};
@@ -176,12 +177,12 @@ namespace RealtimeTests
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
-			var channel = SocketClient.Channel("realtime", "public", "todos");
+			var channel = socketClient!.Channel("realtime", "public", "todos");
 
-			channel.OnInsert += (s, args) => tsc.SetResult(true);
+			channel.OnInsert += (_, _) => tsc.SetResult(true);
 
 			await channel.Subscribe();
-			await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
+			await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
 
 			var check = await tsc.Task;
 			Assert.IsTrue(check);
@@ -192,31 +193,35 @@ namespace RealtimeTests
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
-			var result = await RestClient.Table<Todo>().Order(x => x.InsertedAt, Postgrest.Constants.Ordering.Descending).Get();
+			var result = await restClient!.Table<Todo>().Order(x => x.InsertedAt!, Postgrest.Constants.Ordering.Descending).Get();
 			var model = result.Models.First();
 			var oldDetails = model.Details;
 			var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
 
-			var channel = SocketClient.Channel("realtime", "public", "todos");
+			var channel = socketClient!.Channel("realtime", "public", "todos");
 
-			channel.OnUpdate += (s, args) =>
+			channel.OnUpdate += (_, args) =>
 			{
-				var oldModel = args.Response.OldModel<Todo>();
+				var oldModel = args.Response?.OldModel<Todo>();
 
-				Assert.AreEqual(oldDetails, oldModel.Details);
+				Assert.AreEqual(oldDetails, oldModel?.Details);
 
-				var updated = args.Response.Model<Todo>();
-				Assert.AreEqual(newDetails, updated.Details);
-				Assert.AreEqual(model.Id, updated.Id);
-				Assert.AreEqual(model.UserId, updated.UserId);
+				var updated = args.Response?.Model<Todo>();
+				Assert.AreEqual(newDetails, updated?.Details);
+				
+				if (updated != null)
+				{
+					Assert.AreEqual(model.Id, updated.Id);
+					Assert.AreEqual(model.UserId, updated.UserId);
+				}
 
 				tsc.SetResult(true);
 			};
 
 			await channel.Subscribe();
 
-			await RestClient.Table<Todo>()
-				.Set(x => x.Details, newDetails)
+			await restClient.Table<Todo>()
+				.Set(x => x.Details!, newDetails)
 				.Match(model)
 				.Update();
 
@@ -229,65 +234,65 @@ namespace RealtimeTests
 		{
 			var tsc = new TaskCompletionSource<bool>();
 
-			var channel = SocketClient.Channel("realtime", "public", "todos");
+			var channel = socketClient!.Channel("realtime", "public", "todos");
 
-			channel.OnDelete += (s, args) =>
+			channel.OnDelete += (_, _) =>
 			{
 				tsc.SetResult(true);
 			};
 
 			await channel.Subscribe();
 
-			var result = await RestClient.Table<Todo>().Get();
+			var result = await restClient!.Table<Todo>().Get();
 			var model = result.Models.Last();
 
-			await RestClient.Table<Todo>().Match(model).Delete();
+			await restClient.Table<Todo>().Match(model).Delete();
 
 			var check = await tsc.Task;
 			Assert.IsTrue(check);
 		}
 
 		[TestMethod("Channel: Supports WALRUS Array Changes")]
-		public async Task ChannelSupportsWALRUSArray()
+		public async Task ChannelSupportsWalrusArray()
 		{
-			Todo result = null;
+			Todo? result = null;
 			var tsc = new TaskCompletionSource<bool>();
 
-			var channel = SocketClient.Channel("realtime", "public", "todos");
+			var channel = socketClient!.Channel("realtime", "public", "todos");
 			var numbers = new List<int> { 4, 5, 6 };
 
 			await channel.Subscribe();
 
-			channel.OnInsert += (s, args) =>
+			channel.OnInsert += (_, args) =>
 			{
-				result = args.Response.Model<Todo>();
+				result = args.Response?.Model<Todo>();
 				tsc.SetResult(true);
 			};
 
-			await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Numbers = numbers });
+			await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Numbers = numbers });
 
 			await tsc.Task;
-			CollectionAssert.AreEqual(numbers, result.Numbers);
+			CollectionAssert.AreEqual(numbers, result?.Numbers);
 		}
 
 		[TestMethod("Channel: Sends Join parameters")]
 		public async Task ChannelSendsJoinParameters()
 		{
 			var parameters = new Dictionary<string, string> { { "key", "value" } };
-			var channel = SocketClient.Channel("realtime", "public", "todos", parameters: parameters);
+			var channel = socketClient!.Channel("realtime", "public", "todos", parameters: parameters);
 
 			await channel.Subscribe();
 
-			var serialized = JsonConvert.SerializeObject(channel.JoinPush.Payload);
+			var serialized = JsonConvert.SerializeObject(channel.JoinPush?.Payload);
 			Assert.IsTrue(serialized.Contains("\"key\":\"value\""));
 		}
 
 		[TestMethod("Channel: Returns single subscription per unique topic.")]
 		public async Task ChannelJoinsDuplicateSubscription()
 		{
-			var subscription1 = SocketClient.Channel("realtime", "public", "todos");
-			var subscription2 = SocketClient.Channel("realtime", "public", "todos");
-			var subscription3 = SocketClient.Channel("realtime", "public", "todos", "user_id", "1");
+			var subscription1 = socketClient!.Channel("realtime", "public", "todos");
+			var subscription2 = socketClient!.Channel("realtime", "public", "todos");
+			var subscription3 = socketClient!.Channel("realtime", "public", "todos", "user_id", "1");
 
 			Assert.AreEqual(subscription1.Topic, subscription2.Topic);
 
@@ -296,7 +301,7 @@ namespace RealtimeTests
 			Assert.AreEqual(subscription1.HasJoinedOnce, subscription2.HasJoinedOnce);
 			Assert.AreNotEqual(subscription1.HasJoinedOnce, subscription3.HasJoinedOnce);
 
-			var subscription4 = SocketClient.Channel("realtime", "public", "todos");
+			var subscription4 = socketClient!.Channel("realtime", "public", "todos");
 
 			Assert.AreEqual(subscription1.HasJoinedOnce, subscription4.HasJoinedOnce);
 		}
@@ -310,11 +315,11 @@ namespace RealtimeTests
 
 			List<Task> tasks = new List<Task> { insertTsc.Task, updateTsc.Task, deleteTsc.Task };
 
-			var channel = SocketClient.Channel("realtime", "public", "todos");
+			var channel = socketClient!.Channel("realtime", "public", "todos");
 
-			channel.OnPostgresChange += (sender, e) =>
+			channel.OnPostgresChange += (_, e) =>
 			{
-				switch (e.Response.Payload.Data.Type)
+				switch (e.Response?.Payload?.Data?.Type)
 				{
 					case EventType.Insert:
 						insertTsc.SetResult(true);
@@ -330,11 +335,11 @@ namespace RealtimeTests
 
 			await channel.Subscribe();
 
-			var modeledResponse = await RestClient.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+			var modeledResponse = await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
 			var newModel = modeledResponse.Models.First();
 
-			await RestClient.Table<Todo>().Set(x => x.Details, "And edits.").Match(newModel).Update();
-			await RestClient.Table<Todo>().Match(newModel).Delete();
+			await restClient.Table<Todo>().Set(x => x.Details!, "And edits.").Match(newModel).Update();
+			await restClient.Table<Todo>().Match(newModel).Delete();
 
 			await Task.WhenAll(tasks);
 

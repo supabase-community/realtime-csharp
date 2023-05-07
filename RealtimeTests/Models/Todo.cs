@@ -12,15 +12,15 @@ namespace RealtimeTests.Models
         public int Id { get; set; }
 
         [Column("details")]
-        public string Details { get; set; }
+        public string? Details { get; set; }
 
         [Column("user_id")]
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
 
         [Column("numbers")]
-        public List<int> Numbers { get; set; }
+        public List<int>? Numbers { get; set; }
 
         [Column("inserted_at")]
-        public DateTime InsertedAt { get; set; }
+        public DateTime? InsertedAt { get; set; }
     }
 }
