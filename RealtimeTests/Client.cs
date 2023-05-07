@@ -1,19 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using Postgrest.Interfaces;
-using RealtimeTests.Models;
 using Supabase.Gotrue;
-using Supabase.Realtime;
-using Supabase.Realtime.Channel;
-using Supabase.Realtime.PostgresChanges;
-using Supabase.Realtime.Socket;
 using static Supabase.Realtime.Constants;
-using Constants = Supabase.Realtime.Constants;
 
 namespace RealtimeTests
 {

@@ -1,12 +1,9 @@
-﻿using Supabase;
-using Supabase.Gotrue;
+﻿using Supabase.Gotrue;
 using Supabase.Realtime;
 using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Client = Supabase.Realtime.Client;
 
 namespace RealtimeTests
 {

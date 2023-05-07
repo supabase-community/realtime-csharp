@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
-using Postgrest.Models;
-using Postgrest.Responses;
 using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Interfaces;

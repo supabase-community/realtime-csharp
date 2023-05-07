@@ -1,6 +1,5 @@
 ﻿using Supabase.Realtime.Socket;
 using System;
-using System.Threading.Tasks;
 
 namespace Supabase.Realtime.Interfaces
 {

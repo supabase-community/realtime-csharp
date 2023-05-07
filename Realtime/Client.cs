@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Interfaces;
-using Supabase.Realtime.Models;
 using Supabase.Realtime.PostgresChanges;
-using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
 
 namespace Supabase.Realtime

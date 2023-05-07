@@ -1,5 +1,5 @@
 ﻿using Supabase.Core.Attributes;
-using System;
+
 namespace Supabase.Realtime
 {
     public static class Constants

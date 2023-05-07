@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using Postgrest;
 using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
-using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using static Supabase.Realtime.Constants;
 

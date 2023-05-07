@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Postgrest.Models;
-using Supabase.Realtime.Converters;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Socket;
 using System;

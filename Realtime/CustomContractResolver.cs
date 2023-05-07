@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Postgrest.Attributes;
 using Supabase.Realtime.Converters;
-using Supabase.Realtime.Models;
 
 namespace Supabase.Realtime
 {

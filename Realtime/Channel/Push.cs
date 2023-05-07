@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using Supabase.Realtime.Interfaces;
+﻿using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Socket;
-using Supabase.Realtime.Socket.Responses;
 using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace Supabase.Realtime.Channel

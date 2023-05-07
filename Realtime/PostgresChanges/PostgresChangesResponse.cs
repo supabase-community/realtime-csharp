@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Postgrest.Models;
 using Supabase.Realtime.Socket;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Supabase.Realtime.PostgresChanges
 {

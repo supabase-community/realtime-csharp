@@ -1,7 +1,6 @@
 ﻿using RealtimeExample.Models;
 using Supabase.Realtime;
 using Supabase.Realtime.Channel;
-using Supabase.Realtime.Socket;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
