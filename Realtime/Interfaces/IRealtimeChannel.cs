@@ -12,39 +12,61 @@ using static Supabase.Realtime.Constants;
 namespace Supabase.Realtime.Interfaces
 {
     public interface IRealtimeChannel
-	{
-		bool HasJoinedOnce { get; }
-		bool IsClosed { get; }
-		bool IsErrored { get; }
-		bool IsJoined { get; }
-		bool IsJoining { get; }
-		bool IsLeaving { get; }
-		ChannelOptions Options { get; }
-		BroadcastOptions? BroadcastOptions { get; }
-		PresenceOptions? PresenceOptions { get; }
-		List<PostgresChangesOptions> PostgresChangesOptions { get; }
-		ChannelState State { get; }
-		string Topic { get; }
+    {
+        delegate void MessageReceivedHandler(IRealtimeChannel sender, SocketResponse message);
 
-		event EventHandler<SocketResponseEventArgs> OnMessage;
-		event EventHandler<ChannelStateChangedEventArgs> StateChanged;
-		event EventHandler<ChannelStateChangedEventArgs> OnClose;
-		event EventHandler<ChannelStateChangedEventArgs> OnError;
-		event EventHandler<PostgresChangesEventArgs> OnDelete;
-		event EventHandler<PostgresChangesEventArgs> OnInsert;
-		event EventHandler<PostgresChangesEventArgs> OnUpdate;
-		event EventHandler<PostgresChangesEventArgs> OnPostgresChange;
+        delegate void StateChangedHandler(IRealtimeChannel sender, ChannelState state);
 
-		IRealtimeBroadcast? Broadcast();
-		IRealtimePresence? Presence();
+        delegate void PostgresChangesHandler(IRealtimeChannel sender, PostgresChangesResponse changes);
 
-		Push Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DEFAULT_TIMEOUT);
-		void Rejoin(int timeoutMs = DEFAULT_TIMEOUT);
-		Task<bool> Send(ChannelEventName eventType, string? type, object payload, int timeoutMs = DEFAULT_TIMEOUT);
-		RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(bool broadcastSelf = false, bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast;
-		RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(string presenceKey) where TPresenceResponse : BasePresence;
-		IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions);
-		Task<IRealtimeChannel> Subscribe(int timeoutMs = DEFAULT_TIMEOUT);
-		IRealtimeChannel Unsubscribe();
-	}
+        bool HasJoinedOnce { get; }
+        bool IsClosed { get; }
+        bool IsErrored { get; }
+        bool IsJoined { get; }
+        bool IsJoining { get; }
+        bool IsLeaving { get; }
+        ChannelOptions Options { get; }
+        BroadcastOptions? BroadcastOptions { get; }
+        PresenceOptions? PresenceOptions { get; }
+        List<PostgresChangesOptions> PostgresChangesOptions { get; }
+        ChannelState State { get; }
+        string Topic { get; }
+
+        void AddStateChangedListener(StateChangedHandler stateChangedHandler);
+
+        void RemoveStateChangedListener(StateChangedHandler stateChangedHandler);
+
+        void ClearStateChangedListeners();
+
+        void AddMessageReceivedHandler(MessageReceivedHandler messageReceivedHandler);
+
+        void RemoveMessageReceivedHandler(MessageReceivedHandler messageReceivedHandler);
+
+        void ClearMessageReceivedListeners();
+
+        void AddPostgresChangesListener(PostgresChangesOptions.ListenType listenType,
+            PostgresChangesHandler postgresChangesHandler);
+
+        void RemovePostgresChangesListener(PostgresChangesOptions.ListenType listenType,
+            IRealtimeChannel.PostgresChangesHandler postgresChangesHandler);
+
+        void ClearPostgresChangesListeners();
+
+        IRealtimeBroadcast? Broadcast();
+        IRealtimePresence? Presence();
+
+        Push Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DefaultTimeout);
+        void Rejoin(int timeoutMs = DefaultTimeout);
+        Task<bool> Send(ChannelEventName eventType, string? type, object payload, int timeoutMs = DefaultTimeout);
+
+        RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(bool broadcastSelf = false,
+            bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast;
+
+        RealtimePresence<TPresenceResponse> Register<TPresenceResponse>(string presenceKey)
+            where TPresenceResponse : BasePresence;
+
+        IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions);
+        Task<IRealtimeChannel> Subscribe(int timeoutMs = DefaultTimeout);
+        IRealtimeChannel Unsubscribe();
+    }
 }

@@ -10,7 +10,7 @@ namespace Supabase.Realtime.Interfaces
 		event EventHandler<EventArgs?>? OnLeave;
 		event EventHandler<EventArgs?>? OnSync;
 
-		void Track(object? payload, int timeoutMs = DEFAULT_TIMEOUT);
+		void Track(object? payload, int timeoutMs = DefaultTimeout);
 
 		void TriggerSync(SocketResponseEventArgs args);
 		void TriggerDiff(SocketResponseEventArgs args);

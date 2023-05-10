@@ -2,8 +2,11 @@
 using Supabase.Realtime;
 using Supabase.Realtime.Channel;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Supabase.Realtime.Interfaces;
+using static Supabase.Realtime.Constants;
 
 namespace RealtimeExample
 {
@@ -15,10 +18,7 @@ namespace RealtimeExample
             var postgrestClient = new Postgrest.Client("http://localhost:3000");
             var realtimeClient = new Client("ws://localhost:4000/socket");
 
-            //Socket events
-            realtimeClient.OnOpen += (s, args) => Console.WriteLine("OPEN");
-            realtimeClient.OnClose += (s, args) => Console.WriteLine("CLOSED");
-            realtimeClient.OnError += (s, args) => Console.WriteLine("ERROR");
+            realtimeClient.AddStateChangedListener(SocketEventHandler);
 
             await realtimeClient.ConnectAsync();
 
@@ -49,6 +49,11 @@ namespace RealtimeExample
             await user.Delete<User>();
 
             Console.ReadKey();
+        }
+
+        private static void SocketEventHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel> sender, SocketState state)
+        {
+            Debug.WriteLine($"Socket is ${state.ToString()}");
         }
     }
 }

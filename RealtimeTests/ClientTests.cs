@@ -112,7 +112,7 @@ namespace RealtimeTests
 			socketClient!.SetAuth(token);
 			foreach (var subscription in socketClient!.Subscriptions.Values)
 			{
-				Assert.IsTrue(subscription?.LastPush?.EventName == CHANNEL_ACCESS_TOKEN);
+				Assert.IsTrue(subscription?.LastPush?.EventName == ChannelAccessToken);
 			}
 		}
 

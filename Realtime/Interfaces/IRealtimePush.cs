@@ -7,6 +7,10 @@ namespace Supabase.Realtime.Interfaces
 		where TChannel : IRealtimeChannel
 		where TSocketResponse : IRealtimeSocketResponse
 	{
+		delegate void MessageEventHandler(IRealtimePush<TChannel, TSocketResponse> sender, TSocketResponse message);
+		void AddMessageReceivedListener(MessageEventHandler messageEventHandler);
+		void RemoveMessageReceivedListener(MessageEventHandler messageEventHandler);
+		void ClearMessageReceivedListeners();
 		TChannel Channel { get; }
 		string EventName { get; }
 		bool IsSent { get; }
@@ -14,10 +18,7 @@ namespace Supabase.Realtime.Interfaces
 		object? Payload { get; }
 		string? Ref { get; }
 		IRealtimeSocketResponse? Response { get; }
-
-		event EventHandler<SocketResponseEventArgs>? OnMessage;
 		event EventHandler? OnTimeout;
-
 		void Resend(int timeoutMs = 10000);
 		void Send();
 	}

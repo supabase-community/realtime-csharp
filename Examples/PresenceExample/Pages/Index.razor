@@ -106,7 +106,7 @@
 		await JS.InvokeAsync<double[]>("registerMouseMoveListener", objRef);
 		await JS.InvokeAsync<KeydownEvent>("registerKeydownListener", objRef);
 
-		realtime.OnOpen += (sender, args) => isConnected = args.State == ConnectionState.Open;
+		realtime.AddStateChangedListener((_, state) => isConnected = state != Constants.SocketState.Close);
 
 		await realtime.ConnectAsync();
 

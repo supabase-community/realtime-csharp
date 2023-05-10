@@ -22,18 +22,20 @@ namespace Supabase.Realtime
         /// <summary>
         /// Logging function
         /// </summary>
-        public Action<string, string, object?> Logger { get; set; } = (kind, msg, data) => Debug.WriteLine($"{kind}: {msg}, {JsonConvert.SerializeObject(data, Formatting.Indented)}");
+        public Action<string, string, object?> Logger { get; set; } = (kind, msg, data) =>
+            Debug.WriteLine($"{kind}: {msg}, {JsonConvert.SerializeObject(data, Formatting.Indented)}");
 
         /// <summary>
         /// The Websocket Transport, for example WebSocket.
         /// </summary>
-        public string Transport { get; set; } = Constants.TRANSPORT_WEBSOCKET;
+        public string Transport { get; set; } = Constants.TransportWebsocket;
 
         /// <summary>
         /// The default timeout in milliseconds to trigger push timeouts.
         /// </summary>
-        public TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(Constants.DEFAULT_TIMEOUT);
+        public TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(Constants.DefaultTimeout);
 
+        
         public int EventsPerSecond { get; set; } = 10;
 
         /// <summary>
@@ -46,33 +48,28 @@ namespace Supabase.Realtime
         /// </summary>
         public Func<int, TimeSpan> ReconnectAfterInterval { get; set; } = (tries) =>
         {
-            var intervals = new int[] { 1, 2, 5, 10 };
+            var intervals = new[] { 1, 2, 5, 10 };
             return TimeSpan.FromSeconds(tries < intervals.Length ? tries - 1 : 10);
         };
 
         /// <summary>
-        /// The maximum timeout of a long poll AJAX request.
-        /// </summary>
-        public TimeSpan LongPollerTimeout = TimeSpan.FromSeconds(20);
-
-        /// <summary>
         /// Request headers to be appended to the connection string.
         /// </summary>
-        public Dictionary<string, object> Headers = new Dictionary<string, object>();
+        public readonly Dictionary<string, object> Headers = new();
 
         /// <summary>
         /// The optional params to pass when connecting
         /// </summary>
-        public SocketOptionsParameters Parameters = new SocketOptionsParameters();
+        public SocketOptionsParameters Parameters = new();
 
         /// <summary>
         /// Datetime Style for JSON Deserialization of Models
         /// </summary>
-        public DateTimeStyles DateTimeStyles = DateTimeStyles.AdjustToUniversal;
+        public readonly DateTimeStyles DateTimeStyles = DateTimeStyles.AdjustToUniversal;
 
         /// <summary>
         /// Datetime format for JSON Deserialization of Models (Postgrest style)
         /// </summary>
-        public string DateTimeFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss.FFFFFFK";
+        public string DateTimeFormat { get; set; } = @"yyyy'-'MM'-'dd' 'HH':'mm':'ss.FFFFFFK";
     }
 }

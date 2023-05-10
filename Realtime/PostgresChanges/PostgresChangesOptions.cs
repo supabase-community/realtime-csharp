@@ -47,13 +47,13 @@ namespace Supabase.Realtime.PostgresChanges
         public Dictionary<string, string>? Parameters { get; set; }
 
         [JsonProperty("event")]
-        public string Event => Core.Helpers.GetMappedToAttr(listenType).Mapping!;
+        public string Event => Core.Helpers.GetMappedToAttr(_listenType).Mapping!;
 
-        private ListenType listenType = ListenType.All;
+        private readonly ListenType _listenType;
 
         public PostgresChangesOptions(string schema, string? table = null, ListenType eventType = ListenType.All, string? filter = null, Dictionary<string, string>? parameters = null)
         {
-            listenType = eventType;
+            _listenType = eventType;
             Schema = schema;
             Table = table;
             Filter = filter;

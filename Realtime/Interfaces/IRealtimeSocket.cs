@@ -2,6 +2,7 @@
 using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Interfaces
 {
@@ -9,9 +10,23 @@ namespace Supabase.Realtime.Interfaces
     {
         bool IsConnected { get; }
 
-        event EventHandler<SocketResponseEventArgs> OnHeartbeat;
-        event EventHandler<SocketResponseEventArgs> OnMessage;
-        event EventHandler<SocketStateChangedEventArgs> StateChanged;
+        delegate void StateEventHandler(IRealtimeSocket sender, SocketState state);
+
+        delegate void MessageEventHandler(IRealtimeSocket sender, SocketResponse message);
+
+        delegate void HeartbeatEventHandler(IRealtimeSocket sender, SocketResponse heartbeat);
+
+        void AddStateChangedListener(StateEventHandler stateEventHandler);
+        void RemoveStateChangedListener(StateEventHandler stateEventHandler);
+        void ClearStateChangedListeners();
+        
+        void AddMessageReceivedListener(MessageEventHandler messageEventHandler);
+        void RemoveMessageReceivedListener(MessageEventHandler heartbeatHandler);
+        void ClearMessageReceivedListeners();
+        
+        void AddHeartbeatListener(HeartbeatEventHandler messageEventHandler);
+        void RemoveHeartbeatListener(HeartbeatEventHandler messageEventHandler);
+        void ClearHeartbeatListeners();
 
         Task<double> GetLatency();
 		Task Connect();

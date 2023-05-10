@@ -4,12 +4,12 @@ namespace Supabase.Realtime
 {
     public static class Constants
     {
-        public enum SocketStates
+        public enum SocketState
         {
-            connecting = 0,
-            open = 1,
-            closing = 2,
-            closed = 3
+	        Open,
+	        Close,
+	        Reconnect,
+	        Error
         }
 
         public enum EventType
@@ -66,39 +66,39 @@ namespace Supabase.Realtime
 		/// <summary>
 		/// Timeout interval for requests (used in Socket and Push)
 		/// </summary>
-		public const int DEFAULT_TIMEOUT = 10000;
-        public const int WS_CLOSE_NORMAL = 1000;
+		public const int DefaultTimeout = 10000;
+        public const int WsCloseNormal = 1000;
 
         /// <summary>
-        /// Pheonix Socket Server Event: CLOSE
+        /// Phoenix Socket Server Event: CLOSE
         /// </summary>
         public static string CHANNEL_EVENT_CLOSE = "phx_close";
 
         /// <summary>
-        /// Pheonix Socket Server Event: ERROR
+        /// Phoenix Socket Server Event: ERROR
         /// </summary>
         public static string CHANNEL_EVENT_ERROR = "phx_error";
 
         /// <summary>
-        /// Pheonix Socket Server Event: JOIN
+        /// Phoenix Socket Server Event: JOIN
         /// </summary>
-        public static string CHANNEL_EVENT_JOIN = "phx_join";
+        public const string ChannelEventJoin = "phx_join";
 
         /// <summary>
-        /// Pheonix Socket Server Event: REPLY
+        /// Phoenix Socket Server Event: REPLY
         /// </summary>
-        public static string CHANNEL_EVENT_REPLY = "phx_reply";
+        public const string ChannelEventReply = "phx_reply";
 
         /// <summary>
-        /// Pheonix Socket Server Event: LEAVE
+        /// Phoenix Socket Server Event: LEAVE
         /// </summary>
-        public static string CHANNEL_EVENT_LEAVE = "phx_leave";
+        public const string ChannelEventLeave = "phx_leave";
 
-        public static string PHEONIX_STATUS_OK = "ok";
-        public static string PHEONIX_STATUS_ERROR = "error";
+        public const string PhoenixStatusOk = "ok";
+        public const string PheonixStatusError = "error";
 
-        public static string TRANSPORT_WEBSOCKET = "websocket";
+        public const string TransportWebsocket = "websocket";
 
-        public static string CHANNEL_ACCESS_TOKEN = "access_token";
+        public const string ChannelAccessToken = "access_token";
     }
 }

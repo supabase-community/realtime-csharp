@@ -102,7 +102,7 @@ namespace Supabase.Realtime
 		/// </summary>
 		/// <param name="payload"></param>
 		/// <param name="timeoutMs"></param>
-		public void Track(object? payload, int timeoutMs = DEFAULT_TIMEOUT)
+		public void Track(object? payload, int timeoutMs = DefaultTimeout)
 		{
 			var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
 			channel.Push(eventName, "track", new Dictionary<string, object?> { { "event", "track" }, { "payload", payload } }, timeoutMs);

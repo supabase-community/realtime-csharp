@@ -24,9 +24,8 @@ namespace Supabase.Realtime
 	{
 		public event EventHandler<EventArgs?>? OnBroadcast;
 
-		private RealtimeChannel channel;
-		private BroadcastOptions options;
-		private JsonSerializerSettings serializerSettings;
+		private readonly RealtimeChannel channel;
+		private readonly JsonSerializerSettings serializerSettings;
 
 		private SocketResponse? lastSocketResponse;
 
@@ -47,7 +46,6 @@ namespace Supabase.Realtime
 		public RealtimeBroadcast(RealtimeChannel channel, BroadcastOptions options, JsonSerializerSettings serializerSettings)
 		{
 			this.channel = channel;
-			this.options = options;
 			this.serializerSettings = serializerSettings;
 		}
 
@@ -59,7 +57,8 @@ namespace Supabase.Realtime
 		public void TriggerReceived(SocketResponseEventArgs args)
 		{
 			if (args.Response == null || args.Response.Json == null)
-				throw new ArgumentException(string.Format("Expected parsable JSON response, instead recieved: `{0}`", JsonConvert.SerializeObject(args.Response)));
+				throw new ArgumentException(
+					$"Expected parsable JSON response, instead received: `{JsonConvert.SerializeObject(args.Response)}`");
 
 			lastSocketResponse = args.Response;
 			OnBroadcast?.Invoke(this, null);
