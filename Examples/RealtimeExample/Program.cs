@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Supabase.Realtime.Interfaces;
 using static Supabase.Realtime.Constants;
+using static Supabase.Realtime.PostgresChanges.PostgresChangesOptions;
 
 namespace RealtimeExample
 {
@@ -24,16 +25,23 @@ namespace RealtimeExample
 
             // Subscribe to a channel and events
             var channelUsers = realtimeClient.Channel("realtime", "public", "users");
-            channelUsers.OnInsert += (s, args) => Console.WriteLine("New item inserted: " + args.Response.Payload.Data.Record);
-            channelUsers.OnUpdate += (s, args) => Console.WriteLine("Item updated: " + args.Response.Payload.Data.Record);
-            channelUsers.OnDelete += (s, args) => Console.WriteLine("Item deleted");
+            channelUsers.AddPostgresChangeListener(ListenType.Inserts,
+                (_, change) => { Console.WriteLine($"New item inserted: {change.Model<User>()}"); });
+            channelUsers.AddPostgresChangeListener(ListenType.Updates,
+                (_, change) => { Console.WriteLine($"Item Updated: {change.Model<User>()}"); });
+            channelUsers.AddPostgresChangeListener(ListenType.Deletes,
+                (_, change) => { Console.WriteLine($"Item Deleted"); });
 
             Console.WriteLine("Subscribing to users channel");
             await channelUsers.Subscribe();
 
             //Subscribing to another channel
             var channelTodos = realtimeClient.Channel("realtime", "public", "todos");
-            channelTodos.OnClose += (object sender, ChannelStateChangedEventArgs args) => Console.WriteLine($"Channel todos { args.State}!!");
+            
+            channelTodos.AddStateChangedListener((_, state) =>
+            {
+                Console.WriteLine($"Channel todos {state}!!");
+            });
             Console.WriteLine("Subscribing to todos channel");
             await channelTodos.Subscribe();
 
@@ -51,7 +59,8 @@ namespace RealtimeExample
             Console.ReadKey();
         }
 
-        private static void SocketEventHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel> sender, SocketState state)
+        private static void SocketEventHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel> sender,
+            SocketState state)
         {
             Debug.WriteLine($"Socket is ${state.ToString()}");
         }

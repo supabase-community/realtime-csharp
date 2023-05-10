@@ -9,343 +9,345 @@ using RealtimeTests.Models;
 using Supabase.Realtime;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.Models;
+using Supabase.Realtime.PostgresChanges;
 using static Supabase.Realtime.Constants;
 
 namespace RealtimeTests
 {
-	public class TimePresence : BasePresence
-	{
-		[JsonProperty("time")]
-		public DateTime? Time { get; set; }
-	}
-
-	public class BroadcastExample : BaseBroadcast
-	{
-		[JsonProperty("userId")]
-		public string? UserId { get; set; }
-	}
-
-	[TestClass]
-	public class ChannelTests
-	{
-		private IPostgrestClient? restClient;
-		private IRealtimeClient<RealtimeSocket, RealtimeChannel>? socketClient;
-
-		[TestInitialize]
-		public async Task InitializeTest()
-		{
-			var session = await Helpers.GetSession();
-			restClient = Helpers.RestClient(session!.AccessToken!);
-			socketClient = Helpers.SocketClient();
-
-			await socketClient!.ConnectAsync();
-			socketClient!.SetAuth(session.AccessToken!);
-		}
-
-		[TestCleanup]
-		public void CleanupTest()
-		{
-			socketClient!.Disconnect();
-		}
-
-		[TestMethod("Channel: Can create presence")]
-		public async Task ClientCanCreatePresence()
-		{
-			var tsc = new TaskCompletionSource<bool>();
-			var tsc2 = new TaskCompletionSource<bool>();
-
-			var guid1 = Guid.NewGuid().ToString();
-			var guid2 = Guid.NewGuid().ToString();
-
-			var channel1 = socketClient!.Channel("online-users");
-			var presence1 = channel1.Register<TimePresence>(guid1);
-			presence1.OnSync += (_, _) =>
-			{
-				var state = presence1.CurrentState;
-				if (state.ContainsKey(guid2) && state[guid2].First().Time != null)
-				{
-					tsc.SetResult(true);
-				}
-			};
-
-			var client2 = Helpers.SocketClient();
-			await client2.ConnectAsync();
-			var channel2 = client2.Channel("online-users");
-			var presence2 = channel2.Register<TimePresence>(guid2);
-			presence2.OnSync += (_, _) =>
-			{
-				var state = presence2.CurrentState;
-				if (state.ContainsKey(guid1) && state[guid1].First().Time != null)
-				{
-					tsc2.SetResult(true);
-				}
-			};
-
-			await channel1.Subscribe();
-			await channel2.Subscribe();
-
-			presence1.Track(new TimePresence { Time = DateTime.Now });
-			presence2.Track(new TimePresence { Time = DateTime.Now });
-
-			await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
-		}
-
-		[TestMethod("Channel: Can listen for broadcast")]
-		public async Task ClientCanListenForBroadcast()
-		{
-			var tsc = new TaskCompletionSource<bool>();
-			var tsc2 = new TaskCompletionSource<bool>();
-
-			var guid1 = Guid.NewGuid().ToString();
-			var guid2 = Guid.NewGuid().ToString();
-
-			var channel1 = socketClient!.Channel("online-users");
-			var broadcast1 = channel1.Register<BroadcastExample>(true, true);
-			broadcast1.OnBroadcast += (_, _) =>
-			{
-				var broadcast = broadcast1.Current();
-				if (broadcast?.UserId != guid1 && broadcast?.Event == "user")
-				{
-					tsc.TrySetResult(true);
-				}
-			};
-
-			var client2 = Helpers.SocketClient();
-			await client2.ConnectAsync();
-			var channel2 = client2.Channel("online-users");
-			var broadcast2 = channel2.Register<BroadcastExample>(true, true);
-			broadcast2.OnBroadcast += (_, _) =>
-			{
-				var broadcast = broadcast2.Current();
-				if (broadcast?.UserId != guid2 && broadcast?.Event == "user")
-				{
-					tsc2.TrySetResult(true);
-				}
-			};
-
-			await channel1.Subscribe();
-			await channel2.Subscribe();
+    public class TimePresence : BasePresence
+    {
+        [JsonProperty("time")] public DateTime? Time { get; set; }
+    }
+
+    public class BroadcastExample : BaseBroadcast
+    {
+        [JsonProperty("userId")] public string? UserId { get; set; }
+    }
+
+    [TestClass]
+    public class ChannelTests
+    {
+        private IPostgrestClient? _restClient;
+        private IRealtimeClient<RealtimeSocket, RealtimeChannel>? _socketClient;
+
+        [TestInitialize]
+        public async Task InitializeTest()
+        {
+            var session = await Helpers.GetSession();
+            _restClient = Helpers.RestClient(session!.AccessToken!);
+            _socketClient = Helpers.SocketClient();
+
+            await _socketClient!.ConnectAsync();
+            _socketClient!.SetAuth(session.AccessToken!);
+        }
+
+        [TestCleanup]
+        public void CleanupTest()
+        {
+            _socketClient!.Disconnect();
+        }
+
+        [TestMethod("Channel: Can create presence")]
+        public async Task ClientCanCreatePresence()
+        {
+            var tsc = new TaskCompletionSource<bool>();
+            var tsc2 = new TaskCompletionSource<bool>();
+
+            var guid1 = Guid.NewGuid().ToString();
+            var guid2 = Guid.NewGuid().ToString();
+
+            var channel1 = _socketClient!.Channel("online-users");
+            var presence1 = channel1.Register<TimePresence>(guid1);
+            presence1.OnSync += (_, _) =>
+            {
+                var state = presence1.CurrentState;
+                if (state.ContainsKey(guid2) && state[guid2].First().Time != null)
+                {
+                    tsc.SetResult(true);
+                }
+            };
+
+            var client2 = Helpers.SocketClient();
+            await client2.ConnectAsync();
+            var channel2 = client2.Channel("online-users");
+            var presence2 = channel2.Register<TimePresence>(guid2);
+            presence2.OnSync += (_, _) =>
+            {
+                var state = presence2.CurrentState;
+                if (state.ContainsKey(guid1) && state[guid1].First().Time != null)
+                {
+                    tsc2.SetResult(true);
+                }
+            };
+
+            await channel1.Subscribe();
+            await channel2.Subscribe();
+
+            presence1.Track(new TimePresence { Time = DateTime.Now });
+            presence2.Track(new TimePresence { Time = DateTime.Now });
+
+            await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
+        }
+
+        [TestMethod("Channel: Can listen for broadcast")]
+        public async Task ClientCanListenForBroadcast()
+        {
+            var tsc = new TaskCompletionSource<bool>();
+            var tsc2 = new TaskCompletionSource<bool>();
+
+            var guid1 = Guid.NewGuid().ToString();
+            var guid2 = Guid.NewGuid().ToString();
+
+            var channel1 = _socketClient!.Channel("online-users");
+            var broadcast1 = channel1.Register<BroadcastExample>(true, true);
+            broadcast1.OnBroadcast += (_, _) =>
+            {
+                var broadcast = broadcast1.Current();
+                if (broadcast?.UserId != guid1 && broadcast?.Event == "user")
+                {
+                    tsc.TrySetResult(true);
+                }
+            };
+
+            var client2 = Helpers.SocketClient();
+            await client2.ConnectAsync();
+            var channel2 = client2.Channel("online-users");
+            var broadcast2 = channel2.Register<BroadcastExample>(true, true);
+            broadcast2.OnBroadcast += (_, _) =>
+            {
+                var broadcast = broadcast2.Current();
+                if (broadcast?.UserId != guid2 && broadcast?.Event == "user")
+                {
+                    tsc2.TrySetResult(true);
+                }
+            };
 
-			await broadcast1.Send("user", new BroadcastExample { UserId = guid1 });
-			await broadcast2.Send("user", new BroadcastExample { UserId = guid2 });
-
-			await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
-		}
-
-		[TestMethod("Channel: Payload returns a modeled response (if possible)")]
-		public async Task ChannelPayloadReturnsModel()
-		{
-			var tsc = new TaskCompletionSource<bool>();
+            await channel1.Subscribe();
+            await channel2.Subscribe();
 
-			var channel = socketClient!.Channel("realtime", "public", "*");
-
-			channel.OnInsert += (_, e) =>
-			{
-				var model = e.Response?.Model<Todo>();
-				tsc.SetResult(model != null);
-			};
+            await broadcast1.Send("user", new BroadcastExample { UserId = guid1 });
+            await broadcast2.Send("user", new BroadcastExample { UserId = guid2 });
 
-			await channel.Subscribe();
+            await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
+        }
 
-			await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
+        [TestMethod("Channel: Payload returns a modeled response (if possible)")]
+        public async Task ChannelPayloadReturnsModel()
+        {
+            var tsc = new TaskCompletionSource<bool>();
 
-			var check = await tsc.Task;
-			Assert.IsTrue(check);
-		}
+            var channel = _socketClient!.Channel("realtime", "public", "*");
 
-		[TestMethod("Channel: Close Event Handler")]
-		public async Task ChannelCloseEventHandler()
-		{
-			var tsc = new TaskCompletionSource<bool>();
+            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Inserts, (_, changes) =>
+            {
+                var model = changes.Model<Todo>();
+                tsc.SetResult(model != null);
+            });
 
-			var channel = socketClient!.Channel("realtime", "public", "todos");
-			channel.OnClose += (_, args) =>
-			{
-				tsc.SetResult(ChannelState.Closed == args.State);
-			};
-			
-			await channel.Subscribe();
-			channel.Unsubscribe();
+            await channel.Subscribe();
 
-			var check = await tsc.Task;
-			Assert.IsTrue(check);
-		}
+            await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
 
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
+        }
 
-		[TestMethod("Channel: Receives Insert Callback")]
-		public async Task ChannelReceivesInsertCallback()
-		{
-			var tsc = new TaskCompletionSource<bool>();
+        [TestMethod("Channel: Close Event Handler")]
+        public async Task ChannelCloseEventHandler()
+        {
+            var tsc = new TaskCompletionSource<bool>();
 
-			var channel = socketClient!.Channel("realtime", "public", "todos");
+            var channel = _socketClient!.Channel("realtime", "public", "todos");
+            channel.AddStateChangedListener((_, state) =>
+            {
+                if (state == ChannelState.Closed)
+                    tsc.SetResult(true);
+            });
 
-			channel.OnInsert += (_, _) => tsc.SetResult(true);
+            await channel.Subscribe();
+            channel.Unsubscribe();
 
-			await channel.Subscribe();
-			await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
+        }
 
-			var check = await tsc.Task;
-			Assert.IsTrue(check);
-		}
 
-		[TestMethod("Channel: Receives Update Callback")]
-		public async Task ChannelReceivesUpdateCallback()
-		{
-			var tsc = new TaskCompletionSource<bool>();
+        [TestMethod("Channel: Receives Insert Callback")]
+        public async Task ChannelReceivesInsertCallback()
+        {
+            var tsc = new TaskCompletionSource<bool>();
 
-			var result = await restClient!.Table<Todo>().Order(x => x.InsertedAt!, Postgrest.Constants.Ordering.Descending).Get();
-			var model = result.Models.First();
-			var oldDetails = model.Details;
-			var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
+            var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-			var channel = socketClient!.Channel("realtime", "public", "todos");
+            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Inserts,
+                (_, _) => tsc.SetResult(true));
 
-			channel.OnUpdate += (_, args) =>
-			{
-				var oldModel = args.Response?.OldModel<Todo>();
+            await channel.Subscribe();
+            await _restClient!.Table<Todo>()
+                .Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
 
-				Assert.AreEqual(oldDetails, oldModel?.Details);
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
+        }
 
-				var updated = args.Response?.Model<Todo>();
-				Assert.AreEqual(newDetails, updated?.Details);
-				
-				if (updated != null)
-				{
-					Assert.AreEqual(model.Id, updated.Id);
-					Assert.AreEqual(model.UserId, updated.UserId);
-				}
+        [TestMethod("Channel: Receives Update Callback")]
+        public async Task ChannelReceivesUpdateCallback()
+        {
+            var tsc = new TaskCompletionSource<bool>();
 
-				tsc.SetResult(true);
-			};
+            var result = await _restClient!.Table<Todo>()
+                .Order(x => x.InsertedAt!, Postgrest.Constants.Ordering.Descending).Get();
+            var model = result.Models.First();
+            var oldDetails = model.Details;
+            var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
 
-			await channel.Subscribe();
+            var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-			await restClient.Table<Todo>()
-				.Set(x => x.Details!, newDetails)
-				.Match(model)
-				.Update();
+            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Updates, (_, changes) =>
+            {
+                var oldModel = changes.OldModel<Todo>();
 
-			var check = await tsc.Task;
-			Assert.IsTrue(check);
-		}
+                Assert.AreEqual(oldDetails, oldModel?.Details);
 
-		[TestMethod("Channel: Receives Delete Callback")]
-		public async Task ChannelReceivesDeleteCallback()
-		{
-			var tsc = new TaskCompletionSource<bool>();
+                var updated = changes.Model<Todo>();
+                Assert.AreEqual(newDetails, updated?.Details);
 
-			var channel = socketClient!.Channel("realtime", "public", "todos");
+                if (updated != null)
+                {
+                    Assert.AreEqual(model.Id, updated.Id);
+                    Assert.AreEqual(model.UserId, updated.UserId);
+                }
 
-			channel.OnDelete += (_, _) =>
-			{
-				tsc.SetResult(true);
-			};
+                tsc.SetResult(true);
+            });
 
-			await channel.Subscribe();
+            await channel.Subscribe();
 
-			var result = await restClient!.Table<Todo>().Get();
-			var model = result.Models.Last();
+            await _restClient.Table<Todo>()
+                .Set(x => x.Details!, newDetails)
+                .Match(model)
+                .Update();
 
-			await restClient.Table<Todo>().Match(model).Delete();
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
+        }
 
-			var check = await tsc.Task;
-			Assert.IsTrue(check);
-		}
+        [TestMethod("Channel: Receives Delete Callback")]
+        public async Task ChannelReceivesDeleteCallback()
+        {
+            var tsc = new TaskCompletionSource<bool>();
 
-		[TestMethod("Channel: Supports WALRUS Array Changes")]
-		public async Task ChannelSupportsWalrusArray()
-		{
-			Todo? result = null;
-			var tsc = new TaskCompletionSource<bool>();
+            var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-			var channel = socketClient!.Channel("realtime", "public", "todos");
-			var numbers = new List<int> { 4, 5, 6 };
+            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Deletes,
+                (_, _) => tsc.SetResult(true));
 
-			await channel.Subscribe();
+            await channel.Subscribe();
 
-			channel.OnInsert += (_, args) =>
-			{
-				result = args.Response?.Model<Todo>();
-				tsc.SetResult(true);
-			};
+            var result = await _restClient!.Table<Todo>().Get();
+            var model = result.Models.Last();
 
-			await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Numbers = numbers });
+            await _restClient.Table<Todo>().Match(model).Delete();
 
-			await tsc.Task;
-			CollectionAssert.AreEqual(numbers, result?.Numbers);
-		}
+            var check = await tsc.Task;
+            Assert.IsTrue(check);
+        }
 
-		[TestMethod("Channel: Sends Join parameters")]
-		public async Task ChannelSendsJoinParameters()
-		{
-			var parameters = new Dictionary<string, string> { { "key", "value" } };
-			var channel = socketClient!.Channel("realtime", "public", "todos", parameters: parameters);
+        [TestMethod("Channel: Supports WALRUS Array Changes")]
+        public async Task ChannelSupportsWalrusArray()
+        {
+            Todo? result = null;
+            var tsc = new TaskCompletionSource<bool>();
 
-			await channel.Subscribe();
+            var channel = _socketClient!.Channel("realtime", "public", "todos");
+            var numbers = new List<int> { 4, 5, 6 };
 
-			var serialized = JsonConvert.SerializeObject(channel.JoinPush?.Payload);
-			Assert.IsTrue(serialized.Contains("\"key\":\"value\""));
-		}
+            await channel.Subscribe();
 
-		[TestMethod("Channel: Returns single subscription per unique topic.")]
-		public async Task ChannelJoinsDuplicateSubscription()
-		{
-			var subscription1 = socketClient!.Channel("realtime", "public", "todos");
-			var subscription2 = socketClient!.Channel("realtime", "public", "todos");
-			var subscription3 = socketClient!.Channel("realtime", "public", "todos", "user_id", "1");
+            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Inserts, (_, changes) =>
+            {
+                result = changes.Model<Todo>();
+                tsc.SetResult(true);
+            });
 
-			Assert.AreEqual(subscription1.Topic, subscription2.Topic);
+            await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Numbers = numbers });
 
-			await subscription1.Subscribe();
+            await tsc.Task;
+            CollectionAssert.AreEqual(numbers, result?.Numbers);
+        }
 
-			Assert.AreEqual(subscription1.HasJoinedOnce, subscription2.HasJoinedOnce);
-			Assert.AreNotEqual(subscription1.HasJoinedOnce, subscription3.HasJoinedOnce);
+        [TestMethod("Channel: Sends Join parameters")]
+        public async Task ChannelSendsJoinParameters()
+        {
+            var parameters = new Dictionary<string, string> { { "key", "value" } };
+            var channel = _socketClient!.Channel("realtime", "public", "todos", parameters: parameters);
 
-			var subscription4 = socketClient!.Channel("realtime", "public", "todos");
+            await channel.Subscribe();
 
-			Assert.AreEqual(subscription1.HasJoinedOnce, subscription4.HasJoinedOnce);
-		}
+            var serialized = JsonConvert.SerializeObject(channel.JoinPush?.Payload);
+            Assert.IsTrue(serialized.Contains("\"key\":\"value\""));
+        }
 
-		[TestMethod("Channel: Receives '*' Callback")]
-		public async Task ChannelReceivesWildcardCallback()
-		{
-			var insertTsc = new TaskCompletionSource<bool>();
-			var updateTsc = new TaskCompletionSource<bool>();
-			var deleteTsc = new TaskCompletionSource<bool>();
+        [TestMethod("Channel: Returns single subscription per unique topic.")]
+        public async Task ChannelJoinsDuplicateSubscription()
+        {
+            var subscription1 = _socketClient!.Channel("realtime", "public", "todos");
+            var subscription2 = _socketClient!.Channel("realtime", "public", "todos");
+            var subscription3 = _socketClient!.Channel("realtime", "public", "todos", "user_id", "1");
 
-			List<Task> tasks = new List<Task> { insertTsc.Task, updateTsc.Task, deleteTsc.Task };
+            Assert.AreEqual(subscription1.Topic, subscription2.Topic);
 
-			var channel = socketClient!.Channel("realtime", "public", "todos");
+            await subscription1.Subscribe();
 
-			channel.OnPostgresChange += (_, e) =>
-			{
-				switch (e.Response?.Payload?.Data?.Type)
-				{
-					case EventType.Insert:
-						insertTsc.SetResult(true);
-						break;
-					case EventType.Update:
-						updateTsc.SetResult(true);
-						break;
-					case EventType.Delete:
-						deleteTsc.SetResult(true);
-						break;
-				}
-			};
+            Assert.AreEqual(subscription1.HasJoinedOnce, subscription2.HasJoinedOnce);
+            Assert.AreNotEqual(subscription1.HasJoinedOnce, subscription3.HasJoinedOnce);
 
-			await channel.Subscribe();
+            var subscription4 = _socketClient!.Channel("realtime", "public", "todos");
 
-			var modeledResponse = await restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
-			var newModel = modeledResponse.Models.First();
+            Assert.AreEqual(subscription1.HasJoinedOnce, subscription4.HasJoinedOnce);
+        }
 
-			await restClient.Table<Todo>().Set(x => x.Details!, "And edits.").Match(newModel).Update();
-			await restClient.Table<Todo>().Match(newModel).Delete();
+        [TestMethod("Channel: Receives '*' Callback")]
+        public async Task ChannelReceivesWildcardCallback()
+        {
+            var insertTsc = new TaskCompletionSource<bool>();
+            var updateTsc = new TaskCompletionSource<bool>();
+            var deleteTsc = new TaskCompletionSource<bool>();
 
-			await Task.WhenAll(tasks);
+            List<Task> tasks = new List<Task> { insertTsc.Task, updateTsc.Task, deleteTsc.Task };
 
-			Assert.IsTrue(insertTsc.Task.Result);
-			Assert.IsTrue(updateTsc.Task.Result);
-			Assert.IsTrue(deleteTsc.Task.Result);
-		}
-	}
+            var channel = _socketClient!.Channel("realtime", "public", "todos");
+
+            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.All, (_, changes) =>
+            {
+                switch (changes.Payload?.Data?.Type)
+                {
+                    case EventType.Insert:
+                        insertTsc.SetResult(true);
+                        break;
+                    case EventType.Update:
+                        updateTsc.SetResult(true);
+                        break;
+                    case EventType.Delete:
+                        deleteTsc.SetResult(true);
+                        break;
+                }
+            });
+
+            await channel.Subscribe();
+
+            var modeledResponse = await _restClient!.Table<Todo>().Insert(new Todo
+                { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+            var newModel = modeledResponse.Models.First();
+
+            await _restClient.Table<Todo>().Set(x => x.Details!, "And edits.").Match(newModel).Update();
+            await _restClient.Table<Todo>().Match(newModel).Delete();
+
+            await Task.WhenAll(tasks);
+
+            Assert.IsTrue(insertTsc.Task.Result);
+            Assert.IsTrue(updateTsc.Task.Result);
+            Assert.IsTrue(deleteTsc.Task.Result);
+        }
+    }
 }

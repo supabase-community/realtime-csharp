@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static Supabase.Realtime.Constants;
+using static Supabase.Realtime.PostgresChanges.PostgresChangesOptions;
 
 namespace Supabase.Realtime.Interfaces
 {
@@ -17,7 +18,7 @@ namespace Supabase.Realtime.Interfaces
 
         delegate void StateChangedHandler(IRealtimeChannel sender, ChannelState state);
 
-        delegate void PostgresChangesHandler(IRealtimeChannel sender, PostgresChangesResponse changes);
+        delegate void PostgresChangesHandler(IRealtimeChannel sender, PostgresChangesResponse change);
 
         bool HasJoinedOnce { get; }
         bool IsClosed { get; }
@@ -44,13 +45,11 @@ namespace Supabase.Realtime.Interfaces
 
         void ClearMessageReceivedListeners();
 
-        void AddPostgresChangesListener(PostgresChangesOptions.ListenType listenType,
-            PostgresChangesHandler postgresChangesHandler);
+        void AddPostgresChangeListener(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
 
-        void RemovePostgresChangesListener(PostgresChangesOptions.ListenType listenType,
-            IRealtimeChannel.PostgresChangesHandler postgresChangesHandler);
+        void RemovePostgresChangeListener(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
 
-        void ClearPostgresChangesListeners();
+        void ClearPostgresChangeListeners();
 
         IRealtimeBroadcast? Broadcast();
         IRealtimePresence? Presence();

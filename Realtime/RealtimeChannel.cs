@@ -264,25 +264,25 @@ public class RealtimeChannel : IRealtimeChannel
             handler.Invoke(this, message);
     }
 
-    public void AddPostgresChangesListener(PostgresChangesOptions.ListenType listenType,
-        IRealtimeChannel.PostgresChangesHandler postgresChangesHandler)
+    public void AddPostgresChangeListener(PostgresChangesOptions.ListenType listenType,
+        IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)
     {
         if (_postgresChangesHandlers[listenType] == null)
             _postgresChangesHandlers[listenType] = new List<IRealtimeChannel.PostgresChangesHandler>();
 
-        if (!_postgresChangesHandlers[listenType].Contains(postgresChangesHandler))
-            _postgresChangesHandlers[listenType].Add(postgresChangesHandler);
+        if (!_postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
+            _postgresChangesHandlers[listenType].Add(postgresChangeHandler);
     }
 
-    public void RemovePostgresChangesListener(PostgresChangesOptions.ListenType listenType,
-        IRealtimeChannel.PostgresChangesHandler postgresChangesHandler)
+    public void RemovePostgresChangeListener(PostgresChangesOptions.ListenType listenType,
+        IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)
     {
         if (_postgresChangesHandlers.ContainsKey(listenType) &&
-            _postgresChangesHandlers[listenType].Contains(postgresChangesHandler))
-            _postgresChangesHandlers[listenType].Remove(postgresChangesHandler);
+            _postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
+            _postgresChangesHandlers[listenType].Remove(postgresChangeHandler);
     }
 
-    public void ClearPostgresChangesListeners() =>
+    public void ClearPostgresChangeListeners() =>
         _postgresChangesHandlers.Clear();
 
     private void NotifyPostgresChanges(EventType eventType, PostgresChangesResponse response)
