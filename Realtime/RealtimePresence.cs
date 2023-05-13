@@ -10,144 +10,189 @@ using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime
 {
-	/// <summary>
-	/// Represents a realtime presence client.
-	/// 
-	/// When a client subscribes to a channel, it will immediately receive the channel's latest state in a single message.
-	/// Clients are free to come-and-go as they please, and as long as they are all subscribed to the same channel then they will all have the same Presence state as each other.
-	/// If a client is suddenly disconnected (for example, they go offline), their state will be automatically removed from the shared state.
-	/// </summary>
-	/// <typeparam name="TPresenceModel">A model representing expected payload.</typeparam>
-	public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenceModel : BasePresence
-	{
-		/// <summary>
-		/// The Last State of this Presence instance.
-		/// </summary>
-		public Dictionary<string, List<TPresenceModel>> LastState { get; private set; } = new Dictionary<string, List<TPresenceModel>>();
+    /// <summary>
+    /// Represents a realtime presence client.
+    /// 
+    /// When a client subscribes to a channel, it will immediately receive the channel's latest state in a single message.
+    /// Clients are free to come-and-go as they please, and as long as they are all subscribed to the same channel then they will all have the same Presence state as each other.
+    /// If a client is suddenly disconnected (for example, they go offline), their state will be automatically removed from the shared state.
+    /// </summary>
+    /// <typeparam name="TPresenceModel">A model representing expected payload.</typeparam>
+    public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenceModel : BasePresence
+    {
+        /// <summary>
+        /// The Last State of this Presence instance.
+        /// </summary>
+        public Dictionary<string, List<TPresenceModel>> LastState { get; private set; } =
+            new();
 
-		/// <summary>
-		/// The Current State of this Presence instance.
-		/// </summary>
-		public Dictionary<string, List<TPresenceModel>> CurrentState { get; private set; } = new Dictionary<string, List<TPresenceModel>>();
+        /// <summary>
+        /// The Current State of this Presence instance.
+        /// </summary>
+        public Dictionary<string, List<TPresenceModel>> CurrentState { get; } = new();
 
-		/// <summary>
-		/// Called when Presence Joins (incoming changes) are present in a websocket response.
-		/// </summary>
-		public event EventHandler<EventArgs?>? OnJoin;
+        private PresenceOptions _options;
+        private SocketResponse? _currentResponse;
+        private readonly RealtimeChannel _channel;
+        private readonly JsonSerializerSettings _serializerSettings;
 
-		/// <summary>
-		/// Called when Presence Leaves (previous state) are present in a websocket response.
-		/// </summary>
-		public event EventHandler<EventArgs?>? OnLeave;
+        private readonly Dictionary<IRealtimePresence.EventType, List<IRealtimePresence.PresenceEventHandler>>
+            _presenceEventListeners = new();
 
-		/// <summary>
-		/// Called on every recieved Presence message after setting <see cref="LastState"/> and <see cref="CurrentState"/>
-		/// </summary>
-		public event EventHandler<EventArgs?>? OnSync;
+        public RealtimePresence(RealtimeChannel channel, PresenceOptions options,
+            JsonSerializerSettings serializerSettings)
+        {
+            _channel = channel;
+            _options = options;
+            _serializerSettings = serializerSettings;
+        }
 
-		private RealtimeChannel channel;
-		private PresenceOptions options;
-		private JsonSerializerSettings serializerSettings;
+        /// <summary>
+        /// Add presence event handler for a given event type.
+        /// </summary>
+        /// <param name="eventType"></param>
+        /// <param name="presenceEventHandler"></param>
+        public void AddPresenceEventHandler(IRealtimePresence.EventType eventType,
+            IRealtimePresence.PresenceEventHandler presenceEventHandler)
+        {
+            _presenceEventListeners[eventType] ??= new List<IRealtimePresence.PresenceEventHandler>();
 
-		private SocketResponseEventArgs? currentResponse;
+            if (!_presenceEventListeners[eventType].Contains(presenceEventHandler))
+                _presenceEventListeners[eventType].Add(presenceEventHandler);
+        }
 
-		public RealtimePresence(RealtimeChannel channel, PresenceOptions options, JsonSerializerSettings serializerSettings)
-		{
-			this.channel = channel;
-			this.options = options;
-			this.serializerSettings = serializerSettings;
-		}
+        /// <summary>
+        /// Remove an event handler
+        /// </summary>
+        /// <param name="eventType"></param>
+        /// <param name="presenceEventHandler"></param>
+        public void RemovePresenceEventHandlers(IRealtimePresence.EventType eventType,
+            IRealtimePresence.PresenceEventHandler presenceEventHandler)
+        {
+            if (_presenceEventListeners.ContainsKey(eventType) &&
+                _presenceEventListeners[eventType].Contains(presenceEventHandler))
+                _presenceEventListeners[eventType].Remove(presenceEventHandler);
+        }
 
-		/// <summary>
-		/// Called in two cases:
-		///		- By `RealtimeChannel` when it receives a `presence_state` initializing message.
-		///		- By `RealtimeChannel` When a diff has been received and a new response is saved.
-		/// </summary>
-		/// <param name="args"></param>
-		public void TriggerSync(SocketResponseEventArgs args)
-		{
-			var lastState = new Dictionary<string, List<TPresenceModel>>(LastState);
+        /// <summary>
+        /// Clears all event handlers for a given type (if specified) or clears all handlers.
+        /// </summary>
+        /// <param name="eventType"></param>
+        public void ClearPresenceEventHandlers(IRealtimePresence.EventType? eventType = null)
+        {
+            if (eventType != null && _presenceEventListeners.TryGetValue(eventType.Value, out var list))
+                list.Clear();
+            else
+                _presenceEventListeners.Clear();
+        }
 
-			currentResponse = args;
-			SetState();
+        /// <summary>
+        /// Notifies listeners of state changes
+        /// </summary>
+        /// <param name="eventType"></param>
+        private void NotifyPresenceEventHandlers(IRealtimePresence.EventType eventType)
+        {
+            foreach (var handler in _presenceEventListeners[eventType])
+                handler.Invoke(this, eventType);
+        }
 
-			OnSync?.Invoke(this, null);
-		}
+        /// <summary>
+        /// Called in two cases:
+        ///		- By `RealtimeChannel` when it receives a `presence_state` initializing message.
+        ///		- By `RealtimeChannel` When a diff has been received and a new response is saved.
+        /// </summary>
+        /// <param name="response"></param>
+        public void TriggerSync(SocketResponse response)
+        {
+            _currentResponse = response;
+            SetState();
 
-		/// <summary>
-		/// Triggers a diff comparison and emits events accordingly.
-		/// </summary>
-		/// <param name="args"></param>
-		/// <exception cref="ArgumentException"></exception>
-		public void TriggerDiff(SocketResponseEventArgs args)
-		{
-			if (args.Response == null || args.Response.Json == null)
-				throw new ArgumentException(string.Format("Expected parsable JSON response, instead recieved: `{0}`", JsonConvert.SerializeObject(args.Response)));
+            NotifyPresenceEventHandlers(IRealtimePresence.EventType.Sync);
+        }
 
-			var obj = JsonConvert.DeserializeObject<RealtimePresenceDiff<TPresenceModel>>(args.Response.Json, serializerSettings);
+        /// <summary>
+        /// Triggers a diff comparison and emits events accordingly.
+        /// </summary>
+        /// <param name="response"></param>
+        /// <exception cref="ArgumentException"></exception>
+        public void TriggerDiff(SocketResponse response)
+        {
+            if (response == null || response.Json == null)
+                throw new ArgumentException(
+                    $"Expected parsable JSON response, instead received: `{JsonConvert.SerializeObject(response)}`");
 
-			if (obj == null || obj.Payload == null) return;
+            var obj = JsonConvert.DeserializeObject<RealtimePresenceDiff<TPresenceModel>>(response.Json,
+                _serializerSettings);
 
-			TriggerSync(args);
+            if (obj?.Payload == null) return;
 
-			if (obj.Payload.Joins!.Count > 0)
-				OnJoin?.Invoke(this, null);
+            TriggerSync(response);
 
-			if (obj.Payload.Leaves!.Count > 0)
-				OnLeave?.Invoke(this, null);
-		}
+            if (obj.Payload.Joins!.Count > 0)
+                NotifyPresenceEventHandlers(IRealtimePresence.EventType.Join);
 
-		/// <summary>
-		/// "Tracks" an event, used with <see cref="Presence"/>.
-		/// </summary>
-		/// <param name="payload"></param>
-		/// <param name="timeoutMs"></param>
-		public void Track(object? payload, int timeoutMs = DefaultTimeout)
-		{
-			var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
-			channel.Push(eventName, "track", new Dictionary<string, object?> { { "event", "track" }, { "payload", payload } }, timeoutMs);
-		}
+            if (obj.Payload.Leaves!.Count > 0)
+                NotifyPresenceEventHandlers(IRealtimePresence.EventType.Leave);
+        }
 
-		public void Untrack()
-		{
-			var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
-			channel.Push(eventName, "untrack");
-		}
+        /// <summary>
+        /// "Tracks" an event, used with <see cref="Presence"/>.
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <param name="timeoutMs"></param>
+        public void Track(object? payload, int timeoutMs = DefaultTimeout)
+        {
+            var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
+            _channel.Push(eventName, "track",
+                new Dictionary<string, object?> { { "event", "track" }, { "payload", payload } }, timeoutMs);
+        }
 
-		/// <summary>
-		/// Sets the internal Presence State from the <see cref="currentResponse"/>
-		/// </summary>
-		private void SetState()
-		{
-			LastState = new Dictionary<string, List<TPresenceModel>>(CurrentState);
+        /// <summary>
+        /// Untracks an event.
+        /// </summary>
+        public void Untrack()
+        {
+            var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
+            _channel.Push(eventName, "untrack");
+        }
 
-			if (currentResponse == null || currentResponse.Response.Json == null) return;
+        /// <summary>
+        /// Sets the internal Presence State from the <see cref="_currentResponse"/>
+        /// </summary>
+        private void SetState()
+        {
+            LastState = new Dictionary<string, List<TPresenceModel>>(CurrentState);
 
-			// Is a diff response?
-			if (currentResponse.Response.Payload!.Joins != null || currentResponse.Response.Payload!.Leaves != null)
-			{
-				var state = JsonConvert.DeserializeObject<RealtimePresenceDiff<TPresenceModel>>(currentResponse.Response.Json, serializerSettings)!;
+            if (_currentResponse?.Json == null) return;
 
-				if (state == null || state.Payload == null) return;
+            // Is a diff response?
+            if (_currentResponse.Payload!.Joins != null || _currentResponse.Payload!.Leaves != null)
+            {
+                var state = JsonConvert.DeserializeObject<RealtimePresenceDiff<TPresenceModel>>(_currentResponse.Json,
+                    _serializerSettings)!;
 
-				// Remove any result that has "left"
-				foreach (var item in state.Payload.Leaves!)
-					CurrentState.Remove(item.Key);
+                if (state?.Payload == null) return;
 
-				// Add any results that have come in.
-				foreach (var item in state.Payload.Joins!)
-					CurrentState[item.Key] = item.Value.Metas!;
-			}
-			else
-			{
-				// It's a presence_state init response
-				var state = JsonConvert.DeserializeObject<PresenceStateSocketResponse<TPresenceModel>>(currentResponse.Response.Json, serializerSettings)!;
+                // Remove any result that has "left"
+                foreach (var item in state.Payload.Leaves!)
+                    CurrentState.Remove(item.Key);
 
-				if (state == null || state.Payload == null) return;
+                // Add any results that have come in.
+                foreach (var item in state.Payload.Joins!)
+                    CurrentState[item.Key] = item.Value.Metas!;
+            }
+            else
+            {
+                // It's a presence_state init response
+                var state =
+                    JsonConvert.DeserializeObject<PresenceStateSocketResponse<TPresenceModel>>(_currentResponse.Json,
+                        _serializerSettings)!;
 
-				foreach (var item in state.Payload)
-					CurrentState[item.Key] = item.Value.Metas!;
-			}
-		}
-	}
+                if (state?.Payload == null) return;
+
+                foreach (var item in state.Payload)
+                    CurrentState[item.Key] = item.Value.Metas!;
+            }
+        }
+    }
 }

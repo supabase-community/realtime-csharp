@@ -1,18 +1,30 @@
 ﻿using Supabase.Realtime.Socket;
 using System;
+using Supabase.Realtime.Models;
 using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Interfaces
 {
-	public interface IRealtimePresence
-	{
-		event EventHandler<EventArgs?>? OnJoin;
-		event EventHandler<EventArgs?>? OnLeave;
-		event EventHandler<EventArgs?>? OnSync;
+    public interface IRealtimePresence
+    {
+        delegate void PresenceEventHandler(IRealtimePresence sender, EventType eventType);
 
-		void Track(object? payload, int timeoutMs = DefaultTimeout);
+        public enum EventType
+        {
+            Sync,
+            Join,
+            Leave
+        }
 
-		void TriggerSync(SocketResponseEventArgs args);
-		void TriggerDiff(SocketResponseEventArgs args);
-	}
+        void Track(object? payload, int timeoutMs = DefaultTimeout);
+
+        void TriggerSync(SocketResponse response);
+        void TriggerDiff(SocketResponse args);
+
+        void AddPresenceEventHandler(EventType eventType, PresenceEventHandler presenceEventHandler);
+
+        void RemovePresenceEventHandlers(EventType eventType, PresenceEventHandler presenceEventHandler);
+
+        void ClearPresenceEventHandlers(EventType? eventType = null);
+    }
 }

@@ -25,11 +25,11 @@ namespace RealtimeExample
 
             // Subscribe to a channel and events
             var channelUsers = realtimeClient.Channel("realtime", "public", "users");
-            channelUsers.AddPostgresChangeListener(ListenType.Inserts,
+            channelUsers.AddPostgresChangeHandler(ListenType.Inserts,
                 (_, change) => { Console.WriteLine($"New item inserted: {change.Model<User>()}"); });
-            channelUsers.AddPostgresChangeListener(ListenType.Updates,
+            channelUsers.AddPostgresChangeHandler(ListenType.Updates,
                 (_, change) => { Console.WriteLine($"Item Updated: {change.Model<User>()}"); });
-            channelUsers.AddPostgresChangeListener(ListenType.Deletes,
+            channelUsers.AddPostgresChangeHandler(ListenType.Deletes,
                 (_, change) => { Console.WriteLine($"Item Deleted"); });
 
             Console.WriteLine("Subscribing to users channel");
@@ -38,7 +38,7 @@ namespace RealtimeExample
             //Subscribing to another channel
             var channelTodos = realtimeClient.Channel("realtime", "public", "todos");
             
-            channelTodos.AddStateChangedListener((_, state) =>
+            channelTodos.AddStateChangedHandler((_, state) =>
             {
                 Console.WriteLine($"Channel todos {state}!!");
             });

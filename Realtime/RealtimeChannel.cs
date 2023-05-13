@@ -34,12 +34,6 @@ public class RealtimeChannel : IRealtimeChannel
     public bool IsJoining => State == ChannelState.Joining;
     public bool IsLeaving => State == ChannelState.Leaving;
 
-    private readonly List<IRealtimeChannel.StateChangedHandler> _stateChangedHandlers = new();
-    private readonly List<IRealtimeChannel.MessageReceivedHandler> _messageReceivedHandlers = new();
-
-    private readonly Dictionary<PostgresChangesOptions.ListenType, List<IRealtimeChannel.PostgresChangesHandler>>
-        _postgresChangesHandlers = new();
-
     /// <summary>
     /// The channel's topic (identifier)
     /// </summary>
@@ -116,9 +110,15 @@ public class RealtimeChannel : IRealtimeChannel
     internal Push? LastPush;
 
     // Event handlers that pass events to typed instances for broadcast and presence.
-    internal event EventHandler<SocketResponseEventArgs>? OnBroadcast;
-    internal event EventHandler<SocketResponseEventArgs>? OnPresenceDiff;
-    internal event EventHandler<SocketResponseEventArgs>? OnPresenceSync;
+    internal delegate void BroadcastEventHandler(IRealtimeChannel sender, SocketResponse response);
+
+    internal delegate void PresenceDiffHandler(IRealtimeChannel sender, SocketResponse response);
+
+    internal delegate void PresenceSyncHandler(IRealtimeChannel sender, SocketResponse response);
+
+    internal BroadcastEventHandler? BroadcastHandler;
+    internal PresenceDiffHandler? PresenceDiff;
+    internal PresenceSyncHandler? PresenceSync;
 
     /// <summary>
     /// Buffer of Pushes held because of Socket availability
@@ -128,6 +128,13 @@ public class RealtimeChannel : IRealtimeChannel
     private readonly IRealtimeSocket _socket;
     private IRealtimePresence? _presence;
     private IRealtimeBroadcast? _broadcast;
+
+    private readonly List<IRealtimeChannel.StateChangedHandler> _stateChangedHandlers = new();
+    private readonly List<IRealtimeChannel.MessageReceivedHandler> _messageReceivedHandlers = new();
+
+    private readonly Dictionary<ListenType, List<IRealtimeChannel.PostgresChangesHandler>> _postgresChangesHandlers =
+        new();
+
     private bool CanPush => IsJoined && _socket.IsConnected;
     private bool _hasJoinedOnce;
     private readonly Timer _rejoinTimer;
@@ -185,7 +192,7 @@ public class RealtimeChannel : IRealtimeChannel
             new RealtimeBroadcast<TBroadcastResponse>(this, BroadcastOptions, Options.SerializerSettings);
         _broadcast = instance;
 
-        OnBroadcast += (_, args) => _broadcast.TriggerReceived(args);
+        BroadcastHandler = (_, response) => _broadcast.TriggerReceived(response);
 
         return instance;
     }
@@ -208,27 +215,43 @@ public class RealtimeChannel : IRealtimeChannel
         var instance = new RealtimePresence<TPresenceResponse>(this, PresenceOptions, Options.SerializerSettings);
         _presence = instance;
 
-        OnPresenceSync += (_, args) => _presence.TriggerSync(args);
-        OnPresenceDiff += (_, args) => _presence.TriggerDiff(args);
+        PresenceSync = (_, response) => _presence.TriggerSync(response);
+        PresenceDiff = (_, response) => _presence.TriggerDiff(response);
 
         return instance;
     }
 
-    public void AddStateChangedListener(IRealtimeChannel.StateChangedHandler stateChangedHandler)
+    /// <summary>
+    /// Registers a state changed listener relative to this channel. Called when channel state changes.
+    /// </summary>
+    /// <param name="stateChangedHandler"></param>
+    public void AddStateChangedHandler(IRealtimeChannel.StateChangedHandler stateChangedHandler)
     {
         if (!_stateChangedHandlers.Contains(stateChangedHandler))
             _stateChangedHandlers.Add(stateChangedHandler);
     }
 
-    public void RemoveStateChangedListener(IRealtimeChannel.StateChangedHandler stateChangedHandler)
+    /// <summary>
+    /// Removes a channel state changed listener
+    /// </summary>
+    /// <param name="stateChangedHandler"></param>
+    public void RemoveStateChangedHandler(IRealtimeChannel.StateChangedHandler stateChangedHandler)
     {
         if (_stateChangedHandlers.Contains(stateChangedHandler))
             _stateChangedHandlers.Remove(stateChangedHandler);
     }
 
-    public void ClearStateChangedListeners() =>
+    /// <summary>
+    /// Clears all channel state changed listeners
+    /// </summary>
+    public void ClearStateChangedHandlers() =>
         _stateChangedHandlers.Clear();
 
+    /// <summary>
+    /// Notifies registered listeners that a channel state has changed.
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="shouldRejoin"></param>
     private void NotifyStateChanged(ChannelState state, bool shouldRejoin = true)
     {
         State = state;
@@ -243,38 +266,62 @@ public class RealtimeChannel : IRealtimeChannel
             handler.Invoke(this, state);
     }
 
+    /// <summary>
+    /// Registers a message received listener, called when a socket message is received for this channel.
+    /// </summary>
+    /// <param name="messageReceivedHandler"></param>
     public void AddMessageReceivedHandler(IRealtimeChannel.MessageReceivedHandler messageReceivedHandler)
     {
         if (!_messageReceivedHandlers.Contains(messageReceivedHandler))
             _messageReceivedHandlers.Add(messageReceivedHandler);
     }
 
+    /// <summary>
+    /// Removes a message received listener.
+    /// </summary>
+    /// <param name="messageReceivedHandler"></param>
     public void RemoveMessageReceivedHandler(IRealtimeChannel.MessageReceivedHandler messageReceivedHandler)
     {
         if (_messageReceivedHandlers.Contains(messageReceivedHandler))
             _messageReceivedHandlers.Remove(messageReceivedHandler);
     }
 
-    public void ClearMessageReceivedListeners() =>
+    /// <summary>
+    /// Clears message received listeners.
+    /// </summary>
+    public void ClearMessageReceivedHandlers() =>
         _messageReceivedHandlers.Clear();
 
+    /// <summary>
+    /// Notifies registered listeners that a channel message has been received.
+    /// </summary>
+    /// <param name="message"></param>
     private void NotifyMessageReceived(SocketResponse message)
     {
         foreach (var handler in _messageReceivedHandlers)
             handler.Invoke(this, message);
     }
 
-    public void AddPostgresChangeListener(PostgresChangesOptions.ListenType listenType,
+    /// <summary>
+    /// Add a postgres changes listener. Should be paired with <see cref="Register"/>.
+    /// </summary>
+    /// <param name="listenType">The type of event this callback should process.</param>
+    /// <param name="postgresChangeHandler"></param>
+    public void AddPostgresChangeHandler(ListenType listenType,
         IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)
     {
-        if (_postgresChangesHandlers[listenType] == null)
-            _postgresChangesHandlers[listenType] = new List<IRealtimeChannel.PostgresChangesHandler>();
+        _postgresChangesHandlers[listenType] ??= new List<IRealtimeChannel.PostgresChangesHandler>();
 
         if (!_postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
             _postgresChangesHandlers[listenType].Add(postgresChangeHandler);
     }
 
-    public void RemovePostgresChangeListener(PostgresChangesOptions.ListenType listenType,
+    /// <summary>
+    /// Removes a postgres changes listener.
+    /// </summary>
+    /// <param name="listenType">The type of event this callback was registered to process.</param>
+    /// <param name="postgresChangeHandler"></param>
+    public void RemovePostgresChangeHandler(ListenType listenType,
         IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)
     {
         if (_postgresChangesHandlers.ContainsKey(listenType) &&
@@ -282,26 +329,27 @@ public class RealtimeChannel : IRealtimeChannel
             _postgresChangesHandlers[listenType].Remove(postgresChangeHandler);
     }
 
-    public void ClearPostgresChangeListeners() =>
+    /// <summary>
+    /// Clears all postgres changes listeners.
+    /// </summary>
+    public void ClearPostgresChangeHandlers() =>
         _postgresChangesHandlers.Clear();
 
+    /// <summary>
+    /// Notifies listeners of a postgres change message being received.
+    /// </summary>
+    /// <param name="eventType"></param>
+    /// <param name="response"></param>
     private void NotifyPostgresChanges(EventType eventType, PostgresChangesResponse response)
     {
-        var listenType = ListenType.All;
-
-        switch (eventType)
+        var listenType = eventType switch
         {
-            case EventType.Insert:
-                listenType = ListenType.Inserts;
-                break;
-            case EventType.Delete:
-                listenType = ListenType.Deletes;
-                break;
-            case EventType.Update:
-                listenType = ListenType.Updates;
-                break;
-        }
-        
+            EventType.Insert => ListenType.Inserts,
+            EventType.Delete => ListenType.Deletes,
+            EventType.Update => ListenType.Updates,
+            _ => ListenType.All
+        };
+
         // Invoke the wildcard listener (but only once)
         if (listenType != ListenType.All)
             foreach (var handler in _postgresChangesHandlers[ListenType.All])
@@ -310,7 +358,6 @@ public class RealtimeChannel : IRealtimeChannel
         foreach (var handler in _postgresChangesHandlers[listenType])
             handler.Invoke(this, response);
     }
-
 
     /// <summary>
     /// Registers postgres_changes options, can be called multiple times.
@@ -347,7 +394,7 @@ public class RealtimeChannel : IRealtimeChannel
                     HasJoinedOnce = true;
                     IsSubscribed = true;
 
-                    sender.RemoveStateChangedListener(channelCallback!);
+                    sender.RemoveStateChangedHandler(channelCallback!);
                     JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
                     // Clear buffer
@@ -361,7 +408,7 @@ public class RealtimeChannel : IRealtimeChannel
                 case ChannelState.Closed:
                 case ChannelState.Errored:
                     IsSubscribed = false;
-                    sender.RemoveStateChangedListener(channelCallback!);
+                    sender.RemoveStateChangedHandler(channelCallback!);
                     JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
                     tsc.TrySetException(new Exception("Error occurred connecting to channel. Check logs."));
@@ -372,7 +419,7 @@ public class RealtimeChannel : IRealtimeChannel
         // Throw an exception if there is a problem receiving a join response
         joinPushTimeoutCallback = (_, _) =>
         {
-            RemoveStateChangedListener(channelCallback);
+            RemoveStateChangedHandler(channelCallback);
             JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
             tsc.TrySetException(new RealtimeException("Push Timeout")
@@ -381,7 +428,7 @@ public class RealtimeChannel : IRealtimeChannel
             });
         };
 
-        AddStateChangedListener(channelCallback);
+        AddStateChangedHandler(channelCallback);
 
         // Set a flag to prevent multiple join attempts.
         _hasJoinedOnce = true;
@@ -608,20 +655,18 @@ public class RealtimeChannel : IRealtimeChannel
                 deserialized.Json = message.Json;
                 deserialized.serializerSettings = Options.SerializerSettings;
 
-                var newArgs = new PostgresChangesEventArgs(deserialized);
-
                 // Invoke '*' listener
                 NotifyPostgresChanges(deserialized.Payload!.Data!.Type, deserialized);
 
                 break;
             case EventType.Broadcast:
-                //OnBroadcast?.Invoke(this, message);
+                BroadcastHandler?.Invoke(this, message);
                 break;
             case EventType.PresenceState:
-                //OnPresenceSync?.Invoke(this, message);
+                PresenceSync?.Invoke(this, message);
                 break;
             case EventType.PresenceDiff:
-                //OnPresenceDiff?.Invoke(this, message);
+                PresenceDiff?.Invoke(this, message);
                 break;
         }
     }

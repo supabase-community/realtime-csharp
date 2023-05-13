@@ -4,7 +4,6 @@ using Supabase.Realtime.Models;
 using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static Supabase.Realtime.Constants;
@@ -33,23 +32,23 @@ namespace Supabase.Realtime.Interfaces
         ChannelState State { get; }
         string Topic { get; }
 
-        void AddStateChangedListener(StateChangedHandler stateChangedHandler);
+        void AddStateChangedHandler(StateChangedHandler stateChangedHandler);
 
-        void RemoveStateChangedListener(StateChangedHandler stateChangedHandler);
+        void RemoveStateChangedHandler(StateChangedHandler stateChangedHandler);
 
-        void ClearStateChangedListeners();
+        void ClearStateChangedHandlers();
 
         void AddMessageReceivedHandler(MessageReceivedHandler messageReceivedHandler);
 
         void RemoveMessageReceivedHandler(MessageReceivedHandler messageReceivedHandler);
 
-        void ClearMessageReceivedListeners();
+        void ClearMessageReceivedHandlers();
 
-        void AddPostgresChangeListener(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
+        void AddPostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
 
-        void RemovePostgresChangeListener(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
+        void RemovePostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
 
-        void ClearPostgresChangeListeners();
+        void ClearPostgresChangeHandlers();
 
         IRealtimeBroadcast? Broadcast();
         IRealtimePresence? Presence();

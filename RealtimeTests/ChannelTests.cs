@@ -58,27 +58,23 @@ namespace RealtimeTests
 
             var channel1 = _socketClient!.Channel("online-users");
             var presence1 = channel1.Register<TimePresence>(guid1);
-            presence1.OnSync += (_, _) =>
+            presence1.AddPresenceEventHandler(IRealtimePresence.EventType.Sync, (_, _) =>
             {
                 var state = presence1.CurrentState;
                 if (state.ContainsKey(guid2) && state[guid2].First().Time != null)
-                {
                     tsc.SetResult(true);
-                }
-            };
+            });
 
             var client2 = Helpers.SocketClient();
             await client2.ConnectAsync();
             var channel2 = client2.Channel("online-users");
             var presence2 = channel2.Register<TimePresence>(guid2);
-            presence2.OnSync += (_, _) =>
+            presence2.AddPresenceEventHandler(IRealtimePresence.EventType.Sync, (_, _) =>
             {
                 var state = presence2.CurrentState;
                 if (state.ContainsKey(guid1) && state[guid1].First().Time != null)
-                {
                     tsc2.SetResult(true);
-                }
-            };
+            });
 
             await channel1.Subscribe();
             await channel2.Subscribe();
@@ -100,27 +96,23 @@ namespace RealtimeTests
 
             var channel1 = _socketClient!.Channel("online-users");
             var broadcast1 = channel1.Register<BroadcastExample>(true, true);
-            broadcast1.OnBroadcast += (_, _) =>
+            broadcast1.AddBroadcastEventHandler((_, _) =>
             {
                 var broadcast = broadcast1.Current();
                 if (broadcast?.UserId != guid1 && broadcast?.Event == "user")
-                {
                     tsc.TrySetResult(true);
-                }
-            };
+            });
 
             var client2 = Helpers.SocketClient();
             await client2.ConnectAsync();
             var channel2 = client2.Channel("online-users");
             var broadcast2 = channel2.Register<BroadcastExample>(true, true);
-            broadcast2.OnBroadcast += (_, _) =>
+            broadcast2.AddBroadcastEventHandler((_, _) =>
             {
                 var broadcast = broadcast2.Current();
                 if (broadcast?.UserId != guid2 && broadcast?.Event == "user")
-                {
                     tsc2.TrySetResult(true);
-                }
-            };
+            });
 
             await channel1.Subscribe();
             await channel2.Subscribe();
@@ -138,7 +130,7 @@ namespace RealtimeTests
 
             var channel = _socketClient!.Channel("realtime", "public", "*");
 
-            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Inserts, (_, changes) =>
+            channel.AddPostgresChangeHandler(PostgresChangesOptions.ListenType.Inserts, (_, changes) =>
             {
                 var model = changes.Model<Todo>();
                 tsc.SetResult(model != null);
@@ -158,7 +150,7 @@ namespace RealtimeTests
             var tsc = new TaskCompletionSource<bool>();
 
             var channel = _socketClient!.Channel("realtime", "public", "todos");
-            channel.AddStateChangedListener((_, state) =>
+            channel.AddStateChangedHandler((_, state) =>
             {
                 if (state == ChannelState.Closed)
                     tsc.SetResult(true);
@@ -179,7 +171,7 @@ namespace RealtimeTests
 
             var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Inserts,
+            channel.AddPostgresChangeHandler(PostgresChangesOptions.ListenType.Inserts,
                 (_, _) => tsc.SetResult(true));
 
             await channel.Subscribe();
@@ -203,7 +195,7 @@ namespace RealtimeTests
 
             var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Updates, (_, changes) =>
+            channel.AddPostgresChangeHandler(PostgresChangesOptions.ListenType.Updates, (_, changes) =>
             {
                 var oldModel = changes.OldModel<Todo>();
 
@@ -239,7 +231,7 @@ namespace RealtimeTests
 
             var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Deletes,
+            channel.AddPostgresChangeHandler(PostgresChangesOptions.ListenType.Deletes,
                 (_, _) => tsc.SetResult(true));
 
             await channel.Subscribe();
@@ -264,7 +256,7 @@ namespace RealtimeTests
 
             await channel.Subscribe();
 
-            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.Inserts, (_, changes) =>
+            channel.AddPostgresChangeHandler(PostgresChangesOptions.ListenType.Inserts, (_, changes) =>
             {
                 result = changes.Model<Todo>();
                 tsc.SetResult(true);
@@ -318,7 +310,7 @@ namespace RealtimeTests
 
             var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-            channel.AddPostgresChangeListener(PostgresChangesOptions.ListenType.All, (_, changes) =>
+            channel.AddPostgresChangeHandler(PostgresChangesOptions.ListenType.All, (_, changes) =>
             {
                 switch (changes.Payload?.Data?.Type)
                 {
