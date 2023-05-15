@@ -3,6 +3,7 @@ using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
@@ -82,24 +83,6 @@ namespace Supabase.Realtime
                 options.Headers.Add("X-Client-Info", Core.Util.GetAssemblyVersion(typeof(Client)));
 
             _connection = new WebsocketClient(new Uri(EndpointUrl));
-
-            AddStateChangedListener(HandleSocketStateChanged);
-        }
-
-        private void HandleSocketStateChanged(IRealtimeSocket sender, SocketState state)
-        {
-            switch (state)
-            {
-                case SocketState.Open:
-                    HandleSocketOpened();
-                    break;
-                case SocketState.Close:
-                    HandleSocketClosed();
-                    break;
-                case SocketState.Error:
-                    HandleSocketError();
-                    break;
-            }
         }
 
         void IDisposable.Dispose() =>
@@ -121,7 +104,7 @@ namespace Supabase.Realtime
                 if (reconnectionInfo.Type != ReconnectionType.Initial)
                     _isReconnecting = true;
 
-                NotifySocketStateChange(SocketState.Open);
+                HandleSocketOpened();
             });
 
             _connection.DisconnectionHappened.Subscribe(disconnectionInfo =>
@@ -173,7 +156,9 @@ namespace Supabase.Realtime
         /// <param name="newState"></param>
         private void NotifySocketStateChange(SocketState newState)
         {
-            foreach (var handler in _socketEventHandlers)
+            if (!_socketEventHandlers.Any()) return;
+            
+            foreach (var handler in _socketEventHandlers.ToArray())
                 handler.Invoke(this, newState);
         }
 
@@ -335,7 +320,7 @@ namespace Supabase.Realtime
         private void HandleSocketOpened()
         {
             // Was a reconnection attempt
-            if (_isReconnecting == true)
+            if (_isReconnecting)
                 NotifySocketStateChange(SocketState.Reconnect);
 
             // Reset flag for reconnections
@@ -404,8 +389,11 @@ namespace Supabase.Realtime
 
         private void HandleSocketError(DisconnectionInfo? disconnectionInfo = null)
         {
-            AttemptReconnection();
-            NotifySocketStateChange(SocketState.Error);
+            if (disconnectionInfo?.Type != DisconnectionType.Error) 
+                AttemptReconnection();
+
+            if (disconnectionInfo != null)
+                throw disconnectionInfo.Exception;
         }
 
         /// <summary>
@@ -417,8 +405,6 @@ namespace Supabase.Realtime
 
             if (disconnectionInfo?.Type != DisconnectionType.ByUser)
                 AttemptReconnection();
-
-            NotifySocketStateChange(SocketState.Close);
         }
 
         private void AttemptReconnection()

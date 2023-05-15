@@ -33,12 +33,9 @@ namespace RealtimeTests
         [TestInitialize]
         public async Task InitializeTest()
         {
-            var session = await Helpers.GetSession();
-            _restClient = Helpers.RestClient(session!.AccessToken!);
+            _restClient = Helpers.RestClient();
             _socketClient = Helpers.SocketClient();
-
             await _socketClient!.ConnectAsync();
-            _socketClient!.SetAuth(session.AccessToken!);
         }
 
         [TestCleanup]
@@ -128,8 +125,8 @@ namespace RealtimeTests
         {
             var tsc = new TaskCompletionSource<bool>();
 
-            var channel = _socketClient!.Channel("realtime", "public", "*");
-
+            var channel = _socketClient!.Channel("example");
+            channel.Register(new PostgresChangesOptions("public", "*"));
             channel.AddPostgresChangeHandler(PostgresChangesOptions.ListenType.Inserts, (_, changes) =>
             {
                 var model = changes.Model<Todo>();

@@ -310,7 +310,8 @@ public class RealtimeChannel : IRealtimeChannel
     public void AddPostgresChangeHandler(ListenType listenType,
         IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)
     {
-        _postgresChangesHandlers[listenType] ??= new List<IRealtimeChannel.PostgresChangesHandler>();
+        if (!_postgresChangesHandlers.ContainsKey(listenType))
+            _postgresChangesHandlers[listenType] = new List<IRealtimeChannel.PostgresChangesHandler>();
 
         if (!_postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
             _postgresChangesHandlers[listenType].Add(postgresChangeHandler);

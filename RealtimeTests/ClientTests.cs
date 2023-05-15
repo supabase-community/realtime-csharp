@@ -9,16 +9,12 @@ namespace RealtimeTests
 	public class ClientTests
 	{
 		private Supabase.Realtime.Client? socketClient;
-		private Session? session;
 
 		[TestInitialize]
 		public async Task InitializeTest()
 		{
-			session = await Helpers.GetSession();
 			socketClient = Helpers.SocketClient();
-
 			await socketClient!.ConnectAsync();
-			socketClient!.SetAuth(session!.AccessToken!);
 		}
 
 		[TestCleanup]
