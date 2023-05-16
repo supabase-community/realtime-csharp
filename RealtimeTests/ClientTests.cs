@@ -1,6 +1,9 @@
+using System;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supabase.Gotrue;
+using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 
 namespace RealtimeTests
@@ -13,6 +16,9 @@ namespace RealtimeTests
 		[TestInitialize]
 		public async Task InitializeTest()
 		{
+			Console.WriteLine();	
+			Console.WriteLine(Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult().AddressList[0]);
+
 			socketClient = Helpers.SocketClient();
 			await socketClient!.ConnectAsync();
 		}
@@ -27,37 +33,40 @@ namespace RealtimeTests
 		[TestMethod("Client: Join channels of format: {database}")]
 		public async Task ClientJoinsChannel_DB()
 		{
-			var channel = socketClient!.Channel("realtime", "*");
+			var channel = socketClient!.Channel(table: "todos");
 			await channel.Subscribe();
 
-			Assert.AreEqual("realtime:*", channel.Topic);
+			Assert.AreEqual("realtime:public:todos", channel.Topic);
 		}
 
-		[TestMethod("Client: Join channels of format: {database}:{schema}")]
+		[TestMethod("Client: Join channels of format: {database}:{schema}:*")]
 		public async Task ClientJoinsChannel_DB_Schema()
 		{
-			var channel = socketClient!.Channel(schema: "public");
+			var channel = socketClient!.Channel("realtime", "public", "*");
 			await channel.Subscribe();
 
-			Assert.AreEqual("realtime:public", channel.Topic);
+			Assert.AreEqual("realtime:public:*", channel.Topic);
 		}
 
 		[TestMethod("Client: Join channels of format: {database}:{schema}:{table}")]
 		public async Task ClientJoinsChannel_DB_Schema_Table()
 		{
 			var channel = socketClient!.Channel("realtime", "public", "users");
-			await channel.Subscribe();
+			await Assert.ThrowsExceptionAsync<RealtimeException>(() => channel.Subscribe());
 
-			Assert.AreEqual("realtime:public:users", channel.Topic);
+			var channel2 = socketClient!.Channel("realtime", "public", "todos");
+			await channel2.Subscribe();
+			
+			Assert.AreEqual("realtime:public:todos", channel2.Topic);
 		}
 
 		[TestMethod("Client: Join channels of format: {database}:{schema}:{table}:{col}=eq.{val}")]
 		public async Task ClientJoinsChannel_DB_Schema_Table_Query()
 		{
-			var channel = socketClient!.Channel("realtime", "public", "users", "id", "1");
+			var channel = socketClient!.Channel("realtime", "public", "todos", "id", "1");
 			await channel.Subscribe();
 
-			Assert.AreEqual("realtime:public:users:id=eq.1", channel.Topic);
+			Assert.AreEqual("realtime:public:todos:id=eq.1", channel.Topic);
 		}
 
 		[TestMethod("Client: Returns a single instance of a channel based on topic")]
@@ -91,7 +100,7 @@ namespace RealtimeTests
 		public async Task ClientSetsAuth()
 		{
 			var channel = socketClient!.Channel("realtime", "public", "todos");
-			var channel2 = socketClient!.Channel("realtime", "public", "users");
+			var channel2 = socketClient!.Channel("realtime", "public", "todos");
 
 			var token = @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.C8oVtF5DICct_4HcdSKt8pdrxBFMQOAnPpbiiUbaXAY";
 

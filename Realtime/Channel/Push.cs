@@ -183,7 +183,7 @@ namespace Supabase.Realtime.Channel
         /// <param name="messageResponse"></param>
         private void NotifyMessageReceived(SocketResponse messageResponse)
         {
-            foreach (var handler in _messageEventHandlers)
+            foreach (var handler in _messageEventHandlers.ToArray())
                 handler.Invoke(this, messageResponse);
         }
         
@@ -198,7 +198,4 @@ namespace Supabase.Realtime.Channel
         private void CancelTimeout() => _timer.Stop();
     }
 
-    public class PushTimeoutException : Exception
-    {
-    }
 }

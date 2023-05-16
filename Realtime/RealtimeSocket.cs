@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Supabase.Realtime.Exceptions;
 using Websocket.Client;
 using static Supabase.Realtime.Constants;
 
@@ -157,7 +158,7 @@ namespace Supabase.Realtime
         private void NotifySocketStateChange(SocketState newState)
         {
             if (!_socketEventHandlers.Any()) return;
-            
+
             foreach (var handler in _socketEventHandlers.ToArray())
                 handler.Invoke(this, newState);
         }
@@ -198,7 +199,7 @@ namespace Supabase.Realtime
         /// <param name="heartbeat"></param>
         private void NotifyMessageReceived(SocketResponse heartbeat)
         {
-            foreach (var handler in _messageEventHandlers)
+            foreach (var handler in _messageEventHandlers.ToArray())
                 handler.Invoke(this, heartbeat);
         }
 
@@ -234,7 +235,7 @@ namespace Supabase.Realtime
         /// <param name="heartbeat"></param>
         private void NotifyHeartbeatReceived(SocketResponse heartbeat)
         {
-            foreach (var handler in _heartbeatEventHandlers)
+            foreach (var handler in _heartbeatEventHandlers.ToArray())
                 handler.Invoke(this, heartbeat);
         }
 
@@ -243,7 +244,7 @@ namespace Supabase.Realtime
         /// </summary>
         public void ClearHeartbeatListeners() =>
             _heartbeatEventHandlers.Clear();
-        
+
 
         /// <summary>
         /// Pushes formatted data to the socket server.
@@ -352,47 +353,34 @@ namespace Supabase.Realtime
         }
 
         /// <summary>
-        /// Parses a recieved socket message into a non-generic type.
+        /// Parses a received socket message into a non-generic type.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
         private void OnConnectionMessage(object sender, ResponseMessage args)
         {
-            Task.Run(() =>
+            _options.Decode!(args.Text, decoded =>
             {
-                _options.Decode!(args.Text, decoded =>
+                _options.Logger("receive", args.Text, null);
+
+                // Send Separate heartbeat event
+                if (decoded!.Ref == _pendingHeartbeatRef)
                 {
-                    try
-                    {
-                        _options.Logger("receive", args.Text, null);
+                    NotifyHeartbeatReceived(decoded);
+                    return;
+                }
 
-                        // Send Separate heartbeat event
-                        if (decoded!.Ref == _pendingHeartbeatRef)
-                        {
-                            NotifyHeartbeatReceived(decoded);
-                            return;
-                        }
-
-                        if (decoded.Event != EventType.System)
-                        {
-                            decoded!.Json = args.Text;
-                            NotifyMessageReceived(decoded);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine($"{ex.Message}");
-                    }
-                });
+                decoded!.Json = args.Text;
+                NotifyMessageReceived(decoded);
             });
         }
 
         private void HandleSocketError(DisconnectionInfo? disconnectionInfo = null)
         {
-            if (disconnectionInfo?.Type != DisconnectionType.Error) 
+            if (disconnectionInfo?.Type != DisconnectionType.Error)
                 AttemptReconnection();
 
-            if (disconnectionInfo != null)
+            if (disconnectionInfo is { Exception: not RealtimeException })
                 throw disconnectionInfo.Exception;
         }
 

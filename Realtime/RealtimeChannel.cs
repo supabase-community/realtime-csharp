@@ -28,10 +28,29 @@ namespace Supabase.Realtime;
 /// </summary>
 public class RealtimeChannel : IRealtimeChannel
 {
+    /// <summary>
+    /// As to whether this Channel is Closed
+    /// </summary>
     public bool IsClosed => State == ChannelState.Closed;
+
+    /// <summary>
+    /// As to if this Channel has Errored
+    /// </summary>
     public bool IsErrored => State == ChannelState.Errored;
+
+    /// <summary>
+    /// As to if this Channel is currently Joined
+    /// </summary>
     public bool IsJoined => State == ChannelState.Joined;
+
+    /// <summary>
+    /// As to if this Channel is currently Joining
+    /// </summary>
     public bool IsJoining => State == ChannelState.Joining;
+
+    /// <summary>
+    /// As to if this channel is currently leaving
+    /// </summary>
     public bool IsLeaving => State == ChannelState.Leaving;
 
     /// <summary>
@@ -128,9 +147,11 @@ public class RealtimeChannel : IRealtimeChannel
     private readonly IRealtimeSocket _socket;
     private IRealtimePresence? _presence;
     private IRealtimeBroadcast? _broadcast;
+    private RealtimeException? _exception;
 
     private readonly List<IRealtimeChannel.StateChangedHandler> _stateChangedHandlers = new();
     private readonly List<IRealtimeChannel.MessageReceivedHandler> _messageReceivedHandlers = new();
+    private readonly List<IRealtimeChannel.ErrorEventHandler> _errorEventHandlers = new();
 
     private readonly Dictionary<ListenType, List<IRealtimeChannel.PostgresChangesHandler>> _postgresChangesHandlers =
         new();
@@ -262,7 +283,7 @@ public class RealtimeChannel : IRealtimeChannel
         else
             _rejoinTimer.Stop();
 
-        foreach (var handler in _stateChangedHandlers)
+        foreach (var handler in _stateChangedHandlers.ToArray())
             handler.Invoke(this, state);
     }
 
@@ -298,7 +319,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// <param name="message"></param>
     private void NotifyMessageReceived(SocketResponse message)
     {
-        foreach (var handler in _messageReceivedHandlers)
+        foreach (var handler in _messageReceivedHandlers.ToArray())
             handler.Invoke(this, message);
     }
 
@@ -337,6 +358,43 @@ public class RealtimeChannel : IRealtimeChannel
         _postgresChangesHandlers.Clear();
 
     /// <summary>
+    /// Adds an error event handler.
+    /// </summary>
+    /// <param name="handler"></param>
+    public void AddErrorHandler(IRealtimeChannel.ErrorEventHandler handler)
+    {
+        if (!_errorEventHandlers.Contains(handler))
+            _errorEventHandlers.Add(handler);
+    }
+
+    /// <summary>
+    /// Removes an error event handler
+    /// </summary>
+    /// <param name="handler"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    public void RemoveErrorHandler(IRealtimeChannel.ErrorEventHandler handler)
+    {
+        if (_errorEventHandlers.Contains(handler))
+            _errorEventHandlers.Remove(handler);
+    }
+
+    /// <summary>
+    /// Clears Error Event Handlers
+    /// </summary>
+    public void ClearErrorHandlers() =>
+        _errorEventHandlers.Clear();
+
+    private void NotifyErrorOccurred(RealtimeException exception)
+    {
+        _exception = exception;
+
+        NotifyStateChanged(ChannelState.Errored);
+
+        foreach (var handler in _errorEventHandlers)
+            handler.Invoke(this, exception);
+    }
+
+    /// <summary>
     /// Notifies listeners of a postgres change message being received.
     /// </summary>
     /// <param name="eventType"></param>
@@ -352,12 +410,14 @@ public class RealtimeChannel : IRealtimeChannel
         };
 
         // Invoke the wildcard listener (but only once)
-        if (listenType != ListenType.All)
-            foreach (var handler in _postgresChangesHandlers[ListenType.All])
+        if (listenType != ListenType.All &&
+            _postgresChangesHandlers.TryGetValue(ListenType.All, out var changesHandler))
+            foreach (var handler in changesHandler.ToArray())
                 handler.Invoke(this, response);
 
-        foreach (var handler in _postgresChangesHandlers[listenType])
-            handler.Invoke(this, response);
+        if (_postgresChangesHandlers.TryGetValue(listenType, out var postgresChangesHandler))
+            foreach (var handler in postgresChangesHandler.ToArray())
+                handler.Invoke(this, response);
     }
 
     /// <summary>
@@ -411,8 +471,7 @@ public class RealtimeChannel : IRealtimeChannel
                     IsSubscribed = false;
                     sender.RemoveStateChangedHandler(channelCallback!);
                     JoinPush.OnTimeout -= joinPushTimeoutCallback;
-
-                    tsc.TrySetException(new Exception("Error occurred connecting to channel. Check logs."));
+                    tsc.TrySetException(_exception);
                     break;
             }
         };
@@ -423,7 +482,7 @@ public class RealtimeChannel : IRealtimeChannel
             RemoveStateChangedHandler(channelCallback);
             JoinPush.OnTimeout -= joinPushTimeoutCallback;
 
-            tsc.TrySetException(new RealtimeException("Push Timeout")
+            NotifyErrorOccurred(new RealtimeException("Push Timeout")
             {
                 Reason = FailureHint.Reason.PushTimeout
             });
@@ -468,8 +527,13 @@ public class RealtimeChannel : IRealtimeChannel
     public Push Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DefaultTimeout)
     {
         if (!_hasJoinedOnce)
-            throw new Exception(
-                $"Tried to push '{eventName}' to '{Topic}' before joining. Use `Channel.Subscribe()` before pushing events");
+        {
+            throw new RealtimeException(
+                $"Tried to push '{eventName}' to '{Topic}' before joining. Use `Channel.Subscribe()` before pushing events")
+            {
+                Reason = FailureHint.Reason.ChannelNotOpen
+            };
+        }
 
         var push = new Push(_socket, this, eventName, type, payload, timeoutMs);
         Enqueue(push);
@@ -481,6 +545,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Sends an arbitrary payload with a given payload type (<see cref="ChannelEventName"/>)
     /// </summary>
     /// <param name="eventName"></param>
+    /// <param name="type"></param>
     /// <param name="payload"></param>
     /// <param name="timeoutMs"></param>
     public Task<bool> Send(ChannelEventName eventName, string? type, object payload, int timeoutMs = DefaultTimeout)
@@ -587,8 +652,7 @@ public class RealtimeChannel : IRealtimeChannel
         NotifyStateChanged(ChannelState.Joining);
 
         // Remove handler if exists
-        if (JoinPush != null)
-            JoinPush.RemoveMessageReceivedListener(HandleJoinResponse);
+        JoinPush?.RemoveMessageReceivedListener(HandleJoinResponse);
 
         JoinPush = GenerateJoinPush();
         JoinPush.AddMessageReceivedListener(HandleJoinResponse);
@@ -604,14 +668,13 @@ public class RealtimeChannel : IRealtimeChannel
     {
         if (message._event != ChannelEventReply) return;
 
-        var obj = JsonConvert.DeserializeObject<PheonixResponse>(
-            JsonConvert.SerializeObject(message.Payload, Options.SerializerSettings),
+        var obj = JsonConvert.DeserializeObject<SocketResponse<PhoenixResponse>>(message.Json!,
             Options.SerializerSettings);
+        if (obj?.Payload == null) return;
 
-        if (obj == null) return;
-
-        switch (obj.Status)
+        switch (obj.Payload.Status)
         {
+            // A response was received from the channel
             case PhoenixStatusOk:
                 // Disable Rejoin Timeout
                 _rejoinTimer.Stop();
@@ -620,13 +683,16 @@ public class RealtimeChannel : IRealtimeChannel
                 var authPush = GenerateAuthPush();
                 authPush?.Send();
 
-                NotifyStateChanged(ChannelState.Joined);
+                // If postgres_changes options are specified, we need to wait for a system event
+                // that registers a successful subscription (see HandleSocketMessage.System)
+                if (PostgresChangesOptions.Count == 0)
+                    NotifyStateChanged(ChannelState.Joined);
                 break;
-            case PheonixStatusError:
+            case PhoenixStatusError:
                 _rejoinTimer.Stop();
                 _isRejoining = false;
 
-                NotifyStateChanged(ChannelState.Errored);
+                NotifyErrorOccurred(new RealtimeException(message.Json) { Reason = FailureHint.Reason.JoinFailure });
                 break;
         }
     }
@@ -646,6 +712,31 @@ public class RealtimeChannel : IRealtimeChannel
 
         switch (message.Event)
         {
+            // If a channel is subscribed to postgres changes then we have a special case to account for:
+            // A system event is emitted after the normal join ACK that says:
+            // {"event":"system","payload":{"channel":"public:todos","extension":"postgres_changes","message":"Subscribed to PostgreSQL","status":"ok"}}
+            // This switch case emits the join event after this has been received.
+            case EventType.System:
+                if (!IsJoining) return;
+
+                var obj = JsonConvert.DeserializeObject<SocketResponse<PhoenixResponse>>(message.Json!,
+                    Options.SerializerSettings);
+
+                if (obj?.Payload == null) return;
+
+                switch (obj.Payload.Status)
+                {
+                    case PhoenixStatusOk:
+                        NotifyStateChanged(ChannelState.Joined);
+                        break;
+                    case PhoenixStatusError:
+                        NotifyErrorOccurred(new RealtimeException(message.Json)
+                            { Reason = FailureHint.Reason.JoinFailure });
+                        break;
+                }
+
+                break;
+            // Handles Insert, Update, Delete
             case EventType.PostgresChanges:
                 var deserialized =
                     JsonConvert.DeserializeObject<PostgresChangesResponse>(message.Json!,
@@ -654,7 +745,7 @@ public class RealtimeChannel : IRealtimeChannel
                 if (deserialized?.Payload?.Data == null) return;
 
                 deserialized.Json = message.Json;
-                deserialized.serializerSettings = Options.SerializerSettings;
+                deserialized.SerializerSettings = Options.SerializerSettings;
 
                 // Invoke '*' listener
                 NotifyPostgresChanges(deserialized.Payload!.Data!.Type, deserialized);

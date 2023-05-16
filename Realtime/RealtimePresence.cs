@@ -55,7 +55,8 @@ namespace Supabase.Realtime
         public void AddPresenceEventHandler(IRealtimePresence.EventType eventType,
             IRealtimePresence.PresenceEventHandler presenceEventHandler)
         {
-            _presenceEventListeners[eventType] ??= new List<IRealtimePresence.PresenceEventHandler>();
+            if (!_presenceEventListeners.ContainsKey(eventType))
+                _presenceEventListeners[eventType] = new List<IRealtimePresence.PresenceEventHandler>();
 
             if (!_presenceEventListeners[eventType].Contains(presenceEventHandler))
                 _presenceEventListeners[eventType].Add(presenceEventHandler);
@@ -92,7 +93,9 @@ namespace Supabase.Realtime
         /// <param name="eventType"></param>
         private void NotifyPresenceEventHandlers(IRealtimePresence.EventType eventType)
         {
-            foreach (var handler in _presenceEventListeners[eventType])
+            if (!_presenceEventListeners.ContainsKey(eventType)) return;
+            
+            foreach (var handler in _presenceEventListeners[eventType].ToArray())
                 handler.Invoke(this, eventType);
         }
 

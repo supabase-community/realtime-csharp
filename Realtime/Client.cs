@@ -213,7 +213,7 @@ namespace Supabase.Realtime
         /// <param name="stateChanged"></param>
         private void NotifySocketStateChange(SocketState stateChanged)
         {
-            foreach (var handler in _socketEventHandlers)
+            foreach (var handler in _socketEventHandlers.ToArray())
                 handler.Invoke(this, stateChanged);
         }
 
@@ -316,12 +316,12 @@ namespace Supabase.Realtime
         /// Adds a RealtimeChannel subscription - if a subscription exists with the same signature, the existing subscription will be returned.
         /// </summary>
         /// <param name="database">Database to connect to, with Supabase this will likely be `realtime`.</param>
-        /// <param name="schema">Postgres schema, for example, `public`</param>
+        /// <param name="schema">Postgres schema, usually `public`</param>
         /// <param name="table">Postgres table name</param>
         /// <param name="column">Postgres column name</param>
         /// <param name="value">Value the specified column should have</param>
         /// <returns></returns>
-        public RealtimeChannel Channel(string database = "realtime", string schema = "public", string? table = null,
+        public RealtimeChannel Channel(string database = "realtime", string schema = "public", string table = "*",
             string? column = null, string? value = null, Dictionary<string, string>? parameters = null)
         {
             var key = Utils.GenerateChannelTopic(database, schema, table, column, value);
@@ -390,9 +390,7 @@ namespace Supabase.Realtime
         private void HandleSocketMessageReceived(IRealtimeSocket sender, SocketResponse message)
         {
             if (message.Topic != null && _subscriptions.TryGetValue(message.Topic, out var subscription))
-            {
                 subscription.HandleSocketMessage(message);
-            }
         }
 
         private void HandleSocketStateChanged(IRealtimeSocket sender, SocketState state)

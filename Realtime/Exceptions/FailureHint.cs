@@ -5,7 +5,9 @@ public class FailureHint
     public enum Reason
     {
         Unknown,
-        PushTimeout
+        PushTimeout,
+        ChannelNotOpen,
+        JoinFailure
     }
     
     //public static Reason DetectReason(Socket gte) {}

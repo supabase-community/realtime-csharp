@@ -6,6 +6,7 @@ using Supabase.Realtime.Presence;
 using Supabase.Realtime.Socket;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 using static Supabase.Realtime.PostgresChanges.PostgresChangesOptions;
 
@@ -18,6 +19,9 @@ namespace Supabase.Realtime.Interfaces
         delegate void StateChangedHandler(IRealtimeChannel sender, ChannelState state);
 
         delegate void PostgresChangesHandler(IRealtimeChannel sender, PostgresChangesResponse change);
+        
+        delegate void ErrorEventHandler(IRealtimeChannel sender, RealtimeException exception);
+
 
         bool HasJoinedOnce { get; }
         bool IsClosed { get; }
@@ -49,6 +53,12 @@ namespace Supabase.Realtime.Interfaces
         void RemovePostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
 
         void ClearPostgresChangeHandlers();
+        
+        void AddErrorHandler(ErrorEventHandler handler);
+
+        void RemoveErrorHandler(ErrorEventHandler handler);
+
+        void ClearErrorHandlers();
 
         IRealtimeBroadcast? Broadcast();
         IRealtimePresence? Presence();

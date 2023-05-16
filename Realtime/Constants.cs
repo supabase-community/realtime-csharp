@@ -72,12 +72,12 @@ namespace Supabase.Realtime
         /// <summary>
         /// Phoenix Socket Server Event: CLOSE
         /// </summary>
-        public static string CHANNEL_EVENT_CLOSE = "phx_close";
+        public static string ChannelEventClose = "phx_close";
 
         /// <summary>
         /// Phoenix Socket Server Event: ERROR
         /// </summary>
-        public static string CHANNEL_EVENT_ERROR = "phx_error";
+        public static string ChannelEventError = "phx_error";
 
         /// <summary>
         /// Phoenix Socket Server Event: JOIN
@@ -90,12 +90,44 @@ namespace Supabase.Realtime
         public const string ChannelEventReply = "phx_reply";
 
         /// <summary>
+        /// Phoenix Socket Server Event: SYSTEM
+        /// </summary>
+        public const string ChannelEventSystem = "system";
+
+        /// <summary>
         /// Phoenix Socket Server Event: LEAVE
         /// </summary>
         public const string ChannelEventLeave = "phx_leave";
 
+        /// <summary>
+        /// Phoenix Server Event: OK
+        /// </summary>
         public const string PhoenixStatusOk = "ok";
-        public const string PheonixStatusError = "error";
+
+        /// <summary>
+        /// Phoenix Server Event: POSTGRES_CHANGES
+        /// </summary>
+        public const string ChannelEventPostgresChanges = "postgres_changes";
+
+        /// <summary>
+        /// Phoenix Server Event: BROADCAST
+        /// </summary>
+        public const string ChannelEventBroadcast = "broadcast";
+
+        /// <summary>
+        /// Phoenix Server Event: PRESENCE_STATE
+        /// </summary>
+        public const string ChannelEventPresenceState = "presence_state";
+
+        /// <summary>
+        /// Phoenix Server Event: PRESENCE_DIFF
+        /// </summary>
+        public const string ChannelEventPresenceDiff = "presence_diff";
+        
+        /// <summary>
+        /// Phoenix Server Event: ERROR
+        /// </summary>
+        public const string PhoenixStatusError = "error";
 
         public const string TransportWebsocket = "websocket";
 

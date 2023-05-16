@@ -79,7 +79,7 @@ namespace Supabase.Realtime
 
         private void NotifyBroadcastEventHandlers()
         {
-            foreach (var handler in _broadcastEventHandlers)
+            foreach (var handler in _broadcastEventHandlers.ToArray())
                 handler.Invoke(this, Current());
         }
 

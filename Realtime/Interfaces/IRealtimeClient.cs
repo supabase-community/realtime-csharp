@@ -27,7 +27,7 @@ namespace Supabase.Realtime.Interfaces
 
         TChannel Channel(string channelName);
 
-        TChannel Channel(string database = "realtime", string schema = "public", string? table = null,
+        TChannel Channel(string database = "realtime", string schema = "public", string table = "*",
             string? column = null, string? value = null, Dictionary<string, string>? parameters = null);
 
         IRealtimeClient<TSocket, TChannel> Connect(Action<IRealtimeClient<TSocket, TChannel>>? callback = null);

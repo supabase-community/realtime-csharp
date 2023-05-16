@@ -35,6 +35,7 @@ create table public.todos
 ) tablespace pg_default;
 
 ALTER publication supabase_realtime add table public.todos;
+alter table public.todos replica identity full;
 
 -- CHANNELS
 CREATE TABLE public.channels

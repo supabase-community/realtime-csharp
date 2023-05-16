@@ -25,7 +25,7 @@ namespace Supabase.Realtime.PostgresChanges
 		{
 			if (Json != null && Payload != null && Payload.Data?.Record != null)
 			{
-				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, serializerSettings);
+				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, SerializerSettings);
 				return response?.Payload?.Data?.Record;
 			}
 			else
@@ -45,7 +45,7 @@ namespace Supabase.Realtime.PostgresChanges
 		{
 			if (Json != null && Payload != null && Payload.Data?.OldRecord != null)
 			{
-				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, serializerSettings);
+				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, SerializerSettings);
 				return response?.Payload?.Data?.OldRecord;
 			}
 			else
