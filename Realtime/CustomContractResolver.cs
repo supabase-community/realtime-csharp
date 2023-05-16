@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Postgrest.Attributes;
 using Supabase.Realtime.Converters;
-using Supabase.Realtime.Models;
 
 namespace Supabase.Realtime
 {
@@ -28,17 +27,17 @@ namespace Supabase.Realtime
 			{
 				prop.Converter = new StringArrayConverter();
 			}
-			else if (prop.PropertyType == typeof(DateTime) || Nullable.GetUnderlyingType(prop.PropertyType) == typeof(DateTime))
+			else if (prop.PropertyType == typeof(DateTime) || Nullable.GetUnderlyingType(prop.PropertyType!) == typeof(DateTime))
 			{
 				prop.Converter = new DateTimeConverter();
 			}
-			else if (prop.PropertyType == typeof(List<DateTime>) || Nullable.GetUnderlyingType(prop.PropertyType) == typeof(List<DateTime>))
+			else if (prop.PropertyType == typeof(List<DateTime>) || Nullable.GetUnderlyingType(prop.PropertyType!) == typeof(List<DateTime>))
 			{
 				prop.Converter = new DateTimeConverter();
 			}
 
 			// Dynamically set the name of the key we are serializing/deserializing from the model.
-			if (member.CustomAttributes.Count() > 0)
+			if (member.CustomAttributes.Any())
 			{
 				ColumnAttribute columnAtt = member.GetCustomAttribute<ColumnAttribute>();
 
@@ -54,7 +53,7 @@ namespace Supabase.Realtime
 				if (primaryKeyAtt != null)
 				{
 					prop.PropertyName = primaryKeyAtt.ColumnName;
-					prop.ShouldSerialize = instance => primaryKeyAtt.ShouldInsert;
+					prop.ShouldSerialize = _ => primaryKeyAtt.ShouldInsert;
 					return prop;
 				}
 			}

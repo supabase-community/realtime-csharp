@@ -1,55 +1,35 @@
-﻿using Supabase;
-using Supabase.Gotrue;
+﻿using Supabase.Gotrue;
 using Supabase.Realtime;
 using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 using Client = Supabase.Realtime.Client;
 
 namespace RealtimeTests
 {
-	internal static class Helpers
-	{
-		private static string supabasePublicKey => Environment.GetEnvironmentVariable("SUPABASE_PUBLIC_KEY");
-		private static string supabaseUrl => Environment.GetEnvironmentVariable("SUPABASE_URL");
+    internal static class Helpers
+    {
+        private const string ApiKey =
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIiLCJpYXQiOjE2NzEyMzc4NzMsImV4cCI6MjAwMjc3Mzk5MywiYXVkIjoiIiwic3ViIjoiIiwicm9sZSI6ImF1dGhlbnRpY2F0ZWQifQ.qoYdljDZ9rjfs1DKj5_OqMweNtj7yk20LZKlGNLpUO8";
 
-		private static string supabaseUsername => Environment.GetEnvironmentVariable("SUPABASE_USERNAME");
-		private static string supabasePassword => Environment.GetEnvironmentVariable("SUPABASE_PASSWORD");
+        private const string SocketEndpoint = "ws://realtime-dev.localhost:4000/socket";
+        private const string RestEndpoint = "http://localhost:3000";
 
-		private static string socketEndpoint = string.Format("{0}/realtime/v1", supabaseUrl).Replace("https", "wss");
-		private static string restEndpoint = string.Format("{0}/rest/v1", supabaseUrl);
-		private static string authEndpoint = string.Format("{0}/auth/v1", supabaseUrl);
+        public static Postgrest.Client RestClient() => new(RestEndpoint, new Postgrest.ClientOptions());
 
-		public static Supabase.Gotrue.Client AuthClient => new Supabase.Gotrue.Client(new Supabase.Gotrue.ClientOptions<Supabase.Gotrue.Session>
-		{
-			Url = authEndpoint,
-			Headers = new Dictionary<string, string> { { "apiKey", supabasePublicKey } }
-		});
-
-		public static Postgrest.Client RestClient(string userToken) => new Postgrest.Client(restEndpoint, new Postgrest.ClientOptions
-		{
-			Headers = new Dictionary<string, string>
-			{
-				{ "Authorization", $"Bearer {userToken}" },
-				{ "apiKey", supabasePublicKey }
-			}
-		});
-
-		public static Task<Session> GetSession() => AuthClient.SignInWithPassword(supabaseUsername, supabasePassword);
-
-		public static Supabase.Realtime.Client SocketClient()
-		{
-			var client = new Supabase.Realtime.Client(socketEndpoint, new ClientOptions
+        public static Client SocketClient()
+        {
+            var client = new Client(SocketEndpoint, new ClientOptions
             {
-				Parameters = new SocketOptionsParameters
+                Parameters = new SocketOptionsParameters
                 {
-					ApiKey = supabasePublicKey
+                    ApiKey = ApiKey
                 }
-			});
+            });
 
-			return client;
-		}
-	}
+            return client;
+        }
+    }
 }

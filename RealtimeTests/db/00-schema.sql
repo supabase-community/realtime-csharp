@@ -1,33 +1,14 @@
-﻿ALTER SYSTEM SET wal_level='logical';
-ALTER SYSTEM SET max_wal_senders='10';
-ALTER SYSTEM SET max_replication_slots='10';
+﻿create role anon nologin noinherit;
+create role authenticated nologin noinherit;
+create role service_role nologin noinherit bypassrls;
 
--- Tables for testing
+grant usage on schema public to anon, authenticated, service_role;
 
-CREATE TYPE public.user_status AS ENUM ('ACTIVE', 'INACTIVE');
-CREATE TABLE public.users (
-  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name text
-);
-INSERT INTO 
-    public.users (name) 
-VALUES 
-    ('Joe Bloggs'),
-    ('Jane Doe');
+alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
+alter default privileges in schema public grant all on functions to anon, authenticated, service_role;
+alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
 
-CREATE TABLE public.todos (
-  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  details text,
-  numbers int[],
-  user_id bigint REFERENCES users NOT NULL,
-  inserted_at timestamp without time zone DEFAULT timezone('utc'::text, now()) NOT NULL
-);
+create schema if not exists _realtime;
+create schema if not exists realtime;
 
-INSERT INTO 
-    public.todos (details, user_id)
-VALUES 
-    ('Star the repo', 1),
-    ('Watch the releases', 2);
-
--- Create the Replication publication 
-CREATE PUBLICATION supabase_realtime FOR ALL TABLES;
+create publication supabase_realtime with (publish = 'insert, update, delete');

@@ -24,6 +24,9 @@
 		<LangVersion>latest</LangVersion>
 		<WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
 	</PropertyGroup>
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Version)' == '' ">
 		<VersionPrefix Condition=" '$(VersionPrefix)' == '' ">5.0.5</VersionPrefix>
 		<VersionSuffix Condition=" '$(VersionSuffix)' == '' ">

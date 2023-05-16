@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Postgrest.Models;
 using Supabase.Realtime.Socket;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Supabase.Realtime.PostgresChanges
 {
@@ -28,7 +25,7 @@ namespace Supabase.Realtime.PostgresChanges
 		{
 			if (Json != null && Payload != null && Payload.Data?.Record != null)
 			{
-				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, serializerSettings);
+				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, SerializerSettings);
 				return response?.Payload?.Data?.Record;
 			}
 			else
@@ -48,7 +45,7 @@ namespace Supabase.Realtime.PostgresChanges
 		{
 			if (Json != null && Payload != null && Payload.Data?.OldRecord != null)
 			{
-				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, serializerSettings);
+				var response = JsonConvert.DeserializeObject<PostgresChangesResponse<TModel>>(Json, SerializerSettings);
 				return response?.Payload?.Data?.OldRecord;
 			}
 			else

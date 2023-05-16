@@ -2,7 +2,7 @@
 
 namespace Supabase.Realtime.Socket.Responses
 {
-    public class PheonixResponse
+    public class PhoenixResponse
     {
         [JsonProperty("response")]
         public object? Response;

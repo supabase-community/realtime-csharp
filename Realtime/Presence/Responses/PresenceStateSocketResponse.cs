@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Supabase.Realtime.Models;
 using Supabase.Realtime.Socket;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Supabase.Realtime.Presence.Responses
 {

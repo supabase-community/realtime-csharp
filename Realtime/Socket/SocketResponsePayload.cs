@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Postgrest.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Socket
