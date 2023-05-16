@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum Constants.SocketStates
+    <title>Delegate IRealtimeClient&lt;TSocket, TChannel&gt;.SocketEventHandler
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum Constants.SocketStates
+    <meta name="title" content="Delegate IRealtimeClient&lt;TSocket, TChannel&gt;.SocketEventHandler
    ">
     <meta name="generator" content="docfx 2.56.7.0">
     
@@ -68,47 +68,41 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.Constants.SocketStates">
+            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketEventHandler">
   
   
-  <h1 id="Supabase_Realtime_Constants_SocketStates" data-uid="Supabase.Realtime.Constants.SocketStates" class="text-break">Enum Constants.SocketStates
+  <h1 id="Supabase_Realtime_Interfaces_IRealtimeClient_2_SocketEventHandler" data-uid="Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketEventHandler" class="text-break">Delegate IRealtimeClient&lt;TSocket, TChannel&gt;.SocketEventHandler
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.html">Supabase.Realtime</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.Interfaces.html">Supabase.Realtime.Interfaces</a></h6>
   <h6><strong>Assembly</strong>: Realtime.dll</h6>
-  <h5 id="Supabase_Realtime_Constants_SocketStates_syntax">Syntax</h5>
+  <h5 id="Supabase_Realtime_Interfaces_IRealtimeClient_2_SocketEventHandler_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum SocketStates : int</code></pre>
+    <pre><code class="lang-csharp hljs">public delegate void SocketEventHandler(IRealtimeClient&lt;TSocket, TChannel&gt; sender, Constants.SocketState state);</code></pre>
   </div>
-  <h3 id="fields">Fields
-  </h3>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
+        <th>Type</th>
         <th>Name</th>
         <th>Description</th>
       </tr>
-    <thead>
+    </thead>
     <tbody>
       <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_closed">closed</td>
+        <td><a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeClient-2.html">IRealtimeClient</a>&lt;TSocket, TChannel&gt;</td>
+        <td><span class="parametername">sender</span></td>
         <td></td>
       </tr>
       <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_closing">closing</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_connecting">connecting</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td id="Supabase_Realtime_Constants_SocketStates_open">open</td>
+        <td><a class="xref" href="Supabase.Realtime.Constants.SocketState.html">Constants.SocketState</a></td>
+        <td><span class="parametername">state</span></td>
         <td></td>
       </tr>
     </tbody>
-  </thead></thead></table>
+  </table>
 </article>
           </div>
           
@@ -117,10 +111,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/new/release/5.0.5/apiSpec/new?filename=Supabase_Realtime_Constants_SocketStates.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Constants.SocketStates%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimeClient_2_SocketEventHandler.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimeClient%602.SocketEventHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/blob/release/5.0.5/Realtime/Constants.cs/#L7" class="contribution-link">View Source</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimeClient.cs/#L20" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
