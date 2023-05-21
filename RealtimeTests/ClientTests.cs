@@ -2,7 +2,6 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Supabase.Gotrue;
 using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 

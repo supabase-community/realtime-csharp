@@ -1,10 +1,6 @@
-﻿using Supabase.Gotrue;
+﻿using System.Diagnostics;
 using Supabase.Realtime;
 using Supabase.Realtime.Socket;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
 using Client = Supabase.Realtime.Client;
 
 namespace RealtimeTests
@@ -27,6 +23,14 @@ namespace RealtimeTests
                 {
                     ApiKey = ApiKey
                 }
+            });
+
+            client.AddDebugHandler((sender, message, exception) =>
+            {
+                Debug.WriteLine(message);
+
+                if (exception != null)
+                    throw exception;
             });
 
             return client;

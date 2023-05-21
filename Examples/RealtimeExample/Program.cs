@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Supabase.Realtime.Interfaces;
+using Supabase.Realtime.PostgresChanges;
+using Supabase.Realtime.Socket;
 using static Supabase.Realtime.Constants;
 using static Supabase.Realtime.PostgresChanges.PostgresChangesOptions;
 
@@ -13,50 +15,52 @@ namespace RealtimeExample
 {
     class Program
     {
+        private const string ApiKey =
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIiLCJpYXQiOjE2NzEyMzc4NzMsImV4cCI6MjAwMjc3Mzk5MywiYXVkIjoiIiwic3ViIjoiIiwicm9sZSI6ImF1dGhlbnRpY2F0ZWQifQ.qoYdljDZ9rjfs1DKj5_OqMweNtj7yk20LZKlGNLpUO8";
+
+        private const string SocketEndpoint = "ws://realtime-dev.localhost:4000/socket";
+
         static async Task Main(string[] args)
         {
             // Connect to db and web socket server
             var postgrestClient = new Postgrest.Client("http://localhost:3000");
-            var realtimeClient = new Client("ws://localhost:4000/socket");
+            var realtimeClient = new Client(SocketEndpoint, new ClientOptions
+            {
+                Parameters = new SocketOptionsParameters
+                {
+                    ApiKey = ApiKey
+                }
+            });
 
+            realtimeClient.AddDebugHandler((sender, message, exception) => Console.WriteLine(message));
             realtimeClient.AddStateChangedListener(SocketEventHandler);
 
             await realtimeClient.ConnectAsync();
 
             // Subscribe to a channel and events
-            var channelUsers = realtimeClient.Channel("realtime", "public", "users");
-            channelUsers.AddPostgresChangeHandler(ListenType.Inserts,
-                (_, change) => { Console.WriteLine($"New item inserted: {change.Model<User>()}"); });
-            channelUsers.AddPostgresChangeHandler(ListenType.Updates,
-                (_, change) => { Console.WriteLine($"Item Updated: {change.Model<User>()}"); });
-            channelUsers.AddPostgresChangeHandler(ListenType.Deletes,
-                (_, change) => { Console.WriteLine($"Item Deleted"); });
-
-            Console.WriteLine("Subscribing to users channel");
-            await channelUsers.Subscribe();
-
-            //Subscribing to another channel
             var channelTodos = realtimeClient.Channel("realtime", "public", "todos");
-            
-            channelTodos.AddStateChangedHandler((_, state) =>
-            {
-                Console.WriteLine($"Channel todos {state}!!");
-            });
-            Console.WriteLine("Subscribing to todos channel");
+            channelTodos.AddPostgresChangeHandler(ListenType.Inserts, PostgresInsertedHandler);
+            channelTodos.AddPostgresChangeHandler(ListenType.Updates, PostgresUpdatedHandler);
+            channelTodos.AddPostgresChangeHandler(ListenType.Deletes, PostgresDeletedHandler);
+
             await channelTodos.Subscribe();
 
-            //Unsubscribing from channelTodos to trigger the OnClose event
-            channelTodos.Unsubscribe();
-
-            Console.WriteLine($"Users channel state after unsubscribing from todos channel: {channelUsers.State}");
-
-            var response = await postgrestClient.Table<User>().Insert(new User { Name = "exampleUser" });
-            var user = response.Models.FirstOrDefault();
-            user.Name = "exampleUser2.0";
-            await user.Update<User>();
-            await user.Delete<User>();
-
             Console.ReadKey();
+        }
+
+        private static void PostgresDeletedHandler(IRealtimeChannel _, PostgresChangesResponse change)
+        {
+            Console.WriteLine($"Item Deleted");
+        }
+
+        private static void PostgresUpdatedHandler(IRealtimeChannel _, PostgresChangesResponse change)
+        {
+            Console.WriteLine($"Item Updated: {change.Model<User>()}");
+        }
+
+        private static void PostgresInsertedHandler(IRealtimeChannel _, PostgresChangesResponse change)
+        {
+            Console.WriteLine($"New item inserted: {change.Model<User>()}");
         }
 
         private static void SocketEventHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel> sender,

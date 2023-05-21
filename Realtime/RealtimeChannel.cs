@@ -15,6 +15,7 @@ using Supabase.Realtime.Socket;
 using Supabase.Realtime.Socket.Responses;
 using static Supabase.Realtime.Constants;
 using static Supabase.Realtime.PostgresChanges.PostgresChangesOptions;
+using static Supabase.Realtime.Interfaces.IRealtimeChannel;
 using Timer = System.Timers.Timer;
 
 // ReSharper disable InvalidXmlDocComment
@@ -149,11 +150,11 @@ public class RealtimeChannel : IRealtimeChannel
     private IRealtimeBroadcast? _broadcast;
     private RealtimeException? _exception;
 
-    private readonly List<IRealtimeChannel.StateChangedHandler> _stateChangedHandlers = new();
-    private readonly List<IRealtimeChannel.MessageReceivedHandler> _messageReceivedHandlers = new();
-    private readonly List<IRealtimeChannel.ErrorEventHandler> _errorEventHandlers = new();
+    private readonly List<StateChangedHandler> _stateChangedHandlers = new();
+    private readonly List<MessageReceivedHandler> _messageReceivedHandlers = new();
+    private readonly List<ErrorEventHandler> _errorEventHandlers = new();
 
-    private readonly Dictionary<ListenType, List<IRealtimeChannel.PostgresChangesHandler>> _postgresChangesHandlers =
+    private readonly Dictionary<ListenType, List<PostgresChangesHandler>> _postgresChangesHandlers =
         new();
 
     private bool CanPush => IsJoined && _socket.IsConnected;
@@ -246,7 +247,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Registers a state changed listener relative to this channel. Called when channel state changes.
     /// </summary>
     /// <param name="stateChangedHandler"></param>
-    public void AddStateChangedHandler(IRealtimeChannel.StateChangedHandler stateChangedHandler)
+    public void AddStateChangedHandler(StateChangedHandler stateChangedHandler)
     {
         if (!_stateChangedHandlers.Contains(stateChangedHandler))
             _stateChangedHandlers.Add(stateChangedHandler);
@@ -256,7 +257,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Removes a channel state changed listener
     /// </summary>
     /// <param name="stateChangedHandler"></param>
-    public void RemoveStateChangedHandler(IRealtimeChannel.StateChangedHandler stateChangedHandler)
+    public void RemoveStateChangedHandler(StateChangedHandler stateChangedHandler)
     {
         if (_stateChangedHandlers.Contains(stateChangedHandler))
             _stateChangedHandlers.Remove(stateChangedHandler);
@@ -291,7 +292,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Registers a message received listener, called when a socket message is received for this channel.
     /// </summary>
     /// <param name="messageReceivedHandler"></param>
-    public void AddMessageReceivedHandler(IRealtimeChannel.MessageReceivedHandler messageReceivedHandler)
+    public void AddMessageReceivedHandler(MessageReceivedHandler messageReceivedHandler)
     {
         if (!_messageReceivedHandlers.Contains(messageReceivedHandler))
             _messageReceivedHandlers.Add(messageReceivedHandler);
@@ -301,7 +302,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Removes a message received listener.
     /// </summary>
     /// <param name="messageReceivedHandler"></param>
-    public void RemoveMessageReceivedHandler(IRealtimeChannel.MessageReceivedHandler messageReceivedHandler)
+    public void RemoveMessageReceivedHandler(MessageReceivedHandler messageReceivedHandler)
     {
         if (_messageReceivedHandlers.Contains(messageReceivedHandler))
             _messageReceivedHandlers.Remove(messageReceivedHandler);
@@ -328,11 +329,10 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <param name="listenType">The type of event this callback should process.</param>
     /// <param name="postgresChangeHandler"></param>
-    public void AddPostgresChangeHandler(ListenType listenType,
-        IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)
+    public void AddPostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
         if (!_postgresChangesHandlers.ContainsKey(listenType))
-            _postgresChangesHandlers[listenType] = new List<IRealtimeChannel.PostgresChangesHandler>();
+            _postgresChangesHandlers[listenType] = new List<PostgresChangesHandler>();
 
         if (!_postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
             _postgresChangesHandlers[listenType].Add(postgresChangeHandler);
@@ -343,8 +343,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <param name="listenType">The type of event this callback was registered to process.</param>
     /// <param name="postgresChangeHandler"></param>
-    public void RemovePostgresChangeHandler(ListenType listenType,
-        IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)
+    public void RemovePostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
         if (_postgresChangesHandlers.ContainsKey(listenType) &&
             _postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
@@ -361,7 +360,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Adds an error event handler.
     /// </summary>
     /// <param name="handler"></param>
-    public void AddErrorHandler(IRealtimeChannel.ErrorEventHandler handler)
+    public void AddErrorHandler(ErrorEventHandler handler)
     {
         if (!_errorEventHandlers.Contains(handler))
             _errorEventHandlers.Add(handler);
@@ -372,7 +371,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <param name="handler"></param>
     /// <exception cref="NotImplementedException"></exception>
-    public void RemoveErrorHandler(IRealtimeChannel.ErrorEventHandler handler)
+    public void RemoveErrorHandler(ErrorEventHandler handler)
     {
         if (_errorEventHandlers.Contains(handler))
             _errorEventHandlers.Remove(handler);
@@ -422,6 +421,8 @@ public class RealtimeChannel : IRealtimeChannel
 
     /// <summary>
     /// Registers postgres_changes options, can be called multiple times.
+    ///
+    /// Should be paired with <see cref="AddPostgresChangeHandler"/>
     /// </summary>
     /// <param name="postgresChangesOptions"></param>
     /// <returns></returns>
@@ -443,7 +444,7 @@ public class RealtimeChannel : IRealtimeChannel
             return Task.FromResult(this as IRealtimeChannel);
 
         JoinPush = GenerateJoinPush();
-        IRealtimeChannel.StateChangedHandler? channelCallback = null;
+        StateChangedHandler? channelCallback = null;
         EventHandler? joinPushTimeoutCallback = null;
 
         channelCallback = (sender, state) =>
@@ -636,7 +637,7 @@ public class RealtimeChannel : IRealtimeChannel
         if (State != ChannelState.Closed && State != ChannelState.Errored)
             return;
 
-        Options.ClientOptions.Logger(Topic, "attempting to rejoin", null);
+        Debugger.Instance.Log(this, $"Rejoin Timer Elapsed: Attempting to rejoin [{Topic}]");
 
         // Reset join push instance
         JoinPush = GenerateJoinPush();
@@ -693,7 +694,8 @@ public class RealtimeChannel : IRealtimeChannel
                 _rejoinTimer.Stop();
                 _isRejoining = false;
 
-                NotifyErrorOccurred(new RealtimeException(message.Json) { Reason = FailureHint.Reason.ChannelJoinFailure });
+                NotifyErrorOccurred(new RealtimeException(message.Json)
+                    { Reason = FailureHint.Reason.ChannelJoinFailure });
                 break;
         }
     }
