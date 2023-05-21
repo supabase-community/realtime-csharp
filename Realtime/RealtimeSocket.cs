@@ -467,7 +467,7 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     /// <summary>
     /// Handles reconnecting.
     /// </summary>
-        private void AttemptReconnection()
+    private void AttemptReconnection()
     {
         // Make sure that the connection closed handler doesn't get called repeatedly.
         if (_isReconnecting) return;
@@ -476,29 +476,29 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
         _reconnectTokenSource?.Cancel();
         _reconnectTokenSource = new CancellationTokenSource();
 
-            async Task Reconnect()
-            {
-        _isReconnecting = true;
-
-        while (!_reconnectTokenSource.IsCancellationRequested)
+        async Task Reconnect()
         {
-            // Delay reconnection for a set interval, by default it increases the
-            // time between executions.
-            var delay = _options.ReconnectAfterInterval(tries++);
+            _isReconnecting = true;
 
-            Debugger.Instance.Log(this,
-                $"Socket Reconnection Attempt: [Tries: {tries}, Delay: {delay.Seconds}s, Started: {DateTime.Now.ToShortTimeString()}]");
+            while (!_reconnectTokenSource.IsCancellationRequested)
+            {
+                // Delay reconnection for a set interval, by default it increases the
+                // time between executions.
+                var delay = _options.ReconnectAfterInterval(tries++);
 
-            await _connection.Stop(WebSocketCloseStatus.EndpointUnavailable, "Closed");
+                Debugger.Instance.Log(this,
+                    $"Socket Reconnection Attempt: [Tries: {tries}, Delay: {delay.Seconds}s, Started: {DateTime.Now.ToShortTimeString()}]");
 
-            await Task.Delay(delay, _reconnectTokenSource.Token);
+                await _connection.Stop(WebSocketCloseStatus.EndpointUnavailable, "Closed");
 
-            await Connect();
+                await Task.Delay(delay, _reconnectTokenSource.Token);
+
+                await Connect();
+            }
         }
+
+        Task.Run(Reconnect, _reconnectTokenSource.Token);
     }
-
-            Task.Run(Reconnect, _reconnectTokenSource.Token);
-        }
 
     /// <summary>
     /// Generates an incrementing identifier for message references - this reference is used
