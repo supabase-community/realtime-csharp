@@ -2,6 +2,7 @@
 using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime.Interfaces
@@ -15,7 +16,12 @@ namespace Supabase.Realtime.Interfaces
         /// Is this socket connected?
         /// </summary>
         bool IsConnected { get; }
-
+        
+        /// <summary>
+        /// Delegate for errors on this socket
+        /// </summary>
+        delegate void ErrorEventHandler(IRealtimeSocket sender, RealtimeException exception);
+        
         /// <summary>
         /// Delegate for handling socket state changes.
         /// </summary>
@@ -81,6 +87,23 @@ namespace Supabase.Realtime.Interfaces
         /// Clear heartbeat handlers.
         /// </summary>
         void ClearHeartbeatHandlers();
+        
+        /// <summary>
+        /// Add an error handler
+        /// </summary>
+        /// <param name="handler"></param>
+        void AddErrorHandler(ErrorEventHandler handler);
+
+        /// <summary>
+        /// Remove an error handler
+        /// </summary>
+        /// <param name="handler"></param>
+        void RemoveErrorHandler(ErrorEventHandler handler);
+
+        /// <summary>
+        /// Clear error handlers.
+        /// </summary>
+        void ClearErrorHandlers();
 
         /// <summary>
         /// Gets the roundtrip time of a single message between client and server.

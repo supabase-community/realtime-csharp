@@ -2,7 +2,6 @@
 using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
@@ -42,20 +41,11 @@ namespace Supabase.Realtime
             }
         }
 
-        /// <summary>
-        /// Handlers for notifications of state changes.
-        /// </summary>
         private readonly List<IRealtimeSocket.StateEventHandler> _socketEventHandlers = new();
-
-        /// <summary>
-        /// Handlers for notifications of message events.
-        /// </summary>
         private readonly List<IRealtimeSocket.MessageEventHandler> _messageEventHandlers = new();
-
-        /// <summary>
-        /// Handlers for notifications of heartbeat events.
-        /// </summary>
         private readonly List<IRealtimeSocket.HeartbeatEventHandler> _heartbeatEventHandlers = new();
+        private readonly List<IRealtimeSocket.ErrorEventHandler> _errorEventHandlers = new();
+        private RealtimeException _exception;
 
         private readonly string _endpoint;
         private readonly ClientOptions _options;
@@ -125,7 +115,7 @@ namespace Supabase.Realtime
             _reconnectTokenSource?.Cancel();
             _heartbeatTokenSource?.Cancel();
 
-            _connection?.Stop(code, reason);
+            _connection.Stop(code, reason);
         }
 
         #region Event Listeners
@@ -243,9 +233,46 @@ namespace Supabase.Realtime
         /// </summary>
         public void ClearHeartbeatHandlers() =>
             _heartbeatEventHandlers.Clear();
-        
+
+        /// <summary>
+        /// Adds an error event handler.
+        /// </summary>
+        /// <param name="handler"></param>
+        public void AddErrorHandler(IRealtimeSocket.ErrorEventHandler handler)
+        {
+            if (!_errorEventHandlers.Contains(handler))
+                _errorEventHandlers.Add(handler);
+        }
+
+        /// <summary>
+        /// Removes an error event handler
+        /// </summary>
+        /// <param name="handler"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void RemoveErrorHandler(IRealtimeSocket.ErrorEventHandler handler)
+        {
+            if (_errorEventHandlers.Contains(handler))
+                _errorEventHandlers.Remove(handler);
+        }
+
+        /// <summary>
+        /// Clears Error Event Handlers
+        /// </summary>
+        public void ClearErrorHandlers() =>
+            _errorEventHandlers.Clear();
+
+        private void NotifyErrorOccurred(RealtimeException exception)
+        {
+            _exception = exception;
+
+            NotifySocketStateChange(SocketState.Error);
+
+            foreach (var handler in _errorEventHandlers)
+                handler.Invoke(this, exception);
+        }
+
         #endregion
-        
+
         /// <summary>
         /// Pushes formatted data to the socket server.
         ///
@@ -353,7 +380,7 @@ namespace Supabase.Realtime
         }
 
         #region Socket Event Handlers
-        
+
         /// <summary>
         /// The socket has reconnected (or connected)
         /// </summary>
@@ -393,7 +420,7 @@ namespace Supabase.Realtime
                     return;
                 }
 
-                decoded!.Json = args.Text;
+                decoded.Json = args.Text;
                 NotifyMessageReceived(decoded);
             });
         }
@@ -407,7 +434,11 @@ namespace Supabase.Realtime
         private void HandleSocketError(DisconnectionInfo? disconnectionInfo = null)
         {
             if (!_hasSuccessfullyConnectedOnce && disconnectionInfo is { Exception: not RealtimeException })
-                throw disconnectionInfo.Exception;
+            {
+                NotifyErrorOccurred(new RealtimeException(disconnectionInfo.CloseStatusDescription,
+                    disconnectionInfo.Exception));
+                return;
+            }
 
             AttemptReconnection();
         }
@@ -422,7 +453,7 @@ namespace Supabase.Realtime
             if (disconnectionInfo?.Type != DisconnectionType.ByUser)
                 AttemptReconnection();
         }
-        
+
         #endregion
 
         /// <summary>

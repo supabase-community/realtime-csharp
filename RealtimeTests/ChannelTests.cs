@@ -186,7 +186,7 @@ namespace RealtimeTests
 
             var response = await _restClient!.Table<Todo>()
                 .Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
-            
+
             var model = response.Models.First();
             var oldDetails = model.Details;
             var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";

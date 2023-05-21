@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Supabase.Realtime.Channel;
+using Supabase.Realtime.Exceptions;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Socket;
@@ -121,14 +122,38 @@ namespace Supabase.Realtime
         {
             var tsc = new TaskCompletionSource<IRealtimeClient<RealtimeSocket, RealtimeChannel>>();
 
-            try
+            if (Socket != null)
             {
-                Connect(tsc.SetResult);
+                Options.Logger("error", "Socket already exists.", null);
+                tsc.SetResult(this);
             }
-            catch (Exception ex)
+
+            IRealtimeSocket.StateEventHandler? socketStateHandler = null;
+            IRealtimeSocket.ErrorEventHandler? errorEventHandler = null;
+
+            socketStateHandler = (sender, state) =>
             {
-                tsc.TrySetException(ex);
-            }
+                if (state != SocketState.Open) return;
+
+                sender.RemoveStateChangedHandler(socketStateHandler!);
+                sender.RemoveErrorHandler(errorEventHandler!);
+                
+                NotifySocketStateChange(SocketState.Open);
+                tsc.SetResult(this);
+            };
+
+            errorEventHandler = (sender, ex) =>
+            {
+                NotifySocketStateChange(SocketState.Error);
+                tsc.SetException(ex);
+            };
+
+            Socket = new RealtimeSocket(_realtimeUrl, Options);
+            Socket.AddStateChangedHandler(socketStateHandler);
+            Socket.AddErrorHandler(errorEventHandler);
+            Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
+            Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
+            Socket.Connect();
 
             return tsc.Task;
         }
@@ -151,25 +176,27 @@ namespace Supabase.Realtime
             }
 
             IRealtimeSocket.StateEventHandler? socketStateHandler = null;
+            IRealtimeSocket.ErrorEventHandler? errorEventHandler = null;
 
             socketStateHandler = (sender, state) =>
             {
-                switch (state)
-                {
-                    case SocketState.Open:
-                        sender.RemoveStateChangedHandler(socketStateHandler!);
-                        callback?.Invoke(this);
-                        break;
-                    case SocketState.Close:
-                    case SocketState.Error:
-                        sender.RemoveStateChangedHandler(socketStateHandler!);
-                        throw new Exception("Error occurred connecting to Socket. Check logs.");
-                }
+                if (state != SocketState.Open) return;
+
+                sender.RemoveStateChangedHandler(socketStateHandler!);
+                sender.RemoveErrorHandler(errorEventHandler!);
+                NotifySocketStateChange(SocketState.Open);
+            };
+
+            errorEventHandler = (sender, ex) =>
+            {
+                NotifySocketStateChange(SocketState.Error);
+                throw ex;
             };
 
             Socket = new RealtimeSocket(_realtimeUrl, Options);
-            Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
             Socket.AddStateChangedHandler(socketStateHandler);
+            Socket.AddErrorHandler(errorEventHandler);
+            Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
             Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
             Socket.Connect();
 
