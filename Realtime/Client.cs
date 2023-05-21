@@ -12,6 +12,8 @@ using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Socket;
 using static Supabase.Realtime.Constants;
 
+#pragma warning disable CS1570
+
 namespace Supabase.Realtime
 {
     /// <summary>
@@ -80,7 +82,7 @@ namespace Supabase.Realtime
         /// <summary>
         /// Handlers for notifications of state changes.
         /// </summary>
-        private readonly List<IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketEventHandler>
+        private readonly List<IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler>
             _socketEventHandlers = new();
 
         /// <summary>
@@ -155,20 +157,20 @@ namespace Supabase.Realtime
                 switch (state)
                 {
                     case SocketState.Open:
-                        sender.RemoveStateChangedListener(socketStateHandler!);
+                        sender.RemoveStateChangedHandler(socketStateHandler!);
                         callback?.Invoke(this);
                         break;
                     case SocketState.Close:
                     case SocketState.Error:
-                        sender.RemoveStateChangedListener(socketStateHandler!);
+                        sender.RemoveStateChangedHandler(socketStateHandler!);
                         throw new Exception("Error occurred connecting to Socket. Check logs.");
                 }
             };
 
             Socket = new RealtimeSocket(_realtimeUrl, Options);
-            Socket.AddMessageReceivedListener(HandleSocketMessageReceived);
-            Socket.AddStateChangedListener(socketStateHandler);
-            Socket.AddHeartbeatListener(HandleSocketHeartbeat);
+            Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
+            Socket.AddStateChangedHandler(socketStateHandler);
+            Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
             Socket.Connect();
 
             return this;
@@ -177,26 +179,25 @@ namespace Supabase.Realtime
         /// <summary>
         /// Adds a listener to be notified when the socket state changes.
         /// </summary>
-        /// <param name="authEventHandler"></param>
         public void AddStateChangedListener(
-            IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketEventHandler socketEventHandler)
+            IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler handler)
         {
-            if (_socketEventHandlers.Contains(socketEventHandler))
+            if (_socketEventHandlers.Contains(handler))
                 return;
 
-            _socketEventHandlers.Add(socketEventHandler);
+            _socketEventHandlers.Add(handler);
         }
 
         /// <summary>
         /// Removes a specified listener from socket state changes.
         /// </summary>
         public void RemoveStateChangedListener(
-            IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketEventHandler socketEventHandler)
+            IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler handler)
         {
-            if (!_socketEventHandlers.Contains(socketEventHandler))
+            if (!_socketEventHandlers.Contains(handler))
                 return;
 
-            _socketEventHandlers.Remove(socketEventHandler);
+            _socketEventHandlers.Remove(handler);
         }
 
         /// <summary>
@@ -249,8 +250,8 @@ namespace Supabase.Realtime
         {
             if (Socket != null)
             {
-                Socket.RemoveMessageReceivedListener(HandleSocketMessageReceived);
-                Socket.RemoveStateChangedListener(HandleSocketStateChanged);
+                Socket.RemoveMessageReceivedHandler(HandleSocketMessageReceived);
+                Socket.RemoveStateChangedHandler(HandleSocketStateChanged);
                 Socket.Disconnect(code, reason);
                 Socket = null;
             }
@@ -320,6 +321,7 @@ namespace Supabase.Realtime
         /// <param name="table">Postgres table name</param>
         /// <param name="column">Postgres column name</param>
         /// <param name="value">Value the specified column should have</param>
+        /// <param name="parameters"></param>
         /// <returns></returns>
         public RealtimeChannel Channel(string database = "realtime", string schema = "public", string table = "*",
             string? column = null, string? value = null, Dictionary<string, string>? parameters = null)

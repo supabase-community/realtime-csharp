@@ -44,6 +44,12 @@ namespace Supabase.Realtime
             return obj.Payload;
         }
 
+        /// <summary>
+        /// Initializes a realtime broadcast helper class.
+        /// </summary>
+        /// <param name="channel"></param>
+        /// <param name="options"></param>
+        /// <param name="serializerSettings"></param>
         public RealtimeBroadcast(RealtimeChannel channel, BroadcastOptions options,
             JsonSerializerSettings serializerSettings)
         {

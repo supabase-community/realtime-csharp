@@ -69,12 +69,12 @@ public class RealtimeChannel : IRealtimeChannel
     public ChannelOptions Options { get; }
 
     /// <summary>
-    /// The saved Broadcast Options, set in <see cref="Register{TBroadcastResponse}(BroadcastOptions)"/>
+    /// The saved Broadcast Options, set in <see cref="Register{TBroadcastResponse}(bool, bool)"/>
     /// </summary>
     public BroadcastOptions? BroadcastOptions { get; private set; } = new();
 
     /// <summary>
-    /// The saved Presence Options, set in <see cref="Register{TPresenceResponse}(PresenceOptions)"/>
+    /// The saved Presence Options, set in <see cref="Register{TPresenceResponse}(string)"/>
     /// </summary>
     public PresenceOptions? PresenceOptions { get; private set; } = new(string.Empty);
 
@@ -171,7 +171,7 @@ public class RealtimeChannel : IRealtimeChannel
         Options.Parameters ??= new Dictionary<string, string>();
 
         _socket = socket;
-        _socket.AddStateChangedListener(HandleSocketStateChanged);
+        _socket.AddStateChangedHandler(HandleSocketStateChanged);
 
         _rejoinTimer = new Timer(options.ClientOptions.Timeout.TotalMilliseconds);
         _rejoinTimer.Elapsed += HandleRejoinTimerElapsed;
@@ -518,10 +518,11 @@ public class RealtimeChannel : IRealtimeChannel
 
     /// <summary>
     /// Sends a `Push` request under this channel.
-    ///
+    /// 
     /// Maintains a buffer in the event push is called prior to the channel being joined.
     /// </summary>
     /// <param name="eventName"></param>
+    /// <param name="type"></param>
     /// <param name="payload"></param>
     /// <param name="timeoutMs"></param>
     public Push Push(string eventName, string? type = null, object? payload = null, int timeoutMs = DefaultTimeout)
@@ -560,10 +561,10 @@ public class RealtimeChannel : IRealtimeChannel
         messageCallback = (_, message) =>
         {
             tsc.SetResult(message.Event != EventType.Unknown);
-            push.RemoveMessageReceivedListener(messageCallback!);
+            push.RemoveMessageReceivedHandler(messageCallback!);
         };
 
-        push.AddMessageReceivedListener(messageCallback);
+        push.AddMessageReceivedHandler(messageCallback);
         return tsc.Task;
     }
 
@@ -652,10 +653,10 @@ public class RealtimeChannel : IRealtimeChannel
         NotifyStateChanged(ChannelState.Joining);
 
         // Remove handler if exists
-        JoinPush?.RemoveMessageReceivedListener(HandleJoinResponse);
+        JoinPush?.RemoveMessageReceivedHandler(HandleJoinResponse);
 
         JoinPush = GenerateJoinPush();
-        JoinPush.AddMessageReceivedListener(HandleJoinResponse);
+        JoinPush.AddMessageReceivedHandler(HandleJoinResponse);
         JoinPush.Resend(timeoutMs);
     }
 
@@ -692,7 +693,7 @@ public class RealtimeChannel : IRealtimeChannel
                 _rejoinTimer.Stop();
                 _isRejoining = false;
 
-                NotifyErrorOccurred(new RealtimeException(message.Json) { Reason = FailureHint.Reason.JoinFailure });
+                NotifyErrorOccurred(new RealtimeException(message.Json) { Reason = FailureHint.Reason.ChannelJoinFailure });
                 break;
         }
     }
@@ -731,7 +732,7 @@ public class RealtimeChannel : IRealtimeChannel
                         break;
                     case PhoenixStatusError:
                         NotifyErrorOccurred(new RealtimeException(message.Json)
-                            { Reason = FailureHint.Reason.JoinFailure });
+                            { Reason = FailureHint.Reason.ChannelJoinFailure });
                         break;
                 }
 

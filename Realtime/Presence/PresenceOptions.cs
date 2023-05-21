@@ -13,6 +13,10 @@ namespace Supabase.Realtime.Presence
         [JsonProperty("key")]
         public string PresenceKey { get; set; }
 
+        /// <summary>
+        /// Presence options.
+        /// </summary>
+        /// <param name="presenceKey"></param>
         public PresenceOptions(string presenceKey)
         {
             PresenceKey = presenceKey;

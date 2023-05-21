@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Supabase.Realtime.Exceptions;
 using Websocket.Client;
+using Websocket.Client.Models;
 using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime
@@ -23,6 +24,9 @@ namespace Supabase.Realtime
         /// </summary>
         public bool IsConnected => _connection.IsRunning;
 
+        /// <summary>
+        /// The Socket Endpoint
+        /// </summary>
         private string EndpointUrl
         {
             get
@@ -57,14 +61,12 @@ namespace Supabase.Realtime
         private readonly ClientOptions _options;
         private readonly WebsocketClient _connection;
 
-        private Task? _heartbeatTask;
         private CancellationTokenSource? _heartbeatTokenSource;
+        private CancellationTokenSource? _reconnectTokenSource;
 
+        private bool _hasSuccessfullyConnectedOnce;
         private bool _hasPendingHeartbeat;
         private string? _pendingHeartbeatRef;
-
-        private Task? _reconnectTask;
-        private CancellationTokenSource? _reconnectTokenSource;
 
         private readonly List<Task> _buffer = new();
         private bool _isReconnecting;
@@ -86,8 +88,12 @@ namespace Supabase.Realtime
             _connection = new WebsocketClient(new Uri(EndpointUrl));
         }
 
-        void IDisposable.Dispose() =>
+        void IDisposable.Dispose()
+        {
+            _heartbeatTokenSource?.Cancel();
+            _reconnectTokenSource?.Cancel();
             DisposeConnection();
+        }
 
         /// <summary>
         /// Connects to a socket server and registers event listeners.
@@ -100,23 +106,9 @@ namespace Supabase.Realtime
             _connection.ReconnectTimeout = TimeSpan.FromSeconds(120);
             _connection.ErrorReconnectTimeout = TimeSpan.FromSeconds(30);
 
-            _connection.ReconnectionHappened.Subscribe(reconnectionInfo =>
-            {
-                if (reconnectionInfo.Type != ReconnectionType.Initial)
-                    _isReconnecting = true;
-
-                HandleSocketOpened();
-            });
-
-            _connection.DisconnectionHappened.Subscribe(disconnectionInfo =>
-            {
-                if (disconnectionInfo.Exception != null)
-                    HandleSocketError(disconnectionInfo);
-                else
-                    HandleSocketClosed(disconnectionInfo);
-            });
-
-            _connection.MessageReceived.Subscribe(msg => OnConnectionMessage(this, msg));
+            _connection.ReconnectionHappened.Subscribe(HandleSocketReconnectionHappened);
+            _connection.DisconnectionHappened.Subscribe(HandleSocketDisconnectionHappened);
+            _connection.MessageReceived.Subscribe(HandleSocketMessage);
 
             _hasConnectBeenCalled = true;
 
@@ -128,27 +120,34 @@ namespace Supabase.Realtime
         /// </summary>
         /// <param name="code"></param>
         /// <param name="reason"></param>
-        public void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "") =>
+        public void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "")
+        {
+            _reconnectTokenSource?.Cancel();
+            _heartbeatTokenSource?.Cancel();
+
             _connection?.Stop(code, reason);
+        }
+
+        #region Event Listeners
 
         /// <summary>
         /// Adds a listener to be notified when the socket state changes.
         /// </summary>
-        /// <param name="stateEventHandler"></param>
-        public void AddStateChangedListener(IRealtimeSocket.StateEventHandler stateEventHandler)
+        /// <param name="handler"></param>
+        public void AddStateChangedHandler(IRealtimeSocket.StateEventHandler handler)
         {
-            if (!_socketEventHandlers.Contains(stateEventHandler))
-                _socketEventHandlers.Add(stateEventHandler);
+            if (!_socketEventHandlers.Contains(handler))
+                _socketEventHandlers.Add(handler);
         }
 
         /// <summary>
         /// Removes a specified listener from socket state changes.
         /// </summary>
-        /// <param name="stateEventHandler"></param>
-        public void RemoveStateChangedListener(IRealtimeSocket.StateEventHandler stateEventHandler)
+        /// <param name="handler"></param>
+        public void RemoveStateChangedHandler(IRealtimeSocket.StateEventHandler handler)
         {
-            if (_socketEventHandlers.Contains(stateEventHandler))
-                _socketEventHandlers.Remove(stateEventHandler);
+            if (_socketEventHandlers.Contains(handler))
+                _socketEventHandlers.Remove(handler);
         }
 
         /// <summary>
@@ -166,31 +165,31 @@ namespace Supabase.Realtime
         /// <summary>
         /// Clears all of the listeners from receiving event state changes.
         /// </summary>
-        public void ClearStateChangedListeners() =>
+        public void ClearStateChangedHandlers() =>
             _socketEventHandlers.Clear();
 
         /// <summary>
         /// Adds a listener to be notified when a message is received.
         /// </summary>
-        /// <param name="messageEventHandler"></param>
-        public void AddMessageReceivedListener(IRealtimeSocket.MessageEventHandler messageEventHandler)
+        /// <param name="handler"></param>
+        public void AddMessageReceivedHandler(IRealtimeSocket.MessageEventHandler handler)
         {
-            if (_messageEventHandlers.Contains(messageEventHandler))
+            if (_messageEventHandlers.Contains(handler))
                 return;
 
-            _messageEventHandlers.Add(messageEventHandler);
+            _messageEventHandlers.Add(handler);
         }
 
         /// <summary>
         /// Removes a specified listener from messages received.
         /// </summary>
-        /// <param name="heartbeatHandler"></param>
-        public void RemoveMessageReceivedListener(IRealtimeSocket.MessageEventHandler heartbeatHandler)
+        /// <param name="handler"></param>
+        public void RemoveMessageReceivedHandler(IRealtimeSocket.MessageEventHandler handler)
         {
-            if (!_messageEventHandlers.Contains(heartbeatHandler))
+            if (!_messageEventHandlers.Contains(handler))
                 return;
 
-            _messageEventHandlers.Remove(heartbeatHandler);
+            _messageEventHandlers.Remove(handler);
         }
 
         /// <summary>
@@ -206,27 +205,27 @@ namespace Supabase.Realtime
         /// <summary>
         /// Clears all of the listeners from receiving event state changes.
         /// </summary>
-        public void ClearMessageReceivedListeners() =>
+        public void ClearMessageReceivedHandlers() =>
             _messageEventHandlers.Clear();
 
         /// <summary>
         /// Adds a listener to be notified when a message is received.
         /// </summary>
-        /// <param name="heartbeatHandler"></param>
-        public void AddHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler heartbeatHandler)
+        /// <param name="handler"></param>
+        public void AddHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler handler)
         {
-            if (!_heartbeatEventHandlers.Contains(heartbeatHandler))
-                _heartbeatEventHandlers.Add(heartbeatHandler);
+            if (!_heartbeatEventHandlers.Contains(handler))
+                _heartbeatEventHandlers.Add(handler);
         }
 
         /// <summary>
         /// Removes a specified listener from messages received.
         /// </summary>
-        /// <param name="heartbeatHandler"></param>
-        public void RemoveHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler heartbeatHandler)
+        /// <param name="handler"></param>
+        public void RemoveHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler handler)
         {
-            if (_heartbeatEventHandlers.Contains(heartbeatHandler))
-                _heartbeatEventHandlers.Remove(heartbeatHandler);
+            if (_heartbeatEventHandlers.Contains(handler))
+                _heartbeatEventHandlers.Remove(handler);
         }
 
         /// <summary>
@@ -242,10 +241,11 @@ namespace Supabase.Realtime
         /// <summary>
         /// Clears all of the listeners from receiving event state changes.
         /// </summary>
-        public void ClearHeartbeatListeners() =>
+        public void ClearHeartbeatHandlers() =>
             _heartbeatEventHandlers.Clear();
-
-
+        
+        #endregion
+        
         /// <summary>
         /// Pushes formatted data to the socket server.
         ///
@@ -278,13 +278,12 @@ namespace Supabase.Realtime
             IRealtimeSocket.MessageEventHandler? messageHandler = null;
             messageHandler = (_, messageResponse) =>
             {
-                if (messageResponse.Ref == pingRef)
-                {
-                    RemoveMessageReceivedListener(messageHandler!);
-                    tsc.SetResult((DateTime.Now - start).TotalMilliseconds);
-                }
+                if (messageResponse.Ref != pingRef) return;
+
+                RemoveMessageReceivedHandler(messageHandler!);
+                tsc.SetResult((DateTime.Now - start).TotalMilliseconds);
             };
-            AddMessageReceivedListener(messageHandler);
+            AddMessageReceivedHandler(messageHandler);
 
             Push(new SocketRequest { Topic = "phoenix", Event = "heartbeat", Ref = pingRef });
 
@@ -320,6 +319,8 @@ namespace Supabase.Realtime
         /// </summary>
         private void HandleSocketOpened()
         {
+            _hasSuccessfullyConnectedOnce = true;
+
             // Was a reconnection attempt
             if (_isReconnecting)
                 NotifySocketStateChange(SocketState.Reconnect);
@@ -329,22 +330,12 @@ namespace Supabase.Realtime
 
             _options.Logger("transport", $"connected to ${EndpointUrl}", null);
 
-            if (_reconnectTokenSource != null)
-                _reconnectTokenSource.Cancel();
-
-            if (_heartbeatTokenSource != null)
-                _heartbeatTokenSource.Cancel();
+            _reconnectTokenSource?.Cancel();
+            _heartbeatTokenSource?.Cancel();
 
             _hasPendingHeartbeat = false;
             _heartbeatTokenSource = new CancellationTokenSource();
-            _heartbeatTask = Task.Run(async () =>
-            {
-                while (!_heartbeatTokenSource.IsCancellationRequested)
-                {
-                    SendHeartbeat();
-                    await Task.Delay(_options.HeartbeatInterval, _heartbeatTokenSource.Token);
-                }
-            }, _heartbeatTokenSource.Token);
+            Task.Run(EmitHeartbeat, _heartbeatTokenSource.Token);
 
             // Send any pending `Push` messages that were queued while socket was disconnected.
             FlushBuffer();
@@ -352,12 +343,44 @@ namespace Supabase.Realtime
             NotifySocketStateChange(SocketState.Open);
         }
 
+        private async Task EmitHeartbeat()
+        {
+            while (_heartbeatTokenSource is { IsCancellationRequested: false })
+            {
+                SendHeartbeat();
+                await Task.Delay(_options.HeartbeatInterval, _heartbeatTokenSource.Token);
+            }
+        }
+
+        #region Socket Event Handlers
+        
+        /// <summary>
+        /// The socket has reconnected (or connected)
+        /// </summary>
+        /// <param name="reconnectionInfo"></param>
+        private void HandleSocketReconnectionHappened(ReconnectionInfo reconnectionInfo)
+        {
+            if (reconnectionInfo.Type != ReconnectionType.Initial) _isReconnecting = true;
+            HandleSocketOpened();
+        }
+
+        /// <summary>
+        /// The socket has disconnected, called either through a socket closing or erroring.
+        /// </summary>
+        /// <param name="disconnectionInfo"></param>
+        private void HandleSocketDisconnectionHappened(DisconnectionInfo disconnectionInfo)
+        {
+            if (disconnectionInfo.Exception != null)
+                HandleSocketError(disconnectionInfo);
+            else
+                HandleSocketClosed(disconnectionInfo);
+        }
+
         /// <summary>
         /// Parses a received socket message into a non-generic type.
         /// </summary>
-        /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void OnConnectionMessage(object sender, ResponseMessage args)
+        private void HandleSocketMessage(ResponseMessage args)
         {
             _options.Decode!(args.Text, decoded =>
             {
@@ -375,13 +398,18 @@ namespace Supabase.Realtime
             });
         }
 
+        /// <summary>
+        /// Handles socket errors, attempts reconnection if the error occurs after a successful connection has been
+        /// established at least once.
+        /// </summary>
+        /// <param name="disconnectionInfo"></param>
+        /// <exception cref="Exception"></exception>
         private void HandleSocketError(DisconnectionInfo? disconnectionInfo = null)
         {
-            if (disconnectionInfo?.Type != DisconnectionType.Error)
-                AttemptReconnection();
-
-            if (disconnectionInfo is { Exception: not RealtimeException })
+            if (!_hasSuccessfullyConnectedOnce && disconnectionInfo is { Exception: not RealtimeException })
                 throw disconnectionInfo.Exception;
+
+            AttemptReconnection();
         }
 
         /// <summary>
@@ -394,7 +422,12 @@ namespace Supabase.Realtime
             if (disconnectionInfo?.Type != DisconnectionType.ByUser)
                 AttemptReconnection();
         }
+        
+        #endregion
 
+        /// <summary>
+        /// Handles reconnecting.
+        /// </summary>
         private void AttemptReconnection()
         {
             // Make sure that the connection closed handler doesn't get called repeatedly.
@@ -403,7 +436,8 @@ namespace Supabase.Realtime
             var tries = 1;
             _reconnectTokenSource?.Cancel();
             _reconnectTokenSource = new CancellationTokenSource();
-            _reconnectTask = Task.Run(async () =>
+
+            async Task Reconnect()
             {
                 _isReconnecting = true;
 
@@ -421,7 +455,9 @@ namespace Supabase.Realtime
 
                     await Connect();
                 }
-            }, _reconnectTokenSource.Token);
+            }
+
+            Task.Run(Reconnect, _reconnectTokenSource.Token);
         }
 
         /// <summary>

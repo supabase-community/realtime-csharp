@@ -7,6 +7,9 @@ using Supabase.Realtime.Socket;
 
 namespace Supabase.Realtime
 {
+    /// <summary>
+    /// Options used when initializing a <see cref="Client"/>
+    /// </summary>
     public class ClientOptions
     {
         /// <summary>
@@ -35,7 +38,9 @@ namespace Supabase.Realtime
         /// </summary>
         public TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(Constants.DefaultTimeout);
 
-        
+        /// <summary>
+        /// @todo Presently unused: Limit the number of events that can be sent per second.
+        /// </summary>
         public int EventsPerSecond { get; set; } = 10;
 
         /// <summary>

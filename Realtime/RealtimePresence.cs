@@ -39,6 +39,12 @@ namespace Supabase.Realtime
         private readonly Dictionary<IRealtimePresence.EventType, List<IRealtimePresence.PresenceEventHandler>>
             _presenceEventListeners = new();
 
+        /// <summary>
+        /// Initializes a realtime presence helper class.
+        /// </summary>
+        /// <param name="channel"></param>
+        /// <param name="options"></param>
+        /// <param name="serializerSettings"></param>
         public RealtimePresence(RealtimeChannel channel, PresenceOptions options,
             JsonSerializerSettings serializerSettings)
         {
@@ -51,28 +57,28 @@ namespace Supabase.Realtime
         /// Add presence event handler for a given event type.
         /// </summary>
         /// <param name="eventType"></param>
-        /// <param name="presenceEventHandler"></param>
+        /// <param name="handler"></param>
         public void AddPresenceEventHandler(IRealtimePresence.EventType eventType,
-            IRealtimePresence.PresenceEventHandler presenceEventHandler)
+            IRealtimePresence.PresenceEventHandler handler)
         {
             if (!_presenceEventListeners.ContainsKey(eventType))
                 _presenceEventListeners[eventType] = new List<IRealtimePresence.PresenceEventHandler>();
 
-            if (!_presenceEventListeners[eventType].Contains(presenceEventHandler))
-                _presenceEventListeners[eventType].Add(presenceEventHandler);
+            if (!_presenceEventListeners[eventType].Contains(handler))
+                _presenceEventListeners[eventType].Add(handler);
         }
 
         /// <summary>
         /// Remove an event handler
         /// </summary>
         /// <param name="eventType"></param>
-        /// <param name="presenceEventHandler"></param>
+        /// <param name="handler"></param>
         public void RemovePresenceEventHandlers(IRealtimePresence.EventType eventType,
-            IRealtimePresence.PresenceEventHandler presenceEventHandler)
+            IRealtimePresence.PresenceEventHandler handler)
         {
             if (_presenceEventListeners.ContainsKey(eventType) &&
-                _presenceEventListeners[eventType].Contains(presenceEventHandler))
-                _presenceEventListeners[eventType].Remove(presenceEventHandler);
+                _presenceEventListeners[eventType].Contains(handler))
+                _presenceEventListeners[eventType].Remove(handler);
         }
 
         /// <summary>

@@ -1,14 +1,30 @@
 namespace Supabase.Realtime.Exceptions;
 
-public class FailureHint
+/// <summary>
+/// A failure hint
+/// </summary>
+public static class FailureHint
 {
+    /// <summary>
+    /// Reasons for a failure
+    /// </summary>
     public enum Reason
     {
+        /// <summary>
+        /// Catchall for any kind of failure that is presently untyped.
+        /// </summary>
         Unknown,
+        /// <summary>
+        /// A push timeout
+        /// </summary>
         PushTimeout,
+        /// <summary>
+        /// Channel is not open
+        /// </summary>
         ChannelNotOpen,
-        JoinFailure
+        /// <summary>
+        /// Channel cannot be joined
+        /// </summary>
+        ChannelJoinFailure
     }
-    
-    //public static Reason DetectReason(Socket gte) {}
 }

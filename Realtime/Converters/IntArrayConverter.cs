@@ -5,30 +5,35 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 [assembly: InternalsVisibleTo("RealtimeTests")]
+
 namespace Supabase.Realtime.Converters
 {
+    /// <summary>
+    /// An int array converter that specifically parses Postgrest styled arrays `{1,2,3}` and `[1,2,3]` from strings
+    /// into a <see cref="List{T}"/>.
+    /// </summary>
     public class IntArrayConverter : JsonConverter
     {
+        /// <inheritdoc />
         public override bool CanRead => true;
 
+        /// <inheritdoc />
         public override bool CanWrite => false;
 
+        /// <inheritdoc />
         public override bool CanConvert(Type objectType) => throw new NotImplementedException();
 
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        /// <inheritdoc />
+        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue,
+            JsonSerializer serializer)
         {
             try
             {
                 if (reader.Value != null)
-                {
                     return Parse((string)reader.Value);
-                }
-                else
-                {
-                    JArray jo = JArray.Load(reader);
-                    string json = jo.ToString(Formatting.None);
-                    return jo.ToObject<List<int>>(serializer);
-                }
+
+                var jo = JArray.Load(reader);
+                return jo.ToObject<List<int>>(serializer);
             }
             catch
             {
@@ -36,44 +41,48 @@ namespace Supabase.Realtime.Converters
             }
         }
 
+        /// <inheritdoc />
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
 
-        internal List<int> Parse(string value)
+        internal static List<int> Parse(string value)
         {
             var result = new List<int>();
 
             var firstChar = value[0];
             var lastChar = value[value.Length - 1];
 
-            // {1,2,3}
-            if (firstChar == '{' && lastChar == '}')
+            switch (firstChar)
             {
-                var array = value.Trim(new char[] { '{', '}' }).Split(',');
-                foreach (var item in array)
+                // {1,2,3}
+                case '{' when lastChar == '}':
                 {
-                    if (string.IsNullOrEmpty(item)) continue;
-                    result.Add(int.Parse(item));
-                }
+                    var array = value.Trim(new char[] { '{', '}' }).Split(',');
+                    foreach (var item in array)
+                    {
+                        if (string.IsNullOrEmpty(item)) continue;
+                        result.Add(int.Parse(item));
+                    }
 
-                return result;
-            }
-            // [1,2,3]
-            else if (firstChar == '[' && lastChar == ']')
-            {
-                var array = value.Trim(new char[] { '[', ']' }).Split(',');
-                foreach (var item in array)
+                    return result;
+                }
+                // [1,2,3]
+                case '[' when lastChar == ']':
                 {
-                    if (string.IsNullOrEmpty(item)) continue;
-                    result.Add(int.Parse(item));
+                    var array = value.Trim(new char[] { '[', ']' }).Split(',');
+                    foreach (var item in array)
+                    {
+                        if (string.IsNullOrEmpty(item)) continue;
+                        result.Add(int.Parse(item));
+                    }
+
+                    return result;
                 }
-
-                return result;
+                default:
+                    return result;
             }
-
-            return result;
         }
     }
 }

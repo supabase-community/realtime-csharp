@@ -9,6 +9,9 @@ namespace Supabase.Realtime.Models
 	/// <typeparam name="T"></typeparam>
 	public class BaseBroadcast<T> : BaseBroadcast where T : class
 	{
+		/// <summary>
+		/// The typed payload.
+		/// </summary>
 		[JsonProperty("payload")]
 		public new T? Payload { get; set; }
 	}
@@ -18,9 +21,15 @@ namespace Supabase.Realtime.Models
 	/// </summary>
 	public class BaseBroadcast
 	{
+		/// <summary>
+		/// The event.
+		/// </summary>
 		[JsonProperty("event")]
 		public string? Event { get; set; }
 
+		/// <summary>
+		/// The payload.
+		/// </summary>
 		[JsonProperty("payload")]
 		public Dictionary<string, object>? Payload { get; set; }
 	}

@@ -2,19 +2,19 @@ using System;
 
 namespace Supabase.Realtime.Exceptions;
 
+/// <summary>
+/// An Exception thrown within <see cref="Realtime"/>
+/// </summary>
 public class RealtimeException: Exception
 {
-    
+    /// <inheritdoc />
     public RealtimeException(string? message) : base(message) { }
-    public RealtimeException(string? message, Exception? innerException) : base(message, innerException) { }
 
-    public string? Content { get; internal set; }
+    /// <inheritdoc />
+    public RealtimeException(string? message, Exception? innerException) : base(message, innerException) { }
     
-    public void AddReason()
-    {
-        // Reason = FailureHint.DetectReason(this);
-        //Debug.WriteLine(Content);
-    }
-    
+    /// <summary>
+    /// A specific reason for this exception, as provided by this library.
+    /// </summary>
     public FailureHint.Reason Reason { get; internal set; }
 }

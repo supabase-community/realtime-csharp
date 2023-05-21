@@ -30,14 +30,14 @@ namespace RealtimeTests
             CollectionAssert.AreEqual(new List<string> { "testing", "1", "2" }, parsed?.stringArray);
 
             var intConverter = new IntArrayConverter();
-            CollectionAssert.AreEqual(new List<int>(), intConverter.Parse("{}"));
-            CollectionAssert.AreEqual(new List<int> { 1, 2, 3 }, intConverter.Parse("{1,2,3}"));
-            CollectionAssert.AreEqual(new List<int> { 1, 2, 3 }, intConverter.Parse("[1,2,3]"));
-            CollectionAssert.AreEqual(new List<int> { 99, 999, 9999, 999999 }, intConverter.Parse("[99, 999, 9999, 999999]"));
+            CollectionAssert.AreEqual(new List<int>(), IntArrayConverter.Parse("{}"));
+            CollectionAssert.AreEqual(new List<int> { 1, 2, 3 }, IntArrayConverter.Parse("{1,2,3}"));
+            CollectionAssert.AreEqual(new List<int> { 1, 2, 3 }, IntArrayConverter.Parse("[1,2,3]"));
+            CollectionAssert.AreEqual(new List<int> { 99, 999, 9999, 999999 }, IntArrayConverter.Parse("[99, 999, 9999, 999999]"));
 
             var strConverter = new StringArrayConverter();
-            CollectionAssert.AreEqual(new List<string> { "a", "b", "c" }, strConverter.Parse("{a,b,c}"));
-            CollectionAssert.AreEqual(new List<string> { "a", "b", "c" }, strConverter.Parse("[a,b,c]"));
+            CollectionAssert.AreEqual(new List<string> { "a", "b", "c" }, StringArrayConverter.Parse("{a,b,c}"));
+            CollectionAssert.AreEqual(new List<string> { "a", "b", "c" }, StringArrayConverter.Parse("[a,b,c]"));
         }
     }
 }

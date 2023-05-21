@@ -8,7 +8,7 @@ namespace Supabase.Realtime.Broadcast
     public class BroadcastOptions
     {
         /// <summary>
-        /// self option enables client to receive message it broadcasted
+        /// self option enables client to receive message it broadcast
         /// </summary>
         [JsonProperty("self")]
         public bool BroadcastSelf { get; set; } = false;
@@ -19,6 +19,11 @@ namespace Supabase.Realtime.Broadcast
         [JsonProperty("ack")]
         public bool BroadcastAck { get; set; } = false;
 
+        /// <summary>
+        /// Initializes broadcast options
+        /// </summary>
+        /// <param name="broadcastSelf"></param>
+        /// <param name="broadcastAck"></param>
         public BroadcastOptions(bool broadcastSelf = false, bool broadcastAck = false)
         {
             BroadcastSelf = broadcastSelf;

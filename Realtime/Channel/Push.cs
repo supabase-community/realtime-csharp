@@ -34,7 +34,7 @@ namespace Supabase.Realtime.Channel
         /// </summary>
         public RealtimeChannel Channel { get; }
 
-        public string? Type { get; }
+        private string? Type { get; }
 
         /// <summary>
         /// The event requested.
@@ -73,6 +73,7 @@ namespace Supabase.Realtime.Channel
         /// <param name="socket"></param>
         /// <param name="channel"></param>
         /// <param name="eventName"></param>
+        /// <param name="type"></param>
         /// <param name="payload"></param>
         /// <param name="timeoutMs"></param>
         public Push(IRealtimeSocket socket, RealtimeChannel channel, string eventName, string? type = null,
@@ -88,7 +89,7 @@ namespace Supabase.Realtime.Channel
             EventName = eventName;
             Payload = payload;
 
-            socket.AddMessageReceivedListener(HandleSocketMessageReceived);
+            socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
         }
 
         /// <summary>
@@ -150,31 +151,31 @@ namespace Supabase.Realtime.Channel
             Response = message;
             NotifyMessageReceived(message);
 
-            sender.RemoveMessageReceivedListener(HandleSocketMessageReceived);
+            sender.RemoveMessageReceivedHandler(HandleSocketMessageReceived);
         }
         
         /// <summary>
         /// Adds a listener to be notified when a message is received.
         /// </summary>
-        /// <param name="messageEventHandler"></param>
-        public void AddMessageReceivedListener(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler messageEventHandler)
+        /// <param name="handler"></param>
+        public void AddMessageReceivedHandler(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler handler)
         {
-            if (_messageEventHandlers.Contains(messageEventHandler))
+            if (_messageEventHandlers.Contains(handler))
                 return;
 
-            _messageEventHandlers.Add(messageEventHandler);
+            _messageEventHandlers.Add(handler);
         }
         
         /// <summary>
         /// Removes a specified listener from messages received.
         /// </summary>
-        /// <param name="messageEventHandler"></param>
-        public void RemoveMessageReceivedListener(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler messageEventHandler)
+        /// <param name="handler"></param>
+        public void RemoveMessageReceivedHandler(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler handler)
         {
-            if (!_messageEventHandlers.Contains(messageEventHandler))
+            if (!_messageEventHandlers.Contains(handler))
                 return;
 
-            _messageEventHandlers.Remove(messageEventHandler);
+            _messageEventHandlers.Remove(handler);
         }
         
         /// <summary>
@@ -190,7 +191,7 @@ namespace Supabase.Realtime.Channel
         /// <summary>
         /// Clears all of the listeners from receiving event state changes.
         /// </summary>
-        public void ClearMessageReceivedListeners() =>
+        public void ClearMessageReceivedHandler() =>
             _messageEventHandlers.Clear();
 
         private void HandleTimeoutElapsed(object sender, ElapsedEventArgs e) => OnTimeout?.Invoke(this, null);
