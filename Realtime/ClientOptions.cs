@@ -40,15 +40,15 @@ public class ClientOptions
     /// <summary>
     /// The interval to send a heartbeat message
     /// </summary>
-    public TimeSpan HeartbeatInterval { get; set; } = TimeSpan.FromSeconds(30);
+    public TimeSpan HeartbeatInterval { get; set; } = TimeSpan.FromSeconds(20);
 
     /// <summary>
     /// The interval to reconnect
     /// </summary>
     public Func<int, TimeSpan> ReconnectAfterInterval { get; set; } = (tries) =>
     {
-        var intervals = new[] { 1, 2, 5, 10 };
-        return TimeSpan.FromSeconds(tries < intervals.Length ? tries - 1 : 10);
+        var intervals = new[] { 30, 45, 60, 120 };
+        return TimeSpan.FromSeconds(tries < intervals.Length ? intervals[tries] : intervals[intervals.Length - 1]);
     };
 
     /// <summary>

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supabase.Realtime;
@@ -12,6 +13,7 @@ public class ClientFailureTests
     public async Task ClientThrowsExceptionOnInitialConnectionFailure()
     {
         var client = new Client("ws://localhost:4000/socket");
-        await Assert.ThrowsExceptionAsync<RealtimeException>(() => client.ConnectAsync());
+        client.AddDebugHandler((sender, message, exception) => Debug.WriteLine(message));
+        await Assert.ThrowsExceptionAsync<RealtimeException>(async () => { await client.ConnectAsync(); });
     }
 }

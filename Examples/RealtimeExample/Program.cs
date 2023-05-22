@@ -38,11 +38,11 @@ namespace RealtimeExample
             await realtimeClient.ConnectAsync();
 
             // Subscribe to a channel and events
-            var channelTodos = realtimeClient.Channel("realtime", "public", "todos");
+            var channelTodos = realtimeClient.Channel("public:todos");
+            channelTodos.Register(new PostgresChangesOptions("public", "todos"));
             channelTodos.AddPostgresChangeHandler(ListenType.Inserts, PostgresInsertedHandler);
             channelTodos.AddPostgresChangeHandler(ListenType.Updates, PostgresUpdatedHandler);
             channelTodos.AddPostgresChangeHandler(ListenType.Deletes, PostgresDeletedHandler);
-
             await channelTodos.Subscribe();
 
             Console.ReadKey();

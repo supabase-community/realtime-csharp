@@ -46,14 +46,12 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     private readonly List<IRealtimeSocket.MessageEventHandler> _messageEventHandlers = new();
     private readonly List<IRealtimeSocket.HeartbeatEventHandler> _heartbeatEventHandlers = new();
     private readonly List<IRealtimeSocket.ErrorEventHandler> _errorEventHandlers = new();
-    private RealtimeException? _exception;
 
     private readonly string _endpoint;
     private readonly ClientOptions _options;
     private readonly WebsocketClient _connection;
 
     private CancellationTokenSource? _heartbeatTokenSource;
-    private CancellationTokenSource? _reconnectTokenSource;
 
     private bool _hasSuccessfullyConnectedOnce;
     private bool _hasPendingHeartbeat;
@@ -61,7 +59,7 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
 
     private readonly List<Task> _buffer = new();
     private bool _isReconnecting;
-    private bool _hasConnectBeenCalled;
+    private int _reconnectionAttempts = 0;
 
     /// <summary>
     /// Initializes this Socket instance.
@@ -82,7 +80,6 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     void IDisposable.Dispose()
     {
         _heartbeatTokenSource?.Cancel();
-        _reconnectTokenSource?.Cancel();
         DisposeConnection();
     }
 
@@ -93,17 +90,13 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     {
         if (_connection.IsRunning) return;
 
-        if (!_hasConnectBeenCalled)
-        {
-            _connection.ReconnectTimeout = TimeSpan.FromSeconds(120);
-            _connection.ErrorReconnectTimeout = TimeSpan.FromSeconds(30);
+        _connection.ReconnectTimeout = _options.ReconnectAfterInterval(_reconnectionAttempts);
+        _connection.ErrorReconnectTimeout = TimeSpan.FromSeconds(30);
 
-            _connection.ReconnectionHappened.Subscribe(HandleSocketReconnectionHappened);
-            _connection.DisconnectionHappened.Subscribe(HandleSocketDisconnectionHappened);
-            _connection.MessageReceived.Subscribe(HandleSocketMessage);
-        }
+        _connection.ReconnectionHappened.Subscribe(HandleSocketReconnectionHappened);
+        _connection.DisconnectionHappened.Subscribe(HandleSocketDisconnectionHappened);
+        _connection.MessageReceived.Subscribe(HandleSocketMessage);
 
-        _hasConnectBeenCalled = true;
         await _connection.StartOrFail();
     }
 
@@ -114,9 +107,7 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     /// <param name="reason"></param>
     public void Disconnect(WebSocketCloseStatus code = WebSocketCloseStatus.NormalClosure, string reason = "")
     {
-        _reconnectTokenSource?.Cancel();
         _heartbeatTokenSource?.Cancel();
-
         _connection.Stop(code, reason);
     }
 
@@ -267,8 +258,6 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
 
     private void NotifyErrorOccurred(RealtimeException exception)
     {
-        _exception = exception;
-
         NotifySocketStateChange(SocketState.Error);
 
         foreach (var handler in _errorEventHandlers)
@@ -351,6 +340,7 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     /// </summary>
     private void HandleSocketOpened()
     {
+        _reconnectionAttempts = 0;
         _hasSuccessfullyConnectedOnce = true;
 
         // Was a reconnection attempt
@@ -362,9 +352,7 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
 
         Debugger.Instance.Log(this, $"Socket Connected to: {EndpointUrl}");
 
-        _reconnectTokenSource?.Cancel();
         _heartbeatTokenSource?.Cancel();
-
         _hasPendingHeartbeat = false;
         _heartbeatTokenSource = new CancellationTokenSource();
         Task.Run(EmitHeartbeat, _heartbeatTokenSource.Token);
@@ -394,7 +382,9 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     {
         Debugger.Instance.Log(this, $"Socket Reconnection: {reconnectionInfo.Type}");
 
-        if (reconnectionInfo.Type != ReconnectionType.Initial) _isReconnecting = true;
+        if (reconnectionInfo.Type != ReconnectionType.Initial)
+            _isReconnecting = true;
+
         HandleSocketOpened();
     }
 
@@ -435,20 +425,26 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     }
 
     /// <summary>
-    /// Handles socket errors, attempts reconnection if the error occurs after a successful connection has been
-    /// established at least once.
+    /// Handles socket errors, increments reconnection count if a connection has been established at least once.
     /// </summary>
     /// <param name="disconnectionInfo"></param>
     /// <exception cref="Exception"></exception>
     private void HandleSocketError(DisconnectionInfo? disconnectionInfo = null)
     {
-        if (!_hasSuccessfullyConnectedOnce && disconnectionInfo is { Exception: not RealtimeException })
+        switch (_hasSuccessfullyConnectedOnce)
         {
-            NotifyErrorOccurred(RealtimeException.FromDisconnectionInfo(disconnectionInfo));
-            return;
+            case true:
+            {
+                _isReconnecting = true;
+                _connection.ReconnectTimeout = _options.ReconnectAfterInterval(++_reconnectionAttempts);
+                var nextInterval = DateTime.Now.AddSeconds(_connection.ReconnectTimeout.Value.Seconds).ToLocalTime();
+                Debugger.Instance.Log(this, $"Next reconnection attempt will occur at: {nextInterval}");
+                break;
+            }
+            case false when disconnectionInfo is { Exception: not RealtimeException }:
+                NotifyErrorOccurred(RealtimeException.FromDisconnectionInfo(disconnectionInfo));
+                break;
         }
-
-        AttemptReconnection();
     }
 
     /// <summary>
@@ -456,49 +452,10 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     /// </summary>
     private void HandleSocketClosed(DisconnectionInfo? disconnectionInfo = null)
     {
-        Debugger.Instance.Log(this, $"Socket Closed.", disconnectionInfo?.Exception);
-
-        if (disconnectionInfo?.Type != DisconnectionType.ByUser)
-            AttemptReconnection();
+        Debugger.Instance.Log(this, $"Socket Closed at {DateTime.Now.ToLocalTime()}", disconnectionInfo?.Exception);
     }
 
     #endregion
-
-    /// <summary>
-    /// Handles reconnecting.
-    /// </summary>
-    private void AttemptReconnection()
-    {
-        // Make sure that the connection closed handler doesn't get called repeatedly.
-        if (_isReconnecting) return;
-
-        var tries = 1;
-        _reconnectTokenSource?.Cancel();
-        _reconnectTokenSource = new CancellationTokenSource();
-
-        async Task Reconnect()
-        {
-            _isReconnecting = true;
-
-            while (!_reconnectTokenSource.IsCancellationRequested)
-            {
-                // Delay reconnection for a set interval, by default it increases the
-                // time between executions.
-                var delay = _options.ReconnectAfterInterval(tries++);
-
-                Debugger.Instance.Log(this,
-                    $"Socket Reconnection Attempt: [Tries: {tries}, Delay: {delay.Seconds}s, Started: {DateTime.Now.ToShortTimeString()}]");
-
-                await _connection.Stop(WebSocketCloseStatus.EndpointUnavailable, "Closed");
-
-                await Task.Delay(delay, _reconnectTokenSource.Token);
-
-                await Connect();
-            }
-        }
-
-        Task.Run(Reconnect, _reconnectTokenSource.Token);
-    }
 
     /// <summary>
     /// Generates an incrementing identifier for message references - this reference is used
