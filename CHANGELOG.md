@@ -1,5 +1,41 @@
 ﻿# Changelog
 
+## 6.0.0 - 2023-05-22
+
+- Merges [#28](https://github.com/supabase-community/realtime-csharp/pull/28) and [#30](https://github.com/supabase-community/realtime-csharp/pull/30)
+- The realtime client now takes a "fail-fast" approach. On establishing an initial connection, client will throw
+  a `RealtimeException` in `ConnectAsync()` if the socket server is unreachable. After an initial connection has been
+  established, the **client will continue attempting reconnections indefinitely until disconnected.**
+- [Major, New] C# `EventHandlers` have been changed to `delegates`. This should allow for cleaner event data access over
+  the previous subclassed `EventArgs` setup. Events are scoped accordingly. For example, the `RealtimeSocket` error
+  handlers will receive events regarding socket connectivity; whereas the `RealtimeChannel` error handlers will receive
+  events according to `Channel` joining/leaving/etc. This is implemented with the following methods prefixed by (
+  Add/Remove/Clear):
+	- `RealtimeBroadcast.AddBroadcastEventHandler`
+	- `RealtimePresence.AddPresenceEventHandler`
+	- `RealtimeSocket.AddStateChangedHandler`
+	- `RealtimeSocket.AddMessageReceivedHandler`
+	- `RealtimeSocket.AddHeartbeatHandler`
+	- `RealtimeSocket.AddErrorHandler`
+	- `RealtimeClient.AddDebugHandler`
+	- `RealtimeClient.AddStateChangedHandler`
+	- `RealtimeChannel.AddPostgresChangeHandler`
+	- `RealtimeChannel.AddMessageReceivedHandler`
+	- `RealtimeChannel.AddErrorHandler`
+	- `Push.AddMessageReceivedHandler`
+- [Major, new] `ClientOptions.Logger` has been removed in favor of `Client.AddDebugHandler()` which allows for
+  implementing custom logging solutions if desired.
+	- A simple logger can be set up with the following:
+  ```c#
+  client.AddDebugHandler((sender, message, exception) => Debug.WriteLine(message));
+  ```
+- [Major] `Connect()` has been marked `Obsolete` in favor of `ConnectAsync()`
+- Custom reconnection logic has been removed in favor of using the built-in logic from `Websocket.Client@4.6.1`.
+- Exceptions that are handled within this library have been marked as `RealtimeException`s.
+- The local, docker-composed test suite has been brought back (as opposed to remotely testing on live supabase servers)
+  to test against.
+- Comments have been added throughout the entire codebase and an `XML` file is now generated on build.
+
 ## 5.0.5 - 2023-04-27
 
 - Re: [#27](https://github.com/supabase-community/realtime-csharp/issues/27) `PostgresChangesOptions` was not setting `listenType` in constructor. Thanks [@Kuffs2205](https://github.com/Kuffs2205)

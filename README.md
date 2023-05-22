@@ -45,29 +45,9 @@
   to test against.
 - Comments have been added throughout the entire codebase and an `XML` file is now generated on build.
 
-## BREAKING CHANGES MOVING FROM v4.x.x to v5.x.x
+---
 
 **See realtime-csharp in action [here](https://multiplayer-csharp.azurewebsites.net/).**
-
-## Changes:
-
-- [Major, New] `Channel.PostgresChanges` event will receive the wildcard `*` changes event, not `Channel.OnMessage`.
-- [Major] `Channel.OnInsert`, `Channel.OnUpdate`, and `Channel.OnDelete` now conform to the server's payload
-  of `Response.Payload.**Data**`
-- [Major] `Channel.OnInsert`, `Channel.OnUpdate`, and `Channel.OnDelete` now return `PostgresChangesEventArgs`
-- [Minor] Rename `Channel` to `RealtimeChannel`
-- Supports better handling of disconnects in `RealtimeSocket` and adds a `Client.OnReconnect` event.
-- [Minor] Moves `ChannelOptions` to `Channel.ChannelOptions`
-- [Minor] Moves `ChannelStateChangedEventArgs` to `Channel.ChannelStateChangedEventArgs`
-- [Minor] Moves `Push` to `Channel.Push`
-- [Minor] Moves `Channel.ChannelState` to `Constants.ChannelState`
-- [Minor] Moves `SocketResponse`, `SocketRequest`, `SocketResponsePayload`, `SocketResponseEventArgs`,
-  and `SocketStateChangedEventArgs` to `Socket` namespace.
-- [New] Adds `RealtimeBroadcast`
-- [New] Adds `RealtimePresence`
-- [Improvement] Better handling of disconnection/reconnection
-
----
 
 `realtime-csharp` is written as a client library for [supabase/realtime](https://github.com/supabase/realtime).
 
@@ -160,6 +140,7 @@ broadcast.AddBroadcastEventHandler((sender, _) =>
 {
     // Retrieved typed model.
     var state = broadcast.Current();
+    
     Debug.WriteLine($"{state.Payload}: {state.Payload.MouseX}:{state.Payload.MouseY}");
 });
 await channel.Subscribe();
@@ -208,7 +189,8 @@ var presenceId = Guid.NewGuid().ToString();
 
 var channel = supabase.Realtime.Channel("last-seen");
 var presence = channel.Register<UserPresence>(presenceId);
-presence.AddPresenceEventHandler(IRealtimePresence.EventType.Sync, (sender, type) =>
+
+presence.AddPresenceEventHandler(EventType.Sync, (sender, type) =>
 {
     foreach (var state in presence.CurrentState)
     {
