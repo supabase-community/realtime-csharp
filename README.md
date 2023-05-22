@@ -86,21 +86,20 @@ have `await`-able signatures
 which allow Users to be assured that a connection exists prior to interacting with it.
 
 ```c#
-var endpoint = "ws://localhost:3000";
+var endpoint = "ws://realtime-dev.localhost:4000/socket";
 client = new Client(endpoint);
 
-await client.Connect();
+await client.ConnectAsync();
 
-var channel = client.Channel("realtime", "public", "users");
+// Shorthand for registering a postgres_changes subscription
+var channel = client.Channel("realtime", "public", "todos");
 
-// Per Event Callbacks
-channel.OnInsert += (sender, args) => Console.WriteLine("New item inserted: " + args.Response.Payload.Record);
-channel.OnUpdate += (sender, args) => Console.WriteLine("Item updated: " + args.Response.Payload.Record);
-channel.OnDelete += (sender, args) => Console.WriteLine("Item deleted");
-
-// Callback for any event, INSERT, UPDATE, or DELETE
-channel.OnPostgresChange += (sender, args) => Debug.WriteLine(args.Message.Event);
-
+// Listen to Updates
+channel.AddPostgresChangeHandler(ListenType.Updates, (_, change) =>
+{
+    var model = change.Model<Todo>();
+    var oldModel = change.OldModel<Todo>();
+});
 await channel.Subscribe();
 ```
 
@@ -111,9 +110,10 @@ calling:
 // ...
 var channel = client.Channel("realtime", "public", "users");
 
-channel.OnInsert += (sender, args) => {
-    var model = args.Response.Model<User>();
-};
+channel.AddPostgresChangeHandler(ListenType.Inserts, (_, change) =>
+{
+    var model = change.Model<Todo>();
+});
 
 await channel.Subscribe();
 ```
@@ -156,11 +156,12 @@ class MouseStatus
 var channel = supabase.Realtime.Channel("cursor");
 
 var broadcast = channel.Register<MouseBroadcast>(false, true);
-broadcast<MouseBroadcast>().OnBroadcast += (sender, args) =>
+broadcast.AddBroadcastEventHandler((sender, _) =>
 {
-	var state = broadcast.Current();
-	Debug.WriteLine($"{state.Payload}: {state.Payload.MouseX}:{state.Payload.MouseY}");
-};
+    // Retrieved typed model.
+    var state = broadcast.Current();
+    Debug.WriteLine($"{state.Payload}: {state.Payload.MouseX}:{state.Payload.MouseY}");
+});
 await channel.Subscribe();
 ```
 
@@ -207,15 +208,15 @@ var presenceId = Guid.NewGuid().ToString();
 
 var channel = supabase.Realtime.Channel("last-seen");
 var presence = channel.Register<UserPresence>(presenceId);
-presence.OnSync += (sender, args) =>
+presence.AddPresenceEventHandler(IRealtimePresence.EventType.Sync, (sender, type) =>
 {
-	foreach (var state in presence.CurrentState)
-	{
-                var userId = state.Key;
-                var lastSeen = state.Value.First().LastSeen;
-		Debug.WriteLine($"{userId}: {lastSeen}");
-	}
-};
+    foreach (var state in presence.CurrentState)
+    {
+        var userId = state.Key;
+        var lastSeen = state.Value.First().LastSeen;
+        Debug.WriteLine($"{userId}: {lastSeen}");
+    }
+});
 await channel.Subscribe();
 ```
 
@@ -251,21 +252,21 @@ parties from accessing your data."
 ```c#
 var channel = supabase.Realtime.Channel("public-users");
 channel.Register(new PostgresChangesOptions("public", "users"));
-channel.PostgresChanges += (sender, args) =>
+channel.AddPostgresChangeHandler(ListenType.All, (sender, change) =>
 {
-	switch (args.Response.Data.Type)
-	{
-		case EventType.Insert:
-			// Handle user created
-			break;
-		case EventType.Update:
-			// Handle user updated
-			break;
-		case EventType.Delete:
-			// Handle user deleted
-			break;
-	}
-};
+    switch (change.Event)
+    {
+        case EventType.Insert:
+            // User has been created
+            break;
+        case EventType.Update:
+            // User has been updated
+            break;
+        case EventType.Delete:
+            // User has been deleted
+            break;
+    }
+});
 await channel.Subscribe();
 ```
 
