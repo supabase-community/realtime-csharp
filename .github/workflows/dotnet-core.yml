@@ -38,4 +38,4 @@ jobs:
         run: dotnet build ./Realtime/Realtime.csproj --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./RealtimeTests/RealtimeTests.csproj --no-restore
+        run: docker run --rm --network host -v $(pwd):/app -w /app/RealtimeTests mcr.microsoft.com/dotnet/sdk:7.0 dotnet test
