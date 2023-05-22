@@ -28,9 +28,6 @@ namespace RealtimeTests
             client.AddDebugHandler((sender, message, exception) =>
             {
                 Debug.WriteLine(message);
-
-                if (exception != null)
-                    throw exception;
             });
 
             return client;

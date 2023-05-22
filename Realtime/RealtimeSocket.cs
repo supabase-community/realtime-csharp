@@ -260,7 +260,7 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
     {
         NotifySocketStateChange(SocketState.Error);
 
-        foreach (var handler in _errorEventHandlers)
+        foreach (var handler in _errorEventHandlers.ToArray())
             handler.Invoke(this, exception);
     }
 

@@ -102,7 +102,8 @@ public interface IRealtimeClient<TSocket, TChannel>
     /// </summary>
     /// <param name="callback"></param>
     /// <returns></returns>
-    IRealtimeClient<TSocket, TChannel> Connect(Action<IRealtimeClient<TSocket, TChannel>>? callback = null);
+    IRealtimeClient<TSocket, TChannel> Connect(
+        Action<IRealtimeClient<TSocket, TChannel>, RealtimeException?>? callback = null);
 
     /// <summary>
     /// Connect to the <see cref="Socket"/>

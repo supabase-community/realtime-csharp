@@ -11,6 +11,7 @@ using Supabase.Realtime.Exceptions;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.PostgresChanges;
 using Supabase.Realtime.Socket;
+using Websocket.Client.Exceptions;
 using static Supabase.Realtime.Constants;
 
 #pragma warning disable CS1570
@@ -107,12 +108,12 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
 
 
     /// <summary>
-    /// Attempts to connect to the socket given the params specified in `Initialize`
+    /// Attempts to connect to the Socket.
     ///
     /// Returns when socket has successfully connected.
     /// </summary>
     /// <returns></returns>
-    public Task<IRealtimeClient<RealtimeSocket, RealtimeChannel>> ConnectAsync()
+    public async Task<IRealtimeClient<RealtimeSocket, RealtimeChannel>> ConnectAsync()
     {
         var tsc = new TaskCompletionSource<IRealtimeClient<RealtimeSocket, RealtimeChannel>>();
 
@@ -122,53 +123,57 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
             tsc.SetResult(this);
         }
 
-        IRealtimeSocket.StateEventHandler? socketStateHandler = null;
-        IRealtimeSocket.ErrorEventHandler? errorEventHandler = null;
+        Socket = new RealtimeSocket(_realtimeUrl, Options);
 
+        IRealtimeSocket.StateEventHandler? socketStateHandler = null;
         socketStateHandler = (sender, state) =>
         {
             if (state != SocketState.Open) return;
 
             sender.RemoveStateChangedHandler(socketStateHandler!);
-            sender.RemoveErrorHandler(errorEventHandler!);
+
+            Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
+            Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
 
             NotifySocketStateChange(SocketState.Open);
             tsc.TrySetResult(this);
         };
 
-        errorEventHandler = (sender, ex) =>
-        {
-            NotifySocketStateChange(SocketState.Error);
-            tsc.TrySetException(ex);
-        };
-
-        Socket = new RealtimeSocket(_realtimeUrl, Options);
         Socket.AddStateChangedHandler(socketStateHandler);
-        Socket.AddErrorHandler(errorEventHandler);
-        Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
-        Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
-        Socket.Connect();
 
-        return tsc.Task;
+        try
+        {
+            await Socket.Connect();
+            await tsc.Task;
+        }
+        catch (WebsocketException ex)
+        {
+            Socket = null;
+            throw new RealtimeException(ex.Message, ex) { Reason = FailureHint.Reason.SocketError };
+        }
+
+        return this;
     }
 
     /// <summary>
-    /// Attempts to connect to the socket given the params specified in `Initialize`
+    /// Attempts to connect to the socket.
     ///
     /// Provides a callback for `Task` driven returns.
     /// </summary>
     /// <param name="callback"></param>
     /// <returns></returns>
+    [Obsolete("Please use ConnectAsync() instead.")]
     public IRealtimeClient<RealtimeSocket, RealtimeChannel> Connect(
-        Action<IRealtimeClient<RealtimeSocket, RealtimeChannel>>? callback = null)
+        Action<IRealtimeClient<RealtimeSocket, RealtimeChannel>, RealtimeException?>? callback = null)
     {
         if (Socket != null)
         {
             Debugger.Instance.Log(this, "Calling `ConnectAsync` on an instance that already has a `Socket`");
-            callback?.Invoke(this);
+            callback?.Invoke(this, null);
             return this;
         }
-
+        
+        Socket = new RealtimeSocket(_realtimeUrl, Options);
         IRealtimeSocket.StateEventHandler? socketStateHandler = null;
         IRealtimeSocket.ErrorEventHandler? errorEventHandler = null;
 
@@ -176,22 +181,25 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
         {
             if (state != SocketState.Open) return;
 
+            Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
+            Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
+            
             sender.RemoveStateChangedHandler(socketStateHandler!);
             sender.RemoveErrorHandler(errorEventHandler!);
+            
             NotifySocketStateChange(SocketState.Open);
+            
+            callback?.Invoke(this, null);
         };
 
         errorEventHandler = (sender, ex) =>
         {
-            NotifySocketStateChange(SocketState.Error);
-            throw ex;
+            Socket = null;
+            callback?.Invoke(this, ex);
         };
 
-        Socket = new RealtimeSocket(_realtimeUrl, Options);
         Socket.AddStateChangedHandler(socketStateHandler);
         Socket.AddErrorHandler(errorEventHandler);
-        Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
-        Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
         Socket.Connect();
 
         return this;
@@ -243,14 +251,16 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// Adds a debug handler, likely used within a logging solution of some kind.
     /// </summary>
     /// <param name="handler"></param>
-    public void AddDebugHandler(IRealtimeDebugger.DebugEventHandler handler) => Debugger.Instance.AddDebugHandler(handler);
+    public void AddDebugHandler(IRealtimeDebugger.DebugEventHandler handler) =>
+        Debugger.Instance.AddDebugHandler(handler);
 
 
     /// <summary>
     /// Removes a debug handler
     /// </summary>
     /// <param name="handler"></param>
-    public void RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler handler) => Debugger.Instance.RemoveDebugHandler(handler);
+    public void RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler handler) =>
+        Debugger.Instance.RemoveDebugHandler(handler);
 
     /// <summary>
     /// Clears debug handlers;
