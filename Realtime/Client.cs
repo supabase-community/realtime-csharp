@@ -133,13 +133,13 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
             sender.RemoveErrorHandler(errorEventHandler!);
 
             NotifySocketStateChange(SocketState.Open);
-            tsc.SetResult(this);
+            tsc.TrySetResult(this);
         };
 
         errorEventHandler = (sender, ex) =>
         {
             NotifySocketStateChange(SocketState.Error);
-            tsc.SetException(ex);
+            tsc.TrySetException(ex);
         };
 
         Socket = new RealtimeSocket(_realtimeUrl, Options);
