@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Delegate IRealtimePresence.PresenceEventHandler
+    <title>Delegate IRealtimeClient&lt;TSocket, TChannel&gt;.SocketStateEventHandler
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Delegate IRealtimePresence.PresenceEventHandler
+    <meta name="title" content="Delegate IRealtimeClient&lt;TSocket, TChannel&gt;.SocketStateEventHandler
    ">
     <meta name="generator" content="docfx 2.56.7.0">
     
@@ -68,19 +68,19 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler">
+            <article class="content wrap" id="_content" data-uid="Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketStateEventHandler">
   
   
-  <h1 id="Supabase_Realtime_Interfaces_IRealtimePresence_PresenceEventHandler" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler" class="text-break">Delegate IRealtimePresence.PresenceEventHandler
+  <h1 id="Supabase_Realtime_Interfaces_IRealtimeClient_2_SocketStateEventHandler" data-uid="Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketStateEventHandler" class="text-break">Delegate IRealtimeClient&lt;TSocket, TChannel&gt;.SocketStateEventHandler
   </h1>
-  <div class="markdown level0 summary"><p>Delegate for a presence event.</p>
+  <div class="markdown level0 summary"><p>Delegate for handling a socket state event, this can be seen as synonymous with the Client's state.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.Interfaces.html">Supabase.Realtime.Interfaces</a></h6>
   <h6><strong>Assembly</strong>: Realtime.dll</h6>
-  <h5 id="Supabase_Realtime_Interfaces_IRealtimePresence_PresenceEventHandler_syntax">Syntax</h5>
+  <h5 id="Supabase_Realtime_Interfaces_IRealtimeClient_2_SocketStateEventHandler_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public delegate void PresenceEventHandler(IRealtimePresence sender, IRealtimePresence.EventType eventType);</code></pre>
+    <pre><code class="lang-csharp hljs">public delegate void SocketStateEventHandler(IRealtimeClient&lt;TSocket, TChannel&gt; sender, Constants.SocketState state);</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -93,13 +93,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Supabase.Realtime.Interfaces.IRealtimePresence.html">IRealtimePresence</a></td>
+        <td><a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeClient-2.html">IRealtimeClient</a>&lt;TSocket, TChannel&gt;</td>
         <td><span class="parametername">sender</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Supabase.Realtime.Interfaces.IRealtimePresence.EventType.html">IRealtimePresence.EventType</a></td>
-        <td><span class="parametername">eventType</span></td>
+        <td><a class="xref" href="Supabase.Realtime.Constants.SocketState.html">Constants.SocketState</a></td>
+        <td><span class="parametername">state</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -112,10 +112,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence_PresenceEventHandler.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimeClient_2_SocketStateEventHandler.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimeClient%602.SocketStateEventHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimeClient.cs/#L44" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

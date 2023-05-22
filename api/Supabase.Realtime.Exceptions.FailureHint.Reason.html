@@ -73,7 +73,8 @@
   
   <h1 id="Supabase_Realtime_Exceptions_FailureHint_Reason" data-uid="Supabase.Realtime.Exceptions.FailureHint.Reason" class="text-break">Enum FailureHint.Reason
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Reasons for a failure</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.Exceptions.html">Supabase.Realtime.Exceptions</a></h6>
   <h6><strong>Assembly</strong>: Realtime.dll</h6>
@@ -92,20 +93,40 @@
     <thead>
     <tbody>
       <tr>
-        <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_ChannelNotOpen">ChannelNotOpen</td>
-        <td></td>
+        <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_ChannelJoinFailure">ChannelJoinFailure</td>
+        <td><p>Channel cannot be joined</p>
+</td>
       </tr>
       <tr>
-        <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_JoinFailure">JoinFailure</td>
-        <td></td>
+        <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_ChannelNotOpen">ChannelNotOpen</td>
+        <td><p>Channel is not open</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_ConnectionLost">ConnectionLost</td>
+        <td><p>Connection has been lost</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_ConnectionStale">ConnectionStale</td>
+        <td><p>No message has been received, usually given by server.
+If seen, please open an issue.</p>
+</td>
       </tr>
       <tr>
         <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_PushTimeout">PushTimeout</td>
-        <td></td>
+        <td><p>A push timeout</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_SocketError">SocketError</td>
+        <td><p>Socket has errored, either in connection or reconnection.</p>
+</td>
       </tr>
       <tr>
         <td id="Supabase_Realtime_Exceptions_FailureHint_Reason_Unknown">Unknown</td>
-        <td></td>
+        <td><p>Catchall for any kind of failure that is presently untyped.</p>
+</td>
       </tr>
     </tbody>
   </thead></thead></table>
@@ -120,7 +141,7 @@
                     <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Exceptions_FailureHint_Reason.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Exceptions.FailureHint.Reason%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Exceptions/FailureHint.cs/#L5" class="contribution-link">View Source</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Exceptions/FailureHint.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

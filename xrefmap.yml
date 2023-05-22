@@ -138,38 +138,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.ChannelOptions.SerializerSettings
   nameWithType: ChannelOptions.SerializerSettings
-- uid: Supabase.Realtime.Channel.ChannelStateChangedEventArgs
-  name: ChannelStateChangedEventArgs
-  href: api/Supabase.Realtime.Channel.ChannelStateChangedEventArgs.html
-  commentId: T:Supabase.Realtime.Channel.ChannelStateChangedEventArgs
-  fullName: Supabase.Realtime.Channel.ChannelStateChangedEventArgs
-  nameWithType: ChannelStateChangedEventArgs
-- uid: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.#ctor(Supabase.Realtime.Constants.ChannelState)
-  name: ChannelStateChangedEventArgs(Constants.ChannelState)
-  href: api/Supabase.Realtime.Channel.ChannelStateChangedEventArgs.html#Supabase_Realtime_Channel_ChannelStateChangedEventArgs__ctor_Supabase_Realtime_Constants_ChannelState_
-  commentId: M:Supabase.Realtime.Channel.ChannelStateChangedEventArgs.#ctor(Supabase.Realtime.Constants.ChannelState)
-  fullName: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.ChannelStateChangedEventArgs(Supabase.Realtime.Constants.ChannelState)
-  nameWithType: ChannelStateChangedEventArgs.ChannelStateChangedEventArgs(Constants.ChannelState)
-- uid: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.#ctor*
-  name: ChannelStateChangedEventArgs
-  href: api/Supabase.Realtime.Channel.ChannelStateChangedEventArgs.html#Supabase_Realtime_Channel_ChannelStateChangedEventArgs__ctor_
-  commentId: Overload:Supabase.Realtime.Channel.ChannelStateChangedEventArgs.#ctor
-  isSpec: "True"
-  fullName: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.ChannelStateChangedEventArgs
-  nameWithType: ChannelStateChangedEventArgs.ChannelStateChangedEventArgs
-- uid: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.State
-  name: State
-  href: api/Supabase.Realtime.Channel.ChannelStateChangedEventArgs.html#Supabase_Realtime_Channel_ChannelStateChangedEventArgs_State
-  commentId: P:Supabase.Realtime.Channel.ChannelStateChangedEventArgs.State
-  fullName: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.State
-  nameWithType: ChannelStateChangedEventArgs.State
-- uid: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.State*
-  name: State
-  href: api/Supabase.Realtime.Channel.ChannelStateChangedEventArgs.html#Supabase_Realtime_Channel_ChannelStateChangedEventArgs_State_
-  commentId: Overload:Supabase.Realtime.Channel.ChannelStateChangedEventArgs.State
-  isSpec: "True"
-  fullName: Supabase.Realtime.Channel.ChannelStateChangedEventArgs.State
-  nameWithType: ChannelStateChangedEventArgs.State
 - uid: Supabase.Realtime.Channel.Push
   name: Push
   href: api/Supabase.Realtime.Channel.Push.html
@@ -192,22 +160,22 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.Push.Push
   nameWithType: Push.Push
-- uid: Supabase.Realtime.Channel.Push.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
-  name: AddMessageReceivedListener(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_AddMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimePush_Supabase_Realtime_RealtimeChannel_Supabase_Realtime_Socket_SocketResponse__MessageEventHandler_
-  commentId: M:Supabase.Realtime.Channel.Push.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
-  name.vb: AddMessageReceivedListener(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
-  fullName: Supabase.Realtime.Channel.Push.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush<Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse>.MessageEventHandler)
-  fullName.vb: Supabase.Realtime.Channel.Push.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush(Of Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse).MessageEventHandler)
-  nameWithType: Push.AddMessageReceivedListener(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
-  nameWithType.vb: Push.AddMessageReceivedListener(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
-- uid: Supabase.Realtime.Channel.Push.AddMessageReceivedListener*
-  name: AddMessageReceivedListener
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_AddMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.Channel.Push.AddMessageReceivedListener
+- uid: Supabase.Realtime.Channel.Push.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
+  name: AddMessageReceivedHandler(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_AddMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimePush_Supabase_Realtime_RealtimeChannel_Supabase_Realtime_Socket_SocketResponse__MessageEventHandler_
+  commentId: M:Supabase.Realtime.Channel.Push.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
+  name.vb: AddMessageReceivedHandler(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
+  fullName: Supabase.Realtime.Channel.Push.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush<Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse>.MessageEventHandler)
+  fullName.vb: Supabase.Realtime.Channel.Push.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush(Of Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse).MessageEventHandler)
+  nameWithType: Push.AddMessageReceivedHandler(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
+  nameWithType.vb: Push.AddMessageReceivedHandler(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
+- uid: Supabase.Realtime.Channel.Push.AddMessageReceivedHandler*
+  name: AddMessageReceivedHandler
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_AddMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Channel.Push.AddMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Channel.Push.AddMessageReceivedListener
-  nameWithType: Push.AddMessageReceivedListener
+  fullName: Supabase.Realtime.Channel.Push.AddMessageReceivedHandler
+  nameWithType: Push.AddMessageReceivedHandler
 - uid: Supabase.Realtime.Channel.Push.Channel
   name: Channel
   href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_Channel
@@ -221,19 +189,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.Push.Channel
   nameWithType: Push.Channel
-- uid: Supabase.Realtime.Channel.Push.ClearMessageReceivedListeners
-  name: ClearMessageReceivedListeners()
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_ClearMessageReceivedListeners
-  commentId: M:Supabase.Realtime.Channel.Push.ClearMessageReceivedListeners
-  fullName: Supabase.Realtime.Channel.Push.ClearMessageReceivedListeners()
-  nameWithType: Push.ClearMessageReceivedListeners()
-- uid: Supabase.Realtime.Channel.Push.ClearMessageReceivedListeners*
-  name: ClearMessageReceivedListeners
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_ClearMessageReceivedListeners_
-  commentId: Overload:Supabase.Realtime.Channel.Push.ClearMessageReceivedListeners
+- uid: Supabase.Realtime.Channel.Push.ClearMessageReceivedHandler
+  name: ClearMessageReceivedHandler()
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_ClearMessageReceivedHandler
+  commentId: M:Supabase.Realtime.Channel.Push.ClearMessageReceivedHandler
+  fullName: Supabase.Realtime.Channel.Push.ClearMessageReceivedHandler()
+  nameWithType: Push.ClearMessageReceivedHandler()
+- uid: Supabase.Realtime.Channel.Push.ClearMessageReceivedHandler*
+  name: ClearMessageReceivedHandler
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_ClearMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Channel.Push.ClearMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Channel.Push.ClearMessageReceivedListeners
-  nameWithType: Push.ClearMessageReceivedListeners
+  fullName: Supabase.Realtime.Channel.Push.ClearMessageReceivedHandler
+  nameWithType: Push.ClearMessageReceivedHandler
 - uid: Supabase.Realtime.Channel.Push.EventName
   name: EventName
   href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_EventName
@@ -305,22 +273,22 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.Push.Ref
   nameWithType: Push.Ref
-- uid: Supabase.Realtime.Channel.Push.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
-  name: RemoveMessageReceivedListener(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_RemoveMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimePush_Supabase_Realtime_RealtimeChannel_Supabase_Realtime_Socket_SocketResponse__MessageEventHandler_
-  commentId: M:Supabase.Realtime.Channel.Push.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
-  name.vb: RemoveMessageReceivedListener(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
-  fullName: Supabase.Realtime.Channel.Push.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush<Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse>.MessageEventHandler)
-  fullName.vb: Supabase.Realtime.Channel.Push.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush(Of Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse).MessageEventHandler)
-  nameWithType: Push.RemoveMessageReceivedListener(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
-  nameWithType.vb: Push.RemoveMessageReceivedListener(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
-- uid: Supabase.Realtime.Channel.Push.RemoveMessageReceivedListener*
-  name: RemoveMessageReceivedListener
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_RemoveMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.Channel.Push.RemoveMessageReceivedListener
+- uid: Supabase.Realtime.Channel.Push.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
+  name: RemoveMessageReceivedHandler(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_RemoveMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimePush_Supabase_Realtime_RealtimeChannel_Supabase_Realtime_Socket_SocketResponse__MessageEventHandler_
+  commentId: M:Supabase.Realtime.Channel.Push.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{Supabase.Realtime.RealtimeChannel,Supabase.Realtime.Socket.SocketResponse}.MessageEventHandler)
+  name.vb: RemoveMessageReceivedHandler(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
+  fullName: Supabase.Realtime.Channel.Push.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush<Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse>.MessageEventHandler)
+  fullName.vb: Supabase.Realtime.Channel.Push.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush(Of Supabase.Realtime.RealtimeChannel, Supabase.Realtime.Socket.SocketResponse).MessageEventHandler)
+  nameWithType: Push.RemoveMessageReceivedHandler(IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler)
+  nameWithType.vb: Push.RemoveMessageReceivedHandler(IRealtimePush(Of RealtimeChannel, SocketResponse).MessageEventHandler)
+- uid: Supabase.Realtime.Channel.Push.RemoveMessageReceivedHandler*
+  name: RemoveMessageReceivedHandler
+  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_RemoveMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Channel.Push.RemoveMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Channel.Push.RemoveMessageReceivedListener
-  nameWithType: Push.RemoveMessageReceivedListener
+  fullName: Supabase.Realtime.Channel.Push.RemoveMessageReceivedHandler
+  nameWithType: Push.RemoveMessageReceivedHandler
 - uid: Supabase.Realtime.Channel.Push.Resend(System.Int32)
   name: Resend(Int32)
   href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_Resend_System_Int32_
@@ -360,19 +328,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.Push.Send
   nameWithType: Push.Send
-- uid: Supabase.Realtime.Channel.Push.Type
-  name: Type
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_Type
-  commentId: P:Supabase.Realtime.Channel.Push.Type
-  fullName: Supabase.Realtime.Channel.Push.Type
-  nameWithType: Push.Type
-- uid: Supabase.Realtime.Channel.Push.Type*
-  name: Type
-  href: api/Supabase.Realtime.Channel.Push.html#Supabase_Realtime_Channel_Push_Type_
-  commentId: Overload:Supabase.Realtime.Channel.Push.Type
-  isSpec: "True"
-  fullName: Supabase.Realtime.Channel.Push.Type
-  nameWithType: Push.Type
 - uid: Supabase.Realtime.Client
   name: Client
   href: api/Supabase.Realtime.Client.html
@@ -392,38 +347,35 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Client
   nameWithType: Client.Client
-- uid: Supabase.Realtime.Client.AddDebugListener(Action{System.String,System.Nullable{Exception}})
-  name: AddDebugListener(Action<String, Nullable<Exception>>)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddDebugListener_Action_System_String_System_Nullable_Exception___
-  commentId: M:Supabase.Realtime.Client.AddDebugListener(Action{System.String,System.Nullable{Exception}})
-  name.vb: AddDebugListener(Action(Of String, Nullable(Of Exception)))
-  fullName: Supabase.Realtime.Client.AddDebugListener(Action<System.String, System.Nullable<Exception>>)
-  fullName.vb: Supabase.Realtime.Client.AddDebugListener(Action(Of System.String, System.Nullable(Of Exception)))
-  nameWithType: Client.AddDebugListener(Action<String, Nullable<Exception>>)
-  nameWithType.vb: Client.AddDebugListener(Action(Of String, Nullable(Of Exception)))
-- uid: Supabase.Realtime.Client.AddDebugListener*
-  name: AddDebugListener
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddDebugListener_
-  commentId: Overload:Supabase.Realtime.Client.AddDebugListener
+- uid: Supabase.Realtime.Client.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  name: AddDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddDebugHandler_Supabase_Realtime_Interfaces_IRealtimeDebugger_DebugEventHandler_
+  commentId: M:Supabase.Realtime.Client.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName: Supabase.Realtime.Client.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  nameWithType: Client.AddDebugHandler(IRealtimeDebugger.DebugEventHandler)
+- uid: Supabase.Realtime.Client.AddDebugHandler*
+  name: AddDebugHandler
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddDebugHandler_
+  commentId: Overload:Supabase.Realtime.Client.AddDebugHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Client.AddDebugListener
-  nameWithType: Client.AddDebugListener
-- uid: Supabase.Realtime.Client.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketEventHandler)
-  name: AddStateChangedListener(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketEventHandler)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeClient_Supabase_Realtime_RealtimeSocket_Supabase_Realtime_RealtimeChannel__SocketEventHandler_
-  commentId: M:Supabase.Realtime.Client.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketEventHandler)
-  name.vb: AddStateChangedListener(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketEventHandler)
-  fullName: Supabase.Realtime.Client.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient<Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel>.SocketEventHandler)
-  fullName.vb: Supabase.Realtime.Client.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient(Of Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel).SocketEventHandler)
-  nameWithType: Client.AddStateChangedListener(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketEventHandler)
-  nameWithType.vb: Client.AddStateChangedListener(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketEventHandler)
-- uid: Supabase.Realtime.Client.AddStateChangedListener*
-  name: AddStateChangedListener
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddStateChangedListener_
-  commentId: Overload:Supabase.Realtime.Client.AddStateChangedListener
+  fullName: Supabase.Realtime.Client.AddDebugHandler
+  nameWithType: Client.AddDebugHandler
+- uid: Supabase.Realtime.Client.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketStateEventHandler)
+  name: AddStateChangedHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeClient_Supabase_Realtime_RealtimeSocket_Supabase_Realtime_RealtimeChannel__SocketStateEventHandler_
+  commentId: M:Supabase.Realtime.Client.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketStateEventHandler)
+  name.vb: AddStateChangedHandler(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketStateEventHandler)
+  fullName: Supabase.Realtime.Client.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient<Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel>.SocketStateEventHandler)
+  fullName.vb: Supabase.Realtime.Client.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient(Of Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel).SocketStateEventHandler)
+  nameWithType: Client.AddStateChangedHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler)
+  nameWithType.vb: Client.AddStateChangedHandler(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketStateEventHandler)
+- uid: Supabase.Realtime.Client.AddStateChangedHandler*
+  name: AddStateChangedHandler
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_AddStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.Client.AddStateChangedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Client.AddStateChangedListener
-  nameWithType: Client.AddStateChangedListener
+  fullName: Supabase.Realtime.Client.AddStateChangedHandler
+  nameWithType: Client.AddStateChangedHandler
 - uid: Supabase.Realtime.Client.Channel(System.String)
   name: Channel(String)
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_System_String_
@@ -446,28 +398,41 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Channel
   nameWithType: Client.Channel
-- uid: Supabase.Realtime.Client.ClearStateChangedListeners
-  name: ClearStateChangedListeners()
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ClearStateChangedListeners
-  commentId: M:Supabase.Realtime.Client.ClearStateChangedListeners
-  fullName: Supabase.Realtime.Client.ClearStateChangedListeners()
-  nameWithType: Client.ClearStateChangedListeners()
-- uid: Supabase.Realtime.Client.ClearStateChangedListeners*
-  name: ClearStateChangedListeners
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ClearStateChangedListeners_
-  commentId: Overload:Supabase.Realtime.Client.ClearStateChangedListeners
+- uid: Supabase.Realtime.Client.ClearDebugHandlers
+  name: ClearDebugHandlers()
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ClearDebugHandlers
+  commentId: M:Supabase.Realtime.Client.ClearDebugHandlers
+  fullName: Supabase.Realtime.Client.ClearDebugHandlers()
+  nameWithType: Client.ClearDebugHandlers()
+- uid: Supabase.Realtime.Client.ClearDebugHandlers*
+  name: ClearDebugHandlers
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ClearDebugHandlers_
+  commentId: Overload:Supabase.Realtime.Client.ClearDebugHandlers
   isSpec: "True"
-  fullName: Supabase.Realtime.Client.ClearStateChangedListeners
-  nameWithType: Client.ClearStateChangedListeners
-- uid: Supabase.Realtime.Client.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}}})
-  name: Connect(Nullable<Action<IRealtimeClient<RealtimeSocket, RealtimeChannel>>>)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_System_Nullable_Action_Supabase_Realtime_Interfaces_IRealtimeClient_Supabase_Realtime_RealtimeSocket_Supabase_Realtime_RealtimeChannel____
-  commentId: M:Supabase.Realtime.Client.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}}})
-  name.vb: Connect(Nullable(Of Action(Of IRealtimeClient(Of RealtimeSocket, RealtimeChannel))))
-  fullName: Supabase.Realtime.Client.Connect(System.Nullable<Action<Supabase.Realtime.Interfaces.IRealtimeClient<Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel>>>)
-  fullName.vb: Supabase.Realtime.Client.Connect(System.Nullable(Of Action(Of Supabase.Realtime.Interfaces.IRealtimeClient(Of Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel))))
-  nameWithType: Client.Connect(Nullable<Action<IRealtimeClient<RealtimeSocket, RealtimeChannel>>>)
-  nameWithType.vb: Client.Connect(Nullable(Of Action(Of IRealtimeClient(Of RealtimeSocket, RealtimeChannel))))
+  fullName: Supabase.Realtime.Client.ClearDebugHandlers
+  nameWithType: Client.ClearDebugHandlers
+- uid: Supabase.Realtime.Client.ClearStateChangedHandlers
+  name: ClearStateChangedHandlers()
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ClearStateChangedHandlers
+  commentId: M:Supabase.Realtime.Client.ClearStateChangedHandlers
+  fullName: Supabase.Realtime.Client.ClearStateChangedHandlers()
+  nameWithType: Client.ClearStateChangedHandlers()
+- uid: Supabase.Realtime.Client.ClearStateChangedHandlers*
+  name: ClearStateChangedHandlers
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_ClearStateChangedHandlers_
+  commentId: Overload:Supabase.Realtime.Client.ClearStateChangedHandlers
+  isSpec: "True"
+  fullName: Supabase.Realtime.Client.ClearStateChangedHandlers
+  nameWithType: Client.ClearStateChangedHandlers
+- uid: Supabase.Realtime.Client.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel},Supabase.Realtime.Exceptions.RealtimeException}})
+  name: Connect(Nullable<Action<IRealtimeClient<RealtimeSocket, RealtimeChannel>, RealtimeException>>)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_System_Nullable_Action_Supabase_Realtime_Interfaces_IRealtimeClient_Supabase_Realtime_RealtimeSocket_Supabase_Realtime_RealtimeChannel__Supabase_Realtime_Exceptions_RealtimeException___
+  commentId: M:Supabase.Realtime.Client.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel},Supabase.Realtime.Exceptions.RealtimeException}})
+  name.vb: Connect(Nullable(Of Action(Of IRealtimeClient(Of RealtimeSocket, RealtimeChannel), RealtimeException)))
+  fullName: Supabase.Realtime.Client.Connect(System.Nullable<Action<Supabase.Realtime.Interfaces.IRealtimeClient<Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel>, Supabase.Realtime.Exceptions.RealtimeException>>)
+  fullName.vb: Supabase.Realtime.Client.Connect(System.Nullable(Of Action(Of Supabase.Realtime.Interfaces.IRealtimeClient(Of Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel), Supabase.Realtime.Exceptions.RealtimeException)))
+  nameWithType: Client.Connect(Nullable<Action<IRealtimeClient<RealtimeSocket, RealtimeChannel>, RealtimeException>>)
+  nameWithType.vb: Client.Connect(Nullable(Of Action(Of IRealtimeClient(Of RealtimeSocket, RealtimeChannel), RealtimeException)))
 - uid: Supabase.Realtime.Client.Connect*
   name: Connect
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Connect_
@@ -527,22 +492,35 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Remove
   nameWithType: Client.Remove
-- uid: Supabase.Realtime.Client.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketEventHandler)
-  name: RemoveStateChangedListener(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketEventHandler)
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_RemoveStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeClient_Supabase_Realtime_RealtimeSocket_Supabase_Realtime_RealtimeChannel__SocketEventHandler_
-  commentId: M:Supabase.Realtime.Client.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketEventHandler)
-  name.vb: RemoveStateChangedListener(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketEventHandler)
-  fullName: Supabase.Realtime.Client.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient<Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel>.SocketEventHandler)
-  fullName.vb: Supabase.Realtime.Client.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient(Of Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel).SocketEventHandler)
-  nameWithType: Client.RemoveStateChangedListener(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketEventHandler)
-  nameWithType.vb: Client.RemoveStateChangedListener(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketEventHandler)
-- uid: Supabase.Realtime.Client.RemoveStateChangedListener*
-  name: RemoveStateChangedListener
-  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_RemoveStateChangedListener_
-  commentId: Overload:Supabase.Realtime.Client.RemoveStateChangedListener
+- uid: Supabase.Realtime.Client.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  name: RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_RemoveDebugHandler_Supabase_Realtime_Interfaces_IRealtimeDebugger_DebugEventHandler_
+  commentId: M:Supabase.Realtime.Client.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName: Supabase.Realtime.Client.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  nameWithType: Client.RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler)
+- uid: Supabase.Realtime.Client.RemoveDebugHandler*
+  name: RemoveDebugHandler
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_RemoveDebugHandler_
+  commentId: Overload:Supabase.Realtime.Client.RemoveDebugHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Client.RemoveStateChangedListener
-  nameWithType: Client.RemoveStateChangedListener
+  fullName: Supabase.Realtime.Client.RemoveDebugHandler
+  nameWithType: Client.RemoveDebugHandler
+- uid: Supabase.Realtime.Client.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketStateEventHandler)
+  name: RemoveStateChangedHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_RemoveStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeClient_Supabase_Realtime_RealtimeSocket_Supabase_Realtime_RealtimeChannel__SocketStateEventHandler_
+  commentId: M:Supabase.Realtime.Client.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{Supabase.Realtime.RealtimeSocket,Supabase.Realtime.RealtimeChannel}.SocketStateEventHandler)
+  name.vb: RemoveStateChangedHandler(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketStateEventHandler)
+  fullName: Supabase.Realtime.Client.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient<Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel>.SocketStateEventHandler)
+  fullName.vb: Supabase.Realtime.Client.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient(Of Supabase.Realtime.RealtimeSocket, Supabase.Realtime.RealtimeChannel).SocketStateEventHandler)
+  nameWithType: Client.RemoveStateChangedHandler(IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler)
+  nameWithType.vb: Client.RemoveStateChangedHandler(IRealtimeClient(Of RealtimeSocket, RealtimeChannel).SocketStateEventHandler)
+- uid: Supabase.Realtime.Client.RemoveStateChangedHandler*
+  name: RemoveStateChangedHandler
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_RemoveStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.Client.RemoveStateChangedHandler
+  isSpec: "True"
+  fullName: Supabase.Realtime.Client.RemoveStateChangedHandler
+  nameWithType: Client.RemoveStateChangedHandler
 - uid: Supabase.Realtime.Client.SerializerSettings
   name: SerializerSettings
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_SerializerSettings
@@ -678,19 +656,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.ClientOptions.HeartbeatInterval
   nameWithType: ClientOptions.HeartbeatInterval
-- uid: Supabase.Realtime.ClientOptions.Logger
-  name: Logger
-  href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_Logger
-  commentId: P:Supabase.Realtime.ClientOptions.Logger
-  fullName: Supabase.Realtime.ClientOptions.Logger
-  nameWithType: ClientOptions.Logger
-- uid: Supabase.Realtime.ClientOptions.Logger*
-  name: Logger
-  href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_Logger_
-  commentId: Overload:Supabase.Realtime.ClientOptions.Logger
-  isSpec: "True"
-  fullName: Supabase.Realtime.ClientOptions.Logger
-  nameWithType: ClientOptions.Logger
 - uid: Supabase.Realtime.ClientOptions.Parameters
   name: Parameters
   href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_Parameters
@@ -1012,12 +977,6 @@ references:
   commentId: F:Supabase.Realtime.Constants.TransportWebsocket
   fullName: Supabase.Realtime.Constants.TransportWebsocket
   nameWithType: Constants.TransportWebsocket
-- uid: Supabase.Realtime.Constants.WsCloseNormal
-  name: WsCloseNormal
-  href: api/Supabase.Realtime.Constants.html#Supabase_Realtime_Constants_WsCloseNormal
-  commentId: F:Supabase.Realtime.Constants.WsCloseNormal
-  fullName: Supabase.Realtime.Constants.WsCloseNormal
-  nameWithType: Constants.WsCloseNormal
 - uid: Supabase.Realtime.Converters
   name: Supabase.Realtime.Converters
   href: api/Supabase.Realtime.Converters.html
@@ -1178,44 +1137,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Converters.StringArrayConverter.WriteJson
   nameWithType: StringArrayConverter.WriteJson
-- uid: Supabase.Realtime.DebugNotification
-  name: DebugNotification
-  href: api/Supabase.Realtime.DebugNotification.html
-  commentId: T:Supabase.Realtime.DebugNotification
-  fullName: Supabase.Realtime.DebugNotification
-  nameWithType: DebugNotification
-- uid: Supabase.Realtime.DebugNotification.AddDebugListener(Action{System.String,System.Nullable{Exception}})
-  name: AddDebugListener(Action<String, Nullable<Exception>>)
-  href: api/Supabase.Realtime.DebugNotification.html#Supabase_Realtime_DebugNotification_AddDebugListener_Action_System_String_System_Nullable_Exception___
-  commentId: M:Supabase.Realtime.DebugNotification.AddDebugListener(Action{System.String,System.Nullable{Exception}})
-  name.vb: AddDebugListener(Action(Of String, Nullable(Of Exception)))
-  fullName: Supabase.Realtime.DebugNotification.AddDebugListener(Action<System.String, System.Nullable<Exception>>)
-  fullName.vb: Supabase.Realtime.DebugNotification.AddDebugListener(Action(Of System.String, System.Nullable(Of Exception)))
-  nameWithType: DebugNotification.AddDebugListener(Action<String, Nullable<Exception>>)
-  nameWithType.vb: DebugNotification.AddDebugListener(Action(Of String, Nullable(Of Exception)))
-- uid: Supabase.Realtime.DebugNotification.AddDebugListener*
-  name: AddDebugListener
-  href: api/Supabase.Realtime.DebugNotification.html#Supabase_Realtime_DebugNotification_AddDebugListener_
-  commentId: Overload:Supabase.Realtime.DebugNotification.AddDebugListener
-  isSpec: "True"
-  fullName: Supabase.Realtime.DebugNotification.AddDebugListener
-  nameWithType: DebugNotification.AddDebugListener
-- uid: Supabase.Realtime.DebugNotification.Log(System.String,System.Nullable{Exception})
-  name: Log(String, Nullable<Exception>)
-  href: api/Supabase.Realtime.DebugNotification.html#Supabase_Realtime_DebugNotification_Log_System_String_System_Nullable_Exception__
-  commentId: M:Supabase.Realtime.DebugNotification.Log(System.String,System.Nullable{Exception})
-  name.vb: Log(String, Nullable(Of Exception))
-  fullName: Supabase.Realtime.DebugNotification.Log(System.String, System.Nullable<Exception>)
-  fullName.vb: Supabase.Realtime.DebugNotification.Log(System.String, System.Nullable(Of Exception))
-  nameWithType: DebugNotification.Log(String, Nullable<Exception>)
-  nameWithType.vb: DebugNotification.Log(String, Nullable(Of Exception))
-- uid: Supabase.Realtime.DebugNotification.Log*
-  name: Log
-  href: api/Supabase.Realtime.DebugNotification.html#Supabase_Realtime_DebugNotification_Log_
-  commentId: Overload:Supabase.Realtime.DebugNotification.Log
-  isSpec: "True"
-  fullName: Supabase.Realtime.DebugNotification.Log
-  nameWithType: DebugNotification.Log
 - uid: Supabase.Realtime.Exceptions
   name: Supabase.Realtime.Exceptions
   href: api/Supabase.Realtime.Exceptions.html
@@ -1228,30 +1149,61 @@ references:
   commentId: T:Supabase.Realtime.Exceptions.FailureHint
   fullName: Supabase.Realtime.Exceptions.FailureHint
   nameWithType: FailureHint
+- uid: Supabase.Realtime.Exceptions.FailureHint.Parse(DisconnectionInfo)
+  name: Parse(DisconnectionInfo)
+  href: api/Supabase.Realtime.Exceptions.FailureHint.html#Supabase_Realtime_Exceptions_FailureHint_Parse_DisconnectionInfo_
+  commentId: M:Supabase.Realtime.Exceptions.FailureHint.Parse(DisconnectionInfo)
+  fullName: Supabase.Realtime.Exceptions.FailureHint.Parse(DisconnectionInfo)
+  nameWithType: FailureHint.Parse(DisconnectionInfo)
+- uid: Supabase.Realtime.Exceptions.FailureHint.Parse*
+  name: Parse
+  href: api/Supabase.Realtime.Exceptions.FailureHint.html#Supabase_Realtime_Exceptions_FailureHint_Parse_
+  commentId: Overload:Supabase.Realtime.Exceptions.FailureHint.Parse
+  isSpec: "True"
+  fullName: Supabase.Realtime.Exceptions.FailureHint.Parse
+  nameWithType: FailureHint.Parse
 - uid: Supabase.Realtime.Exceptions.FailureHint.Reason
   name: FailureHint.Reason
   href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html
   commentId: T:Supabase.Realtime.Exceptions.FailureHint.Reason
   fullName: Supabase.Realtime.Exceptions.FailureHint.Reason
   nameWithType: FailureHint.Reason
+- uid: Supabase.Realtime.Exceptions.FailureHint.Reason.ChannelJoinFailure
+  name: ChannelJoinFailure
+  href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_ChannelJoinFailure
+  commentId: F:Supabase.Realtime.Exceptions.FailureHint.Reason.ChannelJoinFailure
+  fullName: Supabase.Realtime.Exceptions.FailureHint.Reason.ChannelJoinFailure
+  nameWithType: FailureHint.Reason.ChannelJoinFailure
 - uid: Supabase.Realtime.Exceptions.FailureHint.Reason.ChannelNotOpen
   name: ChannelNotOpen
   href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_ChannelNotOpen
   commentId: F:Supabase.Realtime.Exceptions.FailureHint.Reason.ChannelNotOpen
   fullName: Supabase.Realtime.Exceptions.FailureHint.Reason.ChannelNotOpen
   nameWithType: FailureHint.Reason.ChannelNotOpen
-- uid: Supabase.Realtime.Exceptions.FailureHint.Reason.JoinFailure
-  name: JoinFailure
-  href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_JoinFailure
-  commentId: F:Supabase.Realtime.Exceptions.FailureHint.Reason.JoinFailure
-  fullName: Supabase.Realtime.Exceptions.FailureHint.Reason.JoinFailure
-  nameWithType: FailureHint.Reason.JoinFailure
+- uid: Supabase.Realtime.Exceptions.FailureHint.Reason.ConnectionLost
+  name: ConnectionLost
+  href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_ConnectionLost
+  commentId: F:Supabase.Realtime.Exceptions.FailureHint.Reason.ConnectionLost
+  fullName: Supabase.Realtime.Exceptions.FailureHint.Reason.ConnectionLost
+  nameWithType: FailureHint.Reason.ConnectionLost
+- uid: Supabase.Realtime.Exceptions.FailureHint.Reason.ConnectionStale
+  name: ConnectionStale
+  href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_ConnectionStale
+  commentId: F:Supabase.Realtime.Exceptions.FailureHint.Reason.ConnectionStale
+  fullName: Supabase.Realtime.Exceptions.FailureHint.Reason.ConnectionStale
+  nameWithType: FailureHint.Reason.ConnectionStale
 - uid: Supabase.Realtime.Exceptions.FailureHint.Reason.PushTimeout
   name: PushTimeout
   href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_PushTimeout
   commentId: F:Supabase.Realtime.Exceptions.FailureHint.Reason.PushTimeout
   fullName: Supabase.Realtime.Exceptions.FailureHint.Reason.PushTimeout
   nameWithType: FailureHint.Reason.PushTimeout
+- uid: Supabase.Realtime.Exceptions.FailureHint.Reason.SocketError
+  name: SocketError
+  href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_SocketError
+  commentId: F:Supabase.Realtime.Exceptions.FailureHint.Reason.SocketError
+  fullName: Supabase.Realtime.Exceptions.FailureHint.Reason.SocketError
+  nameWithType: FailureHint.Reason.SocketError
 - uid: Supabase.Realtime.Exceptions.FailureHint.Reason.Unknown
   name: Unknown
   href: api/Supabase.Realtime.Exceptions.FailureHint.Reason.html#Supabase_Realtime_Exceptions_FailureHint_Reason_Unknown
@@ -1289,32 +1241,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Exceptions.RealtimeException.RealtimeException
   nameWithType: RealtimeException.RealtimeException
-- uid: Supabase.Realtime.Exceptions.RealtimeException.AddReason
-  name: AddReason()
-  href: api/Supabase.Realtime.Exceptions.RealtimeException.html#Supabase_Realtime_Exceptions_RealtimeException_AddReason
-  commentId: M:Supabase.Realtime.Exceptions.RealtimeException.AddReason
-  fullName: Supabase.Realtime.Exceptions.RealtimeException.AddReason()
-  nameWithType: RealtimeException.AddReason()
-- uid: Supabase.Realtime.Exceptions.RealtimeException.AddReason*
-  name: AddReason
-  href: api/Supabase.Realtime.Exceptions.RealtimeException.html#Supabase_Realtime_Exceptions_RealtimeException_AddReason_
-  commentId: Overload:Supabase.Realtime.Exceptions.RealtimeException.AddReason
+- uid: Supabase.Realtime.Exceptions.RealtimeException.FromDisconnectionInfo(DisconnectionInfo)
+  name: FromDisconnectionInfo(DisconnectionInfo)
+  href: api/Supabase.Realtime.Exceptions.RealtimeException.html#Supabase_Realtime_Exceptions_RealtimeException_FromDisconnectionInfo_DisconnectionInfo_
+  commentId: M:Supabase.Realtime.Exceptions.RealtimeException.FromDisconnectionInfo(DisconnectionInfo)
+  fullName: Supabase.Realtime.Exceptions.RealtimeException.FromDisconnectionInfo(DisconnectionInfo)
+  nameWithType: RealtimeException.FromDisconnectionInfo(DisconnectionInfo)
+- uid: Supabase.Realtime.Exceptions.RealtimeException.FromDisconnectionInfo*
+  name: FromDisconnectionInfo
+  href: api/Supabase.Realtime.Exceptions.RealtimeException.html#Supabase_Realtime_Exceptions_RealtimeException_FromDisconnectionInfo_
+  commentId: Overload:Supabase.Realtime.Exceptions.RealtimeException.FromDisconnectionInfo
   isSpec: "True"
-  fullName: Supabase.Realtime.Exceptions.RealtimeException.AddReason
-  nameWithType: RealtimeException.AddReason
-- uid: Supabase.Realtime.Exceptions.RealtimeException.Content
-  name: Content
-  href: api/Supabase.Realtime.Exceptions.RealtimeException.html#Supabase_Realtime_Exceptions_RealtimeException_Content
-  commentId: P:Supabase.Realtime.Exceptions.RealtimeException.Content
-  fullName: Supabase.Realtime.Exceptions.RealtimeException.Content
-  nameWithType: RealtimeException.Content
-- uid: Supabase.Realtime.Exceptions.RealtimeException.Content*
-  name: Content
-  href: api/Supabase.Realtime.Exceptions.RealtimeException.html#Supabase_Realtime_Exceptions_RealtimeException_Content_
-  commentId: Overload:Supabase.Realtime.Exceptions.RealtimeException.Content
-  isSpec: "True"
-  fullName: Supabase.Realtime.Exceptions.RealtimeException.Content
-  nameWithType: RealtimeException.Content
+  fullName: Supabase.Realtime.Exceptions.RealtimeException.FromDisconnectionInfo
+  nameWithType: RealtimeException.FromDisconnectionInfo
 - uid: Supabase.Realtime.Exceptions.RealtimeException.Reason
   name: Reason
   href: api/Supabase.Realtime.Exceptions.RealtimeException.html#Supabase_Realtime_Exceptions_RealtimeException_Reason
@@ -1401,19 +1340,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Interfaces.IRealtimeBroadcast.Send
   nameWithType: IRealtimeBroadcast.Send
-- uid: Supabase.Realtime.Interfaces.IRealtimeBroadcast.TriggerReceived(Supabase.Realtime.Socket.SocketResponse)
-  name: TriggerReceived(SocketResponse)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.html#Supabase_Realtime_Interfaces_IRealtimeBroadcast_TriggerReceived_Supabase_Realtime_Socket_SocketResponse_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeBroadcast.TriggerReceived(Supabase.Realtime.Socket.SocketResponse)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeBroadcast.TriggerReceived(Supabase.Realtime.Socket.SocketResponse)
-  nameWithType: IRealtimeBroadcast.TriggerReceived(SocketResponse)
-- uid: Supabase.Realtime.Interfaces.IRealtimeBroadcast.TriggerReceived*
-  name: TriggerReceived
-  href: api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.html#Supabase_Realtime_Interfaces_IRealtimeBroadcast_TriggerReceived_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeBroadcast.TriggerReceived
-  isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeBroadcast.TriggerReceived
-  nameWithType: IRealtimeBroadcast.TriggerReceived
 - uid: Supabase.Realtime.Interfaces.IRealtimeChannel
   name: IRealtimeChannel
   href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html
@@ -1893,24 +1819,41 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel)
   nameWithType: IRealtimeClient<TSocket, TChannel>
   nameWithType.vb: IRealtimeClient(Of TSocket, TChannel)
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketEventHandler)
-  name: AddStateChangedListener(IRealtimeClient<TSocket, TChannel>.SocketEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_AddStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeClient__0__1__SocketEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketEventHandler)
-  name.vb: AddStateChangedListener(IRealtimeClient(Of TSocket, TChannel).SocketEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SocketEventHandler)
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SocketEventHandler)
-  nameWithType: IRealtimeClient<TSocket, TChannel>.AddStateChangedListener(IRealtimeClient<TSocket, TChannel>.SocketEventHandler)
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).AddStateChangedListener(IRealtimeClient(Of TSocket, TChannel).SocketEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedListener*
-  name: AddStateChangedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_AddStateChangedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedListener
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  name: AddDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_AddDebugHandler_Supabase_Realtime_Interfaces_IRealtimeDebugger_DebugEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.AddDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).AddDebugHandler(IRealtimeDebugger.DebugEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.AddDebugHandler*
+  name: AddDebugHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_AddDebugHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.AddDebugHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.AddStateChangedListener
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).AddStateChangedListener
-  nameWithType: IRealtimeClient<TSocket, TChannel>.AddStateChangedListener
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).AddStateChangedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.AddDebugHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).AddDebugHandler
+  nameWithType: IRealtimeClient<TSocket, TChannel>.AddDebugHandler
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).AddDebugHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketStateEventHandler)
+  name: AddStateChangedHandler(IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_AddStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeClient__0__1__SocketStateEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketStateEventHandler)
+  name.vb: AddStateChangedHandler(IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.AddStateChangedHandler(IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).AddStateChangedHandler(IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedHandler*
+  name: AddStateChangedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_AddStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.AddStateChangedHandler
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.AddStateChangedHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).AddStateChangedHandler
+  nameWithType: IRealtimeClient<TSocket, TChannel>.AddStateChangedHandler
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).AddStateChangedHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel(System.String)
   name: Channel(String)
   href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Channel_System_String_
@@ -1937,32 +1880,49 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Channel
   nameWithType: IRealtimeClient<TSocket, TChannel>.Channel
   nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Channel
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedListeners
-  name: ClearStateChangedListeners()
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ClearStateChangedListeners
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedListeners
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ClearStateChangedListeners()
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ClearStateChangedListeners()
-  nameWithType: IRealtimeClient<TSocket, TChannel>.ClearStateChangedListeners()
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ClearStateChangedListeners()
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedListeners*
-  name: ClearStateChangedListeners
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ClearStateChangedListeners_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedListeners
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearDebugHandlers
+  name: ClearDebugHandlers()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ClearDebugHandlers
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearDebugHandlers
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ClearDebugHandlers()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ClearDebugHandlers()
+  nameWithType: IRealtimeClient<TSocket, TChannel>.ClearDebugHandlers()
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ClearDebugHandlers()
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearDebugHandlers*
+  name: ClearDebugHandlers
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ClearDebugHandlers_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearDebugHandlers
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ClearStateChangedListeners
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ClearStateChangedListeners
-  nameWithType: IRealtimeClient<TSocket, TChannel>.ClearStateChangedListeners
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ClearStateChangedListeners
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}}})
-  name: Connect(Nullable<Action<IRealtimeClient<TSocket, TChannel>>>)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Connect_System_Nullable_Action_Supabase_Realtime_Interfaces_IRealtimeClient__0__1____
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}}})
-  name.vb: Connect(Nullable(Of Action(Of IRealtimeClient(Of TSocket, TChannel))))
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Connect(System.Nullable<Action<Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>>>)
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Connect(System.Nullable(Of Action(Of Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel))))
-  nameWithType: IRealtimeClient<TSocket, TChannel>.Connect(Nullable<Action<IRealtimeClient<TSocket, TChannel>>>)
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Connect(Nullable(Of Action(Of IRealtimeClient(Of TSocket, TChannel))))
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ClearDebugHandlers
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ClearDebugHandlers
+  nameWithType: IRealtimeClient<TSocket, TChannel>.ClearDebugHandlers
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ClearDebugHandlers
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedHandlers
+  name: ClearStateChangedHandlers()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ClearStateChangedHandlers
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedHandlers
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ClearStateChangedHandlers()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ClearStateChangedHandlers()
+  nameWithType: IRealtimeClient<TSocket, TChannel>.ClearStateChangedHandlers()
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ClearStateChangedHandlers()
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedHandlers*
+  name: ClearStateChangedHandlers
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_ClearStateChangedHandlers_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.ClearStateChangedHandlers
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.ClearStateChangedHandlers
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).ClearStateChangedHandlers
+  nameWithType: IRealtimeClient<TSocket, TChannel>.ClearStateChangedHandlers
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).ClearStateChangedHandlers
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1},Supabase.Realtime.Exceptions.RealtimeException}})
+  name: Connect(Nullable<Action<IRealtimeClient<TSocket, TChannel>, RealtimeException>>)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Connect_System_Nullable_Action_Supabase_Realtime_Interfaces_IRealtimeClient__0__1__Supabase_Realtime_Exceptions_RealtimeException___
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect(System.Nullable{Action{Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1},Supabase.Realtime.Exceptions.RealtimeException}})
+  name.vb: Connect(Nullable(Of Action(Of IRealtimeClient(Of TSocket, TChannel), RealtimeException)))
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Connect(System.Nullable<Action<Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>, Supabase.Realtime.Exceptions.RealtimeException>>)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Connect(System.Nullable(Of Action(Of Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel), Supabase.Realtime.Exceptions.RealtimeException)))
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Connect(Nullable<Action<IRealtimeClient<TSocket, TChannel>, RealtimeException>>)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Connect(Nullable(Of Action(Of IRealtimeClient(Of TSocket, TChannel), RealtimeException)))
 - uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Connect*
   name: Connect
   href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Connect_
@@ -2040,24 +2000,41 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Remove
   nameWithType: IRealtimeClient<TSocket, TChannel>.Remove
   nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Remove
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketEventHandler)
-  name: RemoveStateChangedListener(IRealtimeClient<TSocket, TChannel>.SocketEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_RemoveStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeClient__0__1__SocketEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketEventHandler)
-  name.vb: RemoveStateChangedListener(IRealtimeClient(Of TSocket, TChannel).SocketEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SocketEventHandler)
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SocketEventHandler)
-  nameWithType: IRealtimeClient<TSocket, TChannel>.RemoveStateChangedListener(IRealtimeClient<TSocket, TChannel>.SocketEventHandler)
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedListener(IRealtimeClient(Of TSocket, TChannel).SocketEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedListener*
-  name: RemoveStateChangedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_RemoveStateChangedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedListener
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  name: RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_RemoveDebugHandler_Supabase_Realtime_Interfaces_IRealtimeDebugger_DebugEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveDebugHandler*
+  name: RemoveDebugHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_RemoveDebugHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveDebugHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.RemoveStateChangedListener
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedListener
-  nameWithType: IRealtimeClient<TSocket, TChannel>.RemoveStateChangedListener
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.RemoveDebugHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).RemoveDebugHandler
+  nameWithType: IRealtimeClient<TSocket, TChannel>.RemoveDebugHandler
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).RemoveDebugHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketStateEventHandler)
+  name: RemoveStateChangedHandler(IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_RemoveStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeClient__0__1__SocketStateEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient{`0,`1}.SocketStateEventHandler)
+  name.vb: RemoveStateChangedHandler(IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.RemoveStateChangedHandler(IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedHandler(IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedHandler*
+  name: RemoveStateChangedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_RemoveStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeClient`2.RemoveStateChangedHandler
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.RemoveStateChangedHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedHandler
+  nameWithType: IRealtimeClient<TSocket, TChannel>.RemoveStateChangedHandler
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).RemoveStateChangedHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.SerializerSettings
   name: SerializerSettings
   href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_SerializerSettings
@@ -2109,15 +2086,15 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Socket
   nameWithType: IRealtimeClient<TSocket, TChannel>.Socket
   nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Socket
-- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketEventHandler
-  name: IRealtimeClient<TSocket, TChannel>.SocketEventHandler
-  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.SocketEventHandler.html
-  commentId: T:Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketEventHandler
-  name.vb: IRealtimeClient(Of TSocket, TChannel).SocketEventHandler
-  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SocketEventHandler
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SocketEventHandler
-  nameWithType: IRealtimeClient<TSocket, TChannel>.SocketEventHandler
-  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).SocketEventHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketStateEventHandler
+  name: IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.SocketStateEventHandler.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeClient`2.SocketStateEventHandler
+  name.vb: IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler
+  nameWithType: IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).SocketStateEventHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Subscriptions
   name: Subscriptions
   href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Subscriptions
@@ -2135,6 +2112,73 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Subscriptions
   nameWithType: IRealtimeClient<TSocket, TChannel>.Subscriptions
   nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Subscriptions
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger
+  name: IRealtimeDebugger
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeDebugger
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger
+  nameWithType: IRealtimeDebugger
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  name: AddDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_AddDebugHandler_Supabase_Realtime_Interfaces_IRealtimeDebugger_DebugEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeDebugger.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.AddDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  nameWithType: IRealtimeDebugger.AddDebugHandler(IRealtimeDebugger.DebugEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.AddDebugHandler*
+  name: AddDebugHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_AddDebugHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeDebugger.AddDebugHandler
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.AddDebugHandler
+  nameWithType: IRealtimeDebugger.AddDebugHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.ClearDebugHandlers
+  name: ClearDebugHandlers()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_ClearDebugHandlers
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeDebugger.ClearDebugHandlers
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.ClearDebugHandlers()
+  nameWithType: IRealtimeDebugger.ClearDebugHandlers()
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.ClearDebugHandlers*
+  name: ClearDebugHandlers
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_ClearDebugHandlers_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeDebugger.ClearDebugHandlers
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.ClearDebugHandlers
+  nameWithType: IRealtimeDebugger.ClearDebugHandlers
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler
+  name: IRealtimeDebugger.DebugEventHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler
+  nameWithType: IRealtimeDebugger.DebugEventHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.Log(System.Object,System.String,System.Nullable{Exception})
+  name: Log(Object, String, Nullable<Exception>)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_Log_System_Object_System_String_System_Nullable_Exception__
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeDebugger.Log(System.Object,System.String,System.Nullable{Exception})
+  name.vb: Log(Object, String, Nullable(Of Exception))
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.Log(System.Object, System.String, System.Nullable<Exception>)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeDebugger.Log(System.Object, System.String, System.Nullable(Of Exception))
+  nameWithType: IRealtimeDebugger.Log(Object, String, Nullable<Exception>)
+  nameWithType.vb: IRealtimeDebugger.Log(Object, String, Nullable(Of Exception))
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.Log*
+  name: Log
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_Log_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeDebugger.Log
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.Log
+  nameWithType: IRealtimeDebugger.Log
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  name: RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_RemoveDebugHandler_Supabase_Realtime_Interfaces_IRealtimeDebugger_DebugEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeDebugger.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.RemoveDebugHandler(Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler)
+  nameWithType: IRealtimeDebugger.RemoveDebugHandler(IRealtimeDebugger.DebugEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeDebugger.RemoveDebugHandler*
+  name: RemoveDebugHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html#Supabase_Realtime_Interfaces_IRealtimeDebugger_RemoveDebugHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeDebugger.RemoveDebugHandler
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeDebugger.RemoveDebugHandler
+  nameWithType: IRealtimeDebugger.RemoveDebugHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimePresence
   name: IRealtimePresence
   href: api/Supabase.Realtime.Interfaces.IRealtimePresence.html
@@ -2229,32 +2273,6 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Interfaces.IRealtimePresence.Track
   nameWithType: IRealtimePresence.Track
-- uid: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff(Supabase.Realtime.Socket.SocketResponse)
-  name: TriggerDiff(SocketResponse)
-  href: api/Supabase.Realtime.Interfaces.IRealtimePresence.html#Supabase_Realtime_Interfaces_IRealtimePresence_TriggerDiff_Supabase_Realtime_Socket_SocketResponse_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff(Supabase.Realtime.Socket.SocketResponse)
-  fullName: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff(Supabase.Realtime.Socket.SocketResponse)
-  nameWithType: IRealtimePresence.TriggerDiff(SocketResponse)
-- uid: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff*
-  name: TriggerDiff
-  href: api/Supabase.Realtime.Interfaces.IRealtimePresence.html#Supabase_Realtime_Interfaces_IRealtimePresence_TriggerDiff_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff
-  isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff
-  nameWithType: IRealtimePresence.TriggerDiff
-- uid: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync(Supabase.Realtime.Socket.SocketResponse)
-  name: TriggerSync(SocketResponse)
-  href: api/Supabase.Realtime.Interfaces.IRealtimePresence.html#Supabase_Realtime_Interfaces_IRealtimePresence_TriggerSync_Supabase_Realtime_Socket_SocketResponse_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync(Supabase.Realtime.Socket.SocketResponse)
-  fullName: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync(Supabase.Realtime.Socket.SocketResponse)
-  nameWithType: IRealtimePresence.TriggerSync(SocketResponse)
-- uid: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync*
-  name: TriggerSync
-  href: api/Supabase.Realtime.Interfaces.IRealtimePresence.html#Supabase_Realtime_Interfaces_IRealtimePresence_TriggerSync_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync
-  isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync
-  nameWithType: IRealtimePresence.TriggerSync
 - uid: Supabase.Realtime.Interfaces.IRealtimePush`2
   name: IRealtimePush<TChannel, TSocketResponse>
   href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html
@@ -2264,24 +2282,24 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse)
   nameWithType: IRealtimePush<TChannel, TSocketResponse>
   nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse)
-- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
-  name: AddMessageReceivedListener(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_AddMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimePush__0__1__MessageEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
-  name.vb: AddMessageReceivedListener(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
-  nameWithType: IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedListener(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
-  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedListener(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedListener*
-  name: AddMessageReceivedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_AddMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedListener
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
+  name: AddMessageReceivedHandler(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_AddMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimePush__0__1__MessageEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
+  name.vb: AddMessageReceivedHandler(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedHandler(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedHandler(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedHandler*
+  name: AddMessageReceivedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_AddMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.AddMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedListener
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedListener
-  nameWithType: IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedListener
-  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedHandler
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.AddMessageReceivedHandler
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).AddMessageReceivedHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Channel
   name: Channel
   href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Channel
@@ -2299,23 +2317,23 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Channel
   nameWithType: IRealtimePush<TChannel, TSocketResponse>.Channel
   nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Channel
-- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedListeners
-  name: ClearMessageReceivedListeners()
-  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_ClearMessageReceivedListeners
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedListeners
-  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedListeners()
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedListeners()
-  nameWithType: IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedListeners()
-  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedListeners()
-- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedListeners*
-  name: ClearMessageReceivedListeners
-  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_ClearMessageReceivedListeners_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedListeners
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedHandler
+  name: ClearMessageReceivedHandler()
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_ClearMessageReceivedHandler
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedHandler
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedHandler()
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedHandler()
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedHandler()
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedHandler()
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedHandler*
+  name: ClearMessageReceivedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_ClearMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.ClearMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedListeners
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedListeners
-  nameWithType: IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedListeners
-  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedListeners
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedHandler
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.ClearMessageReceivedHandler
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).ClearMessageReceivedHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimePush`2.EventName
   name: EventName
   href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_EventName
@@ -2418,24 +2436,24 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).Ref
   nameWithType: IRealtimePush<TChannel, TSocketResponse>.Ref
   nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).Ref
-- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
-  name: RemoveMessageReceivedListener(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_RemoveMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimePush__0__1__MessageEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
-  name.vb: RemoveMessageReceivedListener(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
-  nameWithType: IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedListener(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
-  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedListener(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedListener*
-  name: RemoveMessageReceivedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_RemoveMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedListener
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
+  name: RemoveMessageReceivedHandler(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_RemoveMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimePush__0__1__MessageEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush{`0,`1}.MessageEventHandler)
+  name.vb: RemoveMessageReceivedHandler(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedHandler(IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler)
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedHandler(IRealtimePush(Of TChannel, TSocketResponse).MessageEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedHandler*
+  name: RemoveMessageReceivedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_RemoveMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePush`2.RemoveMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedListener
-  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedListener
-  nameWithType: IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedListener
-  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedHandler
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedHandler
+  nameWithType: IRealtimePush<TChannel, TSocketResponse>.RemoveMessageReceivedHandler
+  nameWithType.vb: IRealtimePush(Of TChannel, TSocketResponse).RemoveMessageReceivedHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimePush`2.Resend(System.Int32)
   name: Resend(Int32)
   href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html#Supabase_Realtime_Interfaces_IRealtimePush_2_Resend_System_Int32_
@@ -2493,84 +2511,110 @@ references:
   commentId: T:Supabase.Realtime.Interfaces.IRealtimeSocket
   fullName: Supabase.Realtime.Interfaces.IRealtimeSocket
   nameWithType: IRealtimeSocket
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  name: AddHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddHeartbeatListener_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  nameWithType: IRealtimeSocket.AddHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatListener*
-  name: AddHeartbeatListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddHeartbeatListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatListener
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  name: AddErrorHandler(IRealtimeSocket.ErrorEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddErrorHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_ErrorEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  nameWithType: IRealtimeSocket.AddErrorHandler(IRealtimeSocket.ErrorEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddErrorHandler*
+  name: AddErrorHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddErrorHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.AddErrorHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatListener
-  nameWithType: IRealtimeSocket.AddHeartbeatListener
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  name: AddMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  nameWithType: IRealtimeSocket.AddMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedListener*
-  name: AddMessageReceivedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddErrorHandler
+  nameWithType: IRealtimeSocket.AddErrorHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  name: AddHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddHeartbeatHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  nameWithType: IRealtimeSocket.AddHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatHandler*
+  name: AddHeartbeatHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddHeartbeatHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedListener
-  nameWithType: IRealtimeSocket.AddMessageReceivedListener
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  name: AddStateChangedListener(IRealtimeSocket.StateEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  nameWithType: IRealtimeSocket.AddStateChangedListener(IRealtimeSocket.StateEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedListener*
-  name: AddStateChangedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddStateChangedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddHeartbeatHandler
+  nameWithType: IRealtimeSocket.AddHeartbeatHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  name: AddMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  nameWithType: IRealtimeSocket.AddMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedHandler*
+  name: AddMessageReceivedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedListener
-  nameWithType: IRealtimeSocket.AddStateChangedListener
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatListeners
-  name: ClearHeartbeatListeners()
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearHeartbeatListeners
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatListeners
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatListeners()
-  nameWithType: IRealtimeSocket.ClearHeartbeatListeners()
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatListeners*
-  name: ClearHeartbeatListeners
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearHeartbeatListeners_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatListeners
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddMessageReceivedHandler
+  nameWithType: IRealtimeSocket.AddMessageReceivedHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  name: AddStateChangedHandler(IRealtimeSocket.StateEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  nameWithType: IRealtimeSocket.AddStateChangedHandler(IRealtimeSocket.StateEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedHandler*
+  name: AddStateChangedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_AddStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatListeners
-  nameWithType: IRealtimeSocket.ClearHeartbeatListeners
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedListeners
-  name: ClearMessageReceivedListeners()
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearMessageReceivedListeners
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedListeners
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedListeners()
-  nameWithType: IRealtimeSocket.ClearMessageReceivedListeners()
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedListeners*
-  name: ClearMessageReceivedListeners
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearMessageReceivedListeners_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedListeners
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.AddStateChangedHandler
+  nameWithType: IRealtimeSocket.AddStateChangedHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearErrorHandlers
+  name: ClearErrorHandlers()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearErrorHandlers
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearErrorHandlers
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearErrorHandlers()
+  nameWithType: IRealtimeSocket.ClearErrorHandlers()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearErrorHandlers*
+  name: ClearErrorHandlers
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearErrorHandlers_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearErrorHandlers
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedListeners
-  nameWithType: IRealtimeSocket.ClearMessageReceivedListeners
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedListeners
-  name: ClearStateChangedListeners()
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearStateChangedListeners
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedListeners
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedListeners()
-  nameWithType: IRealtimeSocket.ClearStateChangedListeners()
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedListeners*
-  name: ClearStateChangedListeners
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearStateChangedListeners_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedListeners
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearErrorHandlers
+  nameWithType: IRealtimeSocket.ClearErrorHandlers
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatHandlers
+  name: ClearHeartbeatHandlers()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearHeartbeatHandlers
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatHandlers
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatHandlers()
+  nameWithType: IRealtimeSocket.ClearHeartbeatHandlers()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatHandlers*
+  name: ClearHeartbeatHandlers
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearHeartbeatHandlers_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatHandlers
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedListeners
-  nameWithType: IRealtimeSocket.ClearStateChangedListeners
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearHeartbeatHandlers
+  nameWithType: IRealtimeSocket.ClearHeartbeatHandlers
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedHandlers
+  name: ClearMessageReceivedHandlers()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearMessageReceivedHandlers
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedHandlers
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedHandlers()
+  nameWithType: IRealtimeSocket.ClearMessageReceivedHandlers()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedHandlers*
+  name: ClearMessageReceivedHandlers
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearMessageReceivedHandlers_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedHandlers
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearMessageReceivedHandlers
+  nameWithType: IRealtimeSocket.ClearMessageReceivedHandlers
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedHandlers
+  name: ClearStateChangedHandlers()
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearStateChangedHandlers
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedHandlers
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedHandlers()
+  nameWithType: IRealtimeSocket.ClearStateChangedHandlers()
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedHandlers*
+  name: ClearStateChangedHandlers
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ClearStateChangedHandlers_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedHandlers
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ClearStateChangedHandlers
+  nameWithType: IRealtimeSocket.ClearStateChangedHandlers
 - uid: Supabase.Realtime.Interfaces.IRealtimeSocket.Connect
   name: Connect()
   href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_Connect
@@ -2597,6 +2641,12 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Disconnect
   nameWithType: IRealtimeSocket.Disconnect
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler
+  name: IRealtimeSocket.ErrorEventHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler.html
+  commentId: T:Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler
+  nameWithType: IRealtimeSocket.ErrorEventHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimeSocket.GetLatency
   name: GetLatency()
   href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_GetLatency
@@ -2661,58 +2711,58 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.Push
   nameWithType: IRealtimeSocket.Push
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  name: RemoveHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveHeartbeatListener_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  nameWithType: IRealtimeSocket.RemoveHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatListener*
-  name: RemoveHeartbeatListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveHeartbeatListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatListener
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  name: RemoveErrorHandler(IRealtimeSocket.ErrorEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveErrorHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_ErrorEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  nameWithType: IRealtimeSocket.RemoveErrorHandler(IRealtimeSocket.ErrorEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveErrorHandler*
+  name: RemoveErrorHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveErrorHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveErrorHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatListener
-  nameWithType: IRealtimeSocket.RemoveHeartbeatListener
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  name: RemoveMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  nameWithType: IRealtimeSocket.RemoveMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedListener*
-  name: RemoveMessageReceivedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveErrorHandler
+  nameWithType: IRealtimeSocket.RemoveErrorHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  name: RemoveHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveHeartbeatHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  nameWithType: IRealtimeSocket.RemoveHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatHandler*
+  name: RemoveHeartbeatHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveHeartbeatHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedListener
-  nameWithType: IRealtimeSocket.RemoveMessageReceivedListener
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  name: RemoveStateChangedListener(IRealtimeSocket.StateEventHandler)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  nameWithType: IRealtimeSocket.RemoveStateChangedListener(IRealtimeSocket.StateEventHandler)
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedListener*
-  name: RemoveStateChangedListener
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveStateChangedListener_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedListener
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveHeartbeatHandler
+  nameWithType: IRealtimeSocket.RemoveHeartbeatHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  name: RemoveMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  nameWithType: IRealtimeSocket.RemoveMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedHandler*
+  name: RemoveMessageReceivedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedListener
-  nameWithType: IRealtimeSocket.RemoveStateChangedListener
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName(System.String)
-  name: ReplyEventName(String)
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ReplyEventName_System_String_
-  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName(System.String)
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName(System.String)
-  nameWithType: IRealtimeSocket.ReplyEventName(String)
-- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName*
-  name: ReplyEventName
-  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_ReplyEventName_
-  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveMessageReceivedHandler
+  nameWithType: IRealtimeSocket.RemoveMessageReceivedHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  name: RemoveStateChangedHandler(IRealtimeSocket.StateEventHandler)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  nameWithType: IRealtimeSocket.RemoveStateChangedHandler(IRealtimeSocket.StateEventHandler)
+- uid: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedHandler*
+  name: RemoveStateChangedHandler
+  href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.html#Supabase_Realtime_Interfaces_IRealtimeSocket_RemoveStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.ReplyEventName
-  nameWithType: IRealtimeSocket.ReplyEventName
+  fullName: Supabase.Realtime.Interfaces.IRealtimeSocket.RemoveStateChangedHandler
+  nameWithType: IRealtimeSocket.RemoveStateChangedHandler
 - uid: Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler
   name: IRealtimeSocket.StateEventHandler
   href: api/Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler.html
@@ -2860,58 +2910,58 @@ references:
   commentId: T:Supabase.Realtime.Models.BasePresence
   fullName: Supabase.Realtime.Models.BasePresence
   nameWithType: BasePresence
-- uid: Supabase.Realtime.Models.BasePresence.PheonixPrevRef
-  name: PheonixPrevRef
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PheonixPrevRef
-  commentId: P:Supabase.Realtime.Models.BasePresence.PheonixPrevRef
-  fullName: Supabase.Realtime.Models.BasePresence.PheonixPrevRef
-  nameWithType: BasePresence.PheonixPrevRef
-- uid: Supabase.Realtime.Models.BasePresence.PheonixPrevRef*
-  name: PheonixPrevRef
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PheonixPrevRef_
-  commentId: Overload:Supabase.Realtime.Models.BasePresence.PheonixPrevRef
+- uid: Supabase.Realtime.Models.BasePresence.PhoenixPrevRef
+  name: PhoenixPrevRef
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PhoenixPrevRef
+  commentId: P:Supabase.Realtime.Models.BasePresence.PhoenixPrevRef
+  fullName: Supabase.Realtime.Models.BasePresence.PhoenixPrevRef
+  nameWithType: BasePresence.PhoenixPrevRef
+- uid: Supabase.Realtime.Models.BasePresence.PhoenixPrevRef*
+  name: PhoenixPrevRef
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PhoenixPrevRef_
+  commentId: Overload:Supabase.Realtime.Models.BasePresence.PhoenixPrevRef
   isSpec: "True"
-  fullName: Supabase.Realtime.Models.BasePresence.PheonixPrevRef
-  nameWithType: BasePresence.PheonixPrevRef
-- uid: Supabase.Realtime.Models.BasePresence.PheonixRef
-  name: PheonixRef
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PheonixRef
-  commentId: P:Supabase.Realtime.Models.BasePresence.PheonixRef
-  fullName: Supabase.Realtime.Models.BasePresence.PheonixRef
-  nameWithType: BasePresence.PheonixRef
-- uid: Supabase.Realtime.Models.BasePresence.PheonixRef*
-  name: PheonixRef
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PheonixRef_
-  commentId: Overload:Supabase.Realtime.Models.BasePresence.PheonixRef
+  fullName: Supabase.Realtime.Models.BasePresence.PhoenixPrevRef
+  nameWithType: BasePresence.PhoenixPrevRef
+- uid: Supabase.Realtime.Models.BasePresence.PhoenixRef
+  name: PhoenixRef
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PhoenixRef
+  commentId: P:Supabase.Realtime.Models.BasePresence.PhoenixRef
+  fullName: Supabase.Realtime.Models.BasePresence.PhoenixRef
+  nameWithType: BasePresence.PhoenixRef
+- uid: Supabase.Realtime.Models.BasePresence.PhoenixRef*
+  name: PhoenixRef
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_PhoenixRef_
+  commentId: Overload:Supabase.Realtime.Models.BasePresence.PhoenixRef
   isSpec: "True"
-  fullName: Supabase.Realtime.Models.BasePresence.PheonixRef
-  nameWithType: BasePresence.PheonixRef
-- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixPrevRef
-  name: ShouldSerializePheonixPrevRef()
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePheonixPrevRef
-  commentId: M:Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixPrevRef
-  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixPrevRef()
-  nameWithType: BasePresence.ShouldSerializePheonixPrevRef()
-- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixPrevRef*
-  name: ShouldSerializePheonixPrevRef
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePheonixPrevRef_
-  commentId: Overload:Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixPrevRef
+  fullName: Supabase.Realtime.Models.BasePresence.PhoenixRef
+  nameWithType: BasePresence.PhoenixRef
+- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixPrevRef
+  name: ShouldSerializePhoenixPrevRef()
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePhoenixPrevRef
+  commentId: M:Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixPrevRef
+  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixPrevRef()
+  nameWithType: BasePresence.ShouldSerializePhoenixPrevRef()
+- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixPrevRef*
+  name: ShouldSerializePhoenixPrevRef
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePhoenixPrevRef_
+  commentId: Overload:Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixPrevRef
   isSpec: "True"
-  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixPrevRef
-  nameWithType: BasePresence.ShouldSerializePheonixPrevRef
-- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixRef
-  name: ShouldSerializePheonixRef()
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePheonixRef
-  commentId: M:Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixRef
-  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixRef()
-  nameWithType: BasePresence.ShouldSerializePheonixRef()
-- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixRef*
-  name: ShouldSerializePheonixRef
-  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePheonixRef_
-  commentId: Overload:Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixRef
+  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixPrevRef
+  nameWithType: BasePresence.ShouldSerializePhoenixPrevRef
+- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixRef
+  name: ShouldSerializePhoenixRef()
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePhoenixRef
+  commentId: M:Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixRef
+  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixRef()
+  nameWithType: BasePresence.ShouldSerializePhoenixRef()
+- uid: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixRef*
+  name: ShouldSerializePhoenixRef
+  href: api/Supabase.Realtime.Models.BasePresence.html#Supabase_Realtime_Models_BasePresence_ShouldSerializePhoenixRef_
+  commentId: Overload:Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixRef
   isSpec: "True"
-  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePheonixRef
-  nameWithType: BasePresence.ShouldSerializePheonixRef
+  fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixRef
+  nameWithType: BasePresence.ShouldSerializePhoenixRef
 - uid: Supabase.Realtime.PostgresChanges
   name: Supabase.Realtime.PostgresChanges
   href: api/Supabase.Realtime.PostgresChanges.html
@@ -4141,84 +4191,110 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.RealtimeSocket.RealtimeSocket
   nameWithType: RealtimeSocket.RealtimeSocket
-- uid: Supabase.Realtime.RealtimeSocket.AddHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  name: AddHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddHeartbeatListener_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
-  commentId: M:Supabase.Realtime.RealtimeSocket.AddHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  fullName: Supabase.Realtime.RealtimeSocket.AddHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  nameWithType: RealtimeSocket.AddHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-- uid: Supabase.Realtime.RealtimeSocket.AddHeartbeatListener*
-  name: AddHeartbeatListener
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddHeartbeatListener_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.AddHeartbeatListener
+- uid: Supabase.Realtime.RealtimeSocket.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  name: AddErrorHandler(IRealtimeSocket.ErrorEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddErrorHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_ErrorEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  nameWithType: RealtimeSocket.AddErrorHandler(IRealtimeSocket.ErrorEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.AddErrorHandler*
+  name: AddErrorHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddErrorHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.AddErrorHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.AddHeartbeatListener
-  nameWithType: RealtimeSocket.AddHeartbeatListener
-- uid: Supabase.Realtime.RealtimeSocket.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  name: AddMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
-  commentId: M:Supabase.Realtime.RealtimeSocket.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  fullName: Supabase.Realtime.RealtimeSocket.AddMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  nameWithType: RealtimeSocket.AddMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-- uid: Supabase.Realtime.RealtimeSocket.AddMessageReceivedListener*
-  name: AddMessageReceivedListener
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.AddMessageReceivedListener
+  fullName: Supabase.Realtime.RealtimeSocket.AddErrorHandler
+  nameWithType: RealtimeSocket.AddErrorHandler
+- uid: Supabase.Realtime.RealtimeSocket.AddHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  name: AddHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddHeartbeatHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.AddHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.AddHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  nameWithType: RealtimeSocket.AddHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.AddHeartbeatHandler*
+  name: AddHeartbeatHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddHeartbeatHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.AddHeartbeatHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.AddMessageReceivedListener
-  nameWithType: RealtimeSocket.AddMessageReceivedListener
-- uid: Supabase.Realtime.RealtimeSocket.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  name: AddStateChangedListener(IRealtimeSocket.StateEventHandler)
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
-  commentId: M:Supabase.Realtime.RealtimeSocket.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  fullName: Supabase.Realtime.RealtimeSocket.AddStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  nameWithType: RealtimeSocket.AddStateChangedListener(IRealtimeSocket.StateEventHandler)
-- uid: Supabase.Realtime.RealtimeSocket.AddStateChangedListener*
-  name: AddStateChangedListener
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddStateChangedListener_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.AddStateChangedListener
+  fullName: Supabase.Realtime.RealtimeSocket.AddHeartbeatHandler
+  nameWithType: RealtimeSocket.AddHeartbeatHandler
+- uid: Supabase.Realtime.RealtimeSocket.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  name: AddMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  nameWithType: RealtimeSocket.AddMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.AddMessageReceivedHandler*
+  name: AddMessageReceivedHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.AddMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.AddStateChangedListener
-  nameWithType: RealtimeSocket.AddStateChangedListener
-- uid: Supabase.Realtime.RealtimeSocket.ClearHeartbeatListeners
-  name: ClearHeartbeatListeners()
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearHeartbeatListeners
-  commentId: M:Supabase.Realtime.RealtimeSocket.ClearHeartbeatListeners
-  fullName: Supabase.Realtime.RealtimeSocket.ClearHeartbeatListeners()
-  nameWithType: RealtimeSocket.ClearHeartbeatListeners()
-- uid: Supabase.Realtime.RealtimeSocket.ClearHeartbeatListeners*
-  name: ClearHeartbeatListeners
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearHeartbeatListeners_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.ClearHeartbeatListeners
+  fullName: Supabase.Realtime.RealtimeSocket.AddMessageReceivedHandler
+  nameWithType: RealtimeSocket.AddMessageReceivedHandler
+- uid: Supabase.Realtime.RealtimeSocket.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  name: AddStateChangedHandler(IRealtimeSocket.StateEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  nameWithType: RealtimeSocket.AddStateChangedHandler(IRealtimeSocket.StateEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.AddStateChangedHandler*
+  name: AddStateChangedHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_AddStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.AddStateChangedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.ClearHeartbeatListeners
-  nameWithType: RealtimeSocket.ClearHeartbeatListeners
-- uid: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedListeners
-  name: ClearMessageReceivedListeners()
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearMessageReceivedListeners
-  commentId: M:Supabase.Realtime.RealtimeSocket.ClearMessageReceivedListeners
-  fullName: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedListeners()
-  nameWithType: RealtimeSocket.ClearMessageReceivedListeners()
-- uid: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedListeners*
-  name: ClearMessageReceivedListeners
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearMessageReceivedListeners_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.ClearMessageReceivedListeners
+  fullName: Supabase.Realtime.RealtimeSocket.AddStateChangedHandler
+  nameWithType: RealtimeSocket.AddStateChangedHandler
+- uid: Supabase.Realtime.RealtimeSocket.ClearErrorHandlers
+  name: ClearErrorHandlers()
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearErrorHandlers
+  commentId: M:Supabase.Realtime.RealtimeSocket.ClearErrorHandlers
+  fullName: Supabase.Realtime.RealtimeSocket.ClearErrorHandlers()
+  nameWithType: RealtimeSocket.ClearErrorHandlers()
+- uid: Supabase.Realtime.RealtimeSocket.ClearErrorHandlers*
+  name: ClearErrorHandlers
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearErrorHandlers_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.ClearErrorHandlers
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedListeners
-  nameWithType: RealtimeSocket.ClearMessageReceivedListeners
-- uid: Supabase.Realtime.RealtimeSocket.ClearStateChangedListeners
-  name: ClearStateChangedListeners()
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearStateChangedListeners
-  commentId: M:Supabase.Realtime.RealtimeSocket.ClearStateChangedListeners
-  fullName: Supabase.Realtime.RealtimeSocket.ClearStateChangedListeners()
-  nameWithType: RealtimeSocket.ClearStateChangedListeners()
-- uid: Supabase.Realtime.RealtimeSocket.ClearStateChangedListeners*
-  name: ClearStateChangedListeners
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearStateChangedListeners_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.ClearStateChangedListeners
+  fullName: Supabase.Realtime.RealtimeSocket.ClearErrorHandlers
+  nameWithType: RealtimeSocket.ClearErrorHandlers
+- uid: Supabase.Realtime.RealtimeSocket.ClearHeartbeatHandlers
+  name: ClearHeartbeatHandlers()
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearHeartbeatHandlers
+  commentId: M:Supabase.Realtime.RealtimeSocket.ClearHeartbeatHandlers
+  fullName: Supabase.Realtime.RealtimeSocket.ClearHeartbeatHandlers()
+  nameWithType: RealtimeSocket.ClearHeartbeatHandlers()
+- uid: Supabase.Realtime.RealtimeSocket.ClearHeartbeatHandlers*
+  name: ClearHeartbeatHandlers
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearHeartbeatHandlers_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.ClearHeartbeatHandlers
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.ClearStateChangedListeners
-  nameWithType: RealtimeSocket.ClearStateChangedListeners
+  fullName: Supabase.Realtime.RealtimeSocket.ClearHeartbeatHandlers
+  nameWithType: RealtimeSocket.ClearHeartbeatHandlers
+- uid: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedHandlers
+  name: ClearMessageReceivedHandlers()
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearMessageReceivedHandlers
+  commentId: M:Supabase.Realtime.RealtimeSocket.ClearMessageReceivedHandlers
+  fullName: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedHandlers()
+  nameWithType: RealtimeSocket.ClearMessageReceivedHandlers()
+- uid: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedHandlers*
+  name: ClearMessageReceivedHandlers
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearMessageReceivedHandlers_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.ClearMessageReceivedHandlers
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeSocket.ClearMessageReceivedHandlers
+  nameWithType: RealtimeSocket.ClearMessageReceivedHandlers
+- uid: Supabase.Realtime.RealtimeSocket.ClearStateChangedHandlers
+  name: ClearStateChangedHandlers()
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearStateChangedHandlers
+  commentId: M:Supabase.Realtime.RealtimeSocket.ClearStateChangedHandlers
+  fullName: Supabase.Realtime.RealtimeSocket.ClearStateChangedHandlers()
+  nameWithType: RealtimeSocket.ClearStateChangedHandlers()
+- uid: Supabase.Realtime.RealtimeSocket.ClearStateChangedHandlers*
+  name: ClearStateChangedHandlers
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ClearStateChangedHandlers_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.ClearStateChangedHandlers
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeSocket.ClearStateChangedHandlers
+  nameWithType: RealtimeSocket.ClearStateChangedHandlers
 - uid: Supabase.Realtime.RealtimeSocket.Connect
   name: Connect()
   href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_Connect
@@ -4297,45 +4373,58 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.RealtimeSocket.Push
   nameWithType: RealtimeSocket.Push
-- uid: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  name: RemoveHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveHeartbeatListener_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
-  commentId: M:Supabase.Realtime.RealtimeSocket.RemoveHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  fullName: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatListener(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
-  nameWithType: RealtimeSocket.RemoveHeartbeatListener(IRealtimeSocket.HeartbeatEventHandler)
-- uid: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatListener*
-  name: RemoveHeartbeatListener
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveHeartbeatListener_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.RemoveHeartbeatListener
+- uid: Supabase.Realtime.RealtimeSocket.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  name: RemoveErrorHandler(IRealtimeSocket.ErrorEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveErrorHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_ErrorEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)
+  nameWithType: RealtimeSocket.RemoveErrorHandler(IRealtimeSocket.ErrorEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.RemoveErrorHandler*
+  name: RemoveErrorHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveErrorHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.RemoveErrorHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatListener
-  nameWithType: RealtimeSocket.RemoveHeartbeatListener
-- uid: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  name: RemoveMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveMessageReceivedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
-  commentId: M:Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  fullName: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
-  nameWithType: RealtimeSocket.RemoveMessageReceivedListener(IRealtimeSocket.MessageEventHandler)
-- uid: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedListener*
-  name: RemoveMessageReceivedListener
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveMessageReceivedListener_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedListener
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveErrorHandler
+  nameWithType: RealtimeSocket.RemoveErrorHandler
+- uid: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  name: RemoveHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveHeartbeatHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.RemoveHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)
+  nameWithType: RealtimeSocket.RemoveHeartbeatHandler(IRealtimeSocket.HeartbeatEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatHandler*
+  name: RemoveHeartbeatHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveHeartbeatHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.RemoveHeartbeatHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedListener
-  nameWithType: RealtimeSocket.RemoveMessageReceivedListener
-- uid: Supabase.Realtime.RealtimeSocket.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  name: RemoveStateChangedListener(IRealtimeSocket.StateEventHandler)
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveStateChangedListener_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
-  commentId: M:Supabase.Realtime.RealtimeSocket.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  fullName: Supabase.Realtime.RealtimeSocket.RemoveStateChangedListener(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
-  nameWithType: RealtimeSocket.RemoveStateChangedListener(IRealtimeSocket.StateEventHandler)
-- uid: Supabase.Realtime.RealtimeSocket.RemoveStateChangedListener*
-  name: RemoveStateChangedListener
-  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveStateChangedListener_
-  commentId: Overload:Supabase.Realtime.RealtimeSocket.RemoveStateChangedListener
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveHeartbeatHandler
+  nameWithType: RealtimeSocket.RemoveHeartbeatHandler
+- uid: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  name: RemoveMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)
+  nameWithType: RealtimeSocket.RemoveMessageReceivedHandler(IRealtimeSocket.MessageEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedHandler*
+  name: RemoveMessageReceivedHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveMessageReceivedHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedHandler
   isSpec: "True"
-  fullName: Supabase.Realtime.RealtimeSocket.RemoveStateChangedListener
-  nameWithType: RealtimeSocket.RemoveStateChangedListener
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedHandler
+  nameWithType: RealtimeSocket.RemoveMessageReceivedHandler
+- uid: Supabase.Realtime.RealtimeSocket.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  name: RemoveStateChangedHandler(IRealtimeSocket.StateEventHandler)
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_
+  commentId: M:Supabase.Realtime.RealtimeSocket.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)
+  nameWithType: RealtimeSocket.RemoveStateChangedHandler(IRealtimeSocket.StateEventHandler)
+- uid: Supabase.Realtime.RealtimeSocket.RemoveStateChangedHandler*
+  name: RemoveStateChangedHandler
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_RemoveStateChangedHandler_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.RemoveStateChangedHandler
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeSocket.RemoveStateChangedHandler
+  nameWithType: RealtimeSocket.RemoveStateChangedHandler
 - uid: Supabase.Realtime.RealtimeSocket.ReplyEventName(System.String)
   name: ReplyEventName(String)
   href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_ReplyEventName_System_String_
@@ -4622,81 +4711,6 @@ references:
   fullName.vb: Supabase.Realtime.Socket.SocketResponse(Of T).Payload
   nameWithType: SocketResponse<T>.Payload
   nameWithType.vb: SocketResponse(Of T).Payload
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs
-  name: SocketResponseEventArgs
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs.html
-  commentId: T:Supabase.Realtime.Socket.SocketResponseEventArgs
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs
-  nameWithType: SocketResponseEventArgs
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs.#ctor(Supabase.Realtime.Socket.SocketResponse)
-  name: SocketResponseEventArgs(SocketResponse)
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs.html#Supabase_Realtime_Socket_SocketResponseEventArgs__ctor_Supabase_Realtime_Socket_SocketResponse_
-  commentId: M:Supabase.Realtime.Socket.SocketResponseEventArgs.#ctor(Supabase.Realtime.Socket.SocketResponse)
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs.SocketResponseEventArgs(Supabase.Realtime.Socket.SocketResponse)
-  nameWithType: SocketResponseEventArgs.SocketResponseEventArgs(SocketResponse)
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs.#ctor*
-  name: SocketResponseEventArgs
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs.html#Supabase_Realtime_Socket_SocketResponseEventArgs__ctor_
-  commentId: Overload:Supabase.Realtime.Socket.SocketResponseEventArgs.#ctor
-  isSpec: "True"
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs.SocketResponseEventArgs
-  nameWithType: SocketResponseEventArgs.SocketResponseEventArgs
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs.Response
-  name: Response
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs.html#Supabase_Realtime_Socket_SocketResponseEventArgs_Response
-  commentId: P:Supabase.Realtime.Socket.SocketResponseEventArgs.Response
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs.Response
-  nameWithType: SocketResponseEventArgs.Response
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs.Response*
-  name: Response
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs.html#Supabase_Realtime_Socket_SocketResponseEventArgs_Response_
-  commentId: Overload:Supabase.Realtime.Socket.SocketResponseEventArgs.Response
-  isSpec: "True"
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs.Response
-  nameWithType: SocketResponseEventArgs.Response
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs`1
-  name: SocketResponseEventArgs<T>
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs-1.html
-  commentId: T:Supabase.Realtime.Socket.SocketResponseEventArgs`1
-  name.vb: SocketResponseEventArgs(Of T)
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs<T>
-  fullName.vb: Supabase.Realtime.Socket.SocketResponseEventArgs(Of T)
-  nameWithType: SocketResponseEventArgs<T>
-  nameWithType.vb: SocketResponseEventArgs(Of T)
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs`1.#ctor(Supabase.Realtime.Socket.SocketResponse)
-  name: SocketResponseEventArgs(SocketResponse)
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs-1.html#Supabase_Realtime_Socket_SocketResponseEventArgs_1__ctor_Supabase_Realtime_Socket_SocketResponse_
-  commentId: M:Supabase.Realtime.Socket.SocketResponseEventArgs`1.#ctor(Supabase.Realtime.Socket.SocketResponse)
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs<T>.SocketResponseEventArgs(Supabase.Realtime.Socket.SocketResponse)
-  fullName.vb: Supabase.Realtime.Socket.SocketResponseEventArgs(Of T).SocketResponseEventArgs(Supabase.Realtime.Socket.SocketResponse)
-  nameWithType: SocketResponseEventArgs<T>.SocketResponseEventArgs(SocketResponse)
-  nameWithType.vb: SocketResponseEventArgs(Of T).SocketResponseEventArgs(SocketResponse)
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs`1.#ctor*
-  name: SocketResponseEventArgs
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs-1.html#Supabase_Realtime_Socket_SocketResponseEventArgs_1__ctor_
-  commentId: Overload:Supabase.Realtime.Socket.SocketResponseEventArgs`1.#ctor
-  isSpec: "True"
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs<T>.SocketResponseEventArgs
-  fullName.vb: Supabase.Realtime.Socket.SocketResponseEventArgs(Of T).SocketResponseEventArgs
-  nameWithType: SocketResponseEventArgs<T>.SocketResponseEventArgs
-  nameWithType.vb: SocketResponseEventArgs(Of T).SocketResponseEventArgs
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs`1.Response
-  name: Response
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs-1.html#Supabase_Realtime_Socket_SocketResponseEventArgs_1_Response
-  commentId: P:Supabase.Realtime.Socket.SocketResponseEventArgs`1.Response
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs<T>.Response
-  fullName.vb: Supabase.Realtime.Socket.SocketResponseEventArgs(Of T).Response
-  nameWithType: SocketResponseEventArgs<T>.Response
-  nameWithType.vb: SocketResponseEventArgs(Of T).Response
-- uid: Supabase.Realtime.Socket.SocketResponseEventArgs`1.Response*
-  name: Response
-  href: api/Supabase.Realtime.Socket.SocketResponseEventArgs-1.html#Supabase_Realtime_Socket_SocketResponseEventArgs_1_Response_
-  commentId: Overload:Supabase.Realtime.Socket.SocketResponseEventArgs`1.Response
-  isSpec: "True"
-  fullName: Supabase.Realtime.Socket.SocketResponseEventArgs<T>.Response
-  fullName.vb: Supabase.Realtime.Socket.SocketResponseEventArgs(Of T).Response
-  nameWithType: SocketResponseEventArgs<T>.Response
-  nameWithType.vb: SocketResponseEventArgs(Of T).Response
 - uid: Supabase.Realtime.Socket.SocketResponsePayload
   name: SocketResponsePayload
   href: api/Supabase.Realtime.Socket.SocketResponsePayload.html
@@ -4954,84 +4968,3 @@ references:
   fullName.vb: Supabase.Realtime.Socket.SocketResponsePayload(Of T).Record
   nameWithType: SocketResponsePayload<T>.Record
   nameWithType.vb: SocketResponsePayload(Of T).Record
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs
-  name: SocketStateChangedEventArgs
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html
-  commentId: T:Supabase.Realtime.Socket.SocketStateChangedEventArgs
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs
-  nameWithType: SocketStateChangedEventArgs
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.#ctor(Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState,EventArgs)
-  name: SocketStateChangedEventArgs(SocketStateChangedEventArgs.ConnectionState, EventArgs)
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs__ctor_Supabase_Realtime_Socket_SocketStateChangedEventArgs_ConnectionState_EventArgs_
-  commentId: M:Supabase.Realtime.Socket.SocketStateChangedEventArgs.#ctor(Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState,EventArgs)
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.SocketStateChangedEventArgs(Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState, EventArgs)
-  nameWithType: SocketStateChangedEventArgs.SocketStateChangedEventArgs(SocketStateChangedEventArgs.ConnectionState, EventArgs)
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.#ctor*
-  name: SocketStateChangedEventArgs
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs__ctor_
-  commentId: Overload:Supabase.Realtime.Socket.SocketStateChangedEventArgs.#ctor
-  isSpec: "True"
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.SocketStateChangedEventArgs
-  nameWithType: SocketStateChangedEventArgs.SocketStateChangedEventArgs
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.Args
-  name: Args
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_Args
-  commentId: P:Supabase.Realtime.Socket.SocketStateChangedEventArgs.Args
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.Args
-  nameWithType: SocketStateChangedEventArgs.Args
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.Args*
-  name: Args
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_Args_
-  commentId: Overload:Supabase.Realtime.Socket.SocketStateChangedEventArgs.Args
-  isSpec: "True"
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.Args
-  nameWithType: SocketStateChangedEventArgs.Args
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState
-  name: SocketStateChangedEventArgs.ConnectionState
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.html
-  commentId: T:Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState
-  nameWithType: SocketStateChangedEventArgs.ConnectionState
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Close
-  name: Close
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_ConnectionState_Close
-  commentId: F:Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Close
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Close
-  nameWithType: SocketStateChangedEventArgs.ConnectionState.Close
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Error
-  name: Error
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_ConnectionState_Error
-  commentId: F:Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Error
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Error
-  nameWithType: SocketStateChangedEventArgs.ConnectionState.Error
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Message
-  name: Message
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_ConnectionState_Message
-  commentId: F:Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Message
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Message
-  nameWithType: SocketStateChangedEventArgs.ConnectionState.Message
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Open
-  name: Open
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_ConnectionState_Open
-  commentId: F:Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Open
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Open
-  nameWithType: SocketStateChangedEventArgs.ConnectionState.Open
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Reconnected
-  name: Reconnected
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_ConnectionState_Reconnected
-  commentId: F:Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Reconnected
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.ConnectionState.Reconnected
-  nameWithType: SocketStateChangedEventArgs.ConnectionState.Reconnected
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.State
-  name: State
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_State
-  commentId: P:Supabase.Realtime.Socket.SocketStateChangedEventArgs.State
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.State
-  nameWithType: SocketStateChangedEventArgs.State
-- uid: Supabase.Realtime.Socket.SocketStateChangedEventArgs.State*
-  name: State
-  href: api/Supabase.Realtime.Socket.SocketStateChangedEventArgs.html#Supabase_Realtime_Socket_SocketStateChangedEventArgs_State_
-  commentId: Overload:Supabase.Realtime.Socket.SocketStateChangedEventArgs.State
-  isSpec: "True"
-  fullName: Supabase.Realtime.Socket.SocketStateChangedEventArgs.State
-  nameWithType: SocketStateChangedEventArgs.State

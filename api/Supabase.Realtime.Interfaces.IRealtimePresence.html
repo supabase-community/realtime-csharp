@@ -73,7 +73,8 @@
   
   <h1 id="Supabase_Realtime_Interfaces_IRealtimePresence" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence" class="text-break">Interface IRealtimePresence
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Contract representing a Realtime Presence class</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Supabase.Realtime.Interfaces.html">Supabase.Realtime.Interfaces</a></h6>
   <h6><strong>Assembly</strong>: Realtime.dll</h6>
@@ -88,15 +89,16 @@
     <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence_AddPresenceEventHandler_Supabase_Realtime_Interfaces_IRealtimePresence_EventType_Supabase_Realtime_Interfaces_IRealtimePresence_PresenceEventHandler_.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence.AddPresenceEventHandler(Supabase.Realtime.Interfaces.IRealtimePresence.EventType%2CSupabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L24">View Source</a>
+    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L49">View Source</a>
   </span>
   <a id="Supabase_Realtime_Interfaces_IRealtimePresence_AddPresenceEventHandler_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.AddPresenceEventHandler*"></a>
   <h4 id="Supabase_Realtime_Interfaces_IRealtimePresence_AddPresenceEventHandler_Supabase_Realtime_Interfaces_IRealtimePresence_EventType_Supabase_Realtime_Interfaces_IRealtimePresence_PresenceEventHandler_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.AddPresenceEventHandler(Supabase.Realtime.Interfaces.IRealtimePresence.EventType,Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler)">AddPresenceEventHandler(IRealtimePresence.EventType, IRealtimePresence.PresenceEventHandler)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Add a presence event handler</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void AddPresenceEventHandler(IRealtimePresence.EventType eventType, IRealtimePresence.PresenceEventHandler presenceEventHandler)</code></pre>
+    <pre><code class="lang-csharp hljs">void AddPresenceEventHandler(IRealtimePresence.EventType eventType, IRealtimePresence.PresenceEventHandler handler)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -115,7 +117,7 @@
       </tr>
       <tr>
         <td><a class="xref" href="Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler.html">IRealtimePresence.PresenceEventHandler</a></td>
-        <td><span class="parametername">presenceEventHandler</span></td>
+        <td><span class="parametername">handler</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -125,11 +127,12 @@
     <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence_ClearPresenceEventHandlers_System_Nullable_Supabase_Realtime_Interfaces_IRealtimePresence_EventType__.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence.ClearPresenceEventHandlers(System.Nullable%7BSupabase.Realtime.Interfaces.IRealtimePresence.EventType%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L28">View Source</a>
+    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L62">View Source</a>
   </span>
   <a id="Supabase_Realtime_Interfaces_IRealtimePresence_ClearPresenceEventHandlers_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.ClearPresenceEventHandlers*"></a>
   <h4 id="Supabase_Realtime_Interfaces_IRealtimePresence_ClearPresenceEventHandlers_System_Nullable_Supabase_Realtime_Interfaces_IRealtimePresence_EventType__" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.ClearPresenceEventHandlers(System.Nullable{Supabase.Realtime.Interfaces.IRealtimePresence.EventType})">ClearPresenceEventHandlers(Nullable&lt;IRealtimePresence.EventType&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Clear presence events.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -157,15 +160,16 @@
     <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence_RemovePresenceEventHandlers_Supabase_Realtime_Interfaces_IRealtimePresence_EventType_Supabase_Realtime_Interfaces_IRealtimePresence_PresenceEventHandler_.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence.RemovePresenceEventHandlers(Supabase.Realtime.Interfaces.IRealtimePresence.EventType%2CSupabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L26">View Source</a>
+    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L56">View Source</a>
   </span>
   <a id="Supabase_Realtime_Interfaces_IRealtimePresence_RemovePresenceEventHandlers_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.RemovePresenceEventHandlers*"></a>
   <h4 id="Supabase_Realtime_Interfaces_IRealtimePresence_RemovePresenceEventHandlers_Supabase_Realtime_Interfaces_IRealtimePresence_EventType_Supabase_Realtime_Interfaces_IRealtimePresence_PresenceEventHandler_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.RemovePresenceEventHandlers(Supabase.Realtime.Interfaces.IRealtimePresence.EventType,Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler)">RemovePresenceEventHandlers(IRealtimePresence.EventType, IRealtimePresence.PresenceEventHandler)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Remove a presence event handler</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void RemovePresenceEventHandlers(IRealtimePresence.EventType eventType, IRealtimePresence.PresenceEventHandler presenceEventHandler)</code></pre>
+    <pre><code class="lang-csharp hljs">void RemovePresenceEventHandlers(IRealtimePresence.EventType eventType, IRealtimePresence.PresenceEventHandler handler)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -184,7 +188,7 @@
       </tr>
       <tr>
         <td><a class="xref" href="Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler.html">IRealtimePresence.PresenceEventHandler</a></td>
-        <td><span class="parametername">presenceEventHandler</span></td>
+        <td><span class="parametername">handler</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -194,11 +198,12 @@
     <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence_Track_System_Nullable_System_Object__System_Int32_.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence.Track(System.Nullable%7BSystem.Object%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L19">View Source</a>
+    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L42">View Source</a>
   </span>
   <a id="Supabase_Realtime_Interfaces_IRealtimePresence_Track_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.Track*"></a>
   <h4 id="Supabase_Realtime_Interfaces_IRealtimePresence_Track_System_Nullable_System_Object__System_Int32_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.Track(System.Nullable{System.Object},System.Int32)">Track(Nullable&lt;Object&gt;, Int32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Send an arbitrary payload as a presence event, MUST be called once to register this client as an active presence.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -226,70 +231,6 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence_TriggerDiff_Supabase_Realtime_Socket_SocketResponse_.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff(Supabase.Realtime.Socket.SocketResponse)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L22">View Source</a>
-  </span>
-  <a id="Supabase_Realtime_Interfaces_IRealtimePresence_TriggerDiff_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff*"></a>
-  <h4 id="Supabase_Realtime_Interfaces_IRealtimePresence_TriggerDiff_Supabase_Realtime_Socket_SocketResponse_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.TriggerDiff(Supabase.Realtime.Socket.SocketResponse)">TriggerDiff(SocketResponse)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void TriggerDiff(SocketResponse args)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Supabase.Realtime.Socket.SocketResponse.html">SocketResponse</a></td>
-        <td><span class="parametername">args</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence_TriggerSync_Supabase_Realtime_Socket_SocketResponse_.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync(Supabase.Realtime.Socket.SocketResponse)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L21">View Source</a>
-  </span>
-  <a id="Supabase_Realtime_Interfaces_IRealtimePresence_TriggerSync_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync*"></a>
-  <h4 id="Supabase_Realtime_Interfaces_IRealtimePresence_TriggerSync_Supabase_Realtime_Socket_SocketResponse_" data-uid="Supabase.Realtime.Interfaces.IRealtimePresence.TriggerSync(Supabase.Realtime.Socket.SocketResponse)">TriggerSync(SocketResponse)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void TriggerSync(SocketResponse response)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Supabase.Realtime.Socket.SocketResponse.html">SocketResponse</a></td>
-        <td><span class="parametername">response</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 </article>
           </div>
           
@@ -301,7 +242,7 @@
                     <a href="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Interfaces_IRealtimePresence.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Interfaces.IRealtimePresence%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L8" class="contribution-link">View Source</a>
+                    <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Interfaces/IRealtimePresence.cs/#L11" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
