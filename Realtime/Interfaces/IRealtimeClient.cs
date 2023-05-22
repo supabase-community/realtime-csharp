@@ -47,18 +47,18 @@ public interface IRealtimeClient<TSocket, TChannel>
     /// Add a Socket State listener
     /// </summary>
     /// <param name="handler"></param>
-    void AddStateChangedListener(SocketStateEventHandler handler);
+    void AddStateChangedHandler(SocketStateEventHandler handler);
 
     /// <summary>
     /// Remove a Socket State listener
     /// </summary>
     /// <param name="handler"></param>
-    void RemoveStateChangedListener(SocketStateEventHandler handler);
+    void RemoveStateChangedHandler(SocketStateEventHandler handler);
 
     /// <summary>
     /// Clear socket state listeners
     /// </summary>
-    void ClearStateChangedListeners();
+    void ClearStateChangedHandlers();
 
     /// <summary>
     /// Adds a debug handler, likely used within a logging solution of some kind.

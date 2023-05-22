@@ -208,7 +208,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <summary>
     /// Adds a listener to be notified when the socket state changes.
     /// </summary>
-    public void AddStateChangedListener(
+    public void AddStateChangedHandler(
         IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler handler)
     {
         if (_socketEventHandlers.Contains(handler))
@@ -220,7 +220,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <summary>
     /// Removes a specified listener from socket state changes.
     /// </summary>
-    public void RemoveStateChangedListener(
+    public void RemoveStateChangedHandler(
         IRealtimeClient<RealtimeSocket, RealtimeChannel>.SocketStateEventHandler handler)
     {
         if (!_socketEventHandlers.Contains(handler))
@@ -232,7 +232,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <summary>
     /// Clears all of the listeners from receiving socket state changes.
     /// </summary>
-    public void ClearStateChangedListeners() =>
+    public void ClearStateChangedHandlers() =>
         _socketEventHandlers.Clear();
 
     /// <summary>

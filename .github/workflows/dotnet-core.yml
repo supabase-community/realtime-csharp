@@ -26,7 +26,7 @@ jobs:
       
       - name: Add hosts to /etc/hosts
         run: |
-          sudo echo "127.0.0.1 realtime-dev.localhost" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 localhost realtime-dev.localhost" | sudo tee -a /etc/hosts
           
       - name: Initialize Testing Stack
         run: docker-compose up -d

@@ -33,7 +33,7 @@ namespace RealtimeExample
             });
 
             realtimeClient.AddDebugHandler((sender, message, exception) => Console.WriteLine(message));
-            realtimeClient.AddStateChangedListener(SocketEventHandler);
+            realtimeClient.AddStateChangedHandler(SocketEventHandler);
 
             await realtimeClient.ConnectAsync();
 

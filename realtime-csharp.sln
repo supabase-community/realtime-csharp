@@ -21,6 +21,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeExample", "Examples
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresenceExample", "Examples\PresenceExample\PresenceExample.csproj", "{05D46011-4365-4BC6-AD7F-71BE7198EC0C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6CA44E8A-9A31-4CA0-B40B-33E30EC18A5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{DED28688-938B-4F13-9A11-0CBDB06AE5A5}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-documentation.yaml = .github\workflows\build-documentation.yaml
+		.github\workflows\deploy-realtime-example.yaml = .github\workflows\deploy-realtime-example.yaml
+		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +60,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A5BF740D-402B-40D5-954C-18DD2C6D6BE5} = {595D76A4-2809-4D38-A6FE-18785E1B3749}
 		{05D46011-4365-4BC6-AD7F-71BE7198EC0C} = {595D76A4-2809-4D38-A6FE-18785E1B3749}
+		{6CA44E8A-9A31-4CA0-B40B-33E30EC18A5C} = {0DA83318-C23A-4202-82C3-88ECB41998CD}
+		{DED28688-938B-4F13-9A11-0CBDB06AE5A5} = {6CA44E8A-9A31-4CA0-B40B-33E30EC18A5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CFFD342-4DBD-4D79-BD1C-2183939DBFD4}
