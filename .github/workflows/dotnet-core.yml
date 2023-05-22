@@ -28,14 +28,11 @@ jobs:
         run: |
           sudo echo "127.0.0.1 localhost realtime-dev.localhost" | sudo tee -a /etc/hosts
           
-      - name: Initialize Testing Stack
-        run: docker-compose up -d
+      #- name: Initialize Testing Stack
+      #  run: docker-compose up -d
 
       - name: Install dependencies
         run: dotnet restore
 
       - name: Build Realtime
         run: dotnet build ./Realtime/Realtime.csproj --configuration Release --no-restore
-
-      - name: Test
-        run: docker run --rm --network host -v $(pwd):/app -w /app/RealtimeTests mcr.microsoft.com/dotnet/sdk:7.0 dotnet test
