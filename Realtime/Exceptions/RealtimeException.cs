@@ -1,20 +1,36 @@
 using System;
+using Websocket.Client;
 
 namespace Supabase.Realtime.Exceptions;
 
-public class RealtimeException: Exception
+/// <summary>
+/// An Exception thrown within <see cref="Realtime"/>
+/// </summary>
+public class RealtimeException : Exception
 {
-    
-    public RealtimeException(string? message) : base(message) { }
-    public RealtimeException(string? message, Exception? innerException) : base(message, innerException) { }
-
-    public string? Content { get; internal set; }
-    
-    public void AddReason()
+    /// <inheritdoc />
+    public RealtimeException(string? message) : base(message)
     {
-        // Reason = FailureHint.DetectReason(this);
-        //Debug.WriteLine(Content);
     }
-    
+
+    /// <inheritdoc />
+    public RealtimeException(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
+
+    /// <summary>
+    /// A specific reason for this exception, as provided by this library.
+    /// </summary>
     public FailureHint.Reason Reason { get; internal set; }
+
+    /// <summary>
+    /// Creates exception from a <see cref="DisconnectionInfo"/> instance.
+    /// </summary>
+    /// <param name="info"></param>
+    /// <returns></returns>
+    public static RealtimeException FromDisconnectionInfo(DisconnectionInfo info) =>
+        new(info.CloseStatusDescription, info.Exception)
+        {
+            Reason = FailureHint.Parse(info)
+        };
 }

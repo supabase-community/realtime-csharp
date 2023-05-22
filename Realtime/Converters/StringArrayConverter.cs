@@ -5,51 +5,59 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 [assembly: InternalsVisibleTo("RealtimeTests")]
-namespace Supabase.Realtime.Converters
+
+namespace Supabase.Realtime.Converters;
+
+/// <summary>
+/// An string array converter that specifically parses Postgrest styled arrays `{big,string,array}` and `[1,2,3]`
+/// from strings into a <see cref="List{T}"/>.
+/// </summary>
+public class StringArrayConverter : JsonConverter
 {
-    public class StringArrayConverter : JsonConverter
+    /// <inheritdoc />
+    public override bool CanRead => true;
+
+    /// <inheritdoc />
+    public override bool CanWrite => false;
+
+    /// <inheritdoc />
+    public override bool CanConvert(Type objectType) => throw new NotImplementedException();
+
+    /// <inheritdoc />
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue,
+        JsonSerializer serializer)
     {
-        public override bool CanRead => true;
-
-        public override bool CanWrite => false;
-
-        public override bool CanConvert(Type objectType) => throw new NotImplementedException();
-
-        public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        try
         {
-            try
-            {
-                if (reader.Value != null)
-                {
-                    return Parse((string)reader.Value);
-                }
-                else
-                {
-                    JArray jo = JArray.Load(reader);
-                    string json = jo.ToString(Formatting.None);
-                    return jo.ToObject<List<string>>(serializer);
-                }
-            }
-            catch
-            {
-                return null;
-            }
+            if (reader.Value != null)
+                return Parse((string)reader.Value);
+
+            var jo = JArray.Load(reader);
+            return jo.ToObject<List<string>>(serializer);
         }
-
-        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+        catch
         {
-            throw new NotImplementedException();
+            return null;
         }
+    }
 
-        internal List<string> Parse(string value)
+    /// <inheritdoc />
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static List<string> Parse(string value)
+    {
+        var result = new List<string>();
+
+        var firstChar = value[0];
+        var lastChar = value[value.Length - 1];
+
+        switch (firstChar)
         {
-            var result = new List<string>();
-
-            var firstChar = value[0];
-            var lastChar = value[value.Length - 1];
-
             // {1,2,3}
-            if (firstChar == '{' && lastChar == '}')
+            case '{' when lastChar == '}':
             {
                 var array = value.Trim(new char[] { '{', '}' }).Split(',');
                 foreach (var item in array)
@@ -61,7 +69,7 @@ namespace Supabase.Realtime.Converters
                 return result;
             }
             // [1,2,3]
-            else if (firstChar == '[' && lastChar == ']')
+            case '[' when lastChar == ']':
             {
                 var array = value.Trim(new char[] { '[', ']' }).Split(',');
                 foreach (var item in array)
@@ -72,8 +80,8 @@ namespace Supabase.Realtime.Converters
 
                 return result;
             }
-
-            return result;
+            default:
+                return result;
         }
     }
 }

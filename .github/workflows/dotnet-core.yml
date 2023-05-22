@@ -26,7 +26,7 @@ jobs:
       
       - name: Add hosts to /etc/hosts
         run: |
-          sudo echo "127.0.0.1 realtime-dev.localhost" | sudo tee -a /etc/hosts
+          sudo echo "127.0.0.1 localhost realtime-dev.localhost" | sudo tee -a /etc/hosts
           
       - name: Initialize Testing Stack
         run: docker-compose up -d
@@ -38,4 +38,4 @@ jobs:
         run: dotnet build ./Realtime/Realtime.csproj --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./RealtimeTests/RealtimeTests.csproj --no-restore
+        run: docker run --rm --network host -v $(pwd):/app -w /app/RealtimeTests mcr.microsoft.com/dotnet/sdk:7.0 dotnet test
