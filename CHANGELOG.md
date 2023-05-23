@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 6.0.1 - 2023-05-22
+
+- Updates publishing action for future packages, includes README and icon.
+
 ## 6.0.0 - 2023-05-22
 
 - Merges [#28](https://github.com/supabase-community/realtime-csharp/pull/28) and [#30](https://github.com/supabase-community/realtime-csharp/pull/30)
