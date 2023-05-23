@@ -23,6 +23,9 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
 
+      - name: Install dependencies
+        run: dotnet restore
+        
       - name: Build Realtime
         run: dotnet build ./Realtime/Realtime.csproj --configuration Release --no-restore
      
