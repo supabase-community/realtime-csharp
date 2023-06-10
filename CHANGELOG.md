@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 6.0.2 - 2023-06-10
+
+- Updates assembly name to `Supabase.Realtime`
+
 ## 6.0.1 - 2023-05-22
 
 - Updates publishing action for future packages, includes README and icon.
