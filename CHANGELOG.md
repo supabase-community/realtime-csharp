@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 6.0.3 - 2023-06-10
+
+- Updates usage of `Supabase.Core` assembly
+
 ## 6.0.2 - 2023-06-10
 
 - Updates assembly name to `Supabase.Realtime`
