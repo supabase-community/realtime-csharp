@@ -180,8 +180,8 @@ public class RealtimeChannel : IRealtimeChannel
     }
 
     /// <summary>
-    /// Handles socket state changes, specifically when a socket reconnects this channel (if subscribed) should also
-    /// rejoin.
+    /// Handles socket state changes, specifically when a socket reconnects this channel (if previously subscribed)
+    /// should also rejoin.
     /// </summary>
     /// <param name="_"></param>
     /// <param name="state"></param>
@@ -189,7 +189,6 @@ public class RealtimeChannel : IRealtimeChannel
     {
         if (state != SocketState.Reconnect || !IsSubscribed) return;
 
-        IsSubscribed = false;
         Rejoin();
     }
 
@@ -469,7 +468,6 @@ public class RealtimeChannel : IRealtimeChannel
                 // Failure
                 case ChannelState.Closed:
                 case ChannelState.Errored:
-                    IsSubscribed = false;
                     sender.RemoveStateChangedHandler(channelCallback!);
                     JoinPush.OnTimeout -= joinPushTimeoutCallback;
                     tsc.TrySetException(_exception);
@@ -507,6 +505,7 @@ public class RealtimeChannel : IRealtimeChannel
     public IRealtimeChannel Unsubscribe()
     {
         IsSubscribed = false;
+
         NotifyStateChanged(ChannelState.Leaving);
 
         var leavePush = new Push(_socket, this, ChannelEventLeave);
