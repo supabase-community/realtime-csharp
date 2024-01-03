@@ -1,29 +1,27 @@
-name: Deploy To Azure
+name: Deploy to Azure
+
 on:
   push:
     branches:
       - master
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # checkout the repo
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0.102
+          dotnet-version: 8.x
 
-      # dotnet build and publish
-      - name: Build with dotnet
-        run: dotnet build ./Examples/PresenceExample/PresenceExample.csproj --configuration Release
-      - name: dotnet publish
-        run: |
-          dotnet publish ./Examples/PresenceExample/PresenceExample.csproj -c Release -o ./build
-      - name: "Run Azure webapp deploy action using publish profile credentials"
-        uses: azure/webapps-deploy@v1
+      - name: Build and publish
+        run: dotnet publish ./Examples/PresenceExample/PresenceExample.csproj --configuration Release --output ./publish
+
+      - name: Run Azure webapp deploy action using publish profile credentials
+        uses: azure/webapps-deploy@v2
         with:
           app-name: RealtimeExample
           publish-profile: ${{ secrets.REALTIME_EXAMPLE_PUBLISH_PROFILE }}
-          package: ./build
+          package: ./publish
