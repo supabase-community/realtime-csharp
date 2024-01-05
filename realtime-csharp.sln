@@ -9,10 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealtimeTests", "RealtimeTe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DA83318-C23A-4202-82C3-88ECB41998CD}"
 	ProjectSection(SolutionItems) = preProject
-		RealtimeTests\.runsettings = RealtimeTests\.runsettings
 		CHANGELOG.md = CHANGELOG.md
-		README.md = README.md
 		docker-compose.yml = docker-compose.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{595D76A4-2809-4D38-A6FE-18785E1B3749}"
@@ -25,9 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6CA4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{DED28688-938B-4F13-9A11-0CBDB06AE5A5}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
 		.github\workflows\build-documentation.yaml = .github\workflows\build-documentation.yaml
 		.github\workflows\deploy-realtime-example.yaml = .github\workflows\deploy-realtime-example.yaml
-		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
 		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
