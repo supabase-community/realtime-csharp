@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -23,34 +22,29 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/supabase/realtime-csharp</RepositoryUrl>
         <AssemblyName>Supabase.Realtime</AssemblyName>
-    </PropertyGroup>
-    <PropertyGroup>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
-    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
     </PropertyGroup>
-    <PropertyGroup>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    </PropertyGroup>
+
     <PropertyGroup Condition=" '$(Version)' == '' ">
         <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">6.0.4</VersionPrefix>
-        <VersionSuffix Condition=" '$(VersionSuffix)' == '' ">
-        </VersionSuffix>
+        <VersionSuffix Condition=" '$(VersionSuffix)' == '' "></VersionSuffix>
         <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
         <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
     </PropertyGroup>
+
     <ItemGroup>
-        <PackageReference Include="postgrest-csharp" Version="3.2.2" />
+        <PackageReference Include="postgrest-csharp" Version="3.4.0" />
         <PackageReference Include="supabase-core" Version="0.0.3" />
         <PackageReference Include="Websocket.Client" Version="4.6.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
+
     <ItemGroup>
-        <None Remove="Converters\" />
         <None Include="..\.github\icon.png" Pack="true" Link="icon.png" PackagePath="\" />
         <None Include="..\README.md" Pack="true" Link="README.md" PackagePath="\" />
     </ItemGroup>
