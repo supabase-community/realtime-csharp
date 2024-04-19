@@ -29,7 +29,7 @@ services:
   realtime:
     depends_on:
       - db
-    image: supabase/realtime:v2.13.0
+    image: supabase/realtime:v2.28.31
     container_name: realtime-server
     ports:
       - "4000:4000"

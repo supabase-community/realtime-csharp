@@ -118,7 +118,7 @@ public class SocketResponsePayload
     /// Either null or an array of errors.
     /// See: https://github.com/supabase/walrus/#error-states
     /// </summary>
-    [JsonProperty("errors")]
+    [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
     public List<string>? Errors { get; set; }
 
     #region Presence
