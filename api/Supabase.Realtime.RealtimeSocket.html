@@ -2,12 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class RealtimeSocket
- | realtime-csharp </title>
+      <title>Class RealtimeSocket | realtime-csharp </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class RealtimeSocket
- | realtime-csharp ">
+      <meta name="title" content="Class RealtimeSocket | realtime-csharp ">
       
+      <meta name="description" content="Socket connection handler.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -30,15 +29,15 @@
       <meta name="loc:changeTheme" content="Change theme">
       <meta name="loc:copy" content="Copy">
       <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-
-  <script type="module" src="./../public/docfx.min.js"></script>
-
-  <script>
-    const theme = localStorage.getItem('theme') || 'auto'
-    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
-  </script>
-
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
     <header class="bg-body border-bottom">
@@ -90,8 +89,7 @@
 
 
   <h1 id="Supabase_Realtime_RealtimeSocket" data-uid="Supabase.Realtime.RealtimeSocket" class="text-break">
-    Class RealtimeSocket
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L20"><i class="bi bi-code-slash"></i></a>
+Class RealtimeSocket  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -127,7 +125,7 @@
   </dl>
 
 
-  <dl class="typelist derived">
+  <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
     <div>
@@ -166,7 +164,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket__ctor_System_String_Supabase_Realtime_ClientOptions_" data-uid="Supabase.Realtime.RealtimeSocket.#ctor(System.String,Supabase.Realtime.ClientOptions)">
   RealtimeSocket(string, ClientOptions)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L68"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Initializes this Socket instance.</p>
@@ -204,7 +202,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_IsConnected" data-uid="Supabase.Realtime.RealtimeSocket.IsConnected">
   IsConnected
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns whether or not the connection is alive.</p>
@@ -240,7 +238,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_AddErrorHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_ErrorEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)">
   AddErrorHandler(ErrorEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L235"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds an error event handler.</p>
@@ -272,7 +270,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_AddHeartbeatHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.AddHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)">
   AddHeartbeatHandler(HeartbeatEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L199"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a listener to be notified when a message is received.</p>
@@ -304,7 +302,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_AddMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.AddMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)">
   AddMessageReceivedHandler(MessageEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L159"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a listener to be notified when a message is received.</p>
@@ -336,7 +334,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_AddStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.AddStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)">
   AddStateChangedHandler(StateEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L119"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a listener to be notified when the socket state changes.</p>
@@ -368,7 +366,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_ClearErrorHandlers" data-uid="Supabase.Realtime.RealtimeSocket.ClearErrorHandlers">
   ClearErrorHandlers()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L255"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears Error Event Handlers</p>
@@ -395,7 +393,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_ClearHeartbeatHandlers" data-uid="Supabase.Realtime.RealtimeSocket.ClearHeartbeatHandlers">
   ClearHeartbeatHandlers()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L229"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L228"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears all of the listeners from receiving event state changes.</p>
@@ -422,7 +420,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_ClearMessageReceivedHandlers" data-uid="Supabase.Realtime.RealtimeSocket.ClearMessageReceivedHandlers">
   ClearMessageReceivedHandlers()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L192"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears all of the listeners from receiving event state changes.</p>
@@ -449,7 +447,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_ClearStateChangedHandlers" data-uid="Supabase.Realtime.RealtimeSocket.ClearStateChangedHandlers">
   ClearStateChangedHandlers()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L153"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L152"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears all of the listeners from receiving event state changes.</p>
@@ -476,7 +474,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_Connect" data-uid="Supabase.Realtime.RealtimeSocket.Connect">
   Connect()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L88"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Connects to a socket server and registers event listeners.</p>
@@ -508,7 +506,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_Disconnect_System_Net_WebSockets_WebSocketCloseStatus_System_String_" data-uid="Supabase.Realtime.RealtimeSocket.Disconnect(System.Net.WebSockets.WebSocketCloseStatus,System.String)">
   Disconnect(WebSocketCloseStatus, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L107"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Disconnects from the socket server.</p>
@@ -542,7 +540,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_GetLatency" data-uid="Supabase.Realtime.RealtimeSocket.GetLatency">
   GetLatency()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L291"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the latency (in millis) of roundtrip time from socket to server and back.</p>
@@ -574,7 +572,7 @@
 
   <h3 id="Supabase_Realtime_RealtimeSocket_MakeMsgRef" data-uid="Supabase.Realtime.RealtimeSocket.MakeMsgRef">
   MakeMsgRef()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L465"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L464"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Generates an incrementing identifier for message references - this reference is used
@@ -607,7 +605,7 @@ to coordinate requests with their responses.</p>
 
   <h3 id="Supabase_Realtime_RealtimeSocket_Push_Supabase_Realtime_Socket_SocketRequest_" data-uid="Supabase.Realtime.RealtimeSocket.Push(Supabase.Realtime.Socket.SocketRequest)">
   Push(SocketRequest)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L274"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Pushes formatted data to the socket server.</p>
@@ -640,7 +638,7 @@ to coordinate requests with their responses.</p>
 
   <h3 id="Supabase_Realtime_RealtimeSocket_RemoveErrorHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_ErrorEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler)">
   RemoveErrorHandler(ErrorEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L246"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes an error event handler</p>
@@ -677,7 +675,7 @@ to coordinate requests with their responses.</p>
 
   <h3 id="Supabase_Realtime_RealtimeSocket_RemoveHeartbeatHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_HeartbeatEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.RemoveHeartbeatHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler)">
   RemoveHeartbeatHandler(HeartbeatEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L209"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes a specified listener from messages received.</p>
@@ -709,7 +707,7 @@ to coordinate requests with their responses.</p>
 
   <h3 id="Supabase_Realtime_RealtimeSocket_RemoveMessageReceivedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_MessageEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.RemoveMessageReceivedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler)">
   RemoveMessageReceivedHandler(MessageEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L171"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes a specified listener from messages received.</p>
@@ -741,7 +739,7 @@ to coordinate requests with their responses.</p>
 
   <h3 id="Supabase_Realtime_RealtimeSocket_RemoveStateChangedHandler_Supabase_Realtime_Interfaces_IRealtimeSocket_StateEventHandler_" data-uid="Supabase.Realtime.RealtimeSocket.RemoveStateChangedHandler(Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler)">
   RemoveStateChangedHandler(StateEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L129"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes a specified listener from socket state changes.</p>
@@ -773,7 +771,7 @@ to coordinate requests with their responses.</p>
 
   <h3 id="Supabase_Realtime_RealtimeSocket_ReplyEventName_System_String_" data-uid="Supabase.Realtime.RealtimeSocket.ReplyEventName(System.String)">
   ReplyEventName(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L472"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L471"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the expected reply event name based off a generated message ref.</p>
@@ -810,7 +808,7 @@ to coordinate requests with their responses.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L20" class="edit-link">Edit this page</a>
+          <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeSocket.cs/#L19" class="edit-link">Edit this page</a>
         </div>
 
 

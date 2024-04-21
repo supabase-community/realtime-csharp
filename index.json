@@ -92,7 +92,7 @@
   "api/Supabase.Realtime.Exceptions.RealtimeException.html": {
     "href": "api/Supabase.Realtime.Exceptions.RealtimeException.html",
     "title": "Class RealtimeException | realtime-csharp",
-    "keywords": "Class RealtimeException Namespace Supabase.Realtime.Exceptions Assembly Supabase.Realtime.dll An Exception thrown within Supabase.Realtime public class RealtimeException : Exception, ISerializable Inheritance object Exception RealtimeException Implements ISerializable Inherited Members Exception.GetBaseException() Exception.GetObjectData(SerializationInfo, StreamingContext) Exception.GetType() Exception.ToString() Exception.Data Exception.HelpLink Exception.HResult Exception.InnerException Exception.Message Exception.Source Exception.StackTrace Exception.TargetSite Exception.SerializeObjectState object.Equals(object) object.Equals(object, object) object.GetHashCode() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors RealtimeException(string?) public RealtimeException(string? message) Parameters message string RealtimeException(string?, Exception?) public RealtimeException(string? message, Exception? innerException) Parameters message string innerException Exception Properties Reason A specific reason for this exception, as provided by this library. public FailureHint.Reason Reason { get; } Property Value FailureHint.Reason Methods FromDisconnectionInfo(DisconnectionInfo) Creates exception from a Websocket.Client.DisconnectionInfo instance. public static RealtimeException FromDisconnectionInfo(DisconnectionInfo info) Parameters info DisconnectionInfo Returns RealtimeException"
+    "keywords": "Class RealtimeException Namespace Supabase.Realtime.Exceptions Assembly Supabase.Realtime.dll An Exception thrown within Supabase.Realtime public class RealtimeException : Exception, ISerializable Inheritance object Exception RealtimeException Implements ISerializable Inherited Members Exception.GetBaseException() Exception.GetObjectData(SerializationInfo, StreamingContext) Exception.GetType() Exception.ToString() Exception.Data Exception.HelpLink Exception.HResult Exception.InnerException Exception.Message Exception.Source Exception.StackTrace Exception.TargetSite Exception.SerializeObjectState object.Equals(object) object.Equals(object, object) object.GetHashCode() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors RealtimeException(string?) Initializes a new instance of the Exception class with a specified error message. public RealtimeException(string? message) Parameters message string The message that describes the error. RealtimeException(string?, Exception?) Initializes a new instance of the Exception class with a specified error message and a reference to the inner exception that is the cause of this exception. public RealtimeException(string? message, Exception? innerException) Parameters message string The error message that explains the reason for the exception. innerException Exception The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified. Properties Reason A specific reason for this exception, as provided by this library. public FailureHint.Reason Reason { get; } Property Value FailureHint.Reason Methods FromDisconnectionInfo(DisconnectionInfo) Creates exception from a Websocket.Client.DisconnectionInfo instance. public static RealtimeException FromDisconnectionInfo(DisconnectionInfo info) Parameters info DisconnectionInfo Returns RealtimeException"
   },
   "api/Supabase.Realtime.Exceptions.html": {
     "href": "api/Supabase.Realtime.Exceptions.html",
@@ -102,7 +102,7 @@
   "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.BroadcastEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.BroadcastEventHandler.html",
     "title": "Delegate IRealtimeBroadcast.BroadcastEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeBroadcast.BroadcastEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll A delegate for broadcast events public delegate void IRealtimeBroadcast.BroadcastEventHandler(IRealtimeBroadcast sender, BaseBroadcast? broadcast) Parameters sender IRealtimeBroadcast broadcast BaseBroadcast"
+    "keywords": "Delegate IRealtimeBroadcast.BroadcastEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll A delegate for broadcast events public delegate void IRealtimeBroadcast.BroadcastEventHandler(IRealtimeBroadcast sender, BaseBroadcast? broadcast) Parameters sender IRealtimeBroadcast A delegate for broadcast events broadcast BaseBroadcast A delegate for broadcast events"
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.html",
@@ -112,22 +112,22 @@
   "api/Supabase.Realtime.Interfaces.IRealtimeChannel.ErrorEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.ErrorEventHandler.html",
     "title": "Delegate IRealtimeChannel.ErrorEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeChannel.ErrorEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for errors on this channel public delegate void IRealtimeChannel.ErrorEventHandler(IRealtimeChannel sender, RealtimeException exception) Parameters sender IRealtimeChannel exception RealtimeException"
+    "keywords": "Delegate IRealtimeChannel.ErrorEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for errors on this channel public delegate void IRealtimeChannel.ErrorEventHandler(IRealtimeChannel sender, RealtimeException exception) Parameters sender IRealtimeChannel Delegate for errors on this channel exception RealtimeException Delegate for errors on this channel"
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeChannel.MessageReceivedHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.MessageReceivedHandler.html",
     "title": "Delegate IRealtimeChannel.MessageReceivedHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeChannel.MessageReceivedHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for messages received on this channel public delegate void IRealtimeChannel.MessageReceivedHandler(IRealtimeChannel sender, SocketResponse message) Parameters sender IRealtimeChannel message SocketResponse"
+    "keywords": "Delegate IRealtimeChannel.MessageReceivedHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for messages received on this channel public delegate void IRealtimeChannel.MessageReceivedHandler(IRealtimeChannel sender, SocketResponse message) Parameters sender IRealtimeChannel Delegate for messages received on this channel message SocketResponse Delegate for messages received on this channel"
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler.html",
     "title": "Delegate IRealtimeChannel.PostgresChangesHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeChannel.PostgresChangesHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for postgres changes public delegate void IRealtimeChannel.PostgresChangesHandler(IRealtimeChannel sender, PostgresChangesResponse change) Parameters sender IRealtimeChannel change PostgresChangesResponse"
+    "keywords": "Delegate IRealtimeChannel.PostgresChangesHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for postgres changes public delegate void IRealtimeChannel.PostgresChangesHandler(IRealtimeChannel sender, PostgresChangesResponse change) Parameters sender IRealtimeChannel Delegate for postgres changes change PostgresChangesResponse Delegate for postgres changes"
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeChannel.StateChangedHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.StateChangedHandler.html",
     "title": "Delegate IRealtimeChannel.StateChangedHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeChannel.StateChangedHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for channel state changes public delegate void IRealtimeChannel.StateChangedHandler(IRealtimeChannel sender, Constants.ChannelState state) Parameters sender IRealtimeChannel state Constants.ChannelState"
+    "keywords": "Delegate IRealtimeChannel.StateChangedHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for channel state changes public delegate void IRealtimeChannel.StateChangedHandler(IRealtimeChannel sender, Constants.ChannelState state) Parameters sender IRealtimeChannel Delegate for channel state changes state Constants.ChannelState Delegate for channel state changes"
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeChannel.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.html",
@@ -137,7 +137,7 @@
   "api/Supabase.Realtime.Interfaces.IRealtimeClient-2.SocketStateEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeClient-2.SocketStateEventHandler.html",
     "title": "Delegate IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling a socket state event, this can be seen as synonymous with the Client's state. public delegate void IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler(IRealtimeClient<TSocket, TChannel> sender, Constants.SocketState state) Parameters sender IRealtimeClient<TSocket, TChannel> state Constants.SocketState"
+    "keywords": "Delegate IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling a socket state event, this can be seen as synonymous with the Client's state. public delegate void IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler(IRealtimeClient<TSocket, TChannel> sender, Constants.SocketState state) Parameters sender IRealtimeClient<TSocket, TChannel> Delegate for handling a socket state event, this can be seen as synonymous with the Client's state. state Constants.SocketState Delegate for handling a socket state event, this can be seen as synonymous with the Client's state."
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html",
@@ -147,7 +147,7 @@
   "api/Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler.html",
     "title": "Delegate IRealtimeDebugger.DebugEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeDebugger.DebugEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll A debug event handler public delegate void IRealtimeDebugger.DebugEventHandler(object sender, string message, Exception? exception) Parameters sender object message string exception Exception"
+    "keywords": "Delegate IRealtimeDebugger.DebugEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll A debug event handler public delegate void IRealtimeDebugger.DebugEventHandler(object sender, string message, Exception? exception) Parameters sender object A debug event handler message string A debug event handler exception Exception A debug event handler"
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html",
@@ -162,7 +162,7 @@
   "api/Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler.html",
     "title": "Delegate IRealtimePresence.PresenceEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimePresence.PresenceEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for a presence event. public delegate void IRealtimePresence.PresenceEventHandler(IRealtimePresence sender, IRealtimePresence.EventType eventType) Parameters sender IRealtimePresence eventType IRealtimePresence.EventType"
+    "keywords": "Delegate IRealtimePresence.PresenceEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for a presence event. public delegate void IRealtimePresence.PresenceEventHandler(IRealtimePresence sender, IRealtimePresence.EventType eventType) Parameters sender IRealtimePresence Delegate for a presence event. eventType IRealtimePresence.EventType Delegate for a presence event."
   },
   "api/Supabase.Realtime.Interfaces.IRealtimePresence.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimePresence.html",
@@ -172,7 +172,7 @@
   "api/Supabase.Realtime.Interfaces.IRealtimePush-2.MessageEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimePush-2.MessageEventHandler.html",
     "title": "Delegate IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for a message event. public delegate void IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler(IRealtimePush<TChannel, TSocketResponse> sender, TSocketResponse message) Parameters sender IRealtimePush<TChannel, TSocketResponse> message TSocketResponse"
+    "keywords": "Delegate IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for a message event. public delegate void IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler(IRealtimePush<TChannel, TSocketResponse> sender, TSocketResponse message) Parameters sender IRealtimePush<TChannel, TSocketResponse> Delegate for a message event. message TSocketResponse Delegate for a message event."
   },
   "api/Supabase.Realtime.Interfaces.IRealtimePush-2.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimePush-2.html",
@@ -182,22 +182,22 @@
   "api/Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler.html",
     "title": "Delegate IRealtimeSocket.ErrorEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeSocket.ErrorEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for errors on this socket public delegate void IRealtimeSocket.ErrorEventHandler(IRealtimeSocket sender, RealtimeException exception) Parameters sender IRealtimeSocket exception RealtimeException"
+    "keywords": "Delegate IRealtimeSocket.ErrorEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for errors on this socket public delegate void IRealtimeSocket.ErrorEventHandler(IRealtimeSocket sender, RealtimeException exception) Parameters sender IRealtimeSocket Delegate for errors on this socket exception RealtimeException Delegate for errors on this socket"
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler.html",
     "title": "Delegate IRealtimeSocket.HeartbeatEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeSocket.HeartbeatEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling a heartbeat event. public delegate void IRealtimeSocket.HeartbeatEventHandler(IRealtimeSocket sender, SocketResponse heartbeat) Parameters sender IRealtimeSocket heartbeat SocketResponse"
+    "keywords": "Delegate IRealtimeSocket.HeartbeatEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling a heartbeat event. public delegate void IRealtimeSocket.HeartbeatEventHandler(IRealtimeSocket sender, SocketResponse heartbeat) Parameters sender IRealtimeSocket Delegate for handling a heartbeat event. heartbeat SocketResponse Delegate for handling a heartbeat event."
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler.html",
     "title": "Delegate IRealtimeSocket.MessageEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeSocket.MessageEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling message received events. public delegate void IRealtimeSocket.MessageEventHandler(IRealtimeSocket sender, SocketResponse message) Parameters sender IRealtimeSocket message SocketResponse"
+    "keywords": "Delegate IRealtimeSocket.MessageEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling message received events. public delegate void IRealtimeSocket.MessageEventHandler(IRealtimeSocket sender, SocketResponse message) Parameters sender IRealtimeSocket Delegate for handling message received events. message SocketResponse Delegate for handling message received events."
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler.html",
     "title": "Delegate IRealtimeSocket.StateEventHandler | realtime-csharp",
-    "keywords": "Delegate IRealtimeSocket.StateEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling socket state changes. public delegate void IRealtimeSocket.StateEventHandler(IRealtimeSocket sender, Constants.SocketState state) Parameters sender IRealtimeSocket state Constants.SocketState"
+    "keywords": "Delegate IRealtimeSocket.StateEventHandler Namespace Supabase.Realtime.Interfaces Assembly Supabase.Realtime.dll Delegate for handling socket state changes. public delegate void IRealtimeSocket.StateEventHandler(IRealtimeSocket sender, Constants.SocketState state) Parameters sender IRealtimeSocket Delegate for handling socket state changes. state Constants.SocketState Delegate for handling socket state changes."
   },
   "api/Supabase.Realtime.Interfaces.IRealtimeSocket.html": {
     "href": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.html",

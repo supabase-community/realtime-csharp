@@ -2,12 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class RealtimeException
- | realtime-csharp </title>
+      <title>Class RealtimeException | realtime-csharp </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class RealtimeException
- | realtime-csharp ">
+      <meta name="title" content="Class RealtimeException | realtime-csharp ">
       
+      <meta name="description" content="An Exception thrown within">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -30,15 +29,15 @@
       <meta name="loc:changeTheme" content="Change theme">
       <meta name="loc:copy" content="Copy">
       <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-
-  <script type="module" src="./../public/docfx.min.js"></script>
-
-  <script>
-    const theme = localStorage.getItem('theme') || 'auto'
-    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
-  </script>
-
 
   <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
     <header class="bg-body border-bottom">
@@ -90,8 +89,7 @@
 
 
   <h1 id="Supabase_Realtime_Exceptions_RealtimeException" data-uid="Supabase.Realtime.Exceptions.RealtimeException" class="text-break">
-    Class RealtimeException
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Exceptions/RealtimeException.cs/#L9"><i class="bi bi-code-slash"></i></a>
+Class RealtimeException  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Exceptions/RealtimeException.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -127,7 +125,7 @@
   </dl>
 
 
-  <dl class="typelist derived">
+  <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
     <div>
@@ -202,7 +200,8 @@
   <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Exceptions/RealtimeException.cs/#L12"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a> class with a specified error message.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -212,7 +211,8 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The message that describes the error.</p>
+</dd>
   </dl>
 
 
@@ -233,7 +233,8 @@
   <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Exceptions/RealtimeException.cs/#L17"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a> class with a specified error message and a reference to the inner exception that is the cause of this exception.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -243,9 +244,11 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>message</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The error message that explains the reason for the exception.</p>
+</dd>
     <dt><code>innerException</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.exception">Exception</a></dt>
-    <dd></dd>
+    <dd><p>The exception that is the cause of the current exception, or a null reference (<code>Nothing</code> in Visual Basic) if no inner exception is specified.</p>
+</dd>
   </dl>
 
 
