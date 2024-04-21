@@ -273,7 +273,7 @@ See: <a href="https://github.com/supabase/walrus/#error-states">https://github.c
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;errors&quot;)]
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;errors&quot;, NullValueHandling = NullValueHandling.Ignore)]
 public List&lt;string&gt;? Errors { get; set; }</code></pre>
   </div>
 
