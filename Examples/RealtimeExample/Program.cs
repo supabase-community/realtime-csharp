@@ -1,9 +1,7 @@
 ﻿using RealtimeExample.Models;
 using Supabase.Realtime;
-using Supabase.Realtime.Channel;
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Supabase.Realtime.Interfaces;
 using Supabase.Realtime.PostgresChanges;
@@ -23,7 +21,7 @@ namespace RealtimeExample
         static async Task Main(string[] args)
         {
             // Connect to db and web socket server
-            var postgrestClient = new Postgrest.Client("http://localhost:3000");
+            var postgrestClient = new Supabase.Postgrest.Client("http://localhost:3000");
             var realtimeClient = new Client(SocketEndpoint, new ClientOptions
             {
                 Parameters = new SocketOptionsParameters

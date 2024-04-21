@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## 7.0.0 - 2024-04-21
+
+- Merges [#45](https://github.com/supabase-community/realtime-csharp/pull/45) - Updating the `Websocket.Client@5.1.1`
+- Re: [#135](https://github.com/supabase-community/supabase-csharp/issues/135) Update nuget package name `realtime-csharp` to `Supabase.Realtime`
+- Updates Dependencies
+
 ## 6.0.4 - 2023-07-15
 
 - Fixes [#29](https://github.com/supabase-community/realtime-csharp/issues/29) Where the Realtime client could

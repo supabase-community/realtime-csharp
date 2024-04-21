@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Postgrest.Models;
+using Supabase.Postgrest.Models;
 using Supabase.Realtime.Socket;
 
 namespace Supabase.Realtime.PostgresChanges;

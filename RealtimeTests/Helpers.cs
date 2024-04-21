@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Supabase.Realtime;
 using Supabase.Realtime.Socket;
 using Client = Supabase.Realtime.Client;
@@ -14,7 +13,7 @@ internal static class Helpers
     private const string SocketEndpoint = "ws://realtime-dev.localhost:4000/socket";
     private const string RestEndpoint = "http://localhost:3000";
 
-    public static Postgrest.Client RestClient() => new(RestEndpoint, new Postgrest.ClientOptions());
+    public static Supabase.Postgrest.Client RestClient() => new(RestEndpoint, new Supabase.Postgrest.ClientOptions());
 
     public static Client SocketClient()
     {

@@ -3,12 +3,15 @@
 </p>
 <p align="center">
   <img src="https://github.com/supabase/realtime-csharp/workflows/Build%20And%20Test/badge.svg"/>
-  <a href="https://www.nuget.org/packages/realtime-csharp/">
-    <img src="https://img.shields.io/badge/dynamic/json?color=green&label=Nuget%20Release&query=data[0].version&url=https%3A%2F%2Fazuresearch-usnc.nuget.org%2Fquery%3Fq%3Dpackageid%3Arealtime-csharp"/>
+  <a href="https://www.nuget.org/packages/Supabase.Realtime/">
+    <img src="https://img.shields.io/nuget/vpre/Supabase.Realtime"/>
   </a>
 </p>
 
 ---
+
+## [Notice]: v7.0.0 renames this package from `realtime-csharp` to `Supabase.Realtime`. The depreciation notice has been set in NuGet. The API remains the same.
+
 
 ## BREAKING CHANGES MOVING FROM v5.x.x to v6.x.x
 
