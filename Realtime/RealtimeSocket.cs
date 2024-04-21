@@ -10,6 +10,9 @@ using Supabase.Realtime.Exceptions;
 using Supabase.Realtime.Interfaces;
 using Websocket.Client;
 using static Supabase.Realtime.Constants;
+#if NETSTANDARD2_0
+using Websocket.Client.Models;
+#endif
 
 namespace Supabase.Realtime;
 
