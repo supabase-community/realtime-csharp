@@ -388,7 +388,7 @@ If a client is suddenly disconnected (for example, they go offline), their state
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task Track(object? payload, int timeoutMs = 10000)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Push&gt; Track(object? payload, int timeoutMs = 10000)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -401,7 +401,7 @@ If a client is suddenly disconnected (for example, they go offline), their state
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Supabase.Realtime.Channel.Push.html">Push</a>&gt;</dt>
     <dd></dd>
   </dl>
 
@@ -490,7 +490,7 @@ If a client is suddenly disconnected (for example, they go offline), their state
 
   <h3 id="Supabase_Realtime_RealtimePresence_1_Untrack" data-uid="Supabase.Realtime.RealtimePresence`1.Untrack">
   Untrack()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimePresence.cs/#L183"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimePresence.cs/#L185"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Untracks an event.</p>
@@ -498,13 +498,13 @@ If a client is suddenly disconnected (for example, they go offline), their state
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task Untrack()</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Push&gt; Untrack()</code></pre>
   </div>
 
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Supabase.Realtime.Channel.Push.html">Push</a>&gt;</dt>
     <dd></dd>
   </dl>
 
