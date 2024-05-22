@@ -2306,6 +2306,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Interfaces.IRealtimePresence.Track
   nameWithType: IRealtimePresence.Track
+- uid: Supabase.Realtime.Interfaces.IRealtimePresence.Untrack
+  name: Untrack()
+  href: api/Supabase.Realtime.Interfaces.IRealtimePresence.html#Supabase_Realtime_Interfaces_IRealtimePresence_Untrack
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimePresence.Untrack
+  fullName: Supabase.Realtime.Interfaces.IRealtimePresence.Untrack()
+  nameWithType: IRealtimePresence.Untrack()
+- uid: Supabase.Realtime.Interfaces.IRealtimePresence.Untrack*
+  name: Untrack
+  href: api/Supabase.Realtime.Interfaces.IRealtimePresence.html#Supabase_Realtime_Interfaces_IRealtimePresence_Untrack_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimePresence.Untrack
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimePresence.Untrack
+  nameWithType: IRealtimePresence.Untrack
 - uid: Supabase.Realtime.Interfaces.IRealtimePush`2
   name: IRealtimePush<TChannel, TSocketResponse>
   href: api/Supabase.Realtime.Interfaces.IRealtimePush-2.html
