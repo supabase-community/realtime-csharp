@@ -152,7 +152,7 @@ public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenc
     /// </summary>
     /// <param name="payload"></param>
     /// <param name="timeoutMs"></param>
-    public Task Track(object? payload, int timeoutMs = DefaultTimeout)
+    public Task<Push> Track(object? payload, int timeoutMs = DefaultTimeout)
     {
         var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
         var push = new Push(_channel.Socket, _channel, eventName, "track",
@@ -169,7 +169,9 @@ public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenc
 
         push.OnTimeout += (sender, args) =>
         {
-            tcs.SetException(new RealtimeException(args.ToString()) { Reason = FailureHint.Reason.PushTimeout });
+            if (sender is Push p)
+                tcs.SetException(new RealtimeException($"Failed to send push [{p.Ref}])")
+                    { Reason = FailureHint.Reason.PushTimeout });
         };
 
         _channel.Enqueue(push);
@@ -180,7 +182,7 @@ public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenc
     /// <summary>
     /// Untracks an event.
     /// </summary>
-    public Task Untrack()
+    public Task<Push> Untrack()
     {
         var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
         var push = new Push(_channel.Socket, _channel, eventName, "untrack",
@@ -197,8 +199,9 @@ public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenc
 
         push.OnTimeout += (sender, args) =>
         {
-            tcs.TrySetException(new RealtimeException((sender as Push)!.Ref)
-                { Reason = FailureHint.Reason.PushTimeout });
+            if (sender is Push p)
+                tcs.TrySetException(new RealtimeException($"Failed to send push [{p.Ref}])")
+                    { Reason = FailureHint.Reason.PushTimeout });
         };
 
         _channel.Enqueue(push);
