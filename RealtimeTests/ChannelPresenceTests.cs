@@ -50,7 +50,7 @@ public class ChannelPresenceTests
         {
             var state = presence1.CurrentState;
             if (state.ContainsKey(guid2) && state[guid2].First().Time != null)
-                tsc.SetResult(true);
+                tsc.TrySetResult(true);
         });
 
         var client2 = Helpers.SocketClient();
@@ -61,15 +61,17 @@ public class ChannelPresenceTests
         {
             var state = presence2.CurrentState;
             if (state.ContainsKey(guid1) && state[guid1].First().Time != null)
-                tsc2.SetResult(true);
+                tsc2.TrySetResult(true);
         });
 
         await channel1.Subscribe();
         await channel2.Subscribe();
 
-        presence1.Track(new PresenceExample { Time = DateTime.Now });
-        presence2.Track(new PresenceExample { Time = DateTime.Now });
+        await presence1.Track(new PresenceExample { Time = DateTime.Now });
+        await presence2.Track(new PresenceExample { Time = DateTime.Now });
 
+        await presence1.Untrack();
+        
         await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
     }
 }

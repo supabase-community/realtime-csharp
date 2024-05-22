@@ -1,5 +1,6 @@
 ﻿using Supabase.Realtime.Socket;
 using System;
+using System.Threading.Tasks;
 using Supabase.Realtime.Models;
 using static Supabase.Realtime.Constants;
 
@@ -39,7 +40,14 @@ public interface IRealtimePresence
     /// </summary>
     /// <param name="payload"></param>
     /// <param name="timeoutMs"></param>
-    void Track(object? payload, int timeoutMs = DefaultTimeout);
+    Task Track(object? payload, int timeoutMs = DefaultTimeout);
+
+    /// <summary>
+    /// Untracks a client
+    /// </summary>
+    /// <param name="payload"></param>
+    /// <param name="timeoutMs"></param>
+    Task Untrack();
 
     /// <summary>
     /// Add a presence event handler

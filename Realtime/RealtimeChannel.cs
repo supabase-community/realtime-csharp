@@ -145,7 +145,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     private readonly List<Push> _buffer = new();
 
-    private readonly IRealtimeSocket _socket;
+    internal readonly IRealtimeSocket Socket;
     private IRealtimePresence? _presence;
     private IRealtimeBroadcast? _broadcast;
     private RealtimeException? _exception;
@@ -157,7 +157,7 @@ public class RealtimeChannel : IRealtimeChannel
     private readonly Dictionary<ListenType, List<PostgresChangesHandler>> _postgresChangesHandlers =
         new();
 
-    private bool CanPush => IsJoined && _socket.IsConnected;
+    private bool CanPush => IsJoined && Socket.IsConnected;
     private bool _hasJoinedOnce;
     private readonly Timer _rejoinTimer;
     private bool _isRejoining;
@@ -171,8 +171,8 @@ public class RealtimeChannel : IRealtimeChannel
         Options = options;
         Options.Parameters ??= new Dictionary<string, string>();
 
-        _socket = socket;
-        _socket.AddStateChangedHandler(HandleSocketStateChanged);
+        Socket = socket;
+        Socket.AddStateChangedHandler(HandleSocketStateChanged);
 
         _rejoinTimer = new Timer(options.ClientOptions.Timeout.TotalMilliseconds);
         _rejoinTimer.Elapsed += HandleRejoinTimerElapsed;
@@ -508,7 +508,7 @@ public class RealtimeChannel : IRealtimeChannel
 
         NotifyStateChanged(ChannelState.Leaving);
 
-        var leavePush = new Push(_socket, this, ChannelEventLeave);
+        var leavePush = new Push(Socket, this, ChannelEventLeave);
         leavePush.Send();
 
         NotifyStateChanged(ChannelState.Closed, false);
@@ -536,7 +536,7 @@ public class RealtimeChannel : IRealtimeChannel
             };
         }
 
-        var push = new Push(_socket, this, eventName, type, payload, timeoutMs);
+        var push = new Push(Socket, this, eventName, type, payload, timeoutMs);
         Enqueue(push);
 
         return push;
@@ -582,7 +582,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Enqueues a message.
     /// </summary>
     /// <param name="push"></param>
-    private void Enqueue(Push push)
+    internal void Enqueue(Push push)
     {
         LastPush = push;
 
@@ -601,7 +601,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// Generates the Join Push message by merging broadcast, presence, and postgres_changes options.
     /// </summary>
     /// <returns></returns>
-    private Push GenerateJoinPush() => new(_socket, this, ChannelEventJoin,
+    private Push GenerateJoinPush() => new(Socket, this, ChannelEventJoin,
         payload: new JoinPush(BroadcastOptions, PresenceOptions, PostgresChangesOptions));
 
     /// <summary>
@@ -614,7 +614,7 @@ public class RealtimeChannel : IRealtimeChannel
 
         if (!string.IsNullOrEmpty(accessToken))
         {
-            return new Push(_socket, this, ChannelAccessToken, payload: new Dictionary<string, string>
+            return new Push(Socket, this, ChannelAccessToken, payload: new Dictionary<string, string>
             {
                 { "access_token", accessToken! }
             });

@@ -6,6 +6,9 @@ using Supabase.Realtime.Presence.Responses;
 using Supabase.Realtime.Socket;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Supabase.Realtime.Channel;
+using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 
 namespace Supabase.Realtime;
@@ -100,7 +103,7 @@ public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenc
     private void NotifyPresenceEventHandlers(IRealtimePresence.EventType eventType)
     {
         if (!_presenceEventListeners.ContainsKey(eventType)) return;
-            
+
         foreach (var handler in _presenceEventListeners[eventType].ToArray())
             handler.Invoke(this, eventType);
     }
@@ -149,20 +152,57 @@ public class RealtimePresence<TPresenceModel> : IRealtimePresence where TPresenc
     /// </summary>
     /// <param name="payload"></param>
     /// <param name="timeoutMs"></param>
-    public void Track(object? payload, int timeoutMs = DefaultTimeout)
+    public Task Track(object? payload, int timeoutMs = DefaultTimeout)
     {
         var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
-        _channel.Push(eventName, "track",
+        var push = new Push(_channel.Socket, _channel, eventName, "track",
             new Dictionary<string, object?> { { "event", "track" }, { "payload", payload } }, timeoutMs);
+
+        var tcs = new TaskCompletionSource<Push>();
+
+        void Handler(IRealtimePush<RealtimeChannel, SocketResponse> chanel, SocketResponse response)
+        {
+            tcs.TrySetResult(push);
+        }
+
+        push.AddMessageReceivedHandler(Handler);
+
+        push.OnTimeout += (sender, args) =>
+        {
+            tcs.SetException(new RealtimeException(args.ToString()) { Reason = FailureHint.Reason.PushTimeout });
+        };
+
+        _channel.Enqueue(push);
+
+        return tcs.Task;
     }
 
     /// <summary>
     /// Untracks an event.
     /// </summary>
-    public void Untrack()
+    public Task Untrack()
     {
         var eventName = Core.Helpers.GetMappedToAttr(ChannelEventName.Presence).Mapping;
-        _channel.Push(eventName, "untrack");
+        var push = new Push(_channel.Socket, _channel, eventName, "untrack",
+            new Dictionary<string, object?> { { "event", "untrack" } });
+
+        var tcs = new TaskCompletionSource<Push>();
+
+        void Handler(IRealtimePush<RealtimeChannel, SocketResponse> chanel, SocketResponse response)
+        {
+            tcs.TrySetResult(push);
+        }
+
+        push.AddMessageReceivedHandler(Handler);
+
+        push.OnTimeout += (sender, args) =>
+        {
+            tcs.TrySetException(new RealtimeException((sender as Push)!.Ref)
+                { Reason = FailureHint.Reason.PushTimeout });
+        };
+
+        _channel.Enqueue(push);
+        return tcs.Task;
     }
 
     /// <summary>
