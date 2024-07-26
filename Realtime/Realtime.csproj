@@ -38,9 +38,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <InternalsVisibleTo Include="RealtimeTests" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Supabase.Core" Version="1.0.0" />
-        <PackageReference Include="Supabase.Postgrest" Version="4.0.0" />
+        <PackageReference Include="Supabase.Postgrest" Version="4.0.3" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

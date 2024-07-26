@@ -2,6 +2,7 @@
 using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Supabase.Core.Interfaces;
 using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 
@@ -10,7 +11,7 @@ namespace Supabase.Realtime.Interfaces;
 /// <summary>
 /// Contract for a realtime socket.
 /// </summary>
-public interface IRealtimeSocket
+public interface IRealtimeSocket: IGettableHeaders
 {
     /// <summary>
     /// Is this socket connected?

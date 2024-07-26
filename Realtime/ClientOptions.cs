@@ -54,7 +54,7 @@ public class ClientOptions
     /// <summary>
     /// Request headers to be appended to the connection string.
     /// </summary>
-    public readonly Dictionary<string, object> Headers = new();
+    public readonly Dictionary<string, string> Headers = new();
 
     /// <summary>
     /// The optional params to pass when connecting

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Supabase.Realtime.Exceptions;
@@ -129,5 +131,19 @@ public class ClientTests
     {
         client!.Disconnect();
         await client!.ConnectAsync();
+    }
+
+    [TestMethod("Client: Sets headers")]
+    public async Task ClientCanSetHeaders()
+    {
+        client!.Disconnect();
+        
+        client!.GetHeaders = () => new Dictionary<string, string>() { { "testing", "123" } };
+        await client.ConnectAsync();
+        
+        Assert.IsNotNull(client!);
+        Assert.IsNotNull(client!.Socket);
+        Assert.IsNotNull(client!.Socket.GetHeaders);
+        Assert.AreEqual("123",client.Socket.GetHeaders()["testing"]);
     }
 }

@@ -46,6 +46,21 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// </summary>
     public ClientOptions Options { get; }
 
+    private Func<Dictionary<string, string>>? _getHeaders { get; set; }
+    
+    /// <inheritdoc />
+    public Func<Dictionary<string, string>>? GetHeaders
+    {
+        get => _getHeaders;
+        set
+        {
+            _getHeaders = value;
+            
+            if (Socket != null)
+                Socket.GetHeaders = value;
+        }
+    }
+
     /// <summary>
     /// Custom Serializer resolvers and converters that will be used for encoding and decoding Postgrest JSON responses.
     ///
@@ -124,6 +139,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
         }
 
         Socket = new RealtimeSocket(_realtimeUrl, Options);
+        Socket.GetHeaders = GetHeaders;
 
         IRealtimeSocket.StateEventHandler? socketStateHandler = null;
         socketStateHandler = (sender, state) =>
@@ -172,7 +188,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
             callback?.Invoke(this, null);
             return this;
         }
-        
+
         Socket = new RealtimeSocket(_realtimeUrl, Options);
         IRealtimeSocket.StateEventHandler? socketStateHandler = null;
         IRealtimeSocket.ErrorEventHandler? errorEventHandler = null;
@@ -183,12 +199,12 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
 
             Socket.AddMessageReceivedHandler(HandleSocketMessageReceived);
             Socket.AddHeartbeatHandler(HandleSocketHeartbeat);
-            
+
             sender.RemoveStateChangedHandler(socketStateHandler!);
             sender.RemoveErrorHandler(errorEventHandler!);
-            
+
             NotifySocketStateChange(SocketState.Open);
-            
+
             callback?.Invoke(this, null);
         };
 

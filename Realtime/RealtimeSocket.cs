@@ -5,6 +5,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Supabase.Core.Extensions;
 using Supabase.Realtime.Socket;
 using Supabase.Realtime.Exceptions;
 using Supabase.Realtime.Interfaces;
@@ -15,7 +16,6 @@ using Websocket.Client.Models;
 #endif
 
 namespace Supabase.Realtime;
-
 /// <summary>
 /// Socket connection handler.
 /// </summary>
@@ -43,6 +43,15 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
             return string.Format($"{_endpoint}?{Utils.QueryString(parameters)}");
         }
     }
+
+    /// <inheritdoc />
+    public Func<Dictionary<string, string>>? GetHeaders { get; set; }
+    
+    /// <summary>
+    /// Shortcut property that merges <see cref="GetHeaders"/> with <see cref="_options"/>
+    /// Headers specified in <see cref="_options"/> take precedence over <see cref="GetHeaders"/>
+    /// </summary>
+    internal Dictionary<string, string> Headers => GetHeaders != null ? GetHeaders().MergeLeft(_options.Headers) : _options.Headers;
 
     private readonly List<IRealtimeSocket.StateEventHandler> _socketEventHandlers = new();
     private readonly List<IRealtimeSocket.MessageEventHandler> _messageEventHandlers = new();
@@ -76,7 +85,15 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
         if (!options.Headers.ContainsKey("X-Client-Info"))
             options.Headers.Add("X-Client-Info", Core.Util.GetAssemblyVersion(typeof(Client)));
 
-        _connection = new WebsocketClient(new Uri(EndpointUrl));
+        _connection = new WebsocketClient(new Uri(EndpointUrl), () =>
+        {
+            var socket = new ClientWebSocket();
+            
+            foreach (var header in Headers)
+                socket.Options.SetRequestHeader(header.Key, header.Value);
+            
+            return socket;
+        });
     }
 
     void IDisposable.Dispose()

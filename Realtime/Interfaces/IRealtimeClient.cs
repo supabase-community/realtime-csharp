@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Supabase.Core.Interfaces;
 using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 
@@ -14,7 +15,7 @@ namespace Supabase.Realtime.Interfaces;
 /// </summary>
 /// <typeparam name="TSocket"></typeparam>
 /// <typeparam name="TChannel"></typeparam>
-public interface IRealtimeClient<TSocket, TChannel>
+public interface IRealtimeClient<TSocket, TChannel>: IGettableHeaders
     where TSocket : IRealtimeSocket
     where TChannel : IRealtimeChannel
 {
