@@ -1,5 +1,12 @@
 ﻿# Changelog
 
+## 7.0.2 - 2024-07-26
+
+- Update Dependency: `Websocket.Client@5.1.2`
+- Update Dependency: `Supabase.Postgrest@4.0.3`
+- [Re:#167](https://github.com/supabase-community/supabase-csharp/issues/167) Adds support for specifying `GetHeaders`
+  on the `RealtimeClient` which are included on the initial request to the server to establish websocket connection.
+
 ## 7.0.1 - 2024-05-22
 
 - Re: [#47](https://github.com/supabase-community/realtime-csharp/issues/47) Return a Task from `Track` and `Untrack`
