@@ -490,6 +490,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Client.Disconnect
   nameWithType: Client.Disconnect
+- uid: Supabase.Realtime.Client.GetHeaders
+  name: GetHeaders
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_GetHeaders
+  commentId: P:Supabase.Realtime.Client.GetHeaders
+  fullName: Supabase.Realtime.Client.GetHeaders
+  nameWithType: Client.GetHeaders
+- uid: Supabase.Realtime.Client.GetHeaders*
+  name: GetHeaders
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_GetHeaders_
+  commentId: Overload:Supabase.Realtime.Client.GetHeaders
+  isSpec: "True"
+  fullName: Supabase.Realtime.Client.GetHeaders
+  nameWithType: Client.GetHeaders
 - uid: Supabase.Realtime.Client.Options
   name: Options
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Options
@@ -4414,6 +4427,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.RealtimeSocket.Disconnect
   nameWithType: RealtimeSocket.Disconnect
+- uid: Supabase.Realtime.RealtimeSocket.GetHeaders
+  name: GetHeaders
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_GetHeaders
+  commentId: P:Supabase.Realtime.RealtimeSocket.GetHeaders
+  fullName: Supabase.Realtime.RealtimeSocket.GetHeaders
+  nameWithType: RealtimeSocket.GetHeaders
+- uid: Supabase.Realtime.RealtimeSocket.GetHeaders*
+  name: GetHeaders
+  href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_GetHeaders_
+  commentId: Overload:Supabase.Realtime.RealtimeSocket.GetHeaders
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeSocket.GetHeaders
+  nameWithType: RealtimeSocket.GetHeaders
 - uid: Supabase.Realtime.RealtimeSocket.GetLatency
   name: GetLatency()
   href: api/Supabase.Realtime.RealtimeSocket.html#Supabase_Realtime_RealtimeSocket_GetLatency
