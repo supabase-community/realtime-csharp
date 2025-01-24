@@ -71,6 +71,7 @@ public class PostgresChangesOptions
     /// The parameters passed to the server
     /// </summary>
     [JsonProperty("parameters", NullValueHandling = NullValueHandling.Ignore)]
+    [System.Obsolete("The Parameters property is deprecated and will be removed in a future version.")]
     public Dictionary<string, string>? Parameters { get; set; }
 
     /// <summary>

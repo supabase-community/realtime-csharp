@@ -47,7 +47,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     public ClientOptions Options { get; }
 
     private Func<Dictionary<string, string>>? _getHeaders { get; set; }
-    
+
     /// <inheritdoc />
     public Func<Dictionary<string, string>>? GetHeaders
     {
@@ -55,7 +55,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
         set
         {
             _getHeaders = value;
-            
+
             if (Socket != null)
                 Socket.GetHeaders = value;
         }

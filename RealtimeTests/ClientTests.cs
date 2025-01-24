@@ -137,13 +137,13 @@ public class ClientTests
     public async Task ClientCanSetHeaders()
     {
         client!.Disconnect();
-        
+
         client!.GetHeaders = () => new Dictionary<string, string>() { { "testing", "123" } };
         await client.ConnectAsync();
-        
+
         Assert.IsNotNull(client!);
         Assert.IsNotNull(client!.Socket);
         Assert.IsNotNull(client!.Socket.GetHeaders);
-        Assert.AreEqual("123",client.Socket.GetHeaders()["testing"]);
+        Assert.AreEqual("123", client.Socket.GetHeaders()["testing"]);
     }
 }

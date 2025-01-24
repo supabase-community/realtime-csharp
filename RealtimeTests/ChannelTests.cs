@@ -37,7 +37,7 @@ public class ChannelTests
     {
         var tsc = new TaskCompletionSource<bool>();
 
-        var channel = _socketClient!.Channel("realtime", "public", "todos");
+        var channel = _socketClient!.Channel("realtime:public:todos");
         channel.AddStateChangedHandler((_, state) =>
         {
             if (state == ChannelState.Closed)
@@ -57,7 +57,7 @@ public class ChannelTests
         Todo? result = null;
         var tsc = new TaskCompletionSource<bool>();
 
-        var channel = _socketClient!.Channel("realtime", "public", "todos");
+        var channel = _socketClient!.Channel("realtime:public:todos");
         var numbers = new List<int> { 4, 5, 6 };
 
         await channel.Subscribe();
@@ -74,24 +74,12 @@ public class ChannelTests
         CollectionAssert.AreEqual(numbers, result?.Numbers);
     }
 
-    [TestMethod("Channel: Sends Join parameters")]
-    public async Task ChannelSendsJoinParameters()
-    {
-        var parameters = new Dictionary<string, string> { { "key", "value" } };
-        var channel = _socketClient!.Channel("realtime", "public", "todos", parameters: parameters);
-
-        await channel.Subscribe();
-
-        var serialized = JsonConvert.SerializeObject(channel.JoinPush?.Payload);
-        Assert.IsTrue(serialized.Contains("\"key\":\"value\""));
-    }
-
     [TestMethod("Channel: Returns single subscription per unique topic.")]
     public async Task ChannelJoinsDuplicateSubscription()
     {
-        var subscription1 = _socketClient!.Channel("realtime", "public", "todos");
-        var subscription2 = _socketClient!.Channel("realtime", "public", "todos");
-        var subscription3 = _socketClient!.Channel("realtime", "public", "todos", "user_id", "1");
+        var subscription1 = _socketClient!.Channel("realtime:public:todos");
+        var subscription2 = _socketClient!.Channel("realtime:public:todos");
+        var subscription3 = _socketClient!.Channel("realtime:public:todos:user_id:1");
 
         Assert.AreEqual(subscription1.Topic, subscription2.Topic);
 
@@ -100,7 +88,7 @@ public class ChannelTests
         Assert.AreEqual(subscription1.HasJoinedOnce, subscription2.HasJoinedOnce);
         Assert.AreNotEqual(subscription1.HasJoinedOnce, subscription3.HasJoinedOnce);
 
-        var subscription4 = _socketClient!.Channel("realtime", "public", "todos");
+        var subscription4 = _socketClient!.Channel("realtime:public:todos");
 
         Assert.AreEqual(subscription1.HasJoinedOnce, subscription4.HasJoinedOnce);
     }
