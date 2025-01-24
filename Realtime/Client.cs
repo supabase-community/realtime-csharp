@@ -345,7 +345,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <exception cref="Exception"></exception>
     public RealtimeChannel Channel(string channelName)
     {
-        var topic = $"realtime:{channelName}";
+        var topic = channelName.StartsWith("realtime:") ? channelName : $"realtime:{channelName}";
 
         if (_subscriptions.TryGetValue(topic, out var channel))
             return channel;
