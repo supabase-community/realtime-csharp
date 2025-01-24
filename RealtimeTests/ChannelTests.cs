@@ -60,13 +60,13 @@ public class ChannelTests
         var channel = _socketClient!.Channel("realtime:public:todos");
         var numbers = new List<int> { 4, 5, 6 };
 
-        await channel.Subscribe();
-
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) =>
+        channel.OnPostgresChange((_, changes) =>
         {
             result = changes.Model<Todo>();
             tsc.SetResult(true);
-        });
+        }, ListenType.Inserts);
+
+        await channel.Subscribe();
 
         await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Numbers = numbers });
 

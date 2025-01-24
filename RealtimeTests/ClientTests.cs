@@ -103,8 +103,8 @@ public class ClientTests
     [TestMethod("Client: SetsAuth")]
     public async Task ClientSetsAuth()
     {
-        var channel = client!.Channel("realtime", "public", "todos");
-        var channel2 = client!.Channel("realtime", "public", "todos");
+        var channel = client!.Channel("realtime:public:todos");
+        var channel2 = client!.Channel("realtime:public:todos");
 
         var token =
             @"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.C8oVtF5DICct_4HcdSKt8pdrxBFMQOAnPpbiiUbaXAY";
