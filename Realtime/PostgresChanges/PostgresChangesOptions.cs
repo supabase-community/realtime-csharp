@@ -58,7 +58,7 @@ public class PostgresChangesOptions
     /// <summary>
     /// The table for this listener, can be: `*` matching all tables in schema.
     /// </summary>
-    [JsonProperty("table")]
+    [JsonProperty("table", NullValueHandling = NullValueHandling.Ignore)]
     public string? Table { get; set; }
 
     /// <summary>
