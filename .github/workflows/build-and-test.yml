@@ -23,13 +23,12 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      #- name: Add hosts entries
-      #  run: |
-      #    echo "127.0.0.1 realtime-dev.localhost" | sudo tee -a /etc/hosts
-      #    echo "172.17.0.1 host.docker.internal" | sudo tee -a /etc/hosts
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
 
-      #- name: Initialize Testing Stack
-      #  run: docker-compose up -d
+      - name: Start Supabsae
+        run: supabase start
 
-      #- name: Test
-      #  run: dotnet test --no-restore
+      - name: Test
+        run: dotnet test --no-restore

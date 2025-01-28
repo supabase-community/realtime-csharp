@@ -58,7 +58,7 @@ public class PostgresChangesOptions
     /// <summary>
     /// The table for this listener, can be: `*` matching all tables in schema.
     /// </summary>
-    [JsonProperty("table")]
+    [JsonProperty("table", NullValueHandling = NullValueHandling.Ignore)]
     public string? Table { get; set; }
 
     /// <summary>
@@ -71,6 +71,7 @@ public class PostgresChangesOptions
     /// The parameters passed to the server
     /// </summary>
     [JsonProperty("parameters", NullValueHandling = NullValueHandling.Ignore)]
+    [System.Obsolete("The Parameters property is deprecated and will be removed in a future version.")]
     public Dictionary<string, string>? Parameters { get; set; }
 
     /// <summary>

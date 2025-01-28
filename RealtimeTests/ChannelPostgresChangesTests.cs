@@ -7,7 +7,6 @@ using Supabase.Postgrest.Interfaces;
 using RealtimeTests.Models;
 using Supabase.Realtime;
 using Supabase.Realtime.Interfaces;
-using Supabase.Realtime.PostgresChanges;
 using static Supabase.Realtime.Constants;
 using static Supabase.Realtime.PostgresChanges.PostgresChangesOptions;
 
@@ -38,15 +37,13 @@ public class ChannelPostgresChangesTests
     {
         var tsc = new TaskCompletionSource<bool>();
 
-        var channel = _socketClient!.Channel("example");
-        channel.Register(new PostgresChangesOptions("public", "*"));
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) =>
-        {
-            var model = changes.Model<Todo>();
-            tsc.SetResult(model != null);
-        });
-
-        await channel.Subscribe();
+        await _socketClient!.Channel("example")
+            .OnPostgresChange((_, changes) =>
+            {
+                var model = changes.Model<Todo>();
+                tsc.SetResult(model != null);
+            }, ListenType.Inserts)
+            .Subscribe();
 
         await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client Models a response? ✅" });
 
@@ -59,11 +56,10 @@ public class ChannelPostgresChangesTests
     {
         var tsc = new TaskCompletionSource<bool>();
 
-        var channel = _socketClient!.Channel("realtime", "public", "todos");
+        await _socketClient!.Channel("realtime:public:todos")
+            .OnPostgresChange((_, _) => tsc.SetResult(true), ListenType.Inserts, table: "todos")
+            .Subscribe();
 
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, _) => tsc.SetResult(true));
-
-        await channel.Subscribe();
         await _restClient!.Table<Todo>()
             .Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
 
@@ -83,9 +79,8 @@ public class ChannelPostgresChangesTests
         var oldDetails = model.Details;
         var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
 
-        var channel = _socketClient!.Channel("realtime", "public", "todos");
-
-        channel.AddPostgresChangeHandler(ListenType.Updates, (_, changes) =>
+        await _socketClient!.Channel("realtime:public:todos")
+            .OnPostgresChange((_, changes) =>
         {
             var oldModel = changes.OldModel<Todo>();
 
@@ -101,9 +96,8 @@ public class ChannelPostgresChangesTests
             }
 
             tsc.SetResult(true);
-        });
-
-        await channel.Subscribe();
+        }, ListenType.Updates, table: "todos")
+            .Subscribe();
 
         await _restClient.Table<Todo>()
             .Set(x => x.Details!, newDetails)
@@ -119,11 +113,9 @@ public class ChannelPostgresChangesTests
     {
         var tsc = new TaskCompletionSource<bool>();
 
-        var channel = _socketClient!.Channel("realtime", "public", "todos");
-
-        channel.AddPostgresChangeHandler(ListenType.Deletes, (_, _) => tsc.SetResult(true));
-
-        await channel.Subscribe();
+        await _socketClient!.Channel("realtime:public:todos")
+            .OnPostgresChange((_, _) => tsc.SetResult(true), ListenType.Deletes, table: "todos")
+            .Subscribe();
 
         var result = await _restClient!.Table<Todo>().Get();
         var model = result.Models.Last();
@@ -143,9 +135,7 @@ public class ChannelPostgresChangesTests
 
         List<Task> tasks = new List<Task> { insertTsc.Task, updateTsc.Task, deleteTsc.Task };
 
-        var channel = _socketClient!.Channel("realtime", "public", "todos");
-
-        channel.AddPostgresChangeHandler(ListenType.All, (_, changes) =>
+        await _socketClient!.Channel("realtime:public:todos").OnPostgresChange((_, changes) =>
         {
             switch (changes.Payload?.Data?.Type)
             {
@@ -159,12 +149,11 @@ public class ChannelPostgresChangesTests
                     deleteTsc.SetResult(true);
                     break;
             }
-        });
 
-        await channel.Subscribe();
+        }, ListenType.All, table: "todos").Subscribe();
 
         var modeledResponse = await _restClient!.Table<Todo>().Insert(new Todo
-            { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+        { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
         var newModel = modeledResponse.Models.First();
 
         await _restClient.Table<Todo>().Set(x => x.Details!, "And edits.").Match(newModel).Update();
@@ -175,5 +164,81 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(insertTsc.Task.Result);
         Assert.IsTrue(updateTsc.Task.Result);
         Assert.IsTrue(deleteTsc.Task.Result);
+    }
+
+    [TestMethod("Channel: Receives Multiple Handlers")]
+    public async Task ChannelReceivesMultipleHandlers()
+    {
+        var insertTsc = new TaskCompletionSource<bool>();
+        var updateTsc = new TaskCompletionSource<bool>();
+        var deleteTsc = new TaskCompletionSource<bool>();
+        var allHandlerTsc = new TaskCompletionSource<bool>();
+        var filterHandlerTsc = new TaskCompletionSource<bool>();
+
+        var insertHandlerCalledCount = 0;
+        var updateHandlerCalledCount = 0;
+        var deleteHandlerCalledCount = 0;
+        var allHandlerCalledCount = 0;
+        var filterHandlerCalledCount = 0;
+
+        var channel = _socketClient!.Channel("realtime:public:todos");
+
+        channel.OnPostgresChange((_, changes) =>
+        {
+            if (changes.Payload?.Data?.Type == EventType.Insert)
+            {
+                insertHandlerCalledCount += 1;
+                insertTsc.SetResult(true);
+            }
+        }, ListenType.Inserts, table: "todos");
+
+        channel.OnPostgresChange((_, changes) =>
+        {
+            if (changes.Payload?.Data?.Type == EventType.Update)
+            {
+                updateHandlerCalledCount += 1;
+                updateTsc.SetResult(true);
+            }
+        }, ListenType.Updates, table: "todos");
+
+        channel.OnPostgresChange((_, changes) =>
+        {
+            if (changes.Payload?.Data?.Type == EventType.Delete)
+            {
+                deleteHandlerCalledCount += 1;
+                deleteTsc.SetResult(true);
+            }
+        }, ListenType.Deletes, table: "todos");
+
+        channel.OnPostgresChange((_, _) =>
+        {
+            allHandlerCalledCount += 1;
+            allHandlerTsc.SetResult(true);
+        }, ListenType.All, table: "todos");
+
+        channel.OnPostgresChange((_, changes) =>
+        {
+            filterHandlerCalledCount += 1;
+            filterHandlerTsc.SetResult(true);
+        }, ListenType.Updates, table: "todos");
+
+        await channel.Subscribe();
+
+        var modeledResponse = await _restClient!.Table<Todo>().Insert(new Todo
+        { UserId = 1, Details = "Testing multiple handlers" });
+        var newModel = modeledResponse.Models.First();
+
+        await _restClient.Table<Todo>().Set(x => x.Details!, "Filtered update").Match(newModel).Update();
+        await _restClient.Table<Todo>().Set(x => x.Details!, "Another update").Match(newModel).Update();
+        await _restClient.Table<Todo>().Match(newModel).Delete();
+
+        await Task.WhenAll(insertTsc.Task, updateTsc.Task, deleteTsc.Task, allHandlerTsc.Task, filterHandlerTsc.Task);
+
+        Assert.AreEqual(insertHandlerCalledCount, 1);
+        Assert.AreEqual(updateHandlerCalledCount, 2);
+        Assert.AreEqual(deleteHandlerCalledCount, 1);
+
+        Assert.AreEqual(allHandlerCalledCount, 4);
+        Assert.AreEqual(filterHandlerCalledCount, 1);
     }
 }

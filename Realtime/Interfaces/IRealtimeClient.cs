@@ -15,7 +15,7 @@ namespace Supabase.Realtime.Interfaces;
 /// </summary>
 /// <typeparam name="TSocket"></typeparam>
 /// <typeparam name="TChannel"></typeparam>
-public interface IRealtimeClient<TSocket, TChannel>: IGettableHeaders
+public interface IRealtimeClient<TSocket, TChannel> : IGettableHeaders
     where TSocket : IRealtimeSocket
     where TChannel : IRealtimeChannel
 {
@@ -95,6 +95,7 @@ public interface IRealtimeClient<TSocket, TChannel>: IGettableHeaders
     /// <param name="value"></param>
     /// <param name="parameters"></param>
     /// <returns></returns>
+    [Obsolete("Please use Channel(string channelName) instead.")]
     TChannel Channel(string database = "realtime", string schema = "public", string table = "*",
         string? column = null, string? value = null, Dictionary<string, string>? parameters = null);
 

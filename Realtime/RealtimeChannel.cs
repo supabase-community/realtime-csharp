@@ -324,10 +324,28 @@ public class RealtimeChannel : IRealtimeChannel
     }
 
     /// <summary>
-    /// Add a postgres changes listener. Should be paired with <see cref="Register"/>.
+    /// Registers and adds a postgres change handler.
+    /// </summary>
+    /// <param name="postgresChangeHandler">The handler to process the event.</param>
+    /// <param name="listenType">The type of event this callback should process.</param>
+    /// <param name="schema">The schema to listen to.</param>
+    /// <param name="table">The table to listen to.</param>
+    /// <param name="filter">The filter to apply.</param>
+    /// <returns></returns>
+    public IRealtimeChannel OnPostgresChange(PostgresChangesHandler postgresChangeHandler, ListenType listenType = ListenType.All, string schema = "public", string? table = null, string? filter = null)
+    {
+        var postgresChangesOptions = new PostgresChangesOptions(schema, table, listenType, filter);
+        Register(postgresChangesOptions);
+        AddPostgresChangeHandler(listenType, postgresChangeHandler);
+        return this;
+    }
+
+    /// <summary>
+    /// Adds a postgres changes listener. Should be paired with <see cref="Register"/>.
     /// </summary>
     /// <param name="listenType">The type of event this callback should process.</param>
     /// <param name="postgresChangeHandler"></param>
+    [Obsolete("Use OnPostgresChange instead.")]
     public void AddPostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
         if (!_postgresChangesHandlers.ContainsKey(listenType))
@@ -425,6 +443,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <param name="postgresChangesOptions"></param>
     /// <returns></returns>
+    [Obsolete("Use OnPostgresChange instead.")]
     public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)
     {
         PostgresChangesOptions.Add(postgresChangesOptions);
@@ -694,7 +713,7 @@ public class RealtimeChannel : IRealtimeChannel
                 _isRejoining = false;
 
                 NotifyErrorOccurred(new RealtimeException(message.Json)
-                    { Reason = FailureHint.Reason.ChannelJoinFailure });
+                { Reason = FailureHint.Reason.ChannelJoinFailure });
                 break;
         }
     }
@@ -733,7 +752,7 @@ public class RealtimeChannel : IRealtimeChannel
                         break;
                     case PhoenixStatusError:
                         NotifyErrorOccurred(new RealtimeException(message.Json)
-                            { Reason = FailureHint.Reason.ChannelJoinFailure });
+                        { Reason = FailureHint.Reason.ChannelJoinFailure });
                         break;
                 }
 

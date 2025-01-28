@@ -47,7 +47,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     public ClientOptions Options { get; }
 
     private Func<Dictionary<string, string>>? _getHeaders { get; set; }
-    
+
     /// <inheritdoc />
     public Func<Dictionary<string, string>>? GetHeaders
     {
@@ -55,7 +55,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
         set
         {
             _getHeaders = value;
-            
+
             if (Socket != null)
                 Socket.GetHeaders = value;
         }
@@ -345,7 +345,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <exception cref="Exception"></exception>
     public RealtimeChannel Channel(string channelName)
     {
-        var topic = $"realtime:{channelName}";
+        var topic = channelName.StartsWith("realtime:") ? channelName : $"realtime:{channelName}";
 
         if (_subscriptions.TryGetValue(topic, out var channel))
             return channel;
