@@ -332,7 +332,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// <param name="table">The table to listen to.</param>
     /// <param name="filter">The filter to apply.</param>
     /// <returns></returns>
-    public RealtimeChannel OnPostgresChange(PostgresChangesHandler postgresChangeHandler, ListenType listenType = ListenType.All, string schema = "public", string? table = null, string? filter = null)
+    public IRealtimeChannel OnPostgresChange(PostgresChangesHandler postgresChangeHandler, ListenType listenType = ListenType.All, string schema = "public", string? table = null, string? filter = null)
     {
         var postgresChangesOptions = new PostgresChangesOptions(schema, table, listenType, filter);
         Register(postgresChangesOptions);

@@ -98,6 +98,17 @@ public interface IRealtimeChannel
     string Topic { get; }
 
     /// <summary>
+    /// Registers and adds a postgres change handler.
+    /// </summary>
+    /// <param name="postgresChangeHandler">The handler to process the event.</param>
+    /// <param name="listenType">The type of event this callback should process.</param>
+    /// <param name="schema">The schema to listen to.</param>
+    /// <param name="table">The table to listen to.</param>
+    /// <param name="filter">The filter to apply.</param>
+    /// <returns></returns>
+    public IRealtimeChannel OnPostgresChange(PostgresChangesHandler postgresChangeHandler, ListenType listenType = ListenType.All, string schema = "public", string? table = null, string? filter = null);
+
+    /// <summary>
     /// Add a state changed listener
     /// </summary>
     /// <param name="stateChangedHandler"></param>
