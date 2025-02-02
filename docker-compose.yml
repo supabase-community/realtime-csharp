@@ -1,4 +1,4 @@
-version: '3'
+# version: '3'
 
 services:
   db:
@@ -12,6 +12,8 @@ services:
     environment:
       POSTGRES_HOST: /var/run/postgresql
       POSTGRES_PASSWORD: postgres
+    extra_hosts:
+      - host.docker.internal:host-gateway
 
   rest:
     image: postgrest/postgrest:latest
@@ -35,7 +37,7 @@ services:
       - "4000:4000"
     environment:
       PORT: 4000
-      DB_HOST: host.docker.internal
+      DB_HOST: realtime-db
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: postgres

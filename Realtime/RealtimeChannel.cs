@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
@@ -161,6 +162,8 @@ public class RealtimeChannel : IRealtimeChannel
     private bool _hasJoinedOnce;
     private readonly Timer _rejoinTimer;
     private bool _isRejoining;
+
+    private List<Binding> _bindings = [];
 
     /// <summary>
     /// Initializes a Channel - must call `Subscribe()` to receive events.
@@ -334,7 +337,10 @@ public class RealtimeChannel : IRealtimeChannel
             _postgresChangesHandlers[listenType] = new List<PostgresChangesHandler>();
 
         if (!_postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
+        {
             _postgresChangesHandlers[listenType].Add(postgresChangeHandler);
+            BindPostgresChangesHandler(listenType, postgresChangeHandler);
+        }
     }
 
     /// <summary>
@@ -407,15 +413,17 @@ public class RealtimeChannel : IRealtimeChannel
             _ => ListenType.All
         };
 
+        InvokeProperlyHandlerFromBind(eventType, response);
+        
         // Invoke the wildcard listener (but only once)
-        if (listenType != ListenType.All &&
-            _postgresChangesHandlers.TryGetValue(ListenType.All, out var changesHandler))
-            foreach (var handler in changesHandler.ToArray())
-                handler.Invoke(this, response);
+        // if (listenType != ListenType.All &&
+            // _postgresChangesHandlers.TryGetValue(ListenType.All, out var changesHandler))
+            // foreach (var handler in changesHandler.ToArray())
+                // handler.Invoke(this, response);
 
-        if (_postgresChangesHandlers.TryGetValue(listenType, out var postgresChangesHandler))
-            foreach (var handler in postgresChangesHandler.ToArray())
-                handler.Invoke(this, response);
+        // if (_postgresChangesHandlers.TryGetValue(listenType, out var postgresChangesHandler))
+            // foreach (var handler in postgresChangesHandler.ToArray())
+                // handler.Invoke(this, response);
     }
 
     /// <summary>
@@ -428,6 +436,8 @@ public class RealtimeChannel : IRealtimeChannel
     public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)
     {
         PostgresChangesOptions.Add(postgresChangesOptions);
+        
+        BindPostgresChangesOptions(postgresChangesOptions);
         return this;
     }
 
@@ -673,6 +683,8 @@ public class RealtimeChannel : IRealtimeChannel
             Options.SerializerSettings);
         if (obj?.Payload == null) return;
 
+        obj.Payload.Response?.change?.ForEach(BindIdPostgresChanges);
+        
         switch (obj.Payload.Status)
         {
             // A response was received from the channel
@@ -763,5 +775,51 @@ public class RealtimeChannel : IRealtimeChannel
                 PresenceDiff?.Invoke(this, message);
                 break;
         }
+    }
+
+    private void BindPostgresChangesOptions(PostgresChangesOptions options)
+    {
+        var founded = _bindings.FirstOrDefault(b => options.Equals(b.Options));
+        if (founded != null) return;
+        
+        _bindings.Add(
+            new Binding
+            {
+                Options = options,
+            }
+        );
+    }
+
+    private void BindPostgresChangesHandler(ListenType listenType, PostgresChangesHandler handler)
+    {
+        var founded = _bindings.FirstOrDefault(b =>
+            (b.Options?.Event == Core.Helpers.GetMappedToAttr(listenType).Mapping || b.Options?.Event == "*") && 
+            b.Handler == null
+        );
+        if (founded == null) return;
+
+        founded.Handler = handler;
+    }
+
+    private void BindIdPostgresChanges(PhoenixPostgresChangeResponse joinResponse)
+    {
+        var founded = _bindings.FirstOrDefault(b => b.Options != null &&
+                                                    b.Options.Event == joinResponse.eventName &&
+                                                    b.Options.Table == joinResponse.table &&
+                                                    b.Options.Schema == joinResponse.schema &&
+                                                    b.Options.Filter == joinResponse.filter);
+        if (founded == null) return;
+        founded.Id = joinResponse?.id;
+    }
+
+    private void InvokeProperlyHandlerFromBind(EventType eventType, PostgresChangesResponse response)
+    {
+        var result = _bindings.FirstOrDefault(b => b.Options != null && response.Payload != null &&
+                                      (b.Options.Event == response.Payload.Data?._type || b.Options.Event == "*") &&
+                                      response.Payload.Ids.Contains(b.Id) &&
+                                      b.Handler != null
+        );
+        
+        result?.Handler?.Invoke(this, response);
     }
 }
