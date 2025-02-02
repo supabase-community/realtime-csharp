@@ -334,13 +334,12 @@ public class RealtimeChannel : IRealtimeChannel
     public void AddPostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
         if (!_postgresChangesHandlers.ContainsKey(listenType))
-            _postgresChangesHandlers[listenType] = new List<PostgresChangesHandler>();
+            _postgresChangesHandlers[listenType] = [];
 
-        if (!_postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
-        {
-            _postgresChangesHandlers[listenType].Add(postgresChangeHandler);
-            BindPostgresChangesHandler(listenType, postgresChangeHandler);
-        }
+        if (_postgresChangesHandlers[listenType].Contains(postgresChangeHandler)) return;
+        
+        _postgresChangesHandlers[listenType].Add(postgresChangeHandler);
+        BindPostgresChangesHandler(listenType, postgresChangeHandler);
     }
 
     /// <summary>
@@ -413,7 +412,7 @@ public class RealtimeChannel : IRealtimeChannel
             _ => ListenType.All
         };
 
-        InvokeProperlyHandlerFromBind(eventType, response);
+        InvokeProperlyHandlerFromBind(listenType, response);
         
         // Invoke the wildcard listener (but only once)
         // if (listenType != ListenType.All &&
@@ -799,6 +798,7 @@ public class RealtimeChannel : IRealtimeChannel
         if (founded == null) return;
 
         founded.Handler = handler;
+        founded.ListenType = listenType;
     }
 
     private void BindIdPostgresChanges(PhoenixPostgresChangeResponse joinResponse)
@@ -812,14 +812,30 @@ public class RealtimeChannel : IRealtimeChannel
         founded.Id = joinResponse?.id;
     }
 
-    private void InvokeProperlyHandlerFromBind(EventType eventType, PostgresChangesResponse response)
+    private void InvokeProperlyHandlerFromBind(ListenType eventType, PostgresChangesResponse response)
     {
-        var result = _bindings.FirstOrDefault(b => b.Options != null && response.Payload != null &&
-                                      (b.Options.Event == response.Payload.Data?._type || b.Options.Event == "*") &&
-                                      response.Payload.Ids.Contains(b.Id) &&
-                                      b.Handler != null
-        );
-        
+        var all = _bindings.FirstOrDefault(b =>
+        {
+            if (b.Options == null && response.Payload == null && b.Handler == null) return false;
+
+            return response.Payload != null && response.Payload.Ids.Contains(b.Id) && eventType != ListenType.All &&
+                   b.ListenType == ListenType.All;
+        });
+
+        if (all != null)
+        {
+            all.Handler?.Invoke(this, response);
+            return;
+        }
+
+        // Invoke specific handler
+        var result = _bindings.FirstOrDefault(b =>
+        {
+            if (b.Options == null && response.Payload == null && b.Handler == null) return false;
+
+            return response.Payload != null && response.Payload.Ids.Contains(b.Id) && b.ListenType == eventType;
+        });
+
         result?.Handler?.Invoke(this, response);
     }
 }

@@ -71,6 +71,34 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(check);
     }
 
+    [TestMethod("Channel: Receives Filtered Insert Callback")]
+    public async Task ChannelReceivesInsertCallbackFiltered()
+    {
+        var tsc = new TaskCompletionSource<bool>();
+
+        var channel = _socketClient!.Channel("realtime", "public", "todos", "details",
+            "Client receives filtered insert callback? ✅"); 
+        
+        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) =>
+        {
+            var oldModel = changes.Model<Todo>();
+
+            Assert.AreEqual("Client receives filtered insert callback? ✅", oldModel?.Details);
+
+            tsc.SetResult(true);
+        });
+
+        await channel.Subscribe();
+        await _restClient!.Table<Todo>()
+            .Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
+
+        await _restClient!.Table<Todo>()
+            .Insert(new Todo { UserId = 2, Details = "Client receives filtered insert callback? ✅" });
+        
+        var check = await tsc.Task;
+        Assert.IsTrue(check);
+    }
+        
     [TestMethod("Channel: Receives Update Callback")]
     public async Task ChannelReceivesUpdateCallback()
     {
