@@ -98,6 +98,61 @@ public class ChannelPostgresChangesTests
         var check = await tsc.Task;
         Assert.IsTrue(check);
     }
+
+    [TestMethod("Channel: Receives Filtered Two Callback")]
+    public async Task ChannelReceivesTwoCallbacks()
+    {
+        var tsc = new TaskCompletionSource<bool>();
+
+        var response = await _restClient!.Table<Todo>()
+            .Insert(new Todo { UserId = 1, Details = "Client receives insert callback? ✅" });
+        await _restClient!.Table<Todo>()
+            .Insert(new Todo { UserId = 2, Details = "Client receives filtered insert callback? ✅" });
+
+        var model = response.Models.First();
+        var oldDetails = model.Details;
+        var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
+
+        var channel = _socketClient!.Channel("realtime", "public", "todos");
+        channel.AddPostgresChangeHandler(ListenType.Updates, (_, changes) =>
+        {
+            var oldModel = changes.OldModel<Todo>();
+
+            Assert.AreEqual(oldDetails, oldModel?.Details);
+
+            var updated = changes.Model<Todo>();
+            Assert.AreEqual(newDetails, updated?.Details);
+
+            if (updated != null)
+            {
+                Assert.AreEqual(model.Id, updated.Id);
+                Assert.AreEqual(model.UserId, updated.UserId);
+            }
+
+            tsc.SetResult(true);
+        });
+        
+        const string filter = "Client receives filtered insert callback? ✅";
+        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts, $"details=eq.{filter}"));
+        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) =>
+        {
+            var insertedModel = changes.Model<Todo>();
+
+            Assert.AreEqual("Client receives filtered insert callback? ✅", insertedModel?.Details);
+
+            tsc.SetResult(true);
+        });
+        
+        await channel.Subscribe();
+
+        await _restClient.Table<Todo>()
+            .Set(x => x.Details!, newDetails)
+            .Match(model)
+            .Update();
+
+        var check = await tsc.Task;
+        Assert.IsTrue(check);
+    }
         
     [TestMethod("Channel: Receives Update Callback")]
     public async Task ChannelReceivesUpdateCallback()
