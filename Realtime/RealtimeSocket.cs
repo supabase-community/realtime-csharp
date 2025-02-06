@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -88,6 +89,7 @@ public class RealtimeSocket : IDisposable, IRealtimeSocket
         _connection = new WebsocketClient(new Uri(EndpointUrl), () =>
         {
             var socket = new ClientWebSocket();
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"))) return socket;
             
             foreach (var header in Headers)
                 socket.Options.SetRequestHeader(header.Key, header.Value);
