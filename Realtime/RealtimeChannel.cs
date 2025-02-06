@@ -766,6 +766,10 @@ public class RealtimeChannel : IRealtimeChannel
         }
     }
 
+    /// <summary>
+    /// Create a Binding and add to a list
+    /// </summary>
+    /// <param name="options"></param>
     private void BindPostgresChangesOptions(PostgresChangesOptions options)
     {
         var founded = _bindings.FirstOrDefault(b => options.Equals(b.Options));
@@ -779,6 +783,11 @@ public class RealtimeChannel : IRealtimeChannel
         );
     }
 
+    /// <summary>
+    /// Try to bind a PostgresChangesHandler to a PostgresChangesOptions
+    /// </summary>
+    /// <param name="listenType"></param>
+    /// <param name="handler"></param>
     private void BindPostgresChangesHandler(ListenType listenType, PostgresChangesHandler handler)
     {
         var founded = _bindings.FirstOrDefault(b =>
@@ -791,6 +800,10 @@ public class RealtimeChannel : IRealtimeChannel
         founded.ListenType = listenType;
     }
 
+    /// <summary>
+    /// Filter the binding list and try to add an id from socket to its binding
+    /// </summary>
+    /// <param name="joinResponse"></param>
     private void BindIdPostgresChanges(PhoenixPostgresChangeResponse joinResponse)
     {
         var founded = _bindings.FirstOrDefault(b => b.Options != null &&
@@ -802,6 +815,11 @@ public class RealtimeChannel : IRealtimeChannel
         founded.Id = joinResponse?.id;
     }
 
+    /// <summary>
+    /// Try to invoke the handler properly based on event type and socket response 
+    /// </summary>
+    /// <param name="eventType"></param>
+    /// <param name="response"></param>
     private void InvokeProperlyHandlerFromBind(ListenType eventType, PostgresChangesResponse response)
     {
         var all = _bindings.FirstOrDefault(b =>
