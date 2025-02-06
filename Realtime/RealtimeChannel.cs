@@ -351,7 +351,10 @@ public class RealtimeChannel : IRealtimeChannel
     {
         if (_postgresChangesHandlers.ContainsKey(listenType) &&
             _postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
+        {
             _postgresChangesHandlers[listenType].Remove(postgresChangeHandler);
+            RemovePostgresChangesFromBinding(listenType, postgresChangeHandler);
+        }
     }
 
     /// <summary>
@@ -845,5 +848,17 @@ public class RealtimeChannel : IRealtimeChannel
         });
 
         result?.Handler?.Invoke(this, response);
+    }
+    
+    /// <summary>
+    /// Remove handler from binding
+    /// </summary>
+    /// <param name="eventType"></param>
+    /// <param name="handler"></param>
+    private void RemovePostgresChangesFromBinding(ListenType eventType, PostgresChangesHandler handler)
+    {
+        var binding = _bindings.FirstOrDefault(b => b.Handler == handler && b.ListenType == eventType);
+        if (binding == null) return;
+        _bindings.Remove(binding);
     }
 }
