@@ -413,16 +413,6 @@ public class RealtimeChannel : IRealtimeChannel
         };
 
         InvokeProperlyHandlerFromBind(listenType, response);
-        
-        // Invoke the wildcard listener (but only once)
-        // if (listenType != ListenType.All &&
-            // _postgresChangesHandlers.TryGetValue(ListenType.All, out var changesHandler))
-            // foreach (var handler in changesHandler.ToArray())
-                // handler.Invoke(this, response);
-
-        // if (_postgresChangesHandlers.TryGetValue(listenType, out var postgresChangesHandler))
-            // foreach (var handler in postgresChangesHandler.ToArray())
-                // handler.Invoke(this, response);
     }
 
     /// <summary>
