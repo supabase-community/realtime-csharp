@@ -223,7 +223,6 @@ public class ChannelPostgresChangesTests
     {
         var tsc = new TaskCompletionSource<bool>();
         var channel = _socketClient!.Channel("realtime", "public", "todos");
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) => Debug.WriteLine(changes.Model<Todo>()?.Details));
         
         var todo1 = await _restClient!.Table<Todo>().Insert(new Todo
             { UserId = 1, Details = "Client receives callbacks 1? ✅" });
