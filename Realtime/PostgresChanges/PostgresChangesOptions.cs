@@ -80,9 +80,6 @@ public class PostgresChangesOptions
     [JsonProperty("event")]
     public string Event => Core.Helpers.GetMappedToAttr(_listenType).Mapping!;
     
-    [JsonProperty("channel_ref")]
-    public string ChannelRef { get; private set; } 
-
     private readonly ListenType _listenType;
 
     /// <summary>
@@ -100,7 +97,6 @@ public class PostgresChangesOptions
         Table = table;
         Filter = filter;
         Parameters = parameters;
-        ChannelRef = Guid.NewGuid().ToString();
     }
 
     private bool Equals(PostgresChangesOptions other)

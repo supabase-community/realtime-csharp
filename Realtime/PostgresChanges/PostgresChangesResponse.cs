@@ -77,7 +77,4 @@ public class PostgresChangesPayload<T> where T : class
     
     [JsonProperty("ids")]
     public List<int?> Ids { get; set; }
-    
-    [JsonProperty("channel_ref")]
-    public string? ChannelRef { get; set; }
 }

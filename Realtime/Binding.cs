@@ -9,7 +9,7 @@ public class Binding
 
     public IRealtimeChannel.PostgresChangesHandler? Handler { get; set; }
     
-    public PostgresChangesOptions.ListenType ListenType { get; set; }
+    public PostgresChangesOptions.ListenType? ListenType { get; set; }
 
     public int? Id { get; set; }
 }
