@@ -360,8 +360,11 @@ public class RealtimeChannel : IRealtimeChannel
     /// <summary>
     /// Clears all postgres changes listeners.
     /// </summary>
-    public void ClearPostgresChangeHandlers() =>
-        _postgresChangesHandlers.Clear();
+    public void ClearPostgresChangeHandlers()
+    {
+        _postgresChangesHandlers.Clear();   
+        _bindings.Clear();
+    }
 
     /// <summary>
     /// Adds an error event handler.

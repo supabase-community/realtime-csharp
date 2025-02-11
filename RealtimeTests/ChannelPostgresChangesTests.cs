@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -217,6 +218,39 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(check);
     }
 
+    [TestMethod("Channel: Receives Delete Callback")]
+    public async Task ChannelReceivesFilteredDeleteCallback()
+    {
+        var tsc = new TaskCompletionSource<bool>();
+        var channel = _socketClient!.Channel("realtime", "public", "todos");
+        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) => Debug.WriteLine(changes.Model<Todo>()?.Details));
+        
+        var todo1 = await _restClient!.Table<Todo>().Insert(new Todo
+            { UserId = 1, Details = "Client receives callbacks 1? ✅" });
+        var todo2 = await _restClient!.Table<Todo>().Insert(new Todo
+            { UserId = 2, Details = "Client receives callbacks 2? ✅" });
+        await _restClient!.Table<Todo>().Insert(new Todo
+            { UserId = 3, Details = "Client receives callbacks 3? ✅" });
+        
+        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Deletes, $"details=eq.{todo1.Model?.Details}"));
+        channel.AddPostgresChangeHandler(ListenType.Deletes, (_, removed) =>
+        {
+            var result = removed.OldModel<Todo>(); 
+            Assert.AreEqual(result?.Details, todo1.Model?.Details);
+            Assert.AreNotEqual(result?.Details, todo2.Model?.Details);
+            
+            tsc.SetResult(true);
+        });
+
+        await channel.Subscribe();
+
+        await _restClient.Table<Todo>().Match(todo1.Models.First()).Delete();
+        await _restClient.Table<Todo>().Match(todo2.Models.First()).Delete();
+
+        var check = await tsc.Task;
+        Assert.IsTrue(check);
+    }
+    
     [TestMethod("Channel: Receives '*' Callback")]
     public async Task ChannelReceivesWildcardCallback()
     {
