@@ -292,4 +292,55 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(updateTsc.Task.Result);
         Assert.IsTrue(deleteTsc.Task.Result);
     }
+
+    [TestMethod("Channel: Receives Several Same Callback")]
+    public async Task ChannelReceivesSeveralSameCallback()
+    {
+        var insertTask1 = new TaskCompletionSource<bool>();
+        var insertTask2 = new TaskCompletionSource<bool>();
+        var insertTask3 = new TaskCompletionSource<bool>();
+        const string filter1 = "Client receives callbacks 1? ✅";
+        const string filter2 = "Client receives callbacks 2? ✅";
+        
+        var channel = _socketClient!.Channel("realtime", "public", "todos");
+
+        var count = 0;
+        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts));
+        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, added) =>
+        {
+            count++;
+            if (count == 3) insertTask1.TrySetResult(true);
+        });
+
+        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts, $"details=eq.{filter1}"));
+        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, added) =>
+        {
+            var model = added.Model<Todo>();
+            
+            insertTask2.SetResult(model?.Details == filter1);
+        });
+
+
+        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts, $"details=eq.{filter2}"));
+        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, added) =>
+        {
+            var model = added.Model<Todo>();
+
+            insertTask3.SetResult(model?.Details == filter2);
+        });
+
+
+       await channel.Subscribe();
+        
+       await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
+       await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = filter1 });
+       await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = filter2 });
+       
+       await Task.WhenAll(insertTask1.Task, insertTask2.Task, insertTask3.Task);
+
+       Assert.IsTrue(insertTask1.Task.Result);
+       Assert.IsTrue(insertTask2.Task.Result);
+       Assert.IsTrue(insertTask3.Task.Result);
+    }
+    
 }
