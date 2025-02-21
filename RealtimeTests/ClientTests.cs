@@ -18,8 +18,9 @@ public class ClientTests
     [TestInitialize]
     public async Task InitializeTest()
     {
-        Console.WriteLine();
-        Console.WriteLine(Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult().AddressList[0]);
+        // Check if it will pass on github action
+        //Console.WriteLine();
+        //Console.WriteLine(Dns.GetHostEntryAsync(Dns.GetHostName()).GetAwaiter().GetResult().AddressList[0]);
 
         client = Helpers.SocketClient();
         client.AddDebugHandler((sender, message, exception) => Debug.WriteLine(message));
