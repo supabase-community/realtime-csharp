@@ -7,11 +7,10 @@ namespace RealtimeTests;
 
 internal static class Helpers
 {
-    private const string ApiKey =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIiLCJpYXQiOjE2NzEyMzc4NzMsImV4cCI6MjAwMjc3Mzk5MywiYXVkIjoiIiwic3ViIjoiIiwicm9sZSI6ImF1dGhlbnRpY2F0ZWQifQ.qoYdljDZ9rjfs1DKj5_OqMweNtj7yk20LZKlGNLpUO8";
+    private const string ApiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0";
 
-    private const string SocketEndpoint = "ws://realtime-dev.localhost:4000/socket";
-    private const string RestEndpoint = "http://localhost:3000";
+    private const string SocketEndpoint = "ws://127.0.0.1:54321/realtime/v1";
+    private const string RestEndpoint = "http://localhost:54321/rest/v1";
 
     public static Supabase.Postgrest.Client RestClient() => new(RestEndpoint, new Supabase.Postgrest.ClientOptions());
 
