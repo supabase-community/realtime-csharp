@@ -340,7 +340,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// <param name="postgresChangeHandler"></param>
     public void RemovePostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
-            RemovePostgresChangesFromBinding(listenType, postgresChangeHandler);
+        RemovePostgresChangesFromBinding(listenType, postgresChangeHandler);
     }
 
     /// <summary>
