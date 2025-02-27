@@ -7,6 +7,64 @@ references:
   commentId: N:Supabase.Realtime
   fullName: Supabase.Realtime
   nameWithType: Supabase.Realtime
+- uid: Supabase.Realtime.Binding
+  name: Binding
+  href: api/Supabase.Realtime.Binding.html
+  commentId: T:Supabase.Realtime.Binding
+  fullName: Supabase.Realtime.Binding
+  nameWithType: Binding
+- uid: Supabase.Realtime.Binding.Handler
+  name: Handler
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_Handler
+  commentId: P:Supabase.Realtime.Binding.Handler
+  fullName: Supabase.Realtime.Binding.Handler
+  nameWithType: Binding.Handler
+- uid: Supabase.Realtime.Binding.Handler*
+  name: Handler
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_Handler_
+  commentId: Overload:Supabase.Realtime.Binding.Handler
+  isSpec: "True"
+  fullName: Supabase.Realtime.Binding.Handler
+  nameWithType: Binding.Handler
+- uid: Supabase.Realtime.Binding.Id
+  name: Id
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_Id
+  commentId: P:Supabase.Realtime.Binding.Id
+  fullName: Supabase.Realtime.Binding.Id
+  nameWithType: Binding.Id
+- uid: Supabase.Realtime.Binding.Id*
+  name: Id
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_Id_
+  commentId: Overload:Supabase.Realtime.Binding.Id
+  isSpec: "True"
+  fullName: Supabase.Realtime.Binding.Id
+  nameWithType: Binding.Id
+- uid: Supabase.Realtime.Binding.ListenType
+  name: ListenType
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_ListenType
+  commentId: P:Supabase.Realtime.Binding.ListenType
+  fullName: Supabase.Realtime.Binding.ListenType
+  nameWithType: Binding.ListenType
+- uid: Supabase.Realtime.Binding.ListenType*
+  name: ListenType
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_ListenType_
+  commentId: Overload:Supabase.Realtime.Binding.ListenType
+  isSpec: "True"
+  fullName: Supabase.Realtime.Binding.ListenType
+  nameWithType: Binding.ListenType
+- uid: Supabase.Realtime.Binding.Options
+  name: Options
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_Options
+  commentId: P:Supabase.Realtime.Binding.Options
+  fullName: Supabase.Realtime.Binding.Options
+  nameWithType: Binding.Options
+- uid: Supabase.Realtime.Binding.Options*
+  name: Options
+  href: api/Supabase.Realtime.Binding.html#Supabase_Realtime_Binding_Options_
+  commentId: Overload:Supabase.Realtime.Binding.Options
+  isSpec: "True"
+  fullName: Supabase.Realtime.Binding.Options
+  nameWithType: Binding.Options
 - uid: Supabase.Realtime.Broadcast
   name: Supabase.Realtime.Broadcast
   href: api/Supabase.Realtime.Broadcast.html
@@ -3054,6 +3112,22 @@ references:
   fullName.vb: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.New
   nameWithType: PostgresChangesOptions.PostgresChangesOptions
   nameWithType.vb: PostgresChangesOptions.New
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Equals(System.Object)
+  name: Equals(object?)
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html#Supabase_Realtime_PostgresChanges_PostgresChangesOptions_Equals_System_Object_
+  commentId: M:Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Equals(object?)
+  fullName.vb: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Equals(Object)
+  nameWithType: PostgresChangesOptions.Equals(object?)
+  nameWithType.vb: PostgresChangesOptions.Equals(Object)
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Equals*
+  name: Equals
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html#Supabase_Realtime_PostgresChanges_PostgresChangesOptions_Equals_
+  commentId: Overload:Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Equals
+  isSpec: "True"
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Equals
+  nameWithType: PostgresChangesOptions.Equals
 - uid: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Event
   name: Event
   href: api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html#Supabase_Realtime_PostgresChanges_PostgresChangesOptions_Event
@@ -3080,6 +3154,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.Filter
   nameWithType: PostgresChangesOptions.Filter
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.GetHashCode
+  name: GetHashCode()
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html#Supabase_Realtime_PostgresChanges_PostgresChangesOptions_GetHashCode
+  commentId: M:Supabase.Realtime.PostgresChanges.PostgresChangesOptions.GetHashCode
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.GetHashCode()
+  nameWithType: PostgresChangesOptions.GetHashCode()
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.GetHashCode*
+  name: GetHashCode
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html#Supabase_Realtime_PostgresChanges_PostgresChangesOptions_GetHashCode_
+  commentId: Overload:Supabase.Realtime.PostgresChanges.PostgresChangesOptions.GetHashCode
+  isSpec: "True"
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.GetHashCode
+  nameWithType: PostgresChangesOptions.GetHashCode
 - uid: Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType
   name: PostgresChangesOptions.ListenType
   href: api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType.html
@@ -3175,6 +3262,23 @@ references:
   fullName.vb: Supabase.Realtime.PostgresChanges.PostgresChangesPayload(Of T).Data
   nameWithType: PostgresChangesPayload<T>.Data
   nameWithType.vb: PostgresChangesPayload(Of T).Data
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesPayload`1.Ids
+  name: Ids
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesPayload-1.html#Supabase_Realtime_PostgresChanges_PostgresChangesPayload_1_Ids
+  commentId: P:Supabase.Realtime.PostgresChanges.PostgresChangesPayload`1.Ids
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesPayload<T>.Ids
+  fullName.vb: Supabase.Realtime.PostgresChanges.PostgresChangesPayload(Of T).Ids
+  nameWithType: PostgresChangesPayload<T>.Ids
+  nameWithType.vb: PostgresChangesPayload(Of T).Ids
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesPayload`1.Ids*
+  name: Ids
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesPayload-1.html#Supabase_Realtime_PostgresChanges_PostgresChangesPayload_1_Ids_
+  commentId: Overload:Supabase.Realtime.PostgresChanges.PostgresChangesPayload`1.Ids
+  isSpec: "True"
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesPayload<T>.Ids
+  fullName.vb: Supabase.Realtime.PostgresChanges.PostgresChangesPayload(Of T).Ids
+  nameWithType: PostgresChangesPayload<T>.Ids
+  nameWithType.vb: PostgresChangesPayload(Of T).Ids
 - uid: Supabase.Realtime.PostgresChanges.PostgresChangesResponse
   name: PostgresChangesResponse
   href: api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse.html
@@ -4572,6 +4676,77 @@ references:
   commentId: N:Supabase.Realtime.Socket.Responses
   fullName: Supabase.Realtime.Socket.Responses
   nameWithType: Supabase.Realtime.Socket.Responses
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse
+  name: PhoenixPostgresChangeResponse
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html
+  commentId: T:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse
+  nameWithType: PhoenixPostgresChangeResponse
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.eventName
+  name: eventName
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_eventName
+  commentId: P:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.eventName
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.eventName
+  nameWithType: PhoenixPostgresChangeResponse.eventName
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.eventName*
+  name: eventName
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_eventName_
+  commentId: Overload:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.eventName
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.eventName
+  nameWithType: PhoenixPostgresChangeResponse.eventName
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.filter
+  name: filter
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_filter
+  commentId: P:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.filter
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.filter
+  nameWithType: PhoenixPostgresChangeResponse.filter
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.filter*
+  name: filter
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_filter_
+  commentId: Overload:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.filter
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.filter
+  nameWithType: PhoenixPostgresChangeResponse.filter
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.id
+  name: id
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_id
+  commentId: P:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.id
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.id
+  nameWithType: PhoenixPostgresChangeResponse.id
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.id*
+  name: id
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_id_
+  commentId: Overload:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.id
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.id
+  nameWithType: PhoenixPostgresChangeResponse.id
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.schema
+  name: schema
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_schema
+  commentId: P:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.schema
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.schema
+  nameWithType: PhoenixPostgresChangeResponse.schema
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.schema*
+  name: schema
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_schema_
+  commentId: Overload:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.schema
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.schema
+  nameWithType: PhoenixPostgresChangeResponse.schema
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.table
+  name: table
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_table
+  commentId: P:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.table
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.table
+  nameWithType: PhoenixPostgresChangeResponse.table
+- uid: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.table*
+  name: table
+  href: api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PhoenixPostgresChangeResponse_table_
+  commentId: Overload:Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.table
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.table
+  nameWithType: PhoenixPostgresChangeResponse.table
 - uid: Supabase.Realtime.Socket.Responses.PhoenixResponse
   name: PhoenixResponse
   href: api/Supabase.Realtime.Socket.Responses.PhoenixResponse.html
@@ -4590,6 +4765,25 @@ references:
   commentId: F:Supabase.Realtime.Socket.Responses.PhoenixResponse.Status
   fullName: Supabase.Realtime.Socket.Responses.PhoenixResponse.Status
   nameWithType: PhoenixResponse.Status
+- uid: Supabase.Realtime.Socket.Responses.PostgresChangeResponse
+  name: PostgresChangeResponse
+  href: api/Supabase.Realtime.Socket.Responses.PostgresChangeResponse.html
+  commentId: T:Supabase.Realtime.Socket.Responses.PostgresChangeResponse
+  fullName: Supabase.Realtime.Socket.Responses.PostgresChangeResponse
+  nameWithType: PostgresChangeResponse
+- uid: Supabase.Realtime.Socket.Responses.PostgresChangeResponse.change
+  name: change
+  href: api/Supabase.Realtime.Socket.Responses.PostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PostgresChangeResponse_change
+  commentId: P:Supabase.Realtime.Socket.Responses.PostgresChangeResponse.change
+  fullName: Supabase.Realtime.Socket.Responses.PostgresChangeResponse.change
+  nameWithType: PostgresChangeResponse.change
+- uid: Supabase.Realtime.Socket.Responses.PostgresChangeResponse.change*
+  name: change
+  href: api/Supabase.Realtime.Socket.Responses.PostgresChangeResponse.html#Supabase_Realtime_Socket_Responses_PostgresChangeResponse_change_
+  commentId: Overload:Supabase.Realtime.Socket.Responses.PostgresChangeResponse.change
+  isSpec: "True"
+  fullName: Supabase.Realtime.Socket.Responses.PostgresChangeResponse.change
+  nameWithType: PostgresChangeResponse.change
 - uid: Supabase.Realtime.Socket.SocketOptionsParameters
   name: SocketOptionsParameters
   href: api/Supabase.Realtime.Socket.SocketOptionsParameters.html

@@ -12,13 +12,31 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Binding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Binding.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Binding",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Supabase.Realtime.Broadcast.BroadcastOptions.yml",
       "output": {
         ".html": {
           "relative_path": "api/Supabase.Realtime.Broadcast.BroadcastOptions.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Broadcast.BroadcastOptions",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Broadcast.BroadcastOptions.yml\" sourcestartlinenumber=\"1\">Options</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -28,7 +46,11 @@
           "relative_path": "api/Supabase.Realtime.Broadcast.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Broadcast",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -38,7 +60,11 @@
           "relative_path": "api/Supabase.Realtime.Channel.ChannelOptions.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Channel.ChannelOptions",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Channel.ChannelOptions.yml\" sourcestartlinenumber=\"1\">Channel Options</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -48,7 +74,11 @@
           "relative_path": "api/Supabase.Realtime.Channel.Push.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Channel.Push",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Channel.Push.yml\" sourcestartlinenumber=\"1\">Class representation of a single request sent to the Socket server.</p>\n<p sourcefile=\"api/Supabase.Realtime.Channel.Push.yml\" sourcestartlinenumber=\"3\"><code sourcefile=\"api/Supabase.Realtime.Channel.Push.yml\" sourcestartlinenumber=\"3\">Push</code> also adds additional functionality for retrying, timeouts, and listeners\nfor its associated response from the server.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -58,7 +88,11 @@
           "relative_path": "api/Supabase.Realtime.Channel.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Channel",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -68,7 +102,11 @@
           "relative_path": "api/Supabase.Realtime.Client.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Client",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Client.yml\" sourcestartlinenumber=\"1\">Singleton that represents a Client connection to a Realtime Server.</p>\n<p sourcefile=\"api/Supabase.Realtime.Client.yml\" sourcestartlinenumber=\"3\">It maintains a singular Websocket with asynchronous listeners (RealtimeChannels).</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -78,7 +116,11 @@
           "relative_path": "api/Supabase.Realtime.ClientOptions.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.ClientOptions",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.ClientOptions.yml\" sourcestartlinenumber=\"1\">Options used when initializing a <xref href=\"Supabase.Realtime.Client\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -88,7 +130,11 @@
           "relative_path": "api/Supabase.Realtime.Constants.ChannelEventName.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Constants.ChannelEventName",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Constants.ChannelEventName.yml\" sourcestartlinenumber=\"1\">Mapping for event names that can be used with <xref href=\"Supabase.Realtime.RealtimeChannel.Push(System.String%2cSystem.String%2cSystem.Object%2cSystem.Int32)\" data-throw-if-not-resolved=\"false\"></xref> to send arbitrary data.\nThis is unlikely to be used by the developer.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -98,7 +144,11 @@
           "relative_path": "api/Supabase.Realtime.Constants.ChannelState.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Constants.ChannelState",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Constants.ChannelState.yml\" sourcestartlinenumber=\"1\">Mapping of channel states, used with <xref href=\"Supabase.Realtime.RealtimeChannel\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -108,7 +158,11 @@
           "relative_path": "api/Supabase.Realtime.Constants.EventType.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Constants.EventType",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Constants.EventType.yml\" sourcestartlinenumber=\"1\">A channel event type used and parsed in a <xref href=\"Supabase.Realtime.Socket.SocketResponse\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -118,7 +172,11 @@
           "relative_path": "api/Supabase.Realtime.Constants.PresenceListenEventTypes.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Constants.PresenceListenEventTypes",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Constants.PresenceListenEventTypes.yml\" sourcestartlinenumber=\"1\">Map of Presence listener types, used with: <xref href=\"Supabase.Realtime.RealtimePresence%601\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -128,7 +186,11 @@
           "relative_path": "api/Supabase.Realtime.Constants.SocketState.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Constants.SocketState",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Constants.SocketState.yml\" sourcestartlinenumber=\"1\">The Current Socket state, used in <xref href=\"Supabase.Realtime.RealtimeSocket\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -138,7 +200,11 @@
           "relative_path": "api/Supabase.Realtime.Constants.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Constants",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Constants.yml\" sourcestartlinenumber=\"1\">Shared constants for Realtime</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -148,7 +214,11 @@
           "relative_path": "api/Supabase.Realtime.Converters.IntArrayConverter.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Converters.IntArrayConverter",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Converters.IntArrayConverter.yml\" sourcestartlinenumber=\"1\">An int array converter that specifically parses Postgrest styled arrays <code sourcefile=\"api/Supabase.Realtime.Converters.IntArrayConverter.yml\" sourcestartlinenumber=\"1\">{1,2,3}</code> and <code sourcefile=\"api/Supabase.Realtime.Converters.IntArrayConverter.yml\" sourcestartlinenumber=\"1\">[1,2,3]</code> from strings\ninto a <xref href=\"System.Collections.Generic.List%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -158,7 +228,11 @@
           "relative_path": "api/Supabase.Realtime.Converters.StringArrayConverter.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Converters.StringArrayConverter",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Converters.StringArrayConverter.yml\" sourcestartlinenumber=\"1\">An string array converter that specifically parses Postgrest styled arrays <code sourcefile=\"api/Supabase.Realtime.Converters.StringArrayConverter.yml\" sourcestartlinenumber=\"1\">{big,string,array}</code> and <code sourcefile=\"api/Supabase.Realtime.Converters.StringArrayConverter.yml\" sourcestartlinenumber=\"1\">[1,2,3]</code>\nfrom strings into a <xref href=\"System.Collections.Generic.List%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -168,7 +242,11 @@
           "relative_path": "api/Supabase.Realtime.Converters.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Converters",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -178,7 +256,11 @@
           "relative_path": "api/Supabase.Realtime.Exceptions.FailureHint.Reason.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Exceptions.FailureHint.Reason",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Exceptions.FailureHint.Reason.yml\" sourcestartlinenumber=\"1\">Reasons for a failure</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -188,7 +270,11 @@
           "relative_path": "api/Supabase.Realtime.Exceptions.FailureHint.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Exceptions.FailureHint",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Exceptions.FailureHint.yml\" sourcestartlinenumber=\"1\">A failure hint</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -198,7 +284,11 @@
           "relative_path": "api/Supabase.Realtime.Exceptions.RealtimeException.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Exceptions.RealtimeException",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Exceptions.RealtimeException.yml\" sourcestartlinenumber=\"1\">An Exception thrown within <xref href=\"Supabase.Realtime\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -208,7 +298,11 @@
           "relative_path": "api/Supabase.Realtime.Exceptions.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Exceptions",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -218,7 +312,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.BroadcastEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeBroadcast.BroadcastEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.BroadcastEventHandler.yml\" sourcestartlinenumber=\"1\">A delegate for broadcast events</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -228,7 +326,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeBroadcast",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeBroadcast.yml\" sourcestartlinenumber=\"1\">A contract representing a realtime broadcast</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -238,7 +340,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.ErrorEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeChannel.ErrorEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeChannel.ErrorEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for errors on this channel</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -248,7 +354,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.MessageReceivedHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeChannel.MessageReceivedHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeChannel.MessageReceivedHandler.yml\" sourcestartlinenumber=\"1\">Delegate for messages received on this channel</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -258,7 +368,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler.yml\" sourcestartlinenumber=\"1\">Delegate for postgres changes</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -268,7 +382,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.StateChangedHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeChannel.StateChangedHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeChannel.StateChangedHandler.yml\" sourcestartlinenumber=\"1\">Delegate for channel state changes</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -278,7 +396,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeChannel.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeChannel",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeChannel.yml\" sourcestartlinenumber=\"1\">A contract representing a realtime channel</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -288,7 +410,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeClient-2.SocketStateEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.SocketStateEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeClient-2.SocketStateEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for handling a socket state event, this can be seen as synonymous with the Client's state.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -298,7 +424,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeClient-2.yml\" sourcestartlinenumber=\"1\">Contract representing a Realtime Client</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -308,7 +438,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeDebugger.DebugEventHandler.yml\" sourcestartlinenumber=\"1\">A debug event handler</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -318,7 +452,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeDebugger.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeDebugger",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeDebugger.yml\" sourcestartlinenumber=\"1\">Contract representing an internal debugger.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -328,7 +466,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePresence.EventType.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimePresence.EventType",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimePresence.EventType.yml\" sourcestartlinenumber=\"1\">Mapping of presence event types</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -338,7 +480,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimePresence.PresenceEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for a presence event.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -348,7 +494,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePresence.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimePresence",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimePresence.yml\" sourcestartlinenumber=\"1\">Contract representing a Realtime Presence class</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -358,7 +508,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePush-2.MessageEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>.MessageEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimePush-2.MessageEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for a message event.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -368,7 +522,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimePush-2.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimePush<TChannel, TSocketResponse>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimePush-2.yml\" sourcestartlinenumber=\"1\">Contract representing a &quot;Push&quot; or an outgoing message to the socket server</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -378,7 +536,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeSocket.ErrorEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for errors on this socket</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -388,7 +550,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeSocket.HeartbeatEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for handling a heartbeat event.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -398,7 +564,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeSocket.MessageEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for handling message received events.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -408,7 +578,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeSocket.StateEventHandler.yml\" sourcestartlinenumber=\"1\">Delegate for handling socket state changes.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -418,7 +592,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocket.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeSocket",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeSocket.yml\" sourcestartlinenumber=\"1\">Contract for a realtime socket.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -428,7 +606,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces.IRealtimeSocketResponse",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Interfaces.IRealtimeSocketResponse.yml\" sourcestartlinenumber=\"1\">Contract for a socket response</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -438,7 +620,11 @@
           "relative_path": "api/Supabase.Realtime.Interfaces.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Interfaces",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -448,7 +634,11 @@
           "relative_path": "api/Supabase.Realtime.Models.BaseBroadcast-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Models.BaseBroadcast<T>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Models.BaseBroadcast-1.yml\" sourcestartlinenumber=\"1\">Represents a Broadcast response with a modeled payload.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -458,7 +648,11 @@
           "relative_path": "api/Supabase.Realtime.Models.BaseBroadcast.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Models.BaseBroadcast",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Models.BaseBroadcast.yml\" sourcestartlinenumber=\"1\">Represents an arbitrary Broadcast response.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -468,7 +662,11 @@
           "relative_path": "api/Supabase.Realtime.Models.BasePresence.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Models.BasePresence",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Models.BasePresence.yml\" sourcestartlinenumber=\"1\">Represents an arbitrary Presence response.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -478,7 +676,11 @@
           "relative_path": "api/Supabase.Realtime.Models.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Models",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -488,7 +690,11 @@
           "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType.yml\" sourcestartlinenumber=\"1\">Mapping of postgres changes listener types</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -498,7 +704,11 @@
           "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.PostgresChanges.PostgresChangesOptions",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.yml\" sourcestartlinenumber=\"1\">Handles a <code sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.yml\" sourcestartlinenumber=\"1\">postgres_changes</code> channel</p>\n<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.yml\" sourcestartlinenumber=\"3\">For Example in the js client:</p>\n<pre><code sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.yml\" sourcestartlinenumber=\"5\">const databaseFilter = {\n\tschema: 'public',\n\ttable: 'messages',\n\tfilter: `room_id=eq.${channelId}`,\n\tevent: 'INSERT',\n}\n</code></pre>\n<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.yml\" sourcestartlinenumber=\"12\">Would translate to:</p>\n<pre><code sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.yml\" sourcestartlinenumber=\"14\">new PostgresChangesOptions(&quot;public&quot;, &quot;messages&quot;, $&quot;room_id=eq.{channelId}&quot;);\n</code></pre>\n"
     },
     {
       "type": "ManagedReference",
@@ -508,7 +718,11 @@
           "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesPayload-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.PostgresChanges.PostgresChangesPayload<T>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesPayload-1.yml\" sourcestartlinenumber=\"1\">The payload.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -518,7 +732,11 @@
           "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.PostgresChanges.PostgresChangesResponse<T>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse-1.yml\" sourcestartlinenumber=\"1\">A SocketResponse with support for Generically typed Payload</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -528,7 +746,11 @@
           "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.PostgresChanges.PostgresChangesResponse",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesResponse.yml\" sourcestartlinenumber=\"1\">A postgres changes event.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -538,7 +760,11 @@
           "relative_path": "api/Supabase.Realtime.PostgresChanges.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.PostgresChanges",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -548,7 +774,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.PresenceDiffPayload-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence.PresenceDiffPayload<TPresence>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Presence.PresenceDiffPayload-1.yml\" sourcestartlinenumber=\"1\">a Presence Diff payload</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -558,7 +788,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.PresenceDiffPayloadMeta-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence.PresenceDiffPayloadMeta<TPresence>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Presence.PresenceDiffPayloadMeta-1.yml\" sourcestartlinenumber=\"1\">A presence diff payload</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -568,7 +802,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.PresenceOptions.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence.PresenceOptions",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Presence.PresenceOptions.yml\" sourcestartlinenumber=\"1\">Options used to initialize Realtime Presence</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -578,7 +816,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.RealtimePresenceDiff-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence.RealtimePresenceDiff<TPresence>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Presence.RealtimePresenceDiff-1.yml\" sourcestartlinenumber=\"1\">Represents a presence_diff response</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -588,7 +830,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.Responses.PresenceStatePayload-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence.Responses.PresenceStatePayload<TPresence>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Presence.Responses.PresenceStatePayload-1.yml\" sourcestartlinenumber=\"1\">A presence state payload response</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -598,7 +844,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.Responses.PresenceStateSocketResponse-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence.Responses.PresenceStateSocketResponse<TPresence>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Presence.Responses.PresenceStateSocketResponse-1.yml\" sourcestartlinenumber=\"1\">A SocketResponse with support for Generically typed Payload</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -608,7 +858,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.Responses.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence.Responses",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -618,7 +872,11 @@
           "relative_path": "api/Supabase.Realtime.Presence.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Presence",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -628,7 +886,11 @@
           "relative_path": "api/Supabase.Realtime.RealtimeBroadcast-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.RealtimeBroadcast<TBroadcastModel>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.RealtimeBroadcast-1.yml\" sourcestartlinenumber=\"1\">Represents a realtime broadcast client.</p>\n<p sourcefile=\"api/Supabase.Realtime.RealtimeBroadcast-1.yml\" sourcestartlinenumber=\"3\">Broadcast follows the publish-subscribe pattern where a client publishes messages to a channel with a unique identifier.\nOther clients can elect to receive the message in real-time by subscribing to the channel with the same unique identifier. If these clients are online and subscribed then they will receive the message.</p>\n<p sourcefile=\"api/Supabase.Realtime.RealtimeBroadcast-1.yml\" sourcestartlinenumber=\"6\">Broadcast works by connecting your client to the nearest Realtime server, which will communicate with other servers to relay messages to other clients.\nA common use-case is sharing a user's cursor position with other clients in an online game.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -638,7 +900,11 @@
           "relative_path": "api/Supabase.Realtime.RealtimeChannel.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.RealtimeChannel",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.RealtimeChannel.yml\" sourcestartlinenumber=\"1\">Class representation of a channel subscription</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -648,7 +914,11 @@
           "relative_path": "api/Supabase.Realtime.RealtimePresence-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.RealtimePresence<TPresenceModel>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.RealtimePresence-1.yml\" sourcestartlinenumber=\"1\">Represents a realtime presence client.</p>\n<p sourcefile=\"api/Supabase.Realtime.RealtimePresence-1.yml\" sourcestartlinenumber=\"3\">When a client subscribes to a channel, it will immediately receive the channel's latest state in a single message.\nClients are free to come-and-go as they please, and as long as they are all subscribed to the same channel then they will all have the same Presence state as each other.\nIf a client is suddenly disconnected (for example, they go offline), their state will be automatically removed from the shared state.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -658,7 +928,25 @@
           "relative_path": "api/Supabase.Realtime.RealtimeSocket.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.RealtimeSocket",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.RealtimeSocket.yml\" sourcestartlinenumber=\"1\">Socket connection handler.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.Responses.PhoenixPostgresChangeResponse",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -668,7 +956,25 @@
           "relative_path": "api/Supabase.Realtime.Socket.Responses.PhoenixResponse.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.Responses.PhoenixResponse",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Socket.Responses.PhoenixResponse.yml\" sourcestartlinenumber=\"1\">A generic, internal phoenix server response</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Socket.Responses.PostgresChangeResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Socket.Responses.PostgresChangeResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.Responses.PostgresChangeResponse",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -678,7 +984,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.Responses.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.Responses",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -688,7 +998,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.SocketOptionsParameters.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.SocketOptionsParameters",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Socket.SocketOptionsParameters.yml\" sourcestartlinenumber=\"1\">Options to initialize a socket.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -698,7 +1012,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.SocketRequest.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.SocketRequest",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Socket.SocketRequest.yml\" sourcestartlinenumber=\"1\">Representation of a Socket Request, used by <xref href=\"Supabase.Realtime.Channel.Push\" data-throw-if-not-resolved=\"false\"></xref></p>\n"
     },
     {
       "type": "ManagedReference",
@@ -708,7 +1026,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.SocketResponse-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.SocketResponse<T>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Socket.SocketResponse-1.yml\" sourcestartlinenumber=\"1\">A SocketResponse with support for Generically typed Payload</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -718,7 +1040,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.SocketResponse.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.SocketResponse",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Socket.SocketResponse.yml\" sourcestartlinenumber=\"1\">Representation of a Socket Response.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -728,7 +1054,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.SocketResponsePayload-1.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.SocketResponsePayload<T>",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Socket.SocketResponsePayload-1.yml\" sourcestartlinenumber=\"1\">A socket response payload.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -738,7 +1068,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.SocketResponsePayload.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket.SocketResponsePayload",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Socket.SocketResponsePayload.yml\" sourcestartlinenumber=\"1\">A socket response payload.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -748,7 +1082,11 @@
           "relative_path": "api/Supabase.Realtime.Socket.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Socket",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -758,7 +1096,11 @@
           "relative_path": "api/Supabase.Realtime.html"
         }
       },
-      "version": ""
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime",
+      "Summary": null
     },
     {
       "type": "Toc",
