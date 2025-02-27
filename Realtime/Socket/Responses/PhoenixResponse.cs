@@ -11,7 +11,7 @@ public class PhoenixResponse
     /// The response.
     /// </summary>
     [JsonProperty("response")]
-    public object? Response;
+    public PostgresChangeResponse? Response;
 
     /// <summary>
     /// The status.

@@ -406,3 +406,8 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 /RealtimeTests/.runsettings
+
+# supabase stuffs
+supabase/.branches
+supabase/.temp
+supabase/.env

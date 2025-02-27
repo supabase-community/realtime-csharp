@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Timers;
@@ -154,13 +155,12 @@ public class RealtimeChannel : IRealtimeChannel
     private readonly List<MessageReceivedHandler> _messageReceivedHandlers = new();
     private readonly List<ErrorEventHandler> _errorEventHandlers = new();
 
-    private readonly Dictionary<ListenType, List<PostgresChangesHandler>> _postgresChangesHandlers =
-        new();
-
     private bool CanPush => IsJoined && Socket.IsConnected;
     private bool _hasJoinedOnce;
     private readonly Timer _rejoinTimer;
     private bool _isRejoining;
+
+    private List<Binding> _bindings = [];
 
     /// <summary>
     /// Initializes a Channel - must call `Subscribe()` to receive events.
@@ -330,11 +330,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// <param name="postgresChangeHandler"></param>
     public void AddPostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
-        if (!_postgresChangesHandlers.ContainsKey(listenType))
-            _postgresChangesHandlers[listenType] = new List<PostgresChangesHandler>();
-
-        if (!_postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
-            _postgresChangesHandlers[listenType].Add(postgresChangeHandler);
+        BindPostgresChangesHandler(listenType, postgresChangeHandler);
     }
 
     /// <summary>
@@ -344,16 +340,16 @@ public class RealtimeChannel : IRealtimeChannel
     /// <param name="postgresChangeHandler"></param>
     public void RemovePostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
-        if (_postgresChangesHandlers.ContainsKey(listenType) &&
-            _postgresChangesHandlers[listenType].Contains(postgresChangeHandler))
-            _postgresChangesHandlers[listenType].Remove(postgresChangeHandler);
+        RemovePostgresChangesFromBinding(listenType, postgresChangeHandler);
     }
 
     /// <summary>
     /// Clears all postgres changes listeners.
     /// </summary>
-    public void ClearPostgresChangeHandlers() =>
-        _postgresChangesHandlers.Clear();
+    public void ClearPostgresChangeHandlers()
+    {
+        _bindings.Clear();
+    }
 
     /// <summary>
     /// Adds an error event handler.
@@ -407,15 +403,7 @@ public class RealtimeChannel : IRealtimeChannel
             _ => ListenType.All
         };
 
-        // Invoke the wildcard listener (but only once)
-        if (listenType != ListenType.All &&
-            _postgresChangesHandlers.TryGetValue(ListenType.All, out var changesHandler))
-            foreach (var handler in changesHandler.ToArray())
-                handler.Invoke(this, response);
-
-        if (_postgresChangesHandlers.TryGetValue(listenType, out var postgresChangesHandler))
-            foreach (var handler in postgresChangesHandler.ToArray())
-                handler.Invoke(this, response);
+        InvokeProperlyHandlerFromBind(listenType, response);
     }
 
     /// <summary>
@@ -428,6 +416,8 @@ public class RealtimeChannel : IRealtimeChannel
     public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)
     {
         PostgresChangesOptions.Add(postgresChangesOptions);
+        
+        BindPostgresChangesOptions(postgresChangesOptions);
         return this;
     }
 
@@ -673,6 +663,8 @@ public class RealtimeChannel : IRealtimeChannel
             Options.SerializerSettings);
         if (obj?.Payload == null) return;
 
+        obj.Payload.Response?.change?.ForEach(BindIdPostgresChanges);
+        
         switch (obj.Payload.Status)
         {
             // A response was received from the channel
@@ -763,5 +755,114 @@ public class RealtimeChannel : IRealtimeChannel
                 PresenceDiff?.Invoke(this, message);
                 break;
         }
+    }
+
+    /// <summary>
+    /// Create a Binding and add to a list
+    /// </summary>
+    /// <param name="options"></param>
+    private void BindPostgresChangesOptions(PostgresChangesOptions options)
+    {
+        var founded = _bindings.FirstOrDefault(b => options.Equals(b.Options));
+        if (founded != null) return;
+        
+        _bindings.Add(
+            new Binding
+            {
+                Options = options,
+            }
+        );
+    }
+
+    /// <summary>
+    /// Try to bind a PostgresChangesHandler to a PostgresChangesOptions
+    /// </summary>
+    /// <param name="listenType"></param>
+    /// <param name="handler"></param>
+    private void BindPostgresChangesHandler(ListenType listenType, PostgresChangesHandler handler)
+    {
+        var founded = _bindings.FirstOrDefault(b =>
+            b.Options?.Event == Core.Helpers.GetMappedToAttr(listenType).Mapping &&
+            b.Handler == null
+        );
+        if (founded != null)
+        {
+            founded.Handler = handler;
+            founded.ListenType = listenType;
+            return;
+        }
+
+        BindPostgresChangesHandlerGeneric(listenType, handler);
+        
+    }
+
+    private void BindPostgresChangesHandlerGeneric(ListenType listenType, PostgresChangesHandler handler)
+    {
+        var founded = _bindings.FirstOrDefault(b =>
+            (b.Options?.Event == Core.Helpers.GetMappedToAttr(listenType).Mapping || b.Options?.Event == "*") &&
+            b.Handler == null
+        );
+        if (founded == null) return;
+
+        founded.Handler = handler;
+        founded.ListenType = listenType;
+    }
+
+    /// <summary>
+    /// Filter the binding list and try to add an id from socket to its binding
+    /// </summary>
+    /// <param name="joinResponse"></param>
+    private void BindIdPostgresChanges(PhoenixPostgresChangeResponse joinResponse)
+    {
+        var founded = _bindings.FirstOrDefault(b => b.Options != null &&
+                                                    b.Options.Event == joinResponse.eventName &&
+                                                    b.Options.Table == joinResponse.table &&
+                                                    b.Options.Schema == joinResponse.schema &&
+                                                    b.Options.Filter == joinResponse.filter);
+        if (founded == null) return;
+        founded.Id = joinResponse?.id;
+    }
+
+    /// <summary>
+    /// Try to invoke the handler properly based on event type and socket response 
+    /// </summary>
+    /// <param name="eventType"></param>
+    /// <param name="response"></param>
+    private void InvokeProperlyHandlerFromBind(ListenType eventType, PostgresChangesResponse response)
+    {
+        var all = _bindings.FirstOrDefault(b =>
+        {
+            if (b.Options == null && response.Payload == null && b.Handler == null) return false;
+
+            return response.Payload != null && response.Payload.Ids.Contains(b.Id) && eventType != ListenType.All &&
+                   b.ListenType == ListenType.All;
+        });
+
+        if (all != null)
+        {
+            all.Handler?.Invoke(this, response);
+            return;
+        }
+
+        // Invoke all specific handler if possible
+        _bindings.ForEach(binding =>
+        {
+            if (binding.ListenType != eventType) return;
+            if (binding.Options == null || response.Payload == null || binding.Handler == null) return;
+            
+            if (response.Payload.Ids.Contains(binding.Id)) binding.Handler.Invoke(this, response);
+        });
+    }
+    
+    /// <summary>
+    /// Remove handler from binding
+    /// </summary>
+    /// <param name="eventType"></param>
+    /// <param name="handler"></param>
+    private void RemovePostgresChangesFromBinding(ListenType eventType, PostgresChangesHandler handler)
+    {
+        var binding = _bindings.FirstOrDefault(b => b.Handler == handler && b.ListenType == eventType);
+        if (binding == null) return;
+        _bindings.Remove(binding);
     }
 }

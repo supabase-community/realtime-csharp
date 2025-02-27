@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Supabase.Postgrest.Models;
 using Supabase.Realtime.Socket;
 
@@ -73,4 +74,7 @@ public class PostgresChangesPayload<T> where T : class
     /// </summary>
     [JsonProperty("data")]
     public SocketResponsePayload<T>? Data { get; set; }
+    
+    [JsonProperty("ids")]
+    public List<int?> Ids { get; set; }
 }
