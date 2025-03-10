@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 7.1.0 - 2025-03-10
+- Implement postgres change filters by @diegofesanto [#55](https://github.com/supabase-community/realtime-csharp/pull/55)
+- Fix exception thrown for browser/client side [#55](https://github.com/supabase-community/realtime-csharp/pull/55)
+
 ## 7.0.2 - 2024-07-26
 
 - Update Dependency: `Websocket.Client@5.1.2`
