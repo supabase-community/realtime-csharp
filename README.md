@@ -1,14 +1,7 @@
-<p align="center">
-<img width="300" src=".github/logo.png"/>
-</p>
-<p align="center">
-  <img src="https://github.com/supabase/realtime-csharp/workflows/Build%20And%20Test/badge.svg"/>
-  <a href="https://www.nuget.org/packages/Supabase.Realtime/">
-    <img src="https://img.shields.io/nuget/vpre/Supabase.Realtime"/>
-  </a>
-</p>
+# Supabase.Realtime
 
----
+[![Build and Test](https://github.com/supabase-community/realtime-csharp/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/supabase-community/realtime-csharp/actions/workflows/build-and-test.yml)
+[![NuGet](https://img.shields.io/nuget/vpre/Supabase.Realtime)](https://www.nuget.org/packages/Supabase.Realtime/)
 
 ## [Notice]: v7.0.0 renames this package from `realtime-csharp` to `Supabase.Realtime`. The depreciation notice has been set in NuGet. The API remains the same.
 
