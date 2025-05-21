@@ -1,4 +1,20 @@
-﻿# Changelog
+# Changelog
+
+## [7.2.0](https://github.com/supabase-community/realtime-csharp/compare/v7.1.0...v7.2.0) (2025-05-13)
+
+
+### Bug Fixes
+
+* 22 - `SerializerSettings` were not being passed to `PostgresChangesResponse` ([f244281](https://github.com/supabase-community/realtime-csharp/commit/f244281782ca433f1b89a3818a02f5ea3eaaa17f))
+* 9 ([16292b0](https://github.com/supabase-community/realtime-csharp/commit/16292b099c9db1f8b0fa28aa138da7143d1e0978))
+* Change websocket lib for Blazor WASM to use realtime ([ba861d8](https://github.com/supabase-community/realtime-csharp/commit/ba861d842c66dcfb78378b0454a478b11ab57262))
+* Change websocket lib for Blazor WASM to use realtime ([1821fa4](https://github.com/supabase-community/realtime-csharp/commit/1821fa40ed579c0b281ef4f008c529fc3eb27ad1))
+* implement filter on PostgresChangeHandler ([#55](https://github.com/supabase-community/realtime-csharp/issues/55)) ([a41e4f7](https://github.com/supabase-community/realtime-csharp/commit/a41e4f719e2f0f65faf92915777218d5634c24fc))
+
+
+### Miscellaneous Chores
+
+* release 7.2.0 ([09374f4](https://github.com/supabase-community/realtime-csharp/commit/09374f4b0c8e7bb681a350a5604b0ad5e50fd1a5))
 
 ## 7.1.0 - 2025-03-10
 - Implement postgres change filters by @diegofesanto [#55](https://github.com/supabase-community/realtime-csharp/pull/55)
