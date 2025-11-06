@@ -32,4 +32,20 @@ public class BaseBroadcast
 	/// </summary>
 	[JsonProperty("payload")]
 	public Dictionary<string, object>? Payload { get; set; }
+
+	/// <summary>
+	/// Additional metadata associated with a broadcast event.
+	/// </summary>
+	[JsonProperty("meta", NullValueHandling = NullValueHandling.Ignore)]
+	public Meta? Meta { get; set; }
+}
+
+
+public class Meta
+{
+	[JsonProperty("id")]
+	public string Id { get; set; }
+	
+	[JsonProperty("replayed")]
+	public bool Replayed { get; set; }
 }

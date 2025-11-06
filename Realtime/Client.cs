@@ -361,6 +361,29 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     }
 
     /// <summary>
+    /// Adds a RealtimeChannel subscription with custom options - if a subscription exists with the same signature, the existing subscription will be returned.
+    /// </summary>
+    /// <param name="channelName">The name of the Channel to join</param>
+    /// <param name="options">Custom channel options for configuring the subscription</param>
+    /// <returns>A RealtimeChannel instance representing the subscription</returns>
+    /// <exception cref="Exception">Thrown when Socket is null, indicating Connect() was not called</exception>
+    public RealtimeChannel Channel(string channelName, ChannelOptions options)
+    {
+        var topic = $"realtime:{channelName}";
+        
+        if (_subscriptions.TryGetValue(topic, out var channel))
+            return channel;
+        
+        if (Socket == null)
+            throw new Exception("Socket must exist, was `Connect` called?");
+
+        var subs = new RealtimeChannel(Socket!, topic, options);
+        _subscriptions.Add(topic, subs);
+        
+        return subs;
+    }
+
+    /// <summary>
     /// Adds a RealtimeChannel subscription - if a subscription exists with the same signature, the existing subscription will be returned.
     /// </summary>
     /// <param name="database">Database to connect to, with Supabase this will likely be `realtime`.</param>

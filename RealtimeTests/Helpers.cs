@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Supabase.Realtime;
 using Supabase.Realtime.Socket;
 using Client = Supabase.Realtime.Client;
@@ -7,7 +8,8 @@ namespace RealtimeTests;
 
 internal static class Helpers
 {
-    private const string ApiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0";
+    public const string ApiKeyAnon = "sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH";
+    public const string ApiKey = "sb_secret_N7UND0UgjKTVK-Uodkm0Hg_xSvEMPvz";
 
     private const string SocketEndpoint = "ws://127.0.0.1:54321/realtime/v1";
     private const string RestEndpoint = "http://localhost:54321/rest/v1";
@@ -15,6 +17,21 @@ internal static class Helpers
     public static Supabase.Postgrest.Client RestClient() => new(RestEndpoint, new Supabase.Postgrest.ClientOptions());
 
     public static Client SocketClient()
+    {
+        var client = new Client(SocketEndpoint, new ClientOptions
+        {
+            Parameters = new SocketOptionsParameters
+            {
+                ApiKey = ApiKeyAnon
+            }
+        });
+
+        client.AddDebugHandler((_, message, _) => Debug.WriteLine(message));
+
+        return client;
+    }
+    
+    public static Client PrivateSocketClient()
     {
         var client = new Client(SocketEndpoint, new ClientOptions
         {

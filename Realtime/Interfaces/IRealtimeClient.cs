@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Supabase.Core.Interfaces;
+using Supabase.Realtime.Channel;
 using Supabase.Realtime.Exceptions;
 using static Supabase.Realtime.Constants;
 
@@ -85,6 +86,15 @@ public interface IRealtimeClient<TSocket, TChannel>: IGettableHeaders
     /// <returns></returns>
     TChannel Channel(string channelName);
 
+    /// <summary>
+    /// Adds a RealtimeChannel subscription with custom options - if a subscription exists with the same signature, the existing subscription will be returned.
+    /// </summary>
+    /// <param name="channelName">The name of the Channel to join</param>
+    /// <param name="options">Custom channel options for configuring the subscription</param>
+    /// <returns>A RealtimeChannel instance representing the subscription</returns>
+    /// <exception cref="Exception">Thrown when Socket is null, indicating Connect() was not called</exception>
+    TChannel Channel(string channelName, ChannelOptions options);
+    
     /// <summary>
     /// Shorthand initialization of a channel with postgres_changes options already set. 
     /// </summary>

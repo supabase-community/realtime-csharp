@@ -183,3 +183,34 @@ from users
 WHERE username = name_param;
 $$
     LANGUAGE SQL IMMUTABLE;
+    
+    
+CREATE OR REPLACE FUNCTION public.send(
+    event text,
+    topic text,
+    private boolean
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $$
+BEGIN
+BEGIN
+        -- Set the topic configuration
+EXECUTE format('SET LOCAL realtime.topic TO %L', topic);
+
+-- Attempt to insert the message
+INSERT INTO realtime.messages (payload, event, topic, private, extension)
+VALUES (null, event, topic, private, 'broadcast');
+EXCEPTION
+        WHEN OTHERS THEN
+            -- Capture and notify the error
+            RAISE WARNING 'ErrorSendingBroadcastMessage: %', SQLERRM;
+END;
+END;
+$$;
+
+CREATE POLICY messages_insert_all
+ON realtime.messages
+FOR INSERT
+TO PUBLIC
+WITH CHECK (true);

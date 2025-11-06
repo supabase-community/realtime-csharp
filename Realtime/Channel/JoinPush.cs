@@ -11,13 +11,14 @@ internal class JoinPush
 	[JsonProperty("config")]
 	public JoinPushConfig Config { get; private set; }
 
-	public JoinPush(BroadcastOptions? broadcastOptions = null, PresenceOptions? presenceOptions = null, List<PostgresChangesOptions>? postgresChangesOptions = null)
+	public JoinPush(BroadcastOptions? broadcastOptions = null, PresenceOptions? presenceOptions = null, List<PostgresChangesOptions>? postgresChangesOptions = null, bool? isPrivate = null)
 	{
 		Config = new JoinPushConfig
 		{
 			Broadcast = broadcastOptions,
 			Presence = presenceOptions,
-			PostgresChanges = postgresChangesOptions ?? new List<PostgresChangesOptions>()
+			PostgresChanges = postgresChangesOptions ?? new List<PostgresChangesOptions>(),
+			IsPrivate = isPrivate	
 		};
 	}
 
@@ -31,5 +32,8 @@ internal class JoinPush
 
 		[JsonProperty("postgres_changes", NullValueHandling = NullValueHandling.Ignore)]
 		public List<PostgresChangesOptions> PostgresChanges { get; set; } = new List<PostgresChangesOptions> { };
+		
+		[JsonProperty("private", NullValueHandling = NullValueHandling.Ignore)]
+		public bool? IsPrivate { get; set; }
 	}
 }

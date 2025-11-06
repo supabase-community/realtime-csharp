@@ -215,6 +215,16 @@ public interface IRealtimeChannel
     RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(bool broadcastSelf = false,
         bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast;
 
+
+    /// <summary>
+    /// Registers the channel with the specified configuration options.
+    /// </summary>
+    /// <param name="options">The configuration options for the broadcast registration.</param>
+    /// <typeparam name="TBroadcastResponse">The type of the broadcast response, which must inherit from <see cref="BaseBroadcast"/>.</typeparam>
+    /// <returns>A <see cref="RealtimeBroadcast{TBroadcastResponse}"/> instance for managing the broadcast.</returns>
+    public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(BroadcastOptions options)
+        where TBroadcastResponse : BaseBroadcast;
+    
     /// <summary>
     /// Register presence options, must be called to use <see cref="IRealtimePresence"/>, and prior to <see cref="Subscribe"/>
     /// </summary>
