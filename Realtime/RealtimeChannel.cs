@@ -219,6 +219,33 @@ public class RealtimeChannel : IRealtimeChannel
     }
 
     /// <summary>
+    /// Registers the channel for broadcast with the specified options.
+    /// </summary>
+    /// <typeparam name="TBroadcastResponse">The type of the broadcast response, which must inherit from <see cref="BaseBroadcast"/>.</typeparam>
+    /// <param name="options">The broadcast options to configure the channel's broadcast behavior.</param>
+    /// <returns>Returns an instance of <see cref="RealtimeBroadcast{TBroadcastResponse}"/> initialized with the specified broadcast options.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if the method is called multiple times for the same channel.</exception>
+    public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(BroadcastOptions options) where TBroadcastResponse : BaseBroadcast
+    {
+        if (_broadcast != null)
+            throw new InvalidOperationException(
+                "Register can only be called with broadcast options for a channel once.");
+
+        if (!Options.IsPrivate && options.Replay != null)
+            throw new InvalidOperationException($"tried to use replay on public channel '{Topic}'. It must be a private channel.");
+        
+        BroadcastOptions = options; 
+
+        var instance =
+            new RealtimeBroadcast<TBroadcastResponse>(this, BroadcastOptions, Options.SerializerSettings);
+        _broadcast = instance;
+
+        BroadcastHandler = (_, response) => _broadcast.TriggerReceived(response);
+
+        return instance;
+    }
+    
+    /// <summary>
     /// Registers a <see cref="RealtimePresence{TPresenceResponse}"/> instance - allowing presence responses to be parsed and state to be tracked.
     /// </summary>
     /// <typeparam name="TPresenceResponse">The model representing a presence payload.</typeparam>
@@ -592,7 +619,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <returns></returns>
     private Push GenerateJoinPush() => new(Socket, this, ChannelEventJoin,
-        payload: new JoinPush(BroadcastOptions, PresenceOptions, PostgresChangesOptions));
+        payload: new JoinPush(BroadcastOptions, PresenceOptions, PostgresChangesOptions, Options.IsPrivate));
 
     /// <summary>
     /// Generates an auth push.
