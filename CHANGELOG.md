@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.2.1](https://github.com/supabase-community/realtime-csharp/compare/v7.2.0...v7.2.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* lower Newtonsoft.Json minimum version to 13.0.2 ([#66](https://github.com/supabase-community/realtime-csharp/issues/66)) ([5d69eff](https://github.com/supabase-community/realtime-csharp/commit/5d69eff6fa54bee2e285f773e6a4c56935c772ba))
+
 ## [7.2.0](https://github.com/supabase-community/realtime-csharp/compare/v7.1.0...v7.2.0) (2025-05-13)
 
 
