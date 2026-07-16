@@ -17,9 +17,9 @@ public class ClientFailureTests
         client.AddDebugHandler((_, message, _) => Debug.WriteLine($"Client 1: {message}"));
         client2.AddDebugHandler((_, message, _) => Debug.WriteLine($"Client 2: {message}"));
 
-        await Assert.ThrowsExceptionAsync<RealtimeException>(async () => { await client.ConnectAsync(); });
+        await Assert.ThrowsAsync<RealtimeException>(async () => { await client.ConnectAsync(); });
 
-        await Assert.ThrowsExceptionAsync<RealtimeException>(() =>
+        await Assert.ThrowsAsync<RealtimeException>(() =>
         {
             var tsc = new TaskCompletionSource();
 
@@ -39,9 +39,9 @@ public class ClientFailureTests
         client.AddDebugHandler((_, message, _) => Debug.WriteLine(message));
 
         // Should throw first time and clear socket instance.
-        await Assert.ThrowsExceptionAsync<RealtimeException>(client.ConnectAsync);
+        await Assert.ThrowsAsync<RealtimeException>(client.ConnectAsync);
         
         // Should throw again, as socket is still cleared (as opposed to merely logging).
-        await Assert.ThrowsExceptionAsync<RealtimeException>(client.ConnectAsync);
+        await Assert.ThrowsAsync<RealtimeException>(client.ConnectAsync);
     }
 }

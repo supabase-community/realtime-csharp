@@ -56,7 +56,7 @@ public class ClientTests
     public async Task ClientJoinsChannel_DB_Schema_Table()
     {
         var channel = client!.Channel("realtime", "public", "users");
-        await Assert.ThrowsExceptionAsync<RealtimeException>(() => channel.Subscribe());
+        await Assert.ThrowsAsync<RealtimeException>(() => channel.Subscribe());
 
         var channel2 = client!.Channel("realtime", "public", "todos");
         await channel2.Subscribe();

@@ -50,11 +50,11 @@
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-        <PackageReference Include="Websocket.Client" Version="4.7.0" />
+        <PackageReference Include="Websocket.Client" Version="5.5.0" />
     </ItemGroup>
     
     <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
-        <PackageReference Include="Websocket.Client" Version="5.1.1" />
+        <PackageReference Include="Websocket.Client" Version="5.5.0" />
     </ItemGroup>
 
     <ItemGroup>
