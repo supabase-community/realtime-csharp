@@ -740,6 +740,7 @@ public class RealtimeChannel : IRealtimeChannel
 
                 deserialized.Json = message.Json;
                 deserialized.SerializerSettings = Options.SerializerSettings;
+                deserialized.PostgrestClient = Options.ClientOptions.PostgrestClient;
 
                 // Invoke '*' listener
                 NotifyPostgresChanges(deserialized.Payload!.Data!.Type, deserialized);

@@ -20,4 +20,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Realtime\Realtime.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Fixtures\**\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 </Project>
