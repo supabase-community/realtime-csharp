@@ -759,6 +759,19 @@ references:
   commentId: F:Supabase.Realtime.ClientOptions.Parameters
   fullName: Supabase.Realtime.ClientOptions.Parameters
   nameWithType: ClientOptions.Parameters
+- uid: Supabase.Realtime.ClientOptions.PostgrestClient
+  name: PostgrestClient
+  href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_PostgrestClient
+  commentId: P:Supabase.Realtime.ClientOptions.PostgrestClient
+  fullName: Supabase.Realtime.ClientOptions.PostgrestClient
+  nameWithType: ClientOptions.PostgrestClient
+- uid: Supabase.Realtime.ClientOptions.PostgrestClient*
+  name: PostgrestClient
+  href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_PostgrestClient_
+  commentId: Overload:Supabase.Realtime.ClientOptions.PostgrestClient
+  isSpec: "True"
+  fullName: Supabase.Realtime.ClientOptions.PostgrestClient
+  nameWithType: ClientOptions.PostgrestClient
 - uid: Supabase.Realtime.ClientOptions.ReconnectAfterInterval
   name: ReconnectAfterInterval
   href: api/Supabase.Realtime.ClientOptions.html#Supabase_Realtime_ClientOptions_ReconnectAfterInterval
