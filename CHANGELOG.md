@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.0](https://github.com/supabase-community/realtime-csharp/compare/v7.2.1...v7.3.0) (2026-07-20)
+
+
+### Features
+
+* attach Postgrest client context to models returned by PostgresChangesResponse ([#70](https://github.com/supabase-community/realtime-csharp/issues/70)) ([ce98568](https://github.com/supabase-community/realtime-csharp/commit/ce985685a328792c55d7f18d996469d2c860803e))
+
 ## [7.2.1](https://github.com/supabase-community/realtime-csharp/compare/v7.2.0...v7.2.1) (2026-07-15)
 
 
