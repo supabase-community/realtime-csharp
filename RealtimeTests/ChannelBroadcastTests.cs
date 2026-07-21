@@ -37,7 +37,7 @@ public class ChannelBroadcastTests
         _socketClient!.Disconnect();
     }
 
-    [TestMethod("Channel: Can listen for broadcast")]
+    [TestMethod(DisplayName = "Channel: Can listen for broadcast")]
     public async Task ClientCanListenForBroadcast()
     {
         var tsc = new TaskCompletionSource<bool>();
@@ -75,7 +75,24 @@ public class ChannelBroadcastTests
         await Task.WhenAll(new[] { tsc.Task, tsc2.Task });
     }
 
-    [TestMethod("Channel: Payload returns a modeled response (if possible)")]
+    [TestMethod(DisplayName = "Channel: Send resolves when broadcast ack is not explicitly enabled")]
+    public async Task ChannelSendResolvesWithoutExplicitAck()
+    {
+        // Mirrors the most natural usage: `client.Channel(name)` -> `Subscribe()` -> `Send()`,
+        // with no call to `Register<T>(broadcastAck: true)`. See supabase-community/realtime-csharp#38.
+        var channel = _socketClient!.Channel("no-ack-broadcast");
+        await channel.Subscribe();
+
+        var sendTask = channel.Send(Supabase.Realtime.Constants.ChannelEventName.Broadcast, "test_event",
+            new BroadcastExample { UserId = Guid.NewGuid().ToString() });
+
+        var winner = await Task.WhenAny(sendTask, Task.Delay(TimeSpan.FromSeconds(5)));
+
+        Assert.AreSame(sendTask, winner, "channel.Send() did not complete within 5s (issue #38: awaited broadcast send hangs).");
+        Assert.IsTrue(await sendTask);
+    }
+
+    [TestMethod(DisplayName = "Channel: Payload returns a modeled response (if possible)")]
     public async Task ChannelPayloadReturnsModel()
     {
         var tsc = new TaskCompletionSource<bool>();
