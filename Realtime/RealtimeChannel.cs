@@ -541,21 +541,53 @@ public class RealtimeChannel : IRealtimeChannel
     /// <param name="timeoutMs"></param>
     public Task<bool> Send(ChannelEventName eventName, string? type, object payload, int timeoutMs = DefaultTimeout)
     {
-        var tsc = new TaskCompletionSource<bool>();
+        var push = Push(Core.Helpers.GetMappedToAttr(eventName).Mapping, type, payload, timeoutMs);
+        // The server only sends a `phx_reply` for a `broadcast` push when the channel joined
+        // with `config.broadcast.ack = true`. Without that, no reply will ever arrive, so
+        // waiting for one would hang forever - resolve as soon as the push has been dispatched.
+        return eventName == ChannelEventName.Broadcast && BroadcastOptions?.BroadcastAck != true
+            ? Task.FromResult(true)
+            : PushAwaiter.Await(push);
+    }
 
-        var ev = Core.Helpers.GetMappedToAttr(eventName).Mapping;
-        var push = Push(ev, type, payload, timeoutMs);
+    /// <summary>
+    /// Awaits a reply for a given <see cref="Channel.Push"/>, resolving with whether a known reply was
+    /// received, or faulting with a <see cref="RealtimeException"/> if the push times out first.
+    ///
+    /// Kept as instance methods (rather than local lambdas referencing each other) so there's no
+    /// self/mutually-referencing closure over locals that get assigned after the closure is created.
+    /// </summary>
+    private sealed class PushAwaiter
+    {
+        private readonly Push push;
+        private readonly TaskCompletionSource<bool> taskCompletion = new();
 
-        IRealtimePush<RealtimeChannel, SocketResponse>.MessageEventHandler? messageCallback = null;
-
-        messageCallback = (_, message) =>
+        private PushAwaiter(Push push)
         {
-            tsc.SetResult(message.Event != EventType.Unknown);
-            push.RemoveMessageReceivedHandler(messageCallback!);
-        };
+            this.push = push;
+            this.push.AddMessageReceivedHandler(HandleMessageReceived);
+            this.push.OnTimeout += HandleTimeout;
+        }
 
-        push.AddMessageReceivedHandler(messageCallback);
-        return tsc.Task;
+        public static Task<bool> Await(Push push) => new PushAwaiter(push).taskCompletion.Task;
+
+        private void HandleMessageReceived(IRealtimePush<RealtimeChannel, SocketResponse> sender, SocketResponse message)
+        {
+            Detach();
+            taskCompletion.TrySetResult(message.Event != EventType.Unknown);
+        }
+
+        private void HandleTimeout(object sender, EventArgs e)
+        {
+            Detach();
+            taskCompletion.TrySetException(new RealtimeException("Push Timeout") { Reason = FailureHint.Reason.PushTimeout });
+        }
+
+        private void Detach()
+        {
+            push.RemoveMessageReceivedHandler(HandleMessageReceived);
+            push.OnTimeout -= HandleTimeout;
+        }
     }
 
     /// <summary>
