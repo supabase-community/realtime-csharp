@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.3.1](https://github.com/supabase-community/realtime-csharp/compare/v7.3.0...v7.3.1) (2026-07-21)
+
+
+### Bug Fixes
+
+* resolve channel.Send() hanging on unacknowledged broadcast pushes ([#72](https://github.com/supabase-community/realtime-csharp/issues/72)) ([8f34dfe](https://github.com/supabase-community/realtime-csharp/commit/8f34dfee24594b1bc2c402a2649af12c3d1e0171))
+
 ## [7.3.0](https://github.com/supabase-community/realtime-csharp/compare/v7.2.1...v7.3.0) (2026-07-20)
 
 
