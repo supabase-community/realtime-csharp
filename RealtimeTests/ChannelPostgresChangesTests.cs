@@ -342,5 +342,28 @@ public class ChannelPostgresChangesTests
        Assert.IsTrue(insertTask2.Task.Result);
        Assert.IsTrue(insertTask3.Task.Result);
     }
-    
+
+    [TestMethod]
+    public async Task OnPostgresChange_ShouldRegisterAndDeliverToHandler_GivenChainedSubscribe()
+    {
+        var tsc = new TaskCompletionSource<bool>();
+
+        await _socketClient!.Channel("public:todos")
+            .OnPostgresChange((_, changes) => tsc.TrySetResult(changes.Model<Todo>() != null),
+                ListenType.Inserts, new PostgresChangesFilter { Table = "todos" })
+            .Subscribe();
+
+        await _restClient!.Table<Todo>()
+            .Insert(new Todo { UserId = 1, Details = "OnPostgresChange receives insert? ✅" });
+
+        Assert.IsTrue(await WithinTimeout(tsc.Task),
+            "OnPostgresChange should register the option and bind the handler in one call, and return the channel so Subscribe can be chained");
+    }
+
+    private static async Task<bool> WithinTimeout(Task<bool> task, int timeoutMs = 15000)
+    {
+        var completed = await Task.WhenAny(task, Task.Delay(timeoutMs));
+        return completed == task && task.Result;
+    }
+
 }

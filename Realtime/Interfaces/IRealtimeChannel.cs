@@ -132,6 +132,32 @@ public interface IRealtimeChannel
     void ClearMessageReceivedHandlers();
 
     /// <summary>
+    /// Registers a postgres_changes listener and its handler in a single call, then returns the channel
+    /// so registrations can be chained before <see cref="Subscribe"/>. This is the idiomatic replacement
+    /// for pairing <see cref="Register(PostgresChangesOptions)"/> with
+    /// <see cref="AddPostgresChangeHandler"/>.
+    /// </summary>
+    /// <param name="postgresChangeHandler">The handler invoked when a matching change is received.</param>
+    /// <param name="listenType">The change type to listen for.</param>
+    /// <param name="filter">
+    /// Optional targeting — schema, table, and row filter. When omitted, listens to every table in the
+    /// <c>public</c> schema.
+    /// </param>
+    /// <returns>The same channel, to allow chaining further registrations.</returns>
+    /// <example>
+    /// <code>
+    /// await client.Channel("public:todos")
+    ///     .OnPostgresChange(
+    ///         (_, change) => Console.WriteLine(change.Model&lt;Todo&gt;()),
+    ///         ListenType.Inserts,
+    ///         new PostgresChangesFilter { Table = "todos" })
+    ///     .Subscribe();
+    /// </code>
+    /// </example>
+    IRealtimeChannel OnPostgresChange(PostgresChangesHandler postgresChangeHandler, ListenType listenType,
+        PostgresChangesFilter? filter = null);
+
+    /// <summary>
     /// Add a postgres_changes handler
     /// </summary>
     /// <param name="listenType"></param>
