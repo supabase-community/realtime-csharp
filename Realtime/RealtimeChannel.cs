@@ -352,6 +352,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <param name="listenType">The type of event this callback should process.</param>
     /// <param name="postgresChangeHandler"></param>
+    [Obsolete("Favor OnPostgresChange instead.")]
     public void AddPostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler)
     {
         BindPostgresChangesHandler(listenType, postgresChangeHandler);
@@ -437,6 +438,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <param name="postgresChangesOptions"></param>
     /// <returns></returns>
+    [Obsolete("Favor OnPostgresChange instead.")]
     public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)
     {
         RegisterPostgresChangesOptions(postgresChangesOptions);
@@ -448,7 +450,7 @@ public class RealtimeChannel : IRealtimeChannel
     /// and <see cref="OnPostgresChange"/> share a single registration path.
     /// </summary>
     /// <param name="postgresChangesOptions"></param>
-    private void RegisterPostgresChangesOptions(PostgresChangesOptions postgresChangesOptions)
+    internal void RegisterPostgresChangesOptions(PostgresChangesOptions postgresChangesOptions)
     {
         PostgresChangesOptions.Add(postgresChangesOptions);
         BindPostgresChangesOptions(postgresChangesOptions);

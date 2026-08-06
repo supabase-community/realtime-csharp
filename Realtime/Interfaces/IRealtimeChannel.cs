@@ -1,4 +1,5 @@
-﻿using Supabase.Realtime.Broadcast;
+﻿using System;
+using Supabase.Realtime.Broadcast;
 using Supabase.Realtime.Channel;
 using Supabase.Realtime.Models;
 using Supabase.Realtime.PostgresChanges;
@@ -162,6 +163,7 @@ public interface IRealtimeChannel
     /// </summary>
     /// <param name="listenType"></param>
     /// <param name="postgresChangeHandler"></param>
+    [Obsolete("Favor OnPostgresChange instead.")]
     void AddPostgresChangeHandler(ListenType listenType, PostgresChangesHandler postgresChangeHandler);
 
     /// <summary>
@@ -266,6 +268,7 @@ public interface IRealtimeChannel
     /// </summary>
     /// <param name="postgresChangesOptions"></param>
     /// <returns></returns>
+    [Obsolete("Favor OnPostgresChange instead.")]
     IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions);
 
     /// <summary>

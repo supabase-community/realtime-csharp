@@ -404,7 +404,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
         var options = ChannelOptions.Public(Options, () => AccessToken, SerializerSettings);
 
         var subscription = new RealtimeChannel(Socket!, key, options);
-        subscription.Register(changesOptions);
+        subscription.RegisterPostgresChangesOptions(changesOptions);
 
         _subscriptions.Add(key, subscription);
 
