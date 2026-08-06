@@ -343,22 +343,8 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <param name="channelName">The name of the Channel to join (totally arbitrary)</param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    public RealtimeChannel Channel(string channelName)
-    {
-        var topic = $"realtime:{channelName}";
-
-        if (_subscriptions.TryGetValue(topic, out var channel))
-            return channel;
-
-        if (Socket == null)
-            throw new Exception("Socket must exist, was `Connect` called?");
-
-        var subscription = new RealtimeChannel(Socket!, topic,
-            new ChannelOptions(Options, () => AccessToken, SerializerSettings));
-        _subscriptions.Add(topic, subscription);
-
-        return subscription;
-    }
+    public RealtimeChannel Channel(string channelName) =>
+        Channel(channelName, ChannelOptions.Public(Options, () => AccessToken, SerializerSettings));
 
     /// <summary>
     /// Adds a RealtimeChannel subscription with custom options - if a subscription exists with the same signature, the existing subscription will be returned.
@@ -370,17 +356,17 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     public RealtimeChannel Channel(string channelName, ChannelOptions options)
     {
         var topic = $"realtime:{channelName}";
-        
+
         if (_subscriptions.TryGetValue(topic, out var channel))
             return channel;
-        
+
         if (Socket == null)
             throw new Exception("Socket must exist, was `Connect` called?");
 
-        var subs = new RealtimeChannel(Socket!, topic, options);
-        _subscriptions.Add(topic, subs);
-        
-        return subs;
+        var subscription = new RealtimeChannel(Socket!, topic, options);
+        _subscriptions.Add(topic, subscription);
+
+        return subscription;
     }
 
     /// <summary>
@@ -406,7 +392,7 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
 
         var changesOptions = new PostgresChangesOptions(schema, table,
             filter: column != null && value != null ? $"{column}=eq.{value}" : null, parameters: parameters);
-        var options = new ChannelOptions(Options, () => AccessToken, SerializerSettings);
+        var options = ChannelOptions.Public(Options, () => AccessToken, SerializerSettings);
 
         var subscription = new RealtimeChannel(Socket!, key, options);
         subscription.Register(changesOptions);

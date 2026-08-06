@@ -94,7 +94,7 @@ public interface IRealtimeClient<TSocket, TChannel>: IGettableHeaders
     /// <returns>A RealtimeChannel instance representing the subscription</returns>
     /// <exception cref="Exception">Thrown when Socket is null, indicating Connect() was not called</exception>
     TChannel Channel(string channelName, ChannelOptions options);
-    
+
     /// <summary>
     /// Shorthand initialization of a channel with postgres_changes options already set. 
     /// </summary>

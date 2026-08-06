@@ -30,7 +30,7 @@ internal static class Helpers
 
         return client;
     }
-    
+
     public static Client PrivateSocketClient()
     {
         var client = new Client(SocketEndpoint, new ClientOptions

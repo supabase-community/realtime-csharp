@@ -3,7 +3,8 @@
 namespace Supabase.Realtime.Broadcast;
 
 /// <summary>
-/// Options
+/// Configures broadcast behavior for a channel: whether the client receives its own messages,
+/// whether the server acknowledges sends, and whether past messages are replayed from history.
 /// </summary>
 public class BroadcastOptions
 {

@@ -201,22 +201,8 @@ public class RealtimeChannel : IRealtimeChannel
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
     public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(bool broadcastSelf = false,
-        bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast
-    {
-        if (_broadcast != null)
-            throw new InvalidOperationException(
-                "Register can only be called with broadcast options for a channel once.");
-
-        BroadcastOptions = new BroadcastOptions(broadcastSelf, broadcastAck);
-
-        var instance =
-            new RealtimeBroadcast<TBroadcastResponse>(this, BroadcastOptions, Options.SerializerSettings);
-        _broadcast = instance;
-
-        BroadcastHandler = (_, response) => _broadcast.TriggerReceived(response);
-
-        return instance;
-    }
+        bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast =>
+        Register<TBroadcastResponse>(new BroadcastOptions(broadcastSelf, broadcastAck));
 
     /// <summary>
     /// Registers the channel for broadcast with the specified options.
@@ -232,9 +218,10 @@ public class RealtimeChannel : IRealtimeChannel
                 "Register can only be called with broadcast options for a channel once.");
 
         if (!Options.IsPrivate && options.Replay != null)
-            throw new InvalidOperationException($"tried to use replay on public channel '{Topic}'. It must be a private channel.");
-        
-        BroadcastOptions = options; 
+            throw new InvalidOperationException(
+                $"Broadcast replay requires a private channel, but '{Topic}' is public.");
+
+        BroadcastOptions = options;
 
         var instance =
             new RealtimeBroadcast<TBroadcastResponse>(this, BroadcastOptions, Options.SerializerSettings);
@@ -244,7 +231,7 @@ public class RealtimeChannel : IRealtimeChannel
 
         return instance;
     }
-    
+
     /// <summary>
     /// Registers a <see cref="RealtimePresence{TPresenceResponse}"/> instance - allowing presence responses to be parsed and state to be tracked.
     /// </summary>
@@ -619,7 +606,9 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <returns></returns>
     private Push GenerateJoinPush() => new(Socket, this, ChannelEventJoin,
-        payload: new JoinPush(BroadcastOptions, PresenceOptions, PostgresChangesOptions, Options.IsPrivate));
+        payload: Options.IsPrivate
+            ? Channel.JoinPush.ForPrivateChannel(BroadcastOptions, PresenceOptions, PostgresChangesOptions)
+            : Channel.JoinPush.ForPublicChannel(BroadcastOptions, PresenceOptions, PostgresChangesOptions));
 
     /// <summary>
     /// Generates an auth push.

@@ -34,15 +34,14 @@ public class ChannelOptions
     public JsonSerializerSettings SerializerSettings { get; }
 
     /// <summary>
-    /// Gets a value indicating whether the channel is private.
+    /// Whether the channel is private, i.e. authorized against the server's Row Level Security
+    /// policies. Private channels are required for broadcast replay.
     /// </summary>
-    /// <value>
-    /// <c>true</c> if the channel is private; otherwise, <c>false</c>.
-    /// </value>
-    public bool IsPrivate { get; } = false;
+    public bool IsPrivate { get; }
 
     /// <summary>
-    /// The Channel Options (typically only called from within the <see cref="Client"/>)
+    /// The Channel Options (typically only called from within the <see cref="Client"/>). Creates
+    /// options for a public channel; use <see cref="Private"/> for a private one.
     /// </summary>
     /// <param name="clientOptions">The client configuration options.</param>
     /// <param name="retrieveAccessToken">A function that returns the current access token.</param>
@@ -51,21 +50,11 @@ public class ChannelOptions
         ClientOptions clientOptions,
         Func<string?> retrieveAccessToken,
         JsonSerializerSettings serializerSettings
-    )
+    ) : this(clientOptions, retrieveAccessToken, serializerSettings, false)
     {
-        ClientOptions = clientOptions;
-        SerializerSettings = serializerSettings;
-        RetrieveAccessToken = retrieveAccessToken;
     }
 
-    /// <summary>
-    /// The Channel Options (typically only called from within the <see cref="Client"/>)
-    /// </summary>
-    /// <param name="clientOptions">The client configuration options.</param>
-    /// <param name="retrieveAccessToken">A function that returns the current access token.</param>
-    /// <param name="serializerSettings">The JSON serializer settings to be used for message serialization.</param>
-    /// <param name="isPrivate">A value indicating whether the channel is private.</param>
-    public ChannelOptions(
+    private ChannelOptions(
         ClientOptions clientOptions,
         Func<string?> retrieveAccessToken,
         JsonSerializerSettings serializerSettings,
@@ -77,4 +66,29 @@ public class ChannelOptions
         RetrieveAccessToken = retrieveAccessToken;
         IsPrivate = isPrivate;
     }
+
+    /// <summary>
+    /// Creates options for a public channel.
+    /// </summary>
+    /// <param name="clientOptions">The client configuration options.</param>
+    /// <param name="retrieveAccessToken">A function that returns the current access token.</param>
+    /// <param name="serializerSettings">The JSON serializer settings to be used for message serialization.</param>
+    public static ChannelOptions Public(
+        ClientOptions clientOptions,
+        Func<string?> retrieveAccessToken,
+        JsonSerializerSettings serializerSettings
+    ) => new(clientOptions, retrieveAccessToken, serializerSettings, false);
+
+    /// <summary>
+    /// Creates options for a private channel, i.e. one authorized against the server's Row Level
+    /// Security policies. Required for broadcast replay.
+    /// </summary>
+    /// <param name="clientOptions">The client configuration options.</param>
+    /// <param name="retrieveAccessToken">A function that returns the current access token.</param>
+    /// <param name="serializerSettings">The JSON serializer settings to be used for message serialization.</param>
+    public static ChannelOptions Private(
+        ClientOptions clientOptions,
+        Func<string?> retrieveAccessToken,
+        JsonSerializerSettings serializerSettings
+    ) => new(clientOptions, retrieveAccessToken, serializerSettings, true);
 }

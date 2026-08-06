@@ -183,34 +183,41 @@ from users
 WHERE username = name_param;
 $$
     LANGUAGE SQL IMMUTABLE;
-    
-    
+
+
+-- Test fixture: emulates Supabase's realtime.send() so broadcast-replay tests can seed
+-- messages into realtime.messages over REST. Local stack only.
 CREATE OR REPLACE FUNCTION public.send(
     event text,
     topic text,
     private boolean
 )
-RETURNS void
-LANGUAGE plpgsql
-AS $$
+    RETURNS void
+    LANGUAGE plpgsql
+AS
+$$
 BEGIN
-BEGIN
-        -- Set the topic configuration
-EXECUTE format('SET LOCAL realtime.topic TO %L', topic);
+    BEGIN
+        -- Scope the insert to the requested topic.
+        EXECUTE format('SET LOCAL realtime.topic TO %L', topic);
 
--- Attempt to insert the message
-INSERT INTO realtime.messages (payload, event, topic, private, extension)
-VALUES (null, event, topic, private, 'broadcast');
-EXCEPTION
+        INSERT INTO realtime.messages (payload, event, topic, private, extension)
+        VALUES (null, event, topic, private, 'broadcast');
+    EXCEPTION
         WHEN OTHERS THEN
-            -- Capture and notify the error
             RAISE WARNING 'ErrorSendingBroadcastMessage: %', SQLERRM;
-END;
+    END;
 END;
 $$;
 
+-- Test fixture: allow the seed inserts above. Local stack only.
 CREATE POLICY messages_insert_all
-ON realtime.messages
-FOR INSERT
-TO PUBLIC
-WITH CHECK (true);
+    ON realtime.messages
+    FOR INSERT
+    TO PUBLIC
+    WITH CHECK (true);
+
+-- Test fixture: the postgres-changes tests insert into the sample tables over REST as an
+-- unauthenticated (anon) client. Newer Supabase CLIs no longer grant anon/authenticated DML on
+-- public tables by default, so grant it here. Local stack only.
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
