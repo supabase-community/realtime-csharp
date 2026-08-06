@@ -57,9 +57,11 @@ public class PostgresChangesOptions
     public string Schema { get; set; }
 
     /// <summary>
-    /// The table for this listener, can be: `*` matching all tables in schema.
+    /// The table for this listener, can be: `*` matching all tables in schema. When <c>null</c>
+    /// (a schema-wide listener), the <c>table</c> key is omitted from the join payload rather than
+    /// sent as <c>null</c>.
     /// </summary>
-    [JsonProperty("table")]
+    [JsonProperty("table", NullValueHandling = NullValueHandling.Ignore)]
     public string? Table { get; set; }
 
     /// <summary>
