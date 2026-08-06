@@ -15,16 +15,16 @@ namespace RealtimeTests;
 [TestClass]
 public class ChannelBroadcastReplayTests
 {
-    [TestMethod("Channel: Registering broadcast replay on a public channel throws")]
+    [TestMethod(DisplayName = "Channel: Registering broadcast replay on a public channel throws")]
     public void ClientCannotRegisterReplayOnPublicChannel()
     {
         var channel = PublicChannel();
 
-        Assert.ThrowsException<InvalidOperationException>(
+        Assert.Throws<InvalidOperationException>(
             () => channel.Register<BroadcastExample>(WithReplay()));
     }
 
-    [TestMethod("Channel: Registering broadcast replay on a private channel is allowed")]
+    [TestMethod(DisplayName = "Channel: Registering broadcast replay on a private channel is allowed")]
     public void ClientCanRegisterReplayOnPrivateChannel()
     {
         var channel = PrivateChannel();
