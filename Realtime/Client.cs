@@ -340,7 +340,11 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <summary>
     /// Adds a RealtimeChannel subscription - if a subscription exists with the same signature, the existing subscription will be returned.
     /// </summary>
-    /// <param name="channelName">The name of the Channel to join (totally arbitrary)</param>
+    /// <param name="channelName">
+    /// The name of the Channel to join (totally arbitrary). The topic is namespaced under a
+    /// <c>realtime:</c> prefix; a name that already begins with <c>realtime:</c> is used as-is
+    /// rather than prefixed again.
+    /// </param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
     public RealtimeChannel Channel(string channelName) =>
@@ -349,13 +353,18 @@ public class Client : IRealtimeClient<RealtimeSocket, RealtimeChannel>
     /// <summary>
     /// Adds a RealtimeChannel subscription with custom options - if a subscription exists with the same signature, the existing subscription will be returned.
     /// </summary>
-    /// <param name="channelName">The name of the Channel to join</param>
+    /// <param name="channelName">
+    /// The name of the Channel to join. The topic is namespaced under a <c>realtime:</c> prefix; a name
+    /// that already begins with <c>realtime:</c> is used as-is rather than prefixed again.
+    /// </param>
     /// <param name="options">Custom channel options for configuring the subscription</param>
     /// <returns>A RealtimeChannel instance representing the subscription</returns>
     /// <exception cref="Exception">Thrown when Socket is null, indicating Connect() was not called</exception>
     public RealtimeChannel Channel(string channelName, ChannelOptions options)
     {
-        var topic = $"realtime:{channelName}";
+        var topic = channelName.StartsWith("realtime:", StringComparison.Ordinal)
+            ? channelName
+            : $"realtime:{channelName}";
 
         if (_subscriptions.TryGetValue(topic, out var channel))
             return channel;

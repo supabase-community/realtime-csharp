@@ -81,6 +81,14 @@ public class ClientTests
         Assert.AreEqual(true, channel2.IsJoined);
     }
 
+    [TestMethod]
+    public void Channel_ShouldNotDoublePrefixTopic_GivenNameAlreadyPrefixed()
+    {
+        var prefixed = client!.Channel("realtime:public:todos");
+        Assert.AreEqual("realtime:public:todos", prefixed.Topic);
+        Assert.AreSame(prefixed, client!.Channel("public:todos"));
+    }
+
     [TestMethod("Client: Removes Channel Subscriptions")]
     public async Task ClientCanRemoveChannelSubscription()
     {
