@@ -1,5 +1,19 @@
 # Changelog
 
+## [7.4.0](https://github.com/supabase-community/realtime-csharp/compare/v7.3.1...v7.4.0) (2026-08-06)
+
+
+### Features
+
+* add OnPostgresChange for one-call postgres_changes listeners ([#75](https://github.com/supabase-community/realtime-csharp/issues/75)) ([8ace218](https://github.com/supabase-community/realtime-csharp/commit/8ace2180be6d9c2f4be177c5e8ceaedcb60a4b50))
+* enable config to set channel to private ([#61](https://github.com/supabase-community/realtime-csharp/issues/61)) ([0ebc95a](https://github.com/supabase-community/realtime-csharp/commit/0ebc95a0bdd963ec2ff989b10f3ff6b11bf974c9))
+
+
+### Bug Fixes
+
+* guard Channel against double 'realtime:' prefix ([#76](https://github.com/supabase-community/realtime-csharp/issues/76)) ([bd21604](https://github.com/supabase-community/realtime-csharp/commit/bd21604d4d5ed26c14be40bee96f04f9fd12e5d4))
+* omit null table from postgres_changes join payload ([#77](https://github.com/supabase-community/realtime-csharp/issues/77)) ([87b1a8b](https://github.com/supabase-community/realtime-csharp/commit/87b1a8b8d15564815b6e32e2864bd4feb3d4a142))
+
 ## [7.3.1](https://github.com/supabase-community/realtime-csharp/compare/v7.3.0...v7.3.1) (2026-07-21)
 
 
