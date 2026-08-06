@@ -1778,6 +1778,22 @@ references:
   commentId: T:Supabase.Realtime.Interfaces.IRealtimeChannel.MessageReceivedHandler
   fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.MessageReceivedHandler
   nameWithType: IRealtimeChannel.MessageReceivedHandler
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler,Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType,Supabase.Realtime.PostgresChanges.PostgresChangesFilter)
+  name: OnPostgresChange(PostgresChangesHandler, ListenType, PostgresChangesFilter?)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnPostgresChange_Supabase_Realtime_Interfaces_IRealtimeChannel_PostgresChangesHandler_Supabase_Realtime_PostgresChanges_PostgresChangesOptions_ListenType_Supabase_Realtime_PostgresChanges_PostgresChangesFilter_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler,Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType,Supabase.Realtime.PostgresChanges.PostgresChangesFilter)
+  name.vb: OnPostgresChange(PostgresChangesHandler, ListenType, PostgresChangesFilter)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler, Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType, Supabase.Realtime.PostgresChanges.PostgresChangesFilter?)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler, Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType, Supabase.Realtime.PostgresChanges.PostgresChangesFilter)
+  nameWithType: IRealtimeChannel.OnPostgresChange(IRealtimeChannel.PostgresChangesHandler, PostgresChangesOptions.ListenType, PostgresChangesFilter?)
+  nameWithType.vb: IRealtimeChannel.OnPostgresChange(IRealtimeChannel.PostgresChangesHandler, PostgresChangesOptions.ListenType, PostgresChangesFilter)
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.OnPostgresChange*
+  name: OnPostgresChange
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_OnPostgresChange_
+  commentId: Overload:Supabase.Realtime.Interfaces.IRealtimeChannel.OnPostgresChange
+  isSpec: "True"
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.OnPostgresChange
+  nameWithType: IRealtimeChannel.OnPostgresChange
 - uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Options
   name: Options
   href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Options
@@ -3262,6 +3278,51 @@ references:
   commentId: N:Supabase.Realtime.PostgresChanges
   fullName: Supabase.Realtime.PostgresChanges
   nameWithType: Supabase.Realtime.PostgresChanges
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesFilter
+  name: PostgresChangesFilter
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html
+  commentId: T:Supabase.Realtime.PostgresChanges.PostgresChangesFilter
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesFilter
+  nameWithType: PostgresChangesFilter
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Filter
+  name: Filter
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html#Supabase_Realtime_PostgresChanges_PostgresChangesFilter_Filter
+  commentId: P:Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Filter
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Filter
+  nameWithType: PostgresChangesFilter.Filter
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Filter*
+  name: Filter
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html#Supabase_Realtime_PostgresChanges_PostgresChangesFilter_Filter_
+  commentId: Overload:Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Filter
+  isSpec: "True"
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Filter
+  nameWithType: PostgresChangesFilter.Filter
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Schema
+  name: Schema
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html#Supabase_Realtime_PostgresChanges_PostgresChangesFilter_Schema
+  commentId: P:Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Schema
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Schema
+  nameWithType: PostgresChangesFilter.Schema
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Schema*
+  name: Schema
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html#Supabase_Realtime_PostgresChanges_PostgresChangesFilter_Schema_
+  commentId: Overload:Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Schema
+  isSpec: "True"
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Schema
+  nameWithType: PostgresChangesFilter.Schema
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Table
+  name: Table
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html#Supabase_Realtime_PostgresChanges_PostgresChangesFilter_Table
+  commentId: P:Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Table
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Table
+  nameWithType: PostgresChangesFilter.Table
+- uid: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Table*
+  name: Table
+  href: api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html#Supabase_Realtime_PostgresChanges_PostgresChangesFilter_Table_
+  commentId: Overload:Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Table
+  isSpec: "True"
+  fullName: Supabase.Realtime.PostgresChanges.PostgresChangesFilter.Table
+  nameWithType: PostgresChangesFilter.Table
 - uid: Supabase.Realtime.PostgresChanges.PostgresChangesOptions
   name: PostgresChangesOptions
   href: api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.html
@@ -4119,6 +4180,22 @@ references:
   commentId: F:Supabase.Realtime.RealtimeChannel.IsSubscribed
   fullName: Supabase.Realtime.RealtimeChannel.IsSubscribed
   nameWithType: RealtimeChannel.IsSubscribed
+- uid: Supabase.Realtime.RealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler,Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType,Supabase.Realtime.PostgresChanges.PostgresChangesFilter)
+  name: OnPostgresChange(PostgresChangesHandler, ListenType, PostgresChangesFilter?)
+  href: api/Supabase.Realtime.RealtimeChannel.html#Supabase_Realtime_RealtimeChannel_OnPostgresChange_Supabase_Realtime_Interfaces_IRealtimeChannel_PostgresChangesHandler_Supabase_Realtime_PostgresChanges_PostgresChangesOptions_ListenType_Supabase_Realtime_PostgresChanges_PostgresChangesFilter_
+  commentId: M:Supabase.Realtime.RealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler,Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType,Supabase.Realtime.PostgresChanges.PostgresChangesFilter)
+  name.vb: OnPostgresChange(PostgresChangesHandler, ListenType, PostgresChangesFilter)
+  fullName: Supabase.Realtime.RealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler, Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType, Supabase.Realtime.PostgresChanges.PostgresChangesFilter?)
+  fullName.vb: Supabase.Realtime.RealtimeChannel.OnPostgresChange(Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler, Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType, Supabase.Realtime.PostgresChanges.PostgresChangesFilter)
+  nameWithType: RealtimeChannel.OnPostgresChange(IRealtimeChannel.PostgresChangesHandler, PostgresChangesOptions.ListenType, PostgresChangesFilter?)
+  nameWithType.vb: RealtimeChannel.OnPostgresChange(IRealtimeChannel.PostgresChangesHandler, PostgresChangesOptions.ListenType, PostgresChangesFilter)
+- uid: Supabase.Realtime.RealtimeChannel.OnPostgresChange*
+  name: OnPostgresChange
+  href: api/Supabase.Realtime.RealtimeChannel.html#Supabase_Realtime_RealtimeChannel_OnPostgresChange_
+  commentId: Overload:Supabase.Realtime.RealtimeChannel.OnPostgresChange
+  isSpec: "True"
+  fullName: Supabase.Realtime.RealtimeChannel.OnPostgresChange
+  nameWithType: RealtimeChannel.OnPostgresChange
 - uid: Supabase.Realtime.RealtimeChannel.Options
   name: Options
   href: api/Supabase.Realtime.RealtimeChannel.html#Supabase_Realtime_RealtimeChannel_Options

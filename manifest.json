@@ -712,6 +712,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.PostgresChanges.PostgresChangesFilter",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.PostgresChanges.PostgresChangesFilter.yml\" sourcestartlinenumber=\"1\">Optional targeting for an <code>OnPostgresChange</code> listener — which schema, table, and rows to\nlisten to. The event to listen for is passed separately as a <xref href=\"Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType\" data-throw-if-not-resolved=\"false\"></xref>\nparameter; this object carries only the remaining, optional criteria (all with safe defaults).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType.yml",
       "output": {
         ".html": {
