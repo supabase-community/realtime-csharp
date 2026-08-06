@@ -439,7 +439,7 @@ configuration handles that.</p>
 
   <h3 id="Supabase_Realtime_Client_Channel_System_String_" data-uid="Supabase.Realtime.Client.Channel(System.String)">
   Channel(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L346"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L350"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a RealtimeChannel subscription - if a subscription exists with the same signature, the existing subscription will be returned.</p>
@@ -453,7 +453,9 @@ configuration handles that.</p>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>channelName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>The name of the Channel to join (totally arbitrary)</p>
+    <dd><p>The name of the Channel to join (totally arbitrary). The topic is namespaced under a
+<code>realtime:</code> prefix; a name that already begins with <code>realtime:</code> is used as-is
+rather than prefixed again.</p>
 </dd>
   </dl>
 
@@ -482,7 +484,7 @@ configuration handles that.</p>
 
   <h3 id="Supabase_Realtime_Client_Channel_System_String_Supabase_Realtime_Channel_ChannelOptions_" data-uid="Supabase.Realtime.Client.Channel(System.String,Supabase.Realtime.Channel.ChannelOptions)">
   Channel(string, ChannelOptions)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L356"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L363"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a RealtimeChannel subscription with custom options - if a subscription exists with the same signature, the existing subscription will be returned.</p>
@@ -496,7 +498,8 @@ configuration handles that.</p>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>channelName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd><p>The name of the Channel to join</p>
+    <dd><p>The name of the Channel to join. The topic is namespaced under a <code>realtime:</code> prefix; a name
+that already begins with <code>realtime:</code> is used as-is rather than prefixed again.</p>
 </dd>
     <dt><code>options</code> <a class="xref" href="Supabase.Realtime.Channel.ChannelOptions.html">ChannelOptions</a></dt>
     <dd><p>Custom channel options for configuring the subscription</p>
@@ -530,7 +533,7 @@ configuration handles that.</p>
 
   <h3 id="Supabase_Realtime_Client_Channel_System_String_System_String_System_String_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
   Channel(string, string, string, string?, string?, Dictionary&lt;string, string&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L382"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L391"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a RealtimeChannel subscription - if a subscription exists with the same signature, the existing subscription will be returned.</p>
@@ -749,7 +752,7 @@ public IRealtimeClient&lt;RealtimeSocket, RealtimeChannel&gt; Connect(Action&lt;
 
   <h3 id="Supabase_Realtime_Client_Remove_Supabase_Realtime_RealtimeChannel_" data-uid="Supabase.Realtime.Client.Remove(Supabase.Realtime.RealtimeChannel)">
   Remove(RealtimeChannel)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L409"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Client.cs/#L418"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes a channel subscription.</p>
