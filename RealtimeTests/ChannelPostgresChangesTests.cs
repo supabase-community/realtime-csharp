@@ -34,18 +34,17 @@ public class ChannelPostgresChangesTests
         _socketClient!.Disconnect();
     }
 
-    [TestMethod("Channel: Payload returns a modeled response (if possible)")]
+    [TestMethod(DisplayName = "Channel: Payload returns a modeled response (if possible)")]
     public async Task ChannelPayloadReturnsModel()
     {
         var tsc = new TaskCompletionSource<bool>();
 
         var channel = _socketClient!.Channel("example");
-        channel.Register(new PostgresChangesOptions("public", "*"));
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) =>
+        channel.OnPostgresChange((_, changes) =>
         {
             var model = changes.Model<Todo>();
             tsc.SetResult(model != null);
-        });
+        }, ListenType.Inserts, new PostgresChangesFilter { Table = "*" });
 
         await channel.Subscribe();
 
@@ -55,14 +54,15 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(check);
     }
 
-    [TestMethod("Channel: Receives Insert Callback")]
+    [TestMethod(DisplayName = "Channel: Receives Insert Callback")]
     public async Task ChannelReceivesInsertCallback()
     {
         var tsc = new TaskCompletionSource<bool>();
 
         var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, _) => tsc.SetResult(true));
+        channel.OnPostgresChange((_, _) => tsc.SetResult(true), ListenType.Inserts,
+            new PostgresChangesFilter { Table = "todos" });
 
         await channel.Subscribe();
         await _restClient!.Table<Todo>()
@@ -72,22 +72,22 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(check);
     }
 
-    [TestMethod("Channel: Receives Filtered Insert Callback")]
+    [TestMethod(DisplayName = "Channel: Receives Filtered Insert Callback")]
     public async Task ChannelReceivesInsertCallbackFiltered()
     {
         var tsc = new TaskCompletionSource<bool>();
 
-        var channel = _socketClient!.Channel("realtime", "public", "todos", "details",
-            "Client receives filtered insert callback? ✅"); 
-        
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) =>
+        var channel = _socketClient!.Channel("realtime", "public", "todos");
+
+        channel.OnPostgresChange((_, changes) =>
         {
             var oldModel = changes.Model<Todo>();
 
             Assert.AreEqual("Client receives filtered insert callback? ✅", oldModel?.Details);
 
             tsc.SetResult(true);
-        });
+        }, ListenType.Inserts,
+            new PostgresChangesFilter { Table = "todos", Filter = "details=eq.Client receives filtered insert callback? ✅" });
 
         await channel.Subscribe();
         await _restClient!.Table<Todo>()
@@ -95,12 +95,12 @@ public class ChannelPostgresChangesTests
 
         await _restClient!.Table<Todo>()
             .Insert(new Todo { UserId = 2, Details = "Client receives filtered insert callback? ✅" });
-        
+
         var check = await tsc.Task;
         Assert.IsTrue(check);
     }
 
-    [TestMethod("Channel: Receives Filtered Two Callback")]
+    [TestMethod(DisplayName = "Channel: Receives Filtered Two Callback")]
     public async Task ChannelReceivesTwoCallbacks()
     {
         var tsc = new TaskCompletionSource<bool>();
@@ -115,7 +115,7 @@ public class ChannelPostgresChangesTests
         var newDetails = $"I'm an updated item ✏️ - {DateTime.Now}";
 
         var channel = _socketClient!.Channel("realtime", "public", "todos");
-        channel.AddPostgresChangeHandler(ListenType.Updates, (_, changes) =>
+        channel.OnPostgresChange((_, changes) =>
         {
             var oldModel = changes.OldModel<Todo>();
 
@@ -131,19 +131,18 @@ public class ChannelPostgresChangesTests
             }
 
             tsc.SetResult(true);
-        });
-        
+        }, ListenType.Updates, new PostgresChangesFilter { Table = "todos" });
+
         const string filter = "Client receives filtered insert callback? ✅";
-        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts, $"details=eq.{filter}"));
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, changes) =>
+        channel.OnPostgresChange((_, changes) =>
         {
             var insertedModel = changes.Model<Todo>();
 
             Assert.AreEqual("Client receives filtered insert callback? ✅", insertedModel?.Details);
 
             tsc.SetResult(true);
-        });
-        
+        }, ListenType.Inserts, new PostgresChangesFilter { Table = "todos", Filter = $"details=eq.{filter}" });
+
         await channel.Subscribe();
 
         await _restClient.Table<Todo>()
@@ -154,8 +153,8 @@ public class ChannelPostgresChangesTests
         var check = await tsc.Task;
         Assert.IsTrue(check);
     }
-        
-    [TestMethod("Channel: Receives Update Callback")]
+
+    [TestMethod(DisplayName = "Channel: Receives Update Callback")]
     public async Task ChannelReceivesUpdateCallback()
     {
         var tsc = new TaskCompletionSource<bool>();
@@ -169,7 +168,7 @@ public class ChannelPostgresChangesTests
 
         var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-        channel.AddPostgresChangeHandler(ListenType.Updates, (_, changes) =>
+        channel.OnPostgresChange((_, changes) =>
         {
             var oldModel = changes.OldModel<Todo>();
 
@@ -185,7 +184,7 @@ public class ChannelPostgresChangesTests
             }
 
             tsc.SetResult(true);
-        });
+        }, ListenType.Updates, new PostgresChangesFilter { Table = "todos" });
 
         await channel.Subscribe();
 
@@ -198,14 +197,15 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(check);
     }
 
-    [TestMethod("Channel: Receives Delete Callback")]
+    [TestMethod(DisplayName = "Channel: Receives Delete Callback")]
     public async Task ChannelReceivesDeleteCallback()
     {
         var tsc = new TaskCompletionSource<bool>();
 
         var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-        channel.AddPostgresChangeHandler(ListenType.Deletes, (_, _) => tsc.SetResult(true));
+        channel.OnPostgresChange((_, _) => tsc.SetResult(true), ListenType.Deletes,
+            new PostgresChangesFilter { Table = "todos" });
 
         await channel.Subscribe();
 
@@ -218,28 +218,28 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(check);
     }
 
-    [TestMethod("Channel: Receives Delete Callback")]
+    [TestMethod(DisplayName = "Channel: Receives Delete Callback")]
     public async Task ChannelReceivesFilteredDeleteCallback()
     {
         var tsc = new TaskCompletionSource<bool>();
         var channel = _socketClient!.Channel("realtime", "public", "todos");
-        
+
         var todo1 = await _restClient!.Table<Todo>().Insert(new Todo
             { UserId = 1, Details = "Client receives callbacks 1? ✅" });
         var todo2 = await _restClient!.Table<Todo>().Insert(new Todo
             { UserId = 2, Details = "Client receives callbacks 2? ✅" });
         await _restClient!.Table<Todo>().Insert(new Todo
             { UserId = 3, Details = "Client receives callbacks 3? ✅" });
-        
-        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Deletes, $"details=eq.{todo1.Model?.Details}"));
-        channel.AddPostgresChangeHandler(ListenType.Deletes, (_, removed) =>
+
+        channel.OnPostgresChange((_, removed) =>
         {
-            var result = removed.OldModel<Todo>(); 
+            var result = removed.OldModel<Todo>();
             Assert.AreEqual(result?.Details, todo1.Model?.Details);
             Assert.AreNotEqual(result?.Details, todo2.Model?.Details);
-            
+
             tsc.SetResult(true);
-        });
+        }, ListenType.Deletes,
+            new PostgresChangesFilter { Table = "todos", Filter = $"details=eq.{todo1.Model?.Details}" });
 
         await channel.Subscribe();
 
@@ -249,8 +249,8 @@ public class ChannelPostgresChangesTests
         var check = await tsc.Task;
         Assert.IsTrue(check);
     }
-    
-    [TestMethod("Channel: Receives '*' Callback")]
+
+    [TestMethod(DisplayName = "Channel: Receives '*' Callback")]
     public async Task ChannelReceivesWildcardCallback()
     {
         var insertTsc = new TaskCompletionSource<bool>();
@@ -261,7 +261,7 @@ public class ChannelPostgresChangesTests
 
         var channel = _socketClient!.Channel("realtime", "public", "todos");
 
-        channel.AddPostgresChangeHandler(ListenType.All, (_, changes) =>
+        channel.OnPostgresChange((_, changes) =>
         {
             switch (changes.Payload?.Data?.Type)
             {
@@ -275,7 +275,7 @@ public class ChannelPostgresChangesTests
                     deleteTsc.SetResult(true);
                     break;
             }
-        });
+        }, ListenType.All, new PostgresChangesFilter { Table = "todos" });
 
         await channel.Subscribe();
 
@@ -293,7 +293,7 @@ public class ChannelPostgresChangesTests
         Assert.IsTrue(deleteTsc.Task.Result);
     }
 
-    [TestMethod("Channel: Receives Several Same Callback")]
+    [TestMethod(DisplayName = "Channel: Receives Several Same Callback")]
     public async Task ChannelReceivesSeveralSameCallback()
     {
         var insertTask1 = new TaskCompletionSource<bool>();
@@ -301,41 +301,36 @@ public class ChannelPostgresChangesTests
         var insertTask3 = new TaskCompletionSource<bool>();
         const string filter1 = "Client receives callbacks 1? ✅";
         const string filter2 = "Client receives callbacks 2? ✅";
-        
+
         var channel = _socketClient!.Channel("realtime", "public", "todos");
 
         var count = 0;
-        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts));
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, added) =>
+        channel.OnPostgresChange((_, added) =>
         {
             count++;
             if (count == 3) insertTask1.TrySetResult(true);
-        });
+        }, ListenType.Inserts, new PostgresChangesFilter { Table = "todos" });
 
-        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts, $"details=eq.{filter1}"));
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, added) =>
+        channel.OnPostgresChange((_, added) =>
         {
             var model = added.Model<Todo>();
-            
+
             insertTask2.SetResult(model?.Details == filter1);
-        });
+        }, ListenType.Inserts, new PostgresChangesFilter { Table = "todos", Filter = $"details=eq.{filter1}" });
 
-
-        channel.Register(new PostgresChangesOptions("public", "todos", ListenType.Inserts, $"details=eq.{filter2}"));
-        channel.AddPostgresChangeHandler(ListenType.Inserts, (_, added) =>
+        channel.OnPostgresChange((_, added) =>
         {
             var model = added.Model<Todo>();
 
             insertTask3.SetResult(model?.Details == filter2);
-        });
-
+        }, ListenType.Inserts, new PostgresChangesFilter { Table = "todos", Filter = $"details=eq.{filter2}" });
 
        await channel.Subscribe();
-        
+
        await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = "Client receives wildcard callbacks? ✅" });
        await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = filter1 });
        await _restClient!.Table<Todo>().Insert(new Todo { UserId = 1, Details = filter2 });
-       
+
        await Task.WhenAll(insertTask1.Task, insertTask2.Task, insertTask3.Task);
 
        Assert.IsTrue(insertTask1.Task.Result);
