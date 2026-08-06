@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using Newtonsoft.Json;
+using Supabase.Postgrest.Interfaces;
 using Supabase.Realtime.Socket;
 
 namespace Supabase.Realtime;
@@ -70,4 +71,16 @@ public class ClientOptions
     /// Datetime format for JSON Deserialization of Models (Postgrest style)
     /// </summary>
     public string DateTimeFormat { get; set; } = @"yyyy'-'MM'-'dd' 'HH':'mm':'ss.FFFFFFK";
+
+    /// <summary>
+    /// Optional Postgrest client. When set, every model returned by
+    /// <see cref="Supabase.Realtime.PostgresChanges.PostgresChangesResponse.Model{TModel}"/> and
+    /// <c>OldModel&lt;TModel&gt;</c> has this client's context (BaseUrl, RequestClientOptions, headers) attached to
+    /// it via <c>Attach&lt;T&gt;()</c> - enabling <c>Update</c>/<c>Delete</c> to be called directly on a model
+    /// received from Realtime.
+    ///
+    /// Left null, Realtime remains usable standalone: models still deserialize normally, just without client context.
+    /// The Supabase umbrella client wires this automatically to its own Postgrest client.
+    /// </summary>
+    public IPostgrestClient? PostgrestClient { get; set; }
 }
