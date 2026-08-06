@@ -626,7 +626,7 @@ Class RealtimeChannel  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="Supabase_Realtime_RealtimeChannel_AddErrorHandler_Supabase_Realtime_Interfaces_IRealtimeChannel_ErrorEventHandler_" data-uid="Supabase.Realtime.RealtimeChannel.AddErrorHandler(Supabase.Realtime.Interfaces.IRealtimeChannel.ErrorEventHandler)">
   AddErrorHandler(ErrorEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L382"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L383"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds an error event handler.</p>
@@ -698,7 +698,8 @@ Class RealtimeChannel  <a class="header-action link-secondary" title="View sourc
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddPostgresChangeHandler(PostgresChangesOptions.ListenType listenType, IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Favor OnPostgresChange instead.&quot;)]
+public void AddPostgresChangeHandler(PostgresChangesOptions.ListenType listenType, IRealtimeChannel.PostgresChangesHandler postgresChangeHandler)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -826,7 +827,7 @@ Class RealtimeChannel  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="Supabase_Realtime_RealtimeChannel_ClearErrorHandlers" data-uid="Supabase.Realtime.RealtimeChannel.ClearErrorHandlers">
   ClearErrorHandlers()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L402"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L403"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears Error Event Handlers</p>
@@ -880,7 +881,7 @@ Class RealtimeChannel  <a class="header-action link-secondary" title="View sourc
 
   <h3 id="Supabase_Realtime_RealtimeChannel_ClearPostgresChangeHandlers" data-uid="Supabase.Realtime.RealtimeChannel.ClearPostgresChangeHandlers">
   ClearPostgresChangeHandlers()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L374"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Clears all postgres changes listeners.</p>
@@ -1061,7 +1062,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_Push_System_String_System_String_System_Object_System_Int32_" data-uid="Supabase.Realtime.RealtimeChannel.Push(System.String,System.String,System.Object,System.Int32)">
   Push(string, string?, object?, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L551"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L553"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sends a <code>Push</code> request under this channel.</p>
@@ -1105,7 +1106,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_Register_Supabase_Realtime_PostgresChanges_PostgresChangesOptions_" data-uid="Supabase.Realtime.RealtimeChannel.Register(Supabase.Realtime.PostgresChanges.PostgresChangesOptions)">
   Register(PostgresChangesOptions)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L440"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L441"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Registers postgres_changes options, can be called multiple times.</p>
@@ -1114,7 +1115,8 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Favor OnPostgresChange instead.&quot;)]
+public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -1295,7 +1297,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_Rejoin_System_Int32_" data-uid="Supabase.Realtime.RealtimeChannel.Rejoin(System.Int32)">
   Rejoin(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L630"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L632"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Rejoins the channel.</p>
@@ -1327,7 +1329,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_RemoveErrorHandler_Supabase_Realtime_Interfaces_IRealtimeChannel_ErrorEventHandler_" data-uid="Supabase.Realtime.RealtimeChannel.RemoveErrorHandler(Supabase.Realtime.Interfaces.IRealtimeChannel.ErrorEventHandler)">
   RemoveErrorHandler(ErrorEventHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L393"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L394"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes an error event handler</p>
@@ -1396,7 +1398,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_RemovePostgresChangeHandler_Supabase_Realtime_PostgresChanges_PostgresChangesOptions_ListenType_Supabase_Realtime_Interfaces_IRealtimeChannel_PostgresChangesHandler_" data-uid="Supabase.Realtime.RealtimeChannel.RemovePostgresChangeHandler(Supabase.Realtime.PostgresChanges.PostgresChangesOptions.ListenType,Supabase.Realtime.Interfaces.IRealtimeChannel.PostgresChangesHandler)">
   RemovePostgresChangeHandler(ListenType, PostgresChangesHandler)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L366"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes a postgres changes listener.</p>
@@ -1463,7 +1465,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_Send_Supabase_Realtime_Constants_ChannelEventName_System_String_System_Object_System_Int32_" data-uid="Supabase.Realtime.RealtimeChannel.Send(Supabase.Realtime.Constants.ChannelEventName,System.String,System.Object,System.Int32)">
   Send(ChannelEventName, string?, object, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L575"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L577"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sends an arbitrary payload with a given payload type (<a class="xref" href="Supabase.Realtime.Constants.ChannelEventName.html">Constants.ChannelEventName</a>)</p>
@@ -1506,7 +1508,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_Subscribe_System_Int32_" data-uid="Supabase.Realtime.RealtimeChannel.Subscribe(System.Int32)">
   Subscribe(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L461"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L463"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Subscribes to the channel given supplied Options/params.</p>
@@ -1543,7 +1545,7 @@ for pairing <a class="xref" href="Supabase.Realtime.Interfaces.IRealtimeChannel.
 
   <h3 id="Supabase_Realtime_RealtimeChannel_Unsubscribe" data-uid="Supabase.Realtime.RealtimeChannel.Unsubscribe">
   Unsubscribe()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L528"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/RealtimeChannel.cs/#L530"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Unsubscribes from the channel.</p>
