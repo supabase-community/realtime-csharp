@@ -122,6 +122,51 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Broadcast.BroadcastOptions.BroadcastSelf
   nameWithType: BroadcastOptions.BroadcastSelf
+- uid: Supabase.Realtime.Broadcast.BroadcastOptions.Replay
+  name: Replay
+  href: api/Supabase.Realtime.Broadcast.BroadcastOptions.html#Supabase_Realtime_Broadcast_BroadcastOptions_Replay
+  commentId: P:Supabase.Realtime.Broadcast.BroadcastOptions.Replay
+  fullName: Supabase.Realtime.Broadcast.BroadcastOptions.Replay
+  nameWithType: BroadcastOptions.Replay
+- uid: Supabase.Realtime.Broadcast.BroadcastOptions.Replay*
+  name: Replay
+  href: api/Supabase.Realtime.Broadcast.BroadcastOptions.html#Supabase_Realtime_Broadcast_BroadcastOptions_Replay_
+  commentId: Overload:Supabase.Realtime.Broadcast.BroadcastOptions.Replay
+  isSpec: "True"
+  fullName: Supabase.Realtime.Broadcast.BroadcastOptions.Replay
+  nameWithType: BroadcastOptions.Replay
+- uid: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions
+  name: BroadcastOptions.ReplayOptions
+  href: api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.html
+  commentId: T:Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions
+  fullName: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions
+  nameWithType: BroadcastOptions.ReplayOptions
+- uid: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit
+  name: Limit
+  href: api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.html#Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Limit
+  commentId: P:Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit
+  fullName: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit
+  nameWithType: BroadcastOptions.ReplayOptions.Limit
+- uid: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit*
+  name: Limit
+  href: api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.html#Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Limit_
+  commentId: Overload:Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit
+  isSpec: "True"
+  fullName: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit
+  nameWithType: BroadcastOptions.ReplayOptions.Limit
+- uid: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since
+  name: Since
+  href: api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.html#Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Since
+  commentId: P:Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since
+  fullName: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since
+  nameWithType: BroadcastOptions.ReplayOptions.Since
+- uid: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since*
+  name: Since
+  href: api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.html#Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Since_
+  commentId: Overload:Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since
+  isSpec: "True"
+  fullName: Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since
+  nameWithType: BroadcastOptions.ReplayOptions.Since
 - uid: Supabase.Realtime.Channel
   name: Supabase.Realtime.Channel
   href: api/Supabase.Realtime.Channel.html
@@ -166,6 +211,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.ChannelOptions.ClientOptions
   nameWithType: ChannelOptions.ClientOptions
+- uid: Supabase.Realtime.Channel.ChannelOptions.IsPrivate
+  name: IsPrivate
+  href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_IsPrivate
+  commentId: P:Supabase.Realtime.Channel.ChannelOptions.IsPrivate
+  fullName: Supabase.Realtime.Channel.ChannelOptions.IsPrivate
+  nameWithType: ChannelOptions.IsPrivate
+- uid: Supabase.Realtime.Channel.ChannelOptions.IsPrivate*
+  name: IsPrivate
+  href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_IsPrivate_
+  commentId: Overload:Supabase.Realtime.Channel.ChannelOptions.IsPrivate
+  isSpec: "True"
+  fullName: Supabase.Realtime.Channel.ChannelOptions.IsPrivate
+  nameWithType: ChannelOptions.IsPrivate
 - uid: Supabase.Realtime.Channel.ChannelOptions.Parameters
   name: Parameters
   href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_Parameters
@@ -179,6 +237,38 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Channel.ChannelOptions.Parameters
   nameWithType: ChannelOptions.Parameters
+- uid: Supabase.Realtime.Channel.ChannelOptions.Private(Supabase.Realtime.ClientOptions,System.Func{System.String},Newtonsoft.Json.JsonSerializerSettings)
+  name: Private(ClientOptions, Func<string?>, JsonSerializerSettings)
+  href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_Private_Supabase_Realtime_ClientOptions_System_Func_System_String__Newtonsoft_Json_JsonSerializerSettings_
+  commentId: M:Supabase.Realtime.Channel.ChannelOptions.Private(Supabase.Realtime.ClientOptions,System.Func{System.String},Newtonsoft.Json.JsonSerializerSettings)
+  name.vb: Private(ClientOptions, Func(Of String), JsonSerializerSettings)
+  fullName: Supabase.Realtime.Channel.ChannelOptions.Private(Supabase.Realtime.ClientOptions, System.Func<string?>, Newtonsoft.Json.JsonSerializerSettings)
+  fullName.vb: Supabase.Realtime.Channel.ChannelOptions.Private(Supabase.Realtime.ClientOptions, System.Func(Of String), Newtonsoft.Json.JsonSerializerSettings)
+  nameWithType: ChannelOptions.Private(ClientOptions, Func<string?>, JsonSerializerSettings)
+  nameWithType.vb: ChannelOptions.Private(ClientOptions, Func(Of String), JsonSerializerSettings)
+- uid: Supabase.Realtime.Channel.ChannelOptions.Private*
+  name: Private
+  href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_Private_
+  commentId: Overload:Supabase.Realtime.Channel.ChannelOptions.Private
+  isSpec: "True"
+  fullName: Supabase.Realtime.Channel.ChannelOptions.Private
+  nameWithType: ChannelOptions.Private
+- uid: Supabase.Realtime.Channel.ChannelOptions.Public(Supabase.Realtime.ClientOptions,System.Func{System.String},Newtonsoft.Json.JsonSerializerSettings)
+  name: Public(ClientOptions, Func<string?>, JsonSerializerSettings)
+  href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_Public_Supabase_Realtime_ClientOptions_System_Func_System_String__Newtonsoft_Json_JsonSerializerSettings_
+  commentId: M:Supabase.Realtime.Channel.ChannelOptions.Public(Supabase.Realtime.ClientOptions,System.Func{System.String},Newtonsoft.Json.JsonSerializerSettings)
+  name.vb: Public(ClientOptions, Func(Of String), JsonSerializerSettings)
+  fullName: Supabase.Realtime.Channel.ChannelOptions.Public(Supabase.Realtime.ClientOptions, System.Func<string?>, Newtonsoft.Json.JsonSerializerSettings)
+  fullName.vb: Supabase.Realtime.Channel.ChannelOptions.Public(Supabase.Realtime.ClientOptions, System.Func(Of String), Newtonsoft.Json.JsonSerializerSettings)
+  nameWithType: ChannelOptions.Public(ClientOptions, Func<string?>, JsonSerializerSettings)
+  nameWithType.vb: ChannelOptions.Public(ClientOptions, Func(Of String), JsonSerializerSettings)
+- uid: Supabase.Realtime.Channel.ChannelOptions.Public*
+  name: Public
+  href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_Public_
+  commentId: Overload:Supabase.Realtime.Channel.ChannelOptions.Public
+  isSpec: "True"
+  fullName: Supabase.Realtime.Channel.ChannelOptions.Public
+  nameWithType: ChannelOptions.Public
 - uid: Supabase.Realtime.Channel.ChannelOptions.RetrieveAccessToken
   name: RetrieveAccessToken
   href: api/Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_RetrieveAccessToken
@@ -461,6 +551,15 @@ references:
   fullName.vb: Supabase.Realtime.Client.Channel(String)
   nameWithType: Client.Channel(string)
   nameWithType.vb: Client.Channel(String)
+- uid: Supabase.Realtime.Client.Channel(System.String,Supabase.Realtime.Channel.ChannelOptions)
+  name: Channel(string, ChannelOptions)
+  href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_System_String_Supabase_Realtime_Channel_ChannelOptions_
+  commentId: M:Supabase.Realtime.Client.Channel(System.String,Supabase.Realtime.Channel.ChannelOptions)
+  name.vb: Channel(String, ChannelOptions)
+  fullName: Supabase.Realtime.Client.Channel(string, Supabase.Realtime.Channel.ChannelOptions)
+  fullName.vb: Supabase.Realtime.Client.Channel(String, Supabase.Realtime.Channel.ChannelOptions)
+  nameWithType: Client.Channel(string, ChannelOptions)
+  nameWithType.vb: Client.Channel(String, ChannelOptions)
 - uid: Supabase.Realtime.Client.Channel(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})
   name: Channel(string, string, string, string?, string?, Dictionary<string, string>?)
   href: api/Supabase.Realtime.Client.html#Supabase_Realtime_Client_Channel_System_String_System_String_System_String_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__
@@ -1766,6 +1865,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Register
   nameWithType: IRealtimeChannel.Register
+- uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Register``1(Supabase.Realtime.Broadcast.BroadcastOptions)
+  name: Register<TBroadcastResponse>(BroadcastOptions)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Register__1_Supabase_Realtime_Broadcast_BroadcastOptions_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeChannel.Register``1(Supabase.Realtime.Broadcast.BroadcastOptions)
+  name.vb: Register(Of TBroadcastResponse)(BroadcastOptions)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeChannel.Register<TBroadcastResponse>(Supabase.Realtime.Broadcast.BroadcastOptions)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeChannel.Register(Of TBroadcastResponse)(Supabase.Realtime.Broadcast.BroadcastOptions)
+  nameWithType: IRealtimeChannel.Register<TBroadcastResponse>(BroadcastOptions)
+  nameWithType.vb: IRealtimeChannel.Register(Of TBroadcastResponse)(BroadcastOptions)
 - uid: Supabase.Realtime.Interfaces.IRealtimeChannel.Register``1(System.Boolean,System.Boolean)
   name: Register<TBroadcastResponse>(bool, bool)
   href: api/Supabase.Realtime.Interfaces.IRealtimeChannel.html#Supabase_Realtime_Interfaces_IRealtimeChannel_Register__1_System_Boolean_System_Boolean_
@@ -1981,6 +2089,15 @@ references:
   fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Channel(String)
   nameWithType: IRealtimeClient<TSocket, TChannel>.Channel(string)
   nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Channel(String)
+- uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel(System.String,Supabase.Realtime.Channel.ChannelOptions)
+  name: Channel(string, ChannelOptions)
+  href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Channel_System_String_Supabase_Realtime_Channel_ChannelOptions_
+  commentId: M:Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel(System.String,Supabase.Realtime.Channel.ChannelOptions)
+  name.vb: Channel(String, ChannelOptions)
+  fullName: Supabase.Realtime.Interfaces.IRealtimeClient<TSocket, TChannel>.Channel(string, Supabase.Realtime.Channel.ChannelOptions)
+  fullName.vb: Supabase.Realtime.Interfaces.IRealtimeClient(Of TSocket, TChannel).Channel(String, Supabase.Realtime.Channel.ChannelOptions)
+  nameWithType: IRealtimeClient<TSocket, TChannel>.Channel(string, ChannelOptions)
+  nameWithType.vb: IRealtimeClient(Of TSocket, TChannel).Channel(String, ChannelOptions)
 - uid: Supabase.Realtime.Interfaces.IRealtimeClient`2.Channel(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})
   name: Channel(string, string, string, string?, string?, Dictionary<string, string>?)
   href: api/Supabase.Realtime.Interfaces.IRealtimeClient-2.html#Supabase_Realtime_Interfaces_IRealtimeClient_2_Channel_System_String_System_String_System_String_System_String_System_String_System_Collections_Generic_Dictionary_System_String_System_String__
@@ -2997,6 +3114,19 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Models.BaseBroadcast.Event
   nameWithType: BaseBroadcast.Event
+- uid: Supabase.Realtime.Models.BaseBroadcast.Meta
+  name: Meta
+  href: api/Supabase.Realtime.Models.BaseBroadcast.html#Supabase_Realtime_Models_BaseBroadcast_Meta
+  commentId: P:Supabase.Realtime.Models.BaseBroadcast.Meta
+  fullName: Supabase.Realtime.Models.BaseBroadcast.Meta
+  nameWithType: BaseBroadcast.Meta
+- uid: Supabase.Realtime.Models.BaseBroadcast.Meta*
+  name: Meta
+  href: api/Supabase.Realtime.Models.BaseBroadcast.html#Supabase_Realtime_Models_BaseBroadcast_Meta_
+  commentId: Overload:Supabase.Realtime.Models.BaseBroadcast.Meta
+  isSpec: "True"
+  fullName: Supabase.Realtime.Models.BaseBroadcast.Meta
+  nameWithType: BaseBroadcast.Meta
 - uid: Supabase.Realtime.Models.BaseBroadcast.Payload
   name: Payload
   href: api/Supabase.Realtime.Models.BaseBroadcast.html#Supabase_Realtime_Models_BaseBroadcast_Payload
@@ -3094,6 +3224,38 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.Models.BasePresence.ShouldSerializePhoenixRef
   nameWithType: BasePresence.ShouldSerializePhoenixRef
+- uid: Supabase.Realtime.Models.BroadcastMeta
+  name: BroadcastMeta
+  href: api/Supabase.Realtime.Models.BroadcastMeta.html
+  commentId: T:Supabase.Realtime.Models.BroadcastMeta
+  fullName: Supabase.Realtime.Models.BroadcastMeta
+  nameWithType: BroadcastMeta
+- uid: Supabase.Realtime.Models.BroadcastMeta.Id
+  name: Id
+  href: api/Supabase.Realtime.Models.BroadcastMeta.html#Supabase_Realtime_Models_BroadcastMeta_Id
+  commentId: P:Supabase.Realtime.Models.BroadcastMeta.Id
+  fullName: Supabase.Realtime.Models.BroadcastMeta.Id
+  nameWithType: BroadcastMeta.Id
+- uid: Supabase.Realtime.Models.BroadcastMeta.Id*
+  name: Id
+  href: api/Supabase.Realtime.Models.BroadcastMeta.html#Supabase_Realtime_Models_BroadcastMeta_Id_
+  commentId: Overload:Supabase.Realtime.Models.BroadcastMeta.Id
+  isSpec: "True"
+  fullName: Supabase.Realtime.Models.BroadcastMeta.Id
+  nameWithType: BroadcastMeta.Id
+- uid: Supabase.Realtime.Models.BroadcastMeta.Replayed
+  name: Replayed
+  href: api/Supabase.Realtime.Models.BroadcastMeta.html#Supabase_Realtime_Models_BroadcastMeta_Replayed
+  commentId: P:Supabase.Realtime.Models.BroadcastMeta.Replayed
+  fullName: Supabase.Realtime.Models.BroadcastMeta.Replayed
+  nameWithType: BroadcastMeta.Replayed
+- uid: Supabase.Realtime.Models.BroadcastMeta.Replayed*
+  name: Replayed
+  href: api/Supabase.Realtime.Models.BroadcastMeta.html#Supabase_Realtime_Models_BroadcastMeta_Replayed_
+  commentId: Overload:Supabase.Realtime.Models.BroadcastMeta.Replayed
+  isSpec: "True"
+  fullName: Supabase.Realtime.Models.BroadcastMeta.Replayed
+  nameWithType: BroadcastMeta.Replayed
 - uid: Supabase.Realtime.PostgresChanges
   name: Supabase.Realtime.PostgresChanges
   href: api/Supabase.Realtime.PostgresChanges.html
@@ -4047,6 +4209,15 @@ references:
   isSpec: "True"
   fullName: Supabase.Realtime.RealtimeChannel.Register
   nameWithType: RealtimeChannel.Register
+- uid: Supabase.Realtime.RealtimeChannel.Register``1(Supabase.Realtime.Broadcast.BroadcastOptions)
+  name: Register<TBroadcastResponse>(BroadcastOptions)
+  href: api/Supabase.Realtime.RealtimeChannel.html#Supabase_Realtime_RealtimeChannel_Register__1_Supabase_Realtime_Broadcast_BroadcastOptions_
+  commentId: M:Supabase.Realtime.RealtimeChannel.Register``1(Supabase.Realtime.Broadcast.BroadcastOptions)
+  name.vb: Register(Of TBroadcastResponse)(BroadcastOptions)
+  fullName: Supabase.Realtime.RealtimeChannel.Register<TBroadcastResponse>(Supabase.Realtime.Broadcast.BroadcastOptions)
+  fullName.vb: Supabase.Realtime.RealtimeChannel.Register(Of TBroadcastResponse)(Supabase.Realtime.Broadcast.BroadcastOptions)
+  nameWithType: RealtimeChannel.Register<TBroadcastResponse>(BroadcastOptions)
+  nameWithType.vb: RealtimeChannel.Register(Of TBroadcastResponse)(BroadcastOptions)
 - uid: Supabase.Realtime.RealtimeChannel.Register``1(System.Boolean,System.Boolean)
   name: Register<TBroadcastResponse>(bool, bool)
   href: api/Supabase.Realtime.RealtimeChannel.html#Supabase_Realtime_RealtimeChannel_Register__1_System_Boolean_System_Boolean_

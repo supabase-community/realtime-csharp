@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class BroadcastOptions | realtime-csharp </title>
+      <title>Class BroadcastOptions.ReplayOptions | realtime-csharp </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class BroadcastOptions | realtime-csharp ">
+      <meta name="title" content="Class BroadcastOptions.ReplayOptions | realtime-csharp ">
       
-      <meta name="description" content="Configures broadcast behavior for a channel: whether the client receives its own messages, whether the server acknowledges sends, and whether past messages are replayed from history.">
+      <meta name="description" content="Options for replaying events in broadcast configurations.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Broadcast_BroadcastOptions.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Broadcast.BroadcastOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/supabase-community/realtime-csharp/new/master/apiSpec/new?filename=Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions.md&amp;value=---%0Auid%3A%20Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,12 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Supabase.Realtime.Broadcast.BroadcastOptions">
+        <article data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions">
 
 
 
-  <h1 id="Supabase_Realtime_Broadcast_BroadcastOptions" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions" class="text-break">
-Class BroadcastOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions" class="text-break">
+Class BroadcastOptions.ReplayOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,13 +97,12 @@ Class BroadcastOptions  <a class="header-action link-secondary" title="View sour
   <dl><dt>Assembly</dt><dd>Supabase.Realtime.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Configures broadcast behavior for a channel: whether the client receives its own messages,
-whether the server acknowledges sends, and whether past messages are replayed from history.</p>
+  <div class="markdown summary"><p>Options for replaying events in broadcast configurations.</p>
 </div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class BroadcastOptions</code></pre>
+    <pre><code class="lang-csharp hljs">public class BroadcastOptions.ReplayOptions</code></pre>
   </div>
 
 
@@ -113,7 +112,7 @@ whether the server acknowledges sends, and whether past messages are replayed fr
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">BroadcastOptions</span></div>
+      <div><span class="xref">BroadcastOptions.ReplayOptions</span></div>
     </dd>
   </dl>
 
@@ -150,62 +149,25 @@ whether the server acknowledges sends, and whether past messages are replayed fr
 
 
 
-  <h2 class="section" id="constructors">Constructors
-</h2>
-
-
-  <a id="Supabase_Realtime_Broadcast_BroadcastOptions__ctor_" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.#ctor*"></a>
-
-  <h3 id="Supabase_Realtime_Broadcast_BroadcastOptions__ctor_System_Boolean_System_Boolean_" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.#ctor(System.Boolean,System.Boolean)">
-  BroadcastOptions(bool, bool)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L54"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Initializes broadcast options</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BroadcastOptions(bool broadcastSelf = false, bool broadcastAck = false)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>broadcastSelf</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
-    <dt><code>broadcastAck</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-
   <h2 class="section" id="properties">Properties
 </h2>
 
 
-  <a id="Supabase_Realtime_Broadcast_BroadcastOptions_BroadcastAck_" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.BroadcastAck*"></a>
+  <a id="Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Limit_" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit*"></a>
 
-  <h3 id="Supabase_Realtime_Broadcast_BroadcastOptions_BroadcastAck" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.BroadcastAck">
-  BroadcastAck
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Limit" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Limit">
+  Limit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L45"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>ack option instructs server to acknowledge that broadcast message was received</p>
+  <div class="markdown level1 summary"><p>Specifies the maximum number of events to be replayed during broadcast.
+When set to null, there is no limit to the number of events replayed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;ack&quot;)]
-public bool BroadcastAck { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;limit&quot;, NullValueHandling = NullValueHandling.Ignore)]
+public int? Limit { get; set; }</code></pre>
   </div>
 
 
@@ -214,7 +176,7 @@ public bool BroadcastAck { get; set; }</code></pre>
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
     <dd></dd>
   </dl>
 
@@ -225,20 +187,21 @@ public bool BroadcastAck { get; set; }</code></pre>
 
 
 
-  <a id="Supabase_Realtime_Broadcast_BroadcastOptions_BroadcastSelf_" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.BroadcastSelf*"></a>
+  <a id="Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Since_" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since*"></a>
 
-  <h3 id="Supabase_Realtime_Broadcast_BroadcastOptions_BroadcastSelf" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.BroadcastSelf">
-  BroadcastSelf
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Supabase_Realtime_Broadcast_BroadcastOptions_ReplayOptions_Since" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.Since">
+  Since
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L38"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>self option enables client to receive message it broadcast</p>
+  <div class="markdown level1 summary"><p>Specifies the starting point in time, in milliseconds since the Unix epoch,
+from which events should be replayed in the broadcast configuration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;self&quot;)]
-public bool BroadcastSelf { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;since&quot;)]
+public long Since { get; set; }</code></pre>
   </div>
 
 
@@ -247,40 +210,7 @@ public bool BroadcastSelf { get; set; }</code></pre>
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-  <a id="Supabase_Realtime_Broadcast_BroadcastOptions_Replay_" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.Replay*"></a>
-
-  <h3 id="Supabase_Realtime_Broadcast_BroadcastOptions_Replay" data-uid="Supabase.Realtime.Broadcast.BroadcastOptions.Replay">
-  Replay
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L26"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>replay option instructs server to replay broadcast messages</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;replay&quot;, NullValueHandling = NullValueHandling.Ignore)]
-public BroadcastOptions.ReplayOptions? Replay { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h4 class="section">Property Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="Supabase.Realtime.Broadcast.BroadcastOptions.html">BroadcastOptions</a>.<a class="xref" href="Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.html">ReplayOptions</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
     <dd></dd>
   </dl>
 
@@ -295,7 +225,7 @@ public BroadcastOptions.ReplayOptions? Replay { get; set; }</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L9" class="edit-link">Edit this page</a>
+          <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Broadcast/BroadcastOptions.cs/#L32" class="edit-link">Edit this page</a>
         </div>
 
 

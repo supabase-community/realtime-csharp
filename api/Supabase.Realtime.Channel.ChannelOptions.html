@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class ChannelOptions | realtime-csharp ">
       
-      <meta name="description" content="Channel Options">
+      <meta name="description" content="Represents configuration options for a Realtime channel.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="Supabase_Realtime_Channel_ChannelOptions" data-uid="Supabase.Realtime.Channel.ChannelOptions" class="text-break">
-Class ChannelOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L10"><i class="bi bi-code-slash"></i></a>
+Class ChannelOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,7 +97,7 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
   <dl><dt>Assembly</dt><dd>Supabase.Realtime.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Channel Options</p>
+  <div class="markdown summary"><p>Represents configuration options for a Realtime channel.</p>
 </div>
   <div class="markdown conceptual"></div>
 
@@ -147,6 +147,10 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
 
 
 
+  <h2 id="Supabase_Realtime_Channel_ChannelOptions_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>This class contains all the necessary configuration options for establishing and maintaining
+a Realtime channel connection, including authentication, parameters, and serialization settings.</p>
+</div>
 
 
   <h2 class="section" id="constructors">Constructors
@@ -157,10 +161,11 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="Supabase_Realtime_Channel_ChannelOptions__ctor_Supabase_Realtime_ClientOptions_System_Func_System_String__Newtonsoft_Json_JsonSerializerSettings_" data-uid="Supabase.Realtime.Channel.ChannelOptions.#ctor(Supabase.Realtime.ClientOptions,System.Func{System.String},Newtonsoft.Json.JsonSerializerSettings)">
   ChannelOptions(ClientOptions, Func&lt;string?&gt;, JsonSerializerSettings)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L49"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>The Channel Options (typically only called from within the <a class="xref" href="Supabase.Realtime.Client.html">Client</a>)</p>
+  <div class="markdown level1 summary"><p>The Channel Options (typically only called from within the <a class="xref" href="Supabase.Realtime.Client.html">Client</a>). Creates
+options for a public channel; use <a class="xref" href="Supabase.Realtime.Channel.ChannelOptions.html#Supabase_Realtime_Channel_ChannelOptions_Private_Supabase_Realtime_ClientOptions_System_Func_System_String__Newtonsoft_Json_JsonSerializerSettings_">Private(ClientOptions, Func&lt;string?&gt;, JsonSerializerSettings)</a> for a private one.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -171,11 +176,14 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>clientOptions</code> <a class="xref" href="Supabase.Realtime.ClientOptions.html">ClientOptions</a></dt>
-    <dd></dd>
+    <dd><p>The client configuration options.</p>
+</dd>
     <dt><code>retrieveAccessToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
-    <dd></dd>
+    <dd><p>A function that returns the current access token.</p>
+</dd>
     <dt><code>serializerSettings</code> <span class="xref">JsonSerializerSettings</span></dt>
-    <dd></dd>
+    <dd><p>The JSON serializer settings to be used for message serialization.</p>
+</dd>
   </dl>
 
 
@@ -197,7 +205,7 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="Supabase_Realtime_Channel_ChannelOptions_ClientOptions" data-uid="Supabase.Realtime.Channel.ChannelOptions.ClientOptions">
   ClientOptions
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The Client Options</p>
@@ -225,11 +233,44 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
 
 
 
+  <a id="Supabase_Realtime_Channel_ChannelOptions_IsPrivate_" data-uid="Supabase.Realtime.Channel.ChannelOptions.IsPrivate*"></a>
+
+  <h3 id="Supabase_Realtime_Channel_ChannelOptions_IsPrivate" data-uid="Supabase.Realtime.Channel.ChannelOptions.IsPrivate">
+  IsPrivate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether the channel is private, i.e. authorized against the server's Row Level Security
+policies. Private channels are required for broadcast replay.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsPrivate { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="Supabase_Realtime_Channel_ChannelOptions_Parameters_" data-uid="Supabase.Realtime.Channel.ChannelOptions.Parameters*"></a>
 
   <h3 id="Supabase_Realtime_Channel_ChannelOptions_Parameters" data-uid="Supabase.Realtime.Channel.ChannelOptions.Parameters">
   Parameters
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Parameters that are sent to the channel when opened (JSON Serializable)</p>
@@ -261,7 +302,7 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="Supabase_Realtime_Channel_ChannelOptions_RetrieveAccessToken" data-uid="Supabase.Realtime.Channel.ChannelOptions.RetrieveAccessToken">
   RetrieveAccessToken
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>A function that returns the current access token.</p>
@@ -293,7 +334,7 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
 
   <h3 id="Supabase_Realtime_Channel_ChannelOptions_SerializerSettings" data-uid="Supabase.Realtime.Channel.ChannelOptions.SerializerSettings">
   SerializerSettings
-  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>The Serializer Settings</p>
@@ -321,11 +362,104 @@ Class ChannelOptions  <a class="header-action link-secondary" title="View source
 
 
 
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Supabase_Realtime_Channel_ChannelOptions_Private_" data-uid="Supabase.Realtime.Channel.ChannelOptions.Private*"></a>
+
+  <h3 id="Supabase_Realtime_Channel_ChannelOptions_Private_Supabase_Realtime_ClientOptions_System_Func_System_String__Newtonsoft_Json_JsonSerializerSettings_" data-uid="Supabase.Realtime.Channel.ChannelOptions.Private(Supabase.Realtime.ClientOptions,System.Func{System.String},Newtonsoft.Json.JsonSerializerSettings)">
+  Private(ClientOptions, Func&lt;string?&gt;, JsonSerializerSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates options for a private channel, i.e. one authorized against the server's Row Level
+Security policies. Required for broadcast replay.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ChannelOptions Private(ClientOptions clientOptions, Func&lt;string?&gt; retrieveAccessToken, JsonSerializerSettings serializerSettings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>clientOptions</code> <a class="xref" href="Supabase.Realtime.ClientOptions.html">ClientOptions</a></dt>
+    <dd><p>The client configuration options.</p>
+</dd>
+    <dt><code>retrieveAccessToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A function that returns the current access token.</p>
+</dd>
+    <dt><code>serializerSettings</code> <span class="xref">JsonSerializerSettings</span></dt>
+    <dd><p>The JSON serializer settings to be used for message serialization.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Supabase.Realtime.Channel.ChannelOptions.html">ChannelOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Supabase_Realtime_Channel_ChannelOptions_Public_" data-uid="Supabase.Realtime.Channel.ChannelOptions.Public*"></a>
+
+  <h3 id="Supabase_Realtime_Channel_ChannelOptions_Public_Supabase_Realtime_ClientOptions_System_Func_System_String__Newtonsoft_Json_JsonSerializerSettings_" data-uid="Supabase.Realtime.Channel.ChannelOptions.Public(Supabase.Realtime.ClientOptions,System.Func{System.String},Newtonsoft.Json.JsonSerializerSettings)">
+  Public(ClientOptions, Func&lt;string?&gt;, JsonSerializerSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates options for a public channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ChannelOptions Public(ClientOptions clientOptions, Func&lt;string?&gt; retrieveAccessToken, JsonSerializerSettings serializerSettings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>clientOptions</code> <a class="xref" href="Supabase.Realtime.ClientOptions.html">ClientOptions</a></dt>
+    <dd><p>The client configuration options.</p>
+</dd>
+    <dt><code>retrieveAccessToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>A function that returns the current access token.</p>
+</dd>
+    <dt><code>serializerSettings</code> <span class="xref">JsonSerializerSettings</span></dt>
+    <dd><p>The JSON serializer settings to be used for message serialization.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Supabase.Realtime.Channel.ChannelOptions.html">ChannelOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L10" class="edit-link">Edit this page</a>
+          <a href="https://github.com/supabase-community/realtime-csharp/blob/master/Realtime/Channel/ChannelOptions.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -26,6 +26,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Broadcast.BroadcastOptions.ReplayOptions.yml\" sourcestartlinenumber=\"1\">Options for replaying events in broadcast configurations.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Supabase.Realtime.Broadcast.BroadcastOptions.yml",
       "output": {
         ".html": {
@@ -36,7 +50,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Supabase.Realtime.Broadcast.BroadcastOptions",
-      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Broadcast.BroadcastOptions.yml\" sourcestartlinenumber=\"1\">Options</p>\n"
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Broadcast.BroadcastOptions.yml\" sourcestartlinenumber=\"1\">Configures broadcast behavior for a channel: whether the client receives its own messages,\nwhether the server acknowledges sends, and whether past messages are replayed from history.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -64,7 +78,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Supabase.Realtime.Channel.ChannelOptions",
-      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Channel.ChannelOptions.yml\" sourcestartlinenumber=\"1\">Channel Options</p>\n"
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Channel.ChannelOptions.yml\" sourcestartlinenumber=\"1\">Represents configuration options for a Realtime channel.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -667,6 +681,20 @@
       "IsMRef": true,
       "Title": "Supabase.Realtime.Models.BasePresence",
       "Summary": "<p sourcefile=\"api/Supabase.Realtime.Models.BasePresence.yml\" sourcestartlinenumber=\"1\">Represents an arbitrary Presence response.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Supabase.Realtime.Models.BroadcastMeta.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Supabase.Realtime.Models.BroadcastMeta.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Supabase.Realtime.Models.BroadcastMeta",
+      "Summary": "<p sourcefile=\"api/Supabase.Realtime.Models.BroadcastMeta.yml\" sourcestartlinenumber=\"1\">Server-supplied metadata attached to a broadcast event, present when the message was replayed\nfrom history on a private channel.</p>\n"
     },
     {
       "type": "ManagedReference",
