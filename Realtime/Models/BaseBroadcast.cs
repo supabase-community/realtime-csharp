@@ -32,4 +32,30 @@ public class BaseBroadcast
 	/// </summary>
 	[JsonProperty("payload")]
 	public Dictionary<string, object>? Payload { get; set; }
+
+	/// <summary>
+	/// Additional metadata associated with a broadcast event. Populated by the server when a
+	/// message is replayed from history on a private channel; otherwise absent.
+	/// </summary>
+	[JsonProperty("meta", NullValueHandling = NullValueHandling.Ignore)]
+	public BroadcastMeta? Meta { get; set; }
+}
+
+/// <summary>
+/// Server-supplied metadata attached to a broadcast event, present when the message was replayed
+/// from history on a private channel.
+/// </summary>
+public class BroadcastMeta
+{
+	/// <summary>
+	/// The unique identifier the server assigned to the broadcast message.
+	/// </summary>
+	[JsonProperty("id")]
+	public string? Id { get; set; }
+
+	/// <summary>
+	/// Whether this event was replayed from history rather than received live.
+	/// </summary>
+	[JsonProperty("replayed")]
+	public bool Replayed { get; set; }
 }

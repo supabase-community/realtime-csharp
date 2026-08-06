@@ -201,13 +201,27 @@ public class RealtimeChannel : IRealtimeChannel
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
     public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(bool broadcastSelf = false,
-        bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast
+        bool broadcastAck = false) where TBroadcastResponse : BaseBroadcast =>
+        Register<TBroadcastResponse>(new BroadcastOptions(broadcastSelf, broadcastAck));
+
+    /// <summary>
+    /// Registers the channel for broadcast with the specified options.
+    /// </summary>
+    /// <typeparam name="TBroadcastResponse">The type of the broadcast response, which must inherit from <see cref="BaseBroadcast"/>.</typeparam>
+    /// <param name="options">The broadcast options to configure the channel's broadcast behavior.</param>
+    /// <returns>Returns an instance of <see cref="RealtimeBroadcast{TBroadcastResponse}"/> initialized with the specified broadcast options.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if the method is called multiple times for the same channel.</exception>
+    public RealtimeBroadcast<TBroadcastResponse> Register<TBroadcastResponse>(BroadcastOptions options) where TBroadcastResponse : BaseBroadcast
     {
         if (_broadcast != null)
             throw new InvalidOperationException(
                 "Register can only be called with broadcast options for a channel once.");
 
-        BroadcastOptions = new BroadcastOptions(broadcastSelf, broadcastAck);
+        if (!Options.IsPrivate && options.Replay != null)
+            throw new InvalidOperationException(
+                $"Broadcast replay requires a private channel, but '{Topic}' is public.");
+
+        BroadcastOptions = options;
 
         var instance =
             new RealtimeBroadcast<TBroadcastResponse>(this, BroadcastOptions, Options.SerializerSettings);
@@ -624,7 +638,9 @@ public class RealtimeChannel : IRealtimeChannel
     /// </summary>
     /// <returns></returns>
     private Push GenerateJoinPush() => new(Socket, this, ChannelEventJoin,
-        payload: new JoinPush(BroadcastOptions, PresenceOptions, PostgresChangesOptions));
+        payload: Options.IsPrivate
+            ? Channel.JoinPush.ForPrivateChannel(BroadcastOptions, PresenceOptions, PostgresChangesOptions)
+            : Channel.JoinPush.ForPublicChannel(BroadcastOptions, PresenceOptions, PostgresChangesOptions));
 
     /// <summary>
     /// Generates an auth push.

@@ -184,11 +184,43 @@ WHERE username = name_param;
 $$
     LANGUAGE SQL IMMUTABLE;
 
--- Tables created by the `postgres` role in the `public` schema no longer inherit
--- SELECT/INSERT/UPDATE/DELETE for the API roles under current Supabase CLI default privileges
--- (https://supabase.com/changelog/45329-breaking-change-tables-not-exposed-to-data-and-graphql-api-automatically),
--- so the privileges must be granted explicitly.
-grant select, insert, update, delete on all tables in schema public to anon, authenticated, service_role;
+
+-- Test fixture: emulates Supabase's realtime.send() so broadcast-replay tests can seed
+-- messages into realtime.messages over REST. Local stack only.
+CREATE OR REPLACE FUNCTION public.send(
+    event text,
+    topic text,
+    private boolean
+)
+    RETURNS void
+    LANGUAGE plpgsql
+AS
+$$
+BEGIN
+    BEGIN
+        -- Scope the insert to the requested topic.
+        EXECUTE format('SET LOCAL realtime.topic TO %L', topic);
+
+        INSERT INTO realtime.messages (payload, event, topic, private, extension)
+        VALUES (null, event, topic, private, 'broadcast');
+    EXCEPTION
+        WHEN OTHERS THEN
+            RAISE WARNING 'ErrorSendingBroadcastMessage: %', SQLERRM;
+    END;
+END;
+$$;
+
+-- Test fixture: allow the seed inserts above. Local stack only.
+CREATE POLICY messages_insert_all
+    ON realtime.messages
+    FOR INSERT
+    TO PUBLIC
+    WITH CHECK (true);
+
+-- Test fixture: the postgres-changes tests insert into the sample tables over REST as an
+-- unauthenticated (anon) client. Newer Supabase CLIs no longer grant anon/authenticated DML on
+-- public tables by default, so grant it here. Local stack only.
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
 grant usage, select on all sequences in schema public to anon, authenticated, service_role;
 grant execute on all functions in schema public to anon, authenticated, service_role;
 
