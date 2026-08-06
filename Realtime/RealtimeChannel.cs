@@ -337,6 +337,16 @@ public class RealtimeChannel : IRealtimeChannel
             handler.Invoke(this, message);
     }
 
+    /// <inheritdoc />
+    public IRealtimeChannel OnPostgresChange(PostgresChangesHandler postgresChangeHandler, ListenType listenType,
+        PostgresChangesFilter? filter = null)
+    {
+        filter ??= new PostgresChangesFilter();
+        RegisterPostgresChangesOptions(new PostgresChangesOptions(filter.Schema, filter.Table, listenType, filter.Filter));
+        BindPostgresChangesHandler(listenType, postgresChangeHandler);
+        return this;
+    }
+
     /// <summary>
     /// Add a postgres changes listener. Should be paired with <see cref="Register"/>.
     /// </summary>
@@ -429,10 +439,19 @@ public class RealtimeChannel : IRealtimeChannel
     /// <returns></returns>
     public IRealtimeChannel Register(PostgresChangesOptions postgresChangesOptions)
     {
-        PostgresChangesOptions.Add(postgresChangesOptions);
-        
-        BindPostgresChangesOptions(postgresChangesOptions);
+        RegisterPostgresChangesOptions(postgresChangesOptions);
         return this;
+    }
+
+    /// <summary>
+    /// Records postgres_changes options for this channel and binds them, so both <see cref="Register"/>
+    /// and <see cref="OnPostgresChange"/> share a single registration path.
+    /// </summary>
+    /// <param name="postgresChangesOptions"></param>
+    private void RegisterPostgresChangesOptions(PostgresChangesOptions postgresChangesOptions)
+    {
+        PostgresChangesOptions.Add(postgresChangesOptions);
+        BindPostgresChangesOptions(postgresChangesOptions);
     }
 
     /// <summary>
